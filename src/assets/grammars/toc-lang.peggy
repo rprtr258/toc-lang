@@ -16,7 +16,15 @@ start
   };
 }
 
-statement = commentLine / nodeStatement / edgeStatement
+statement = typeStatement / commentLine / nodeStatement / edgeStatement
+
+typeStatement = _ "type:" _ type:ident _
+{
+  return {
+    type: "type",
+    value: type
+  };
+}
 
 commentLine = _ "#" text:([^\n\r]*)
 {

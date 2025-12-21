@@ -1,11 +1,24 @@
-/// <reference types="vitest" />
-import {defineConfig} from 'vite';
-import react from '@vitejs/plugin-react-swc';
-// import eslint from 'vite-plugin-eslint';
+import {defineConfig} from "vite";
+import vue from "@vitejs/plugin-vue";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react() /*, eslint() */],
-  base: '/toc-lang/',
-  assetsInclude: ['**/*.peggy'],
+  plugins: [vue()],
+  base: "/toc-lang/",
+  assetsInclude: ["**/*.peggy"],
+  server: {
+    watch: {
+      ignored: ["**/.jj/**"],
+    },
+  },
+  // TODO: remove, required now since vue-codemirror dependencies conflicts with direct codemirror imports
+  resolve: {
+    dedupe: [
+      "@codemirror/state",
+      "@codemirror/view",
+      "@codemirror/language",
+      "@codemirror/lint",
+      "@codemirror/autocomplete",
+    ],
+  },
 });

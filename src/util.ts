@@ -1,45 +1,38 @@
-// break string into lines on word boundaries
-export const wrapLines = (str, width) => {
-  const words = str.split(" ")
-  const lines: string[] = []
-  let line = ""
-  words.forEach((word, i) => {
+function* wrapLinesGen(str: string, width: number): Generator<string> {
+  const words = str.split(" ");
+  let line = "";
+  for (const [i, word] of words.entries()) {
     if (line.length + word.length > width) {
-      lines.push(line)
-      line = ""
+      yield line;
+      line = "";
     }
-    line += word + " "
+    line += word + " ";
     if (i === words.length - 1) {
-      lines.push(line)
+      yield line;
     }
-  })
-  return lines
+  }
 }
 
-export function computeResizeTransform(gNode: any, container: any, padX, padY) {
-  const bbox = gNode.getBBox({ stroke: true, fill: true, markers: true })
-  const boundingWidth = bbox.width + padX
-  const boundingHeight = bbox.height + padY
+// break string into lines on word boundaries
+export function wrapLines(str: string, width: number): string[] {
+  return Array.from(wrapLinesGen(str, width));
+}
 
-  console.log("bounding h w: ", boundingHeight, boundingWidth)
+export function computeResizeTransform(
+  gNode: SVGGraphicsElement,
+  container: { clientWidth: number, clientHeight: number },
+  padX: number,
+  padY: number,
+): string {
+  const bbox = gNode.getBBox({stroke: true, fill: true, markers: true});
+  const boundingWidth = bbox.width + padX;
+  const boundingHeight = bbox.height + padY;
 
-  const containerWidth = container.clientWidth
-  const containerHeight = container.clientHeight
-  console.log("container h w: ", containerHeight, containerWidth)
+  console.log("bounding h w: ", boundingHeight, boundingWidth);
+  const {clientWidth: containerWidth, clientHeight: containerHeight} = container;
+  console.log("container h w: ", containerHeight, containerWidth);
+
   // Calculate applicable scale for zoom
-  const zoomScale = Math.min(100 / boundingWidth, 100 / boundingHeight)
-  console.log("zoomScale: ", zoomScale)
-  return `scale(${zoomScale},${zoomScale})`
-}
-
-export function saveSvgUrl(svgEl) {
-  // https://stackoverflow.com/questions/23218174/how-do-i-save-export-an-svg-file-after-creating-an-svg-with-d3-js-ie-safari-an
-  // Assume xmlns is set.
-  // svgEl.setAttribute("xmlns", "http://www.w3.org/2000/svg");
-  const svgData = svgEl.outerHTML
-  const preface = '<?xml version="1.0" standalone="no"?>\r\n'
-  const svgBlob = new Blob([preface, svgData], {
-    type: "image/svg+xml;charset=utf-8"
-  })
-  return URL.createObjectURL(svgBlob)
+  const zoomScale = 100 / Math.max(boundingWidth, boundingHeight);
+  return `scale(${zoomScale},${zoomScale})`;
 }

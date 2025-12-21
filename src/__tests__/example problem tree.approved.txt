@@ -53,42 +53,43 @@
         "to": "bad"
       },
       {
-        "from": "ux_features_cause_cluttered",
-        "to": "cluttered"
-      },
-      {
         "from": "ux",
         "to": "ux_features_cause_cluttered"
       },
       {
         "from": "features",
         "to": "ux_features_cause_cluttered"
+      },
+      {
+        "from": "ux_features_cause_cluttered",
+        "to": "cluttered"
       }
     ],
     "nodes": {
       "bad": {
         "annotation": "UDE",
-        "key": "bad",
+        "id": "bad",
         "label": "Bad user experience"
       },
       "cluttered": {
         "annotation": "UDE",
-        "key": "cluttered",
+        "id": "cluttered",
         "label": "Cluttered interface"
       },
       "features": {
-        "key": "features",
+        "id": "features",
         "label": "Many features added"
       },
       "ux": {
-        "key": "ux",
+        "id": "ux",
         "label": "Low investment in UX design"
       },
       "ux_features_cause_cluttered": {
+        "id": "ux_features_cause_cluttered",
         "intermediate": true,
-        "key": "ux_features_cause_cluttered",
         "label": "AND"
       }
-    }
+    },
+    "rankdir": "BT"
   }
 }

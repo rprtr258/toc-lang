@@ -1,239 +1,197 @@
-import peggy from "peggy"
-import tocLangGrammarUrl from "./assets/grammars/toc-lang.peggy"
-/* eslint @typescript-eslint/no-unsafe-argument: 0 */
+import peggy from "peggy";
+import tocLangGrammarUrl from "./assets/grammars/toc-lang.peggy?raw";
 
-const loadFile = async (url) => {
-  if (process.env.NODE_ENV === "test") {
-    // Load the file from the filesystem
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const fs = require("fs")
-    // project root
-    const root = process.cwd()
-    const urlSubPath = url.replace(/^\/toc-lang/, "")
-    return fs.readFileSync(root + urlSubPath, "utf8")
-  } else {
-    const response = await fetch(url)
-    return await response.text()
-  }
-}
+const tocLang = peggy.generate(tocLangGrammarUrl);
 
-const tocLangParserPromise = loadFile(tocLangGrammarUrl).then(
-  (peggyGrammar) => {
-    return peggy.generate(peggyGrammar)
-  }
-)
+const parsers = {
+  conflict: tocLang,
+  goal: tocLang,
+  problem: tocLang,
+};
 
-const parsersPromise = Promise.all([tocLangParserPromise]).then(([tocLang]) => {
-  return {
-    conflict: tocLang,
-    goal: tocLang,
-    problem: tocLang
-  }
-})
+export type NodeID = string;
 
 export interface Node {
-  key: string
-  label: string
-  statusPercentage?: number
-  annotation?: string
-  intermediate?: boolean
+  id: NodeID,
+  label: string,
+  statusPercentage?: number,
+  annotation?: string,
+  intermediate?: boolean,
 }
 
 export interface Edge {
-  from: string
-  to: string
+  from: NodeID,
+  to: NodeID,
 }
 
 export interface TreeSemantics {
-  rankdir: "LR" | "RL" | "TB" | "BT"
-  nodes: Map<string, Node>
-  edges: Edge[]
+  rankdir: "LR" | "RL" | "TB" | "BT",
+  nodes: Record<NodeID, Node>,
+  edges: Edge[],
 }
 
 export interface Completions {
-  idents: string[]
+  idents: NodeID[],
 }
 
-export type EDiagramType = "problem" | "conflict" | "goal"
+export type EDiagramType = "problem" | "conflict" | "goal";
 
 export interface ParseResult {
-  ast: Ast
-  type: EDiagramType
+  ast: Ast,
+  type: EDiagramType,
 }
 
-const isGoalNodeStatement = (s) =>
-  s.type === "node" && normalizeId(s.id) === "goal"
-const normalizeId = (id) => (id && id.toLowerCase() === "goal" ? "Goal" : id)
+export function parseGoalTreeSemantics(ast: Ast): TreeSemantics {
+  const goal = ast.statements.find((s: StatementAst) => s.type === "node" && s.id === "Goal") as StatementAst & {type: "node"} | undefined;
 
-export const parseGoalTreeSemantics = (ast): TreeSemantics => {
-  const nodes = new Map<string, Node>()
-  nodes.set("Goal", { key: "Goal", label: "", annotation: "G" })
-  const edges = [] as Edge[]
-  const goalStatement = ast.statements.find(isGoalNodeStatement)
-  if (goalStatement) {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    nodes.get("Goal")!.label = goalStatement.text
-    // nodes.get("goal")!.statusPercentage = ast.goal.params.status
-  }
+  const nodes = {
+    "Goal": {
+      id: "Goal",
+      annotation: "G",
+      label: goal?.text || "",
+      ...(goal?.params.status ? {statusPercentage: parseFloat(goal.params.status)} : {}),
+    },
+    ...Object.fromEntries(ast.statements
+      .filter((s): s is StatementAst & { type: "node" } => s.type === "node" && s.id !== "Goal")
+      .map((statement) => [statement.id, {
+        id: statement.id,
+        label: statement.text,
+        ...(statement.params.class ? {annotation: statement.params.class} : {}),
+        ...(statement.params.status ? {statusPercentage: parseFloat(statement.params.status)} : {}),
+      }])),
+  } as Record<string, Node>;
 
-  ast.statements
-    .filter((s) => s.type === "node")
-    .forEach((statement) => {
-      const node: Node = {
-        key: statement.id,
-        label: statement.text
-      }
-      if (statement.params.class) {
-        node.annotation = statement.params.class
-      }
-      if (statement.id === "Goal") {
-        node.annotation = "G"
-      }
-      if (statement.params.status || statement.params.status === 0) {
-        node.statusPercentage = statement.params.status
-      }
-      nodes.set(statement.id, node)
-    })
-
-  ast.statements
-    .filter((s) => s.type === "edge")
-    .forEach((statement) => {
-      const nodeKey = statement.toId
-      if (!nodes.has(nodeKey)) {
-        throw new Error(`Node ${nodeKey} not found`)
+  const edges = ast.statements
+    .filter((s): s is StatementAst & { type: "edge" } => s.type === "edge")
+    .map((statement): Edge => {
+      const nodeID = statement.toId;
+      if (!nodes[nodeID]) {
+        throw new Error(`Node ${nodeID} not found`);
       }
       if (statement.fromIds.length !== 1) {
-        throw new Error(
-          `Edges must have exactly one 'from' node in a Goal Tree`
-        )
+        throw new Error("Edges must have exactly one 'from' node in a Goal Tree");
       }
-      const reqKey = statement.fromIds[0]
-      if (!nodes.has(reqKey)) {
-        throw new Error(`Requirement ${reqKey} not found`)
+      const reqID = statement.fromIds[0];
+      if (!nodes[reqID]) {
+        throw new Error(`Requirement ${reqID} not found`);
       }
-      if (nodeKey === "Goal") {
-        nodes.get(reqKey)!.annotation = "CSF"
+      if (nodeID === "Goal") {
+        nodes[reqID].annotation = "CSF";
       }
-      edges.push({ from: reqKey, to: nodeKey })
-    })
-  return { nodes, edges, rankdir: "BT" }
+      return {from: reqID, to: nodeID};
+    });
+
+  return {nodes, edges, rankdir: "BT"};
 }
 
-export const parseProblemTreeSemantics = (ast): TreeSemantics => {
-  const nodes = new Map<string, Node>()
-  const edges = [] as Edge[]
-  const findNodeAnnotation = (statement: StatementAst) => {
-    const pattern = /^(UDE|FOL|DE)/i
-    if (
-      typeof statement.params?.class === "string" &&
-      statement.params?.class?.match(pattern)
-    ) {
-      return statement.params.class.match(pattern)![0].toUpperCase()
-    }
-    return undefined
+function findNodeAnnotation(statement: StatementAst) {
+  if (statement.type !== "node")
+    return undefined;
+  const pattern = /^(UDE|FOL|DE)/i;
+  if (typeof statement.params?.class === "string" && statement.params?.class?.match(pattern)) {
+    return statement.params.class.match(pattern)![0].toUpperCase();
   }
-  ast.statements
-    .filter((s) => s.type === "node")
-    .forEach((statement) => {
-      nodes.set(statement.id, {
-        annotation: findNodeAnnotation(statement),
-        key: statement.id,
-        label: statement.text
-      })
-    })
+  return undefined;
+}
 
-  ast.statements
-    .filter((s) => s.type === "edge")
-    .forEach((statement) => {
-      const effectKey = statement.toId
-      let keyToConnect = effectKey
-      if (statement.fromIds.length > 1) {
-        const combinedId = statement.fromIds.join("_") + "_cause_" + effectKey
-        keyToConnect = combinedId
-        nodes.set(combinedId, {
-          key: combinedId,
-          label: "AND",
-          intermediate: true
-        })
-        edges.push({ from: combinedId, to: effectKey })
+export function parseProblemTreeSemantics(ast: Ast): TreeSemantics {
+  const nodes: Record<NodeID, Node> = Object.fromEntries(ast.statements
+    .filter((s): s is StatementAst & { type: "node" } => s.type === "node")
+    .map(statement => [statement.id, {
+      annotation: findNodeAnnotation(statement),
+      id: statement.id,
+      label: statement.text,
+    }]));
+
+  const edges = ast.statements
+    .filter((s): s is StatementAst & { type: "edge" } => s.type === "edge")
+    .flatMap((statement): Edge[] => {
+      const effectID = statement.toId;
+      if (!nodes[effectID]) {
+        throw new Error(`Effect ${effectID} not declared`);
       }
-      for (const causeKey of statement.fromIds) {
-        if (!nodes.has(causeKey)) {
-          throw new Error(`Cause ${causeKey} not declared`)
+      if (statement.fromIds.length === 1) {
+        const causeID = statement.fromIds[0];
+        if (!nodes[causeID]) {
+          throw new Error(`Cause ${causeID} not declared`);
         }
-        if (!nodes.has(effectKey)) {
-          throw new Error(`Effect ${effectKey} not declared`)
-        }
-        edges.push({ from: causeKey, to: keyToConnect })
+        return [{from: causeID, to: effectID}];
       }
-    })
-  return { nodes, edges, rankdir: "BT" }
+
+      // Multi-cause: create intermediate AND node
+      const intermediateID = statement.fromIds.join("_") + "_cause_" + effectID;
+      nodes[intermediateID] = {
+        id: intermediateID,
+        label: "AND",
+        intermediate: true,
+      };
+      return [
+        ...statement.fromIds.map(causeID => {
+          if (!nodes[causeID]) {
+            throw new Error(`Cause ${causeID} not declared`);
+          }
+          return {from: causeID, to: intermediateID};
+        }),
+        {from: intermediateID, to: effectID},
+      ];
+    });
+
+  return {nodes, edges, rankdir: "BT"};
 }
 
-interface Ast {
-  statements: StatementAst[]
+export type RawStatementAst =
+  | StatementAst
+  | {
+      type: "type",
+      value: string,
+    };
+
+export type StatementAst =
+  | {
+      type: "edge",
+      id?: string,
+      text?: string,
+      fromIds: string[],
+      toId: string,
+      biDir?: boolean,
+      params?: ParamsAst,
+      biDirectional?: true,
+    }
+  | {
+      type: "node",
+      id: string,
+      text: string,
+      params: ParamsAst,
+    }
+  | {
+      type: "comment",
+      text: string,
+    };
+
+export interface Ast {
+  statements: StatementAst[],
 }
 
-interface StatementAst {
-  type: "node" | "edge" | "comment"
-  id?: string
-  text: string
-  fromIds?: string[]
-  toId?: string
-  biDir?: boolean
-  params?: ParamsAst
-}
+type ParamsAst = Record<string, string>;
 
-type ParamsAst = Record<string, number | string>
-
-const normalizeAstIds = (ast: Ast): Ast => {
-  const { statements: oldStatments, ...etc } = ast
-  const statements = oldStatments.map((s: StatementAst) => {
-    const { id, fromIds, toId, ...etc } = s
-    const result: StatementAst = {
-      ...etc
-    }
-    if (id) {
-      result.id = normalizeId(id)
-    }
-    if (toId) {
-      result.toId = normalizeId(toId)
-    }
-    if (fromIds) {
-      result.fromIds = fromIds.map(normalizeId)
-    }
-    return result
-  })
-  return {
-    statements,
-    ...etc
-  }
-}
-
-export const parseTextToAst = async (
-  code: string | unknown
-): Promise<ParseResult> => {
-  if (typeof code !== "string") {
-    throw Error("Code missing")
-  }
+export function parseTextToAst(code: string): ParseResult {
   // Since we don't have the full parsers yet, using a RegEx.
   // This could false match on a comment or something but fine for now.
-  const typeMatch = code.match(/\btype:\s*(\w+)\b/)
+  const typeMatch = code.match(/\btype:\s*(\w+)\b/);
   if (!typeMatch) {
-    throw Error("Type declaration missing")
+    throw Error("Type declaration missing");
   }
-  const parserType: string = typeMatch[1]
-  if (["problem", "conflict", "goal"].includes(parserType)) {
-    const parserEType = parserType as EDiagramType
 
-    const parser: peggy.Parser = (await parsersPromise)[parserType]
-    const ast = parser.parse(code)
-    const normalizeAst = normalizeAstIds(ast)
-    const statements = normalizeAst.statements.filter((s) => s.id !== "type")
-    return { ast: { statements }, type: parserEType }
-  } else {
+  const parserType: string = typeMatch[1];
+  if (!["problem", "conflict", "goal"].includes(parserType)) {
     throw Error(
-      `Invalid type '${parserType}'. Must be one of: problem, conflict, goal`
-    )
+      `Invalid type '${parserType}'. Must be one of: problem, conflict, goal`,
+    );
   }
+
+  const parserEType = parserType as EDiagramType;
+  const parser: peggy.Parser = parsers[parserType];
+  const parsedAst = parser.parse(code) as { statements: RawStatementAst[] };
+  const statements = parsedAst.statements.filter((s): s is StatementAst => s.type !== "type");
+  return {ast: {statements}, type: parserEType};
 }

@@ -1,3 +1,76 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+:root {
+  --color-text: black;
+  --color-background: white;
+  height: 100vh;
+}
+
+body, textarea {
+  color: var(--color-text);
+  background-color: var(--color-background);
+  height: 100%;
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+.nav-item {
+  padding-right: 5px;
+  padding-bottom: 10px;
+}
+.nav-item.title {
+  font-size: 1.8em;
+  font-weight: bold;
+  font-family: "OCR A Std", monospace;
+  color: var(--color-text);
+}
+
+.nav-item.right {
+  margin-left: auto;
+}
+.nav-item a.active {
+  color: inherit;
+  text-decoration: inherit;
+}
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+#about-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2em;
+}
+
+.annotation-label {
+  fill: black;
+  text-anchor: middle;
+  font-weight: bold;
+  alignment-baseline: middle;
+}
+
 :root {
   font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
   font-size: 16px;
@@ -10,9 +83,6 @@
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
 }
 
 a {
@@ -37,29 +107,6 @@ h1 {
   line-height: 1.1;
 }
 
-.file-controls {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 8px;
-
-  button.load {
-    background-color: #4a5568;
-    color: white;
-  }
-
-  button.save {
-    background-color: #4299e1;
-    color: white;
-  }
-}
-
-.diagram-controls {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 8px;
-  margin-left: 12px;
-}
-
 button {
   padding: 4px 12px;
   font-size: 0.9em;
@@ -74,9 +121,8 @@ button {
 button:hover {
   border-color: #646cff;
 }
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+button:focus, button:focus-visible {
+  outline: 4px auto;
 }
 
 @media (prefers-color-scheme: light) {
@@ -94,87 +140,4 @@ button:focus-visible {
 
 #root-reset {
   width: 100%;
-}
-
-.App {
-  padding: 10px;
-}
-
-#resizeHandler {
-  cursor: col-resize;
-  padding: 0 2px;
-}
-.flex {
-  display: flex;
-}
-.flex-col {
-  display: flex;
-  flex-direction: column;
-}
-.flex-col-reverse {
-  display: flex;
-  flex-direction: column-reverse;
-}
-.flex-1 {
-  flex: 1 1 100%;
-  /* flex-grow: 1; */
-  /* flex-basis: max-content; */
-}
-.flex-2 {
-  flex: 2 2 100%;
-  /* flex-grow: 1; */
-  /* flex-basis: max-content; */
-}
-.editor {
-  text-align: left;
-  padding-right: 10px;
-}
-.flex-row {
-  display: flex;
-  flex-direction: row;
-}
-.edit-result {
-  border-radius: 0.5em;
-  -moz-border-radius: 0.5em;
-  padding: 0.5em 1em;
-  min-height: 3em;
-}
-.error {
-  background-color: orange;
-}
-.overflow-hidden {
-  overflow: hidden;
-}
-.shadow-2xl {
-  --tw-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-  --tw-shadow-colored: 0 25px 50px -12px var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
-    var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-}
-
-.shadow-2xl {
-  --tw-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-  --tw-shadow-colored: 0 25px 50px -12px var(--tw-shadow-color);
-}
-.shadow-2xl,
-.shadow-lg {
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
-    var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-}
-.rounded {
-  border-radius: 0.25rem;
-}
-.flex-none {
-  flex: none;
-}
-
-.card-body {
-  display: flex;
-  flex: 1 1 auto;
-  flex-direction: column;
-  gap: 0.5rem;
-  padding: var(--padding-card, 2rem);
-}
-.h-full {
-  height: 100%;
 }
