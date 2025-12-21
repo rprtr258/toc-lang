@@ -32,7 +32,7 @@ revUp <- keepCust
 costsDown <- reduceInfra
 retain <- marketSalary
 retain <- morale
-`
+`;
 
 export const exampleEvaporatingCloudText = `type: conflict
 
@@ -47,18 +47,14 @@ D: Subordinate people's needs to the financial goal
 B <- D: *inject* Psychological flow triggers
 
 D': Attend to people's needs (& let people work)
-`
+`;
 
 export const exampleProblemTreeText = `type: problem
 
-bad: "Bad user experience" {
-    class: UDE
-}
-cluttered: "Cluttered interface" {
-    class: UDE
-}
+bad: "Bad user experience" {class: UDE}
+cluttered: "Cluttered interface" {class: UDE}
 bad <- cluttered
 ux: "Low investment in UX design"
 features: "Many features added"
 cluttered <- ux && features
-`
+`;

@@ -2,7 +2,7 @@
 
 ## Commands
 
-- **Build**: `bun run build` (tsc -p tsconfig.prod.json && vite build)
+- **Build**: `bun run build` (tsc -p tsconfig.json && vite build)
 - **Lint**: `bun run lint` (eslint src/\*_/_.{js,jsx,ts,tsx,json} --ignore-pattern src/generated/)
 - **Lint fix**: `bun run lint:fix`
 - **Format**: `bun run format` (prettier --write with config)

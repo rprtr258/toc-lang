@@ -133,15 +133,6 @@ button:focus-visible {
   display: flex;
   flex-direction: row;
 }
-.edit-result {
-  border-radius: 0.5em;
-  -moz-border-radius: 0.5em;
-  padding: 0.5em 1em;
-  min-height: 3em;
-}
-.error {
-  background-color: orange;
-}
 .overflow-hidden {
   overflow: hidden;
 }

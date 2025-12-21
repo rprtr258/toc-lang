@@ -1,28 +1,28 @@
 import { computeResizeTransform, wrapLines } from "./util"
 
 function fromHTML(html: string): Element | HTMLCollection | null {
-  if (!html) return null
+  if (!html) return null;
 
   // Then set up a new template element.
-  const template = document.createElement("template")
-  template.innerHTML = html
-  const result = template.content.children
+  const template = document.createElement("template");
+  template.innerHTML = html;
+  const result = template.content.children;
 
   // Then return either an HTMLElement or HTMLCollection,
   // based on whether the input HTML had one or more roots.
-  if (result.length === 1) return result[0]
-  return result
+  if (result.length === 1) return result[0];
+  return result;
 }
 
-export const intermediatePoint = (start, end, distance) => {
-  const dx = end.x - start.x
-  const dy = end.y - start.y
-  const length = Math.sqrt(dx * dx + dy * dy)
-  const ratio = distance / length
+export function intermediatePoint(start, end, distance) {
+  const dx = end.x - start.x;
+  const dy = end.y - start.y;
+  const length = Math.sqrt(dx * dx + dy * dy);
+  const ratio = distance / length;
   return {
     x: start.x + dx * ratio,
     y: start.y + dy * ratio
-  }
+  };
 }
 
 export function midPoint(
@@ -51,7 +51,7 @@ export const Injection = ({
   dy: number
 }) => {
   if (!text) {
-    return <></>
+    return "";
   }
   const lines = wrapLines(text, 35)
   const edgeMidPoint = midPoint(edge.start, edge.end)
@@ -64,90 +64,81 @@ export const Injection = ({
   const textTopY = textY
   const lineStartY = dYMagnitude === 1 ? textTopY : textBottomY
   const lineStartX = textCenterX
-  return (
-    <>
-      <text x={textX} y={textY}>
-        {lines.map((line, i) => {
-          return (
-            <tspan key={i} x={textX} dy={lineHeight}>
-              {line}
-            </tspan>
-          )
-        })}
-      </text>
-      <line
-        x1={lineStartX}
-        y1={lineStartY}
-        x2={edgeMidPoint.x}
-        y2={edgeMidPoint.y}
-        stroke="#000"
-        strokeDasharray="4 5"
-        strokeWidth="2"
-      />
-    </>
-  )
+  return `
+    <text x=${textX} y=${textY}>
+      ${lines.map((line, i) => {
+        return `<tspan key=${i} x=${textX} dy=${lineHeight}>
+          ${line}
+        </tspan>`;
+      })}
+    </text>
+    <line
+      x1=${lineStartX}
+      y1=${lineStartY}
+      x2=${edgeMidPoint.x}
+      y2=${edgeMidPoint.y}
+      stroke="#000"
+      strokeDasharray="4 5"
+      strokeWidth="2"
+    />`
 }
 
 export const CloudEdge = ({ edge }) => {
-  return (
-    <line
-      x1={edge.adjStart.x}
-      y1={edge.adjStart.y}
-      x2={edge.end.x}
-      y2={edge.end.y}
-      stroke="#000"
-      strokeWidth="3"
-      markerStart="url(#startarrow)"
-    />
-  )
+  return `<line
+    x1={edge.adjStart.x}
+    y1={edge.adjStart.y}
+    x2={edge.end.x}
+    y2={edge.end.y}
+    stroke="#000"
+    strokeWidth="3"
+    markerStart="url(#startarrow)"
+  />`;
 }
 
-export const CloudNode = ({ text, x, y, width, height, annotation }) => {
-  const lines = wrapLines(text, 20)
-  const lineHeight = 16
-  const textMargin = 12
-  const textHeight = lines.length * lineHeight
-  const textY = y + height / 2 - textHeight / 2 - 4
-  const textX = x + textMargin
-  return (
-    <>
-      <rect x={x} y={y} rx="10" ry="10" width={width} height={height} />
-      <text x={textX} y={textY}>
-        {lines.map((line, i) => {
-          return (
-            <tspan key={i} x={textX} dy={lineHeight}>
-              {line}
-            </tspan>
-          )
-        })}
-      </text>
-      <circle
-        cx={x}
-        cy={y}
-        r="10"
-        style={{ fill: "white", stroke: "black", strokeWidth: "2px" }}
-      ></circle>
-      <text x={x - 4} y={y + 4}>
-        {annotation}
-      </text>
-    </>
-  )
+export function CloudNode({ text, x, y, width, height, annotation }) {
+  const lines = wrapLines(text, 20);
+  const lineHeight = 16;
+  const textMargin = 12;
+  const textHeight = lines.length * lineHeight;
+  const textY = y + height / 2 - textHeight / 2 - 4;
+  const textX = x + textMargin;
+  return `
+    <rect x={x} y={y} rx="10" ry="10" width={width} height={height} />
+    <text x={textX} y={textY}>
+      {lines.map((line, i) => {
+        return (
+          <tspan key={i} x={textX} dy={lineHeight}>
+            {line}
+          </tspan>
+        )
+      })}
+    </text>
+    <circle
+      cx={x}
+      cy={y}
+      r="10"
+      style={{ fill: "white", stroke: "black", strokeWidth: "2px" }}
+    ></circle>
+    <text x={x - 4} y={y + 4}>
+      {annotation}
+    </text>
+  `;
 }
 
-export const drawCloud = (ast) => {
+export function drawCloud(ast) {
   const nodeLabels = {
     A: "",
     B: "",
     C: "",
     D: "",
     "D'": ""
-  }
-  const injections = new Map<string, string>()
+  };
+  const injections = new Map<string, string>();
   ast.statements
     .filter((statement) => statement.type === "node")
     .forEach((statement) => {
       nodeLabels[statement.id] = statement.text
-    })
+    });
   ast.statements.forEach((statement) => {
     if (statement.type === "edge") {
       const id1 = statement.fromIds[0]
@@ -155,60 +146,60 @@ export const drawCloud = (ast) => {
       const edgeName = id1 < id2 ? `${id1}-${id2}` : `${id2}-${id1}`
       injections[edgeName] = statement.text
     }
-  })
+  });
 
-  const x1 = 25
-  const x2 = 250
-  const x3 = 500
-  const y1 = 50
-  const y3 = 300
-  const y2 = (y1 + y3) / 2
-  const nodeWidth = 150
-  const nodeHeight = 75
-  const nodeA = { x: x1, y: y2, w: nodeWidth, h: nodeHeight }
-  const nodeB = { x: x2, y: y1, w: nodeWidth, h: nodeHeight }
-  const nodeC = { x: x2, y: y3, w: nodeWidth, h: nodeHeight }
-  const nodeD = { x: x3, y: y1, w: nodeWidth, h: nodeHeight }
-  const nodeDp = { x: x3, y: y3, w: nodeWidth, h: nodeHeight }
-  const edgeAB = createEdge(nodeA, nodeB)
-  const edgeAC = createEdge(nodeA, nodeC)
-  const edgeBD = createEdge(nodeB, nodeD)
-  const edgeCDp = createEdge(nodeC, nodeDp)
-  const conflictStart = nodeBottomCenterPont(nodeD)
-  const conflictEnd = nodeTopCenterPont(nodeDp)
-  const conflictMid = midPoint(conflictStart, conflictEnd)
+  const x1 = 25;
+  const x2 = 250;
+  const x3 = 500;
+  const y1 = 50;
+  const y3 = 300;
+  const y2 = (y1 + y3) / 2;
+  const nodeWidth = 150;
+  const nodeHeight = 75;
+  const nodeA = { x: x1, y: y2, w: nodeWidth, h: nodeHeight };
+  const nodeB = { x: x2, y: y1, w: nodeWidth, h: nodeHeight };
+  const nodeC = { x: x2, y: y3, w: nodeWidth, h: nodeHeight };
+  const nodeD = { x: x3, y: y1, w: nodeWidth, h: nodeHeight };
+  const nodeDp = { x: x3, y: y3, w: nodeWidth, h: nodeHeight };
+  const edgeAB = createEdge(nodeA, nodeB);
+  const edgeAC = createEdge(nodeA, nodeC);
+  const edgeBD = createEdge(nodeB, nodeD);
+  const edgeCDp = createEdge(nodeC, nodeDp);
+  const conflictStart = nodeBottomCenterPont(nodeD);
+  const conflictEnd = nodeTopCenterPont(nodeDp);
+  const conflictMid = midPoint(conflictStart, conflictEnd);
   const conflictEdgePoints = [
     displacePoint(conflictStart, 0, 16),
     displacePoint(conflictMid, -15, 5),
     displacePoint(conflictMid, 15, -5),
     displacePoint(conflictEnd, 0, -16)
-  ]
+  ];
   const edgeDDp = {
     start: conflictEdgePoints[0],
     end: conflictEdgePoints[3]
-  }
+  };
   const conflictEdgePointsString = conflictEdgePoints
     .map((p) => `${p.x},${p.y}`)
-    .join(" ")
+    .join(" ");
 
   const style = `
-  svg {
-    font-family: "trebuchet ms", verdana, arial, sans-serif;
-    font-size: 13px;
-  }
-  svg text {
-    fill: black;
-  }
-  svg text.annotation {
-    font-weight: bold;
-  }
-  svg rect {
-    fill: white;
-    stroke: black;
-    stroke-width: 2;
-  }
-  `
-  return (
+    svg {
+      font-family: "trebuchet ms", verdana, arial, sans-serif;
+      font-size: 13px;
+    }
+    svg text {
+      fill: black;
+    }
+    svg text.annotation {
+      font-weight: bold;
+    }
+    svg rect {
+      fill: white;
+      stroke: black;
+      stroke-width: 2;
+    }
+  `;
+  return `
     <svg
       id="cloudSvg"
       width="100%"
@@ -318,7 +309,7 @@ export const drawCloud = (ast) => {
         />
       </g>
     </svg>
-  )
+  `;
 }
 
 function createEdge(

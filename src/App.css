@@ -74,3 +74,10 @@ textarea {
   justify-content: center;
   padding: 2em;
 }
+
+.annotation-label {
+  fill: black;
+  text-anchor: middle;
+  font-weight: bold;
+  alignment-baseline: middle;
+}
