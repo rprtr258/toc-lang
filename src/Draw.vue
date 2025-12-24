@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import {ref} from "vue";
-import {parser} from "peggy";
 import type {Diagnostic} from "@codemirror/lint";
 import Editor from "./Editor.vue";
 import Diagram from "./Diagram.vue";
@@ -11,8 +10,9 @@ import {
   type TreeSemantics,
   type Completions,
   EDiagramType,
-  Ast,
 } from "./interpreter.ts";
+import {Ast} from "./parser.ts";
+import {SyntaxError} from "./tokenizer.ts";
 
 const completions = ref<Completions>({idents: []});
 
@@ -46,12 +46,12 @@ const onEditorChange = (value: string) => {
     diagramType.value = type;
     diagnostics.value = [];
   } catch (e) {
-    const err = e as parser.SyntaxError;
+    const err = e as SyntaxError;
     const diag: Diagnostic = {
-      from: err.location.start.offset - err.location.start.column,
-      to: err.location?.end?.offset ?? value.length,
+      from: err.token.start - err.token.col,
+      to: err.token.end ?? value.length,
       severity: "error",
-      message: err.message || e.toString(),
+      message: err.message,
     };
     diagnostics.value = [diag];
   }

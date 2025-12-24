@@ -1,6 +1,7 @@
 import {describe, expect, it} from "bun:test";
-import {parseTextToAst, parseGoalTreeSemantics, Ast, TreeSemantics} from "../interpreter.ts";
+import {parseTextToAst, parseGoalTreeSemantics, TreeSemantics} from "../interpreter.ts";
 import {exampleGoalTreeText} from "../examples.ts";
+import {Ast} from "../parser.ts";
 
 const testcases = [
   {
@@ -25,14 +26,14 @@ const testcases = [
     text: `
     type: goal
 
-    Goal: win
+    Goal: "win"
 
-    weScore: We score points { class: CSF }
-    theyDont: Other team doesn't score { class: CSF }
+    weScore: "We score points" { class: CSF }
+    theyDont: "Other team doesn't score" { class: CSF }
 
-    possession: We get the ball
-    shooting: We shoot the ball accurately
-    defense: We have good defense
+    possession: "We get the ball"
+    shooting: "We shoot the ball accurately"
+    defense: "We have good defense"
 
     theyDont <- defense
     weScore <- possession
@@ -111,7 +112,7 @@ const testcases = [
           text: "win",
           type: "node",
           id: "mynode",
-          params: {status: 50},
+          params: {status: "50"},
         },
       ],
     },
@@ -136,8 +137,8 @@ const testcases = [
     text: `
     type: goal
 
-    Goal: win
-    weScore: We score points {status: 70}
+    Goal: "win"
+    weScore: "We score points" {status: 70}
     `,
     expected: {
       statements: [
@@ -151,7 +152,7 @@ const testcases = [
           id: "weScore",
           text: "We score points",
           type: "node",
-          params: {status: 70},
+          params: {status: "70"},
         },
       ],
     },

@@ -1,16 +1,13 @@
 import {describe, expect, it} from "bun:test";
 import * as approvals from "approvals";
-import {parseTextToAst, parseProblemTreeSemantics, Ast} from "../interpreter.ts";
+import {parseTextToAst, parseProblemTreeSemantics} from "../interpreter.ts";
 import {exampleProblemTreeText} from "../examples.ts";
+import {Ast} from "../parser.ts";
 
 const testCases = [
   {
     name: "with only UDE",
-    text: "b: badness {class: UDE}",
-  },
-  {
-    name: "with only UDE quoted label",
-    text: 'b: "badness" {class: UDE}',
+    text: `b: "badness" {class: UDE}`,
   },
   {
     name: "with UDE and single cause",
@@ -79,7 +76,7 @@ describe("problem tree interpreter", () => {
     };
     const {ast} = parseTextToAst(text);
     expect(ast).toEqual(expected);
-    expect(() => parseProblemTreeSemantics(ast)).toThrowError();
+    expect(() => parseProblemTreeSemantics(ast)).toThrowError(/^Effect d not declared$/);
   });
 
   it("example parses", () => {

@@ -34,14 +34,14 @@ import {
 import {Completions} from "./interpreter.ts";
 import {TOC_LANG, TOC_LANG_HIGHLIGHT} from "./highlight.ts";
 
-const myProps = withDefaults(defineProps<{ // TODO: кто тронет, того в жопу выебет альпака
+const myProps = withDefaults(defineProps<{
   rows: number,
   value: string,
   diagnostics: Diagnostic[],
   completions: Completions,
-}>(), {rows: 20}); // TODO: кто тронет, того в жопу выебет альпака
+}>(), {rows: 20});
 const emit = defineEmits<{
-  "update": [value: string], // TODO: кто тронет, того в жопу выебет альпака
+  "update": [value: string],
 }>();
 
 const editorText = ref(myProps.value || "");
@@ -58,9 +58,6 @@ const extensions = computed(() => [
   closeBrackets(),
   autocompletion(),
   highlightActiveLine(),
-  EditorView.theme({
-    ".cm-gutters": {display: "none"},
-  }),
   keymap.of([
     ...closeBracketsKeymap,
     ...defaultKeymap,
@@ -72,7 +69,7 @@ const extensions = computed(() => [
   linter(() => myProps.diagnostics),
 ]);
 
-watch(editorText, newVal => emit("update", newVal)); // TODO: кто тронет, того в жопу выебет альпака
+watch(editorText, newVal => emit("update", newVal));
 
 async function handleLoad() {
   const file = await fileOpen();

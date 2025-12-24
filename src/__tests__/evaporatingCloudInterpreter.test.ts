@@ -1,6 +1,7 @@
 import {describe, expect, it} from "bun:test";
-import {Ast, parseTextToAst} from "../interpreter.ts";
+import {parseTextToAst} from "../interpreter.ts";
 import {exampleEvaporatingCloudText} from "../examples.ts";
+import {Ast} from "../parser.ts";
 
 const testcases = [
   {
@@ -14,11 +15,11 @@ const testcases = [
     name: "with only labels",
     text: `
 type: conflict
-A: Maximize business performance
-B: Subordinate all decisions to the financial goal
-C: Ensure people are in a state of optimal performance
-D: Subordinate people's needs to the financial goal
-E: Attend to people's needs (& let people work)
+A: "Maximize business performance"
+B: "Subordinate all decisions to the financial goal"
+C: "Ensure people are in a state of optimal performance"
+D: "Subordinate people's needs to the financial goal"
+E: "Attend to people's needs (& let people work)"
 `,
     expected: {
       statements: [
@@ -104,9 +105,9 @@ E: "Attend to people's needs (& let people work)"
     name: "with injection on requirement",
     text: `
 type: conflict
-A: Maximize business performance
-D: Subordinate people's needs to the financial goal
-A <- D: inject Psychological flow triggers
+A: "Maximize business performance"
+D: "Subordinate people's needs to the financial goal"
+A <- D: "inject Psychological flow triggers"
 `,
     expected: {
       statements: [
@@ -177,6 +178,23 @@ type: conflict
         {
           text: " This is a comment",
           type: "comment",
+        },
+      ],
+    },
+  },
+  {
+    name: "unusual characters in annotation",
+    text: `
+type: conflict
+A: "*watafa* pepe"
+`,
+    expected: {
+      statements: [
+        {
+          type: "node",
+          id: "A",
+          text: "*watafa* pepe",
+          params: {},
         },
       ],
     },

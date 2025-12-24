@@ -32,12 +32,12 @@ retain <- morale
 
 export const exampleEvaporatingCloudText = `type: conflict
 
-A: Maximize business performance
-B: Subordinate all decisions to the financial goal
-C: Ensure people are in a state of optimal performance
-D: Subordinate people's needs to the financial goal
-B <- D: *inject* Psychological flow triggers
-E: Attend to people's needs (& let people work)
+A: "Maximize business performance"
+B: "Subordinate all decisions to the financial goal"
+C: "Ensure people are in a state of optimal performance"
+D: "Subordinate people's needs to the financial goal"
+B <- D: "*inject* Psychological flow triggers"
+E: "Attend to people's needs (& let people work)"
 `;
 
 export const exampleProblemTreeText = `type: problem

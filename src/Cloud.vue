@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import {computed, onMounted, useTemplateRef, watch} from "vue";
-import {Ast, StatementAst} from "./interpreter.ts";
 import {createEdge, displacePoint, midPoint, bottomCenter, topCenter, rect} from "./math.ts";
 import CloudNode from "./CloudNode.vue";
 import Injection from "./Injection.vue";
 import CloudEdge from "./CloudEdge.vue";
+import {Ast, StatementAst} from "./parser.ts";
 
 const props = defineProps<{
   ast: Ast,
@@ -83,7 +83,7 @@ const conflictEdgePointsString = conflictEdgePoints.map((p) => `${p.x},${p.y}`).
 </script>
 
 <template>
-  <div style="width: 100%; height: 500px">
+  <div style="width: 100%; height: 100%">
     <svg
       ref="cloudSvg"
       width="100%"

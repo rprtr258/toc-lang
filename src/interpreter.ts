@@ -1,13 +1,4 @@
-import peggy from "peggy";
-import tocLangGrammarUrl from "./assets/grammars/toc-lang.peggy?raw";
-
-const tocLang = peggy.generate(tocLangGrammarUrl);
-
-const parsers = {
-  conflict: tocLang,
-  goal: tocLang,
-  problem: tocLang,
-};
+import {Ast, parse, ParsedAst, StatementAst} from "./parser.ts";
 
 export type NodeID = string;
 
@@ -126,7 +117,7 @@ export function parseProblemTreeSemantics(ast: Ast): TreeSemantics {
         intermediate: true,
       };
       return [
-        ...statement.fromIds.map(causeID => {
+        ...statement.fromIds.map((causeID) => {
           if (!nodes[causeID]) {
             throw new Error(`Cause ${causeID} not declared`);
           }
@@ -139,59 +130,23 @@ export function parseProblemTreeSemantics(ast: Ast): TreeSemantics {
   return {nodes, edges, rankdir: "BT"};
 }
 
-export type RawStatementAst =
-  | StatementAst
-  | {
-      type: "type",
-      value: string,
-    };
-
-export type StatementAst =
-  | {
-      type: "edge",
-      id?: string,
-      text?: string,
-      fromIds: string[],
-      toId: string,
-      biDir?: boolean,
-      params?: ParamsAst,
-      biDirectional?: true,
-    }
-  | {
-      type: "node",
-      id: string,
-      text: string,
-      params: ParamsAst,
-    }
-  | {
-      type: "comment",
-      text: string,
-    };
-
-export interface Ast {
-  statements: StatementAst[],
-}
-
-type ParamsAst = Record<string, string>;
-
 export function parseTextToAst(code: string): ParseResult {
-  // Since we don't have the full parsers yet, using a RegEx.
-  // This could false match on a comment or something but fine for now.
-  const typeMatch = code.match(/\btype:\s*(\w+)\b/);
-  if (!typeMatch) {
+  const parsedAst: ParsedAst = parse(code);
+
+  // Find type from parsed statements
+  const typeStatement = parsedAst.statements.find((s) => s.type === "type") as | {type: "type", value: string} | undefined;
+  const parserType = typeStatement ? typeStatement.value : "problem";
+
+  if (!["problem", "conflict", "goal"].includes(parserType)) {
+    throw Error(`Invalid type '${parserType}'. Must be one of: problem, conflict, goal`);
+  }
+
+  // For empty input, require explicit type
+  if (!typeStatement && parsedAst.statements.length === 0) {
     throw Error("Type declaration missing");
   }
 
-  const parserType: string = typeMatch[1];
-  if (!["problem", "conflict", "goal"].includes(parserType)) {
-    throw Error(
-      `Invalid type '${parserType}'. Must be one of: problem, conflict, goal`,
-    );
-  }
-
   const parserEType = parserType as EDiagramType;
-  const parser: peggy.Parser = parsers[parserType];
-  const parsedAst = parser.parse(code) as { statements: RawStatementAst[] };
   const statements = parsedAst.statements.filter((s): s is StatementAst => s.type !== "type");
   return {ast: {statements}, type: parserEType};
 }
