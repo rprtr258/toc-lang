@@ -1,25 +1,25 @@
 {
-  "statements": [
+  "edges": [
+    {
+      "fromIds": [
+        "c"
+      ],
+      "toId": "b"
+    }
+  ],
+  "nodes": [
     {
       "id": "b",
       "params": {
         "class": "UDE"
       },
-      "text": "badness",
-      "type": "node"
+      "text": "badness"
     },
     {
       "id": "c",
       "params": {},
-      "text": "cause",
-      "type": "node"
-    },
-    {
-      "fromIds": [
-        "c"
-      ],
-      "toId": "b",
-      "type": "edge"
+      "text": "cause"
     }
-  ]
+  ],
+  "type": "problem"
 }

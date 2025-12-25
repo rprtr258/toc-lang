@@ -49,13 +49,17 @@ const testCases = [
     c -> b
     `,
   },
+  {
+    name: "empty text",
+    text: "",
+  },
 ];
 
 describe("problem tree interpreter", () => {
   testCases.forEach((testCase) => {
     it(testCase.name, () => {
       const typeLine = `type: problem\n`;
-      const {ast} = parseTextToAst(typeLine + testCase.text);
+      const ast = parseTextToAst(typeLine + testCase.text);
       approvals.verifyAsJSON(__dirname, "parses ast for input " + testCase.name, ast, {});
     });
   });
@@ -68,21 +72,24 @@ describe("problem tree interpreter", () => {
     d <- c
     `;
     const expected: Ast = {
-      statements: [
-        {text: "badness", type: "node", id: "b", params: {class: "UDE"}},
-        {text: "cause", type: "node", id: "c", params: {}},
-        {fromIds: ["c"], type: "edge", toId: "d", text: undefined},
+      type: "problem",
+      nodes: [
+        {id: "b", text: "badness", params: {class: "UDE"}},
+        {id: "c", text: "cause", params: {}},
+      ],
+      edges: [
+        {fromIds: ["c"], toId: "d", text: undefined},
       ],
     };
-    const {ast} = parseTextToAst(text);
+    const ast = parseTextToAst(text);
     expect(ast).toEqual(expected);
     expect(() => parseProblemTreeSemantics(ast)).toThrowError(/^Effect d not declared$/);
   });
 
   it("example parses", () => {
     const text = exampleProblemTreeText;
-    const {ast, type} = parseTextToAst(text);
-    expect(type).toEqual("problem");
+    const ast = parseTextToAst(text);
+    expect(ast.type).toEqual("problem");
     const semantics = parseProblemTreeSemantics(ast);
     approvals.verifyAsJSON(__dirname, "example problem tree", {ast, semantics}, {});
   });

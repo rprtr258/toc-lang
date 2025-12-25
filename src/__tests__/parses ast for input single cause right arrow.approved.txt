@@ -1,23 +1,23 @@
 {
-  "statements": [
-    {
-      "id": "b",
-      "params": {},
-      "text": "badness",
-      "type": "node"
-    },
-    {
-      "id": "c",
-      "params": {},
-      "text": "cause",
-      "type": "node"
-    },
+  "edges": [
     {
       "fromIds": [
         "c"
       ],
-      "toId": "b",
-      "type": "edge"
+      "toId": "b"
     }
-  ]
+  ],
+  "nodes": [
+    {
+      "id": "b",
+      "params": {},
+      "text": "badness"
+    },
+    {
+      "id": "c",
+      "params": {},
+      "text": "cause"
+    }
+  ],
+  "type": "problem"
 }

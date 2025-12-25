@@ -11,14 +11,15 @@ const testcases = [
     Goal: "win"
     `,
     expected: {
-      statements: [
+      type: "goal",
+      nodes: [
         {
-          text: "win",
-          type: "node",
           id: "Goal",
+          text: "win",
           params: {},
         },
       ],
+      edges: [],
     },
   },
   {
@@ -40,60 +41,51 @@ const testcases = [
     weScore <- shooting
     `,
     expected: {
-      statements: [
+      type: "goal",
+      nodes: [
         {
           id: "Goal",
           text: "win",
-          type: "node",
           params: {},
         },
         {
           id: "weScore",
           text: "We score points",
-          type: "node",
           params: {class: "CSF"},
         },
         {
           id: "theyDont",
           text: "Other team doesn't score",
-          type: "node",
           params: {class: "CSF"},
         },
         {
           id: "possession",
           text: "We get the ball",
-          type: "node",
           params: {},
         },
         {
           id: "shooting",
           text: "We shoot the ball accurately",
-          type: "node",
           params: {},
         },
         {
           id: "defense",
           text: "We have good defense",
-          type: "node",
           params: {},
         },
+      ],
+      edges: [
         {
           toId: "theyDont",
           fromIds: ["defense"],
-          type: "edge",
-          text: undefined,
         },
         {
           toId: "weScore",
           fromIds: ["possession"],
-          type: "edge",
-          text: undefined,
         },
         {
           toId: "weScore",
           fromIds: ["shooting"],
-          type: "edge",
-          text: undefined,
         },
       ],
     },
@@ -107,14 +99,15 @@ const testcases = [
     }
     `,
     expected: {
-      statements: [
+      type: "goal",
+      nodes: [
         {
-          text: "win",
-          type: "node",
           id: "mynode",
+          text: "win",
           params: {status: "50"},
         },
       ],
+      edges: [],
     },
   },
   {
@@ -124,12 +117,9 @@ const testcases = [
     type: goal
     `,
     expected: {
-      statements: [
-        {
-          text: " This is a comment",
-          type: "comment",
-        },
-      ],
+      type: "goal",
+      nodes: [],
+      edges: [],
     },
   },
   {
@@ -141,20 +131,20 @@ const testcases = [
     weScore: "We score points" {status: 70}
     `,
     expected: {
-      statements: [
+      type: "goal",
+      nodes: [
         {
           id: "Goal",
           text: "win",
-          type: "node",
           params: {},
         },
         {
           id: "weScore",
           text: "We score points",
-          type: "node",
           params: {status: "70"},
         },
       ],
+      edges: [],
     },
   },
 ] as {name: string, text: string, expected: Ast}[];
@@ -162,53 +152,26 @@ const testcases = [
 describe("goal tree interpreter", () => {
   for (const {name, text, expected} of testcases) {
     it(name, () => {
-      expect(parseTextToAst(text).ast).toStrictEqual(expected);
+      expect(parseTextToAst(text)).toStrictEqual(expected);
     });
   }
 
   it("parses example", () => {
     const text = exampleGoalTreeText;
-    const {ast} = parseTextToAst(text);
+    const ast = parseTextToAst(text);
     expect(ast).not.toBeNull();
     const semTree = parseGoalTreeSemantics(ast);
     const expectedSemTree: TreeSemantics = {
       edges: [
-        {
-          from: "revUp",
-          to: "Goal",
-        },
-        {
-          from: "costsDown",
-          to: "Goal",
-        },
-        {
-          from: "features",
-          to: "newCust",
-        },
-        {
-          from: "retain",
-          to: "features",
-        },
-        {
-          from: "newCust",
-          to: "revUp",
-        },
-        {
-          from: "keepCust",
-          to: "revUp",
-        },
-        {
-          from: "reduceInfra",
-          to: "costsDown",
-        },
-        {
-          from: "marketSalary",
-          to: "retain",
-        },
-        {
-          from: "morale",
-          to: "retain",
-        },
+        {from: "revUp", to: "Goal"},
+        {from: "costsDown", to: "Goal"},
+        {from: "newCust", to: "revUp"},
+        {from: "keepCust", to: "revUp"},
+        {from: "reduceInfra", to: "costsDown"},
+        {from: "features", to: "newCust"},
+        {from: "retain", to: "features"},
+        {from: "marketSalary", to: "retain"},
+        {from: "morale", to: "retain"},
       ],
       nodes: {
         Goal: {

@@ -4,7 +4,7 @@ import {createEdge, displacePoint, midPoint, bottomCenter, topCenter, rect} from
 import CloudNode from "./CloudNode.vue";
 import Injection from "./Injection.vue";
 import CloudEdge from "./CloudEdge.vue";
-import {Ast, StatementAst} from "./parser.ts";
+import {Ast} from "./parser.ts";
 
 const props = defineProps<{
   ast: Ast,
@@ -36,18 +36,14 @@ type NodeLabels = {
   D: string,
   E: string,
 };
-const nodeLabels = computed<NodeLabels>(() => Object.fromEntries(ast.value.statements
-  .filter((statement): statement is StatementAst & { type: "node" } => statement.type === "node")
-  .map(statement => [statement.id, statement.text])) as NodeLabels);
+const nodeLabels = computed<NodeLabels>(() => Object.fromEntries(ast.value.nodes.map(node => [node.id, node.text])) as NodeLabels);
 
-const injections = computed<Record<string, string>>(() => Object.fromEntries(ast.value.statements
-  .filter((statement): statement is StatementAst & { type: "edge" } => statement.type === "edge")
-  .map(statement => {
-    const id1 = statement.fromIds[0];
-    const id2 = statement.toId;
-    const edgeName = id1 < id2 ? `${id1}-${id2}` : `${id2}-${id1}`;
-    return [edgeName, statement.text!];
-  })));
+const injections = computed<Record<string, string>>(() => Object.fromEntries(ast.value.edges.map(edge => {
+  const id1 = edge.fromIds[0];
+  const id2 = edge.toId;
+  const edgeName = id1 < id2 ? `${id1}-${id2}` : `${id2}-${id1}`;
+  return [edgeName, edge.text!];
+})));
 
 const x1 = 25;
 const x2 = 250;

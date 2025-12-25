@@ -24,7 +24,7 @@ type LayoutedNode = {
   style: string,
   labelStyle: string,
   label: string,
-  annotation?: string,
+  annotation: string,
 };
 
 function edgePath(points: xy[]): string {
@@ -68,8 +68,9 @@ function createNode(node: Node): LayoutedNode {
   })(node.statusPercentage);
   const styleCommon = shape === "rect" ? "rx: 5px; ry: 5px;" : "";
   const style = `stroke: black; stroke-width: 1px; ${styleCommon} fill:${fillColor};`;
-  const width = node.intermediate ? 25 : 150; // Default width, adjust as needed
-  const height = node.intermediate ? 25 : 50; // Default height
+  const width = node.intermediate ? 25 : 150;
+  const labelLines = wrapLines(node.label, 20);
+  const height = node.intermediate ? 25 : Math.max(50, labelLines.length * 20);
   return {
     id: node.id,
     width,
@@ -77,8 +78,8 @@ function createNode(node: Node): LayoutedNode {
     shape,
     style,
     labelStyle: `font: ${fontWeight} ${fontSize}px "trebuchet ms",verdana,arial,sans-serif; fill: black;`,
-    label: wrapLines(node.label, 20).join("\n"),
-    annotation: node.annotation,
+    label: labelLines.join("\n"),
+    annotation: node.annotation ?? "",
   };
 }
 

@@ -1,50 +1,47 @@
 {
   "ast": {
-    "statements": [
-      {
-        "id": "bad",
-        "params": {
-          "class": "UDE"
-        },
-        "text": "Bad user experience",
-        "type": "node"
-      },
-      {
-        "id": "cluttered",
-        "params": {
-          "class": "UDE"
-        },
-        "text": "Cluttered interface",
-        "type": "node"
-      },
+    "edges": [
       {
         "fromIds": [
           "cluttered"
         ],
-        "toId": "bad",
-        "type": "edge"
-      },
-      {
-        "id": "ux",
-        "params": {},
-        "text": "Low investment in UX design",
-        "type": "node"
-      },
-      {
-        "id": "features",
-        "params": {},
-        "text": "Many features added",
-        "type": "node"
+        "toId": "bad"
       },
       {
         "fromIds": [
           "ux",
           "features"
         ],
-        "toId": "cluttered",
-        "type": "edge"
+        "toId": "cluttered"
       }
-    ]
+    ],
+    "nodes": [
+      {
+        "id": "bad",
+        "params": {
+          "class": "UDE"
+        },
+        "text": "Bad user experience"
+      },
+      {
+        "id": "cluttered",
+        "params": {
+          "class": "UDE"
+        },
+        "text": "Cluttered interface"
+      },
+      {
+        "id": "ux",
+        "params": {},
+        "text": "Low investment in UX design"
+      },
+      {
+        "id": "features",
+        "params": {},
+        "text": "Many features added"
+      }
+    ],
+    "type": "problem"
   },
   "semantics": {
     "edges": [

@@ -1,30 +1,29 @@
 {
-  "statements": [
-    {
-      "id": "b",
-      "params": {},
-      "text": "badness",
-      "type": "node"
-    },
-    {
-      "id": "c1",
-      "params": {},
-      "text": "cause 1",
-      "type": "node"
-    },
-    {
-      "id": "c2",
-      "params": {},
-      "text": "cause 2",
-      "type": "node"
-    },
+  "edges": [
     {
       "fromIds": [
         "c1",
         "c2"
       ],
-      "toId": "b",
-      "type": "edge"
+      "toId": "b"
     }
-  ]
+  ],
+  "nodes": [
+    {
+      "id": "b",
+      "params": {},
+      "text": "badness"
+    },
+    {
+      "id": "c1",
+      "params": {},
+      "text": "cause 1"
+    },
+    {
+      "id": "c2",
+      "params": {},
+      "text": "cause 2"
+    }
+  ],
+  "type": "problem"
 }

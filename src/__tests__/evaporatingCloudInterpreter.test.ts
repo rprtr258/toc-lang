@@ -8,7 +8,9 @@ const testcases = [
     name: "only type line parses to empty",
     text: "type: conflict",
     expected: {
-      statements: [],
+      type: "conflict",
+      nodes: [],
+      edges: [],
     },
   },
   {
@@ -22,38 +24,35 @@ D: "Subordinate people's needs to the financial goal"
 E: "Attend to people's needs (& let people work)"
 `,
     expected: {
-      statements: [
+      type: "conflict",
+      nodes: [
         {
           id: "A",
           text: "Maximize business performance",
-          type: "node",
           params: {},
         },
         {
           id: "B",
           text: "Subordinate all decisions to the financial goal",
-          type: "node",
           params: {},
         },
         {
           id: "C",
           text: "Ensure people are in a state of optimal performance",
-          type: "node",
           params: {},
         },
         {
           id: "D",
           text: "Subordinate people's needs to the financial goal",
-          type: "node",
           params: {},
         },
         {
           id: "E",
           text: "Attend to people's needs (& let people work)",
-          type: "node",
           params: {},
         },
       ],
+      edges: [],
     },
   },
   {
@@ -67,38 +66,35 @@ D: "Subordinate people's needs to the financial goal"
 E: "Attend to people's needs (& let people work)"
 `,
     expected: {
-      statements: [
+      type: "conflict",
+      nodes: [
         {
           id: "A",
           text: "Maximize business performance {",
-          type: "node",
           params: {},
         },
         {
           id: "B",
           text: "Subordinate all decisions to the financial goal",
-          type: "node",
           params: {},
         },
         {
           id: "C",
           text: "Ensure people are in a state of optimal performance",
-          type: "node",
           params: {},
         },
         {
           id: "D",
           text: "Subordinate people's needs to the financial goal",
-          type: "node",
           params: {},
         },
         {
           id: "E",
           text: "Attend to people's needs (& let people work)",
-          type: "node",
           params: {},
         },
       ],
+      edges: [],
     },
   },
   {
@@ -110,24 +106,24 @@ D: "Subordinate people's needs to the financial goal"
 A <- D: "inject Psychological flow triggers"
 `,
     expected: {
-      statements: [
+      type: "conflict",
+      nodes: [
         {
           id: "A",
           text: "Maximize business performance",
-          type: "node",
           params: {},
         },
         {
           id: "D",
           text: "Subordinate people's needs to the financial goal",
-          type: "node",
           params: {},
         },
+      ],
+      edges: [
         {
           fromIds: ["D"],
           toId: "A",
           text: "inject Psychological flow triggers",
-          type: "edge",
         },
       ],
     },
@@ -139,12 +135,13 @@ type: conflict
 D -> E: "Discover they don't conflict"
 `,
     expected: {
-      statements: [
+      type: "conflict",
+      nodes: [],
+      edges: [
         {
-          type: "edge",
-          text: "Discover they don't conflict",
           fromIds: ["D"],
           toId: "E",
+          text: "Discover they don't conflict",
         },
       ],
     },
@@ -156,12 +153,13 @@ type: conflict
 D -- E: "Discover they don't conflict"
 `,
     expected: {
-      statements: [
+      type: "conflict",
+      nodes: [],
+      edges: [
         {
-          type: "edge",
-          text: "Discover they don't conflict",
           fromIds: ["D"],
           toId: "E",
+          text: "Discover they don't conflict",
           biDirectional: true,
         },
       ],
@@ -174,12 +172,9 @@ D -- E: "Discover they don't conflict"
 type: conflict
 `,
     expected: {
-      statements: [
-        {
-          text: " This is a comment",
-          type: "comment",
-        },
-      ],
+      type: "conflict",
+      nodes: [],
+      edges: [],
     },
   },
   {
@@ -189,14 +184,15 @@ type: conflict
 A: "*watafa* pepe"
 `,
     expected: {
-      statements: [
+      type: "conflict",
+      nodes: [
         {
-          type: "node",
           id: "A",
           text: "*watafa* pepe",
           params: {},
         },
       ],
+      edges: [],
     },
   },
 ] as {name: string, text: string, expected: Ast}[];
@@ -204,17 +200,12 @@ A: "*watafa* pepe"
 describe("evaporating cloud tree interpreter", () => {
   for (const {name, text, expected} of testcases) {
     it(name, () => {
-      expect(parseTextToAst(text).ast).toStrictEqual(expected);
+      expect(parseTextToAst(text)).toStrictEqual(expected);
     });
   }
 
   it("parses example", () => {
     const text = exampleEvaporatingCloudText;
-    expect(parseTextToAst(text).ast).not.toBeNull();
-  });
-
-  it("empty text throws type missing", () => {
-    const text = "";
-    expect(() => parseTextToAst(text)).toThrow("Type declaration missing");
+    expect(parseTextToAst(text)).not.toBeNull();
   });
 });

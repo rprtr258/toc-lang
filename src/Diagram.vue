@@ -3,7 +3,8 @@ import {computed, ref} from "vue";
 import svgPanZoom from "svg-pan-zoom";
 import Cloud from "./Cloud.vue";
 import Tree from "./Tree.vue";
-import {EDiagramType, TreeSemantics, Ast} from "./interpreter.ts";
+import {TreeSemantics} from "./interpreter.ts";
+import {Ast, EDiagramType} from "./parser.ts";
 
 const props = defineProps<{
   ast: Ast,

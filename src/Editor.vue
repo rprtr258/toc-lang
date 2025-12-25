@@ -2,29 +2,9 @@
 import {ref, onMounted, watch, computed} from "vue";
 import {fileOpen, fileSave} from "browser-fs-access";
 import {Codemirror} from "vue-codemirror";
-import {EditorView} from "codemirror";
+import {basicSetup, EditorView} from "codemirror";
 import {linter, type Diagnostic} from "@codemirror/lint";
 import {EditorSelection} from "@codemirror/state";
-import {
-  highlightSpecialChars,
-  drawSelection,
-  dropCursor,
-  highlightActiveLine,
-  keymap,
-} from "@codemirror/view";
-import {defaultKeymap, historyKeymap} from "@codemirror/commands";
-import {
-  autocompletion,
-  closeBrackets,
-  closeBracketsKeymap,
-  completionKeymap,
-} from "@codemirror/autocomplete";
-import {
-  bracketMatching,
-  defaultHighlightStyle,
-  indentOnInput,
-  syntaxHighlighting,
-} from "@codemirror/language";
 import FileControls from "./FileControls.vue";
 import {
   exampleEvaporatingCloudText,
@@ -49,21 +29,10 @@ const editorText = ref(myProps.value || "");
 const view = ref<EditorView | null>(null);
 
 const extensions = computed(() => [
-  highlightSpecialChars(),
-  drawSelection(),
-  dropCursor(),
-  indentOnInput(),
-  syntaxHighlighting(defaultHighlightStyle, {fallback: true}),
-  bracketMatching(),
-  closeBrackets(),
-  autocompletion(),
-  highlightActiveLine(),
-  keymap.of([
-    ...closeBracketsKeymap,
-    ...defaultKeymap,
-    ...historyKeymap,
-    ...completionKeymap,
-  ]),
+  basicSetup,
+  EditorView.baseTheme({
+    ".cm-gutters": {display: "none"},
+  }),
   TOC_LANG({idents: myProps.completions.idents}),
   TOC_LANG_HIGHLIGHT,
   linter(() => myProps.diagnostics),

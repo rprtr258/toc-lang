@@ -1,4 +1,4 @@
-import {Ast, parse, ParsedAst, StatementAst} from "./parser.ts";
+import {Ast, AstNode, parse} from "./parser.ts";
 
 export type NodeID = string;
 
@@ -25,15 +25,24 @@ export interface Completions {
   idents: NodeID[],
 }
 
-export type EDiagramType = "problem" | "conflict" | "goal";
-
-export interface ParseResult {
-  ast: Ast,
-  type: EDiagramType,
+function sortAst(ast: Ast): Ast {
+  const orderedNodes = topologicalSort(ast);
+  const rank = new Map(orderedNodes.map((n, i) => [n.id, i]));
+  return {
+    type: ast.type,
+    nodes: orderedNodes,
+    edges: ast.edges.toSorted((a, b) => {
+      if (a.fromIds.length !== b.fromIds.length) {
+        return a.fromIds.length - b.fromIds.length;
+      }
+      return rank.get(a.toId)! - rank.get(b.toId)!;
+    }),
+  };
 }
 
 export function parseGoalTreeSemantics(ast: Ast): TreeSemantics {
-  const goal = ast.statements.find((s: StatementAst) => s.type === "node" && s.id === "Goal") as StatementAst & {type: "node"} | undefined;
+  ast = sortAst(ast);
+  const goal = ast.nodes.find((s: AstNode) => s.id === "Goal");
 
   const nodes = {
     "Goal": {
@@ -42,8 +51,8 @@ export function parseGoalTreeSemantics(ast: Ast): TreeSemantics {
       label: goal?.text || "",
       ...(goal?.params.status ? {statusPercentage: parseFloat(goal.params.status)} : {}),
     },
-    ...Object.fromEntries(ast.statements
-      .filter((s): s is StatementAst & { type: "node" } => s.type === "node" && s.id !== "Goal")
+    ...Object.fromEntries(ast.nodes
+      .filter(s => s.id !== "Goal")
       .map((statement) => [statement.id, {
         id: statement.id,
         label: statement.text,
@@ -52,8 +61,7 @@ export function parseGoalTreeSemantics(ast: Ast): TreeSemantics {
       }])),
   } as Record<string, Node>;
 
-  const edges = ast.statements
-    .filter((s): s is StatementAst & { type: "edge" } => s.type === "edge")
+  const edges = ast.edges
     .map((statement): Edge => {
       const nodeID = statement.toId;
       if (!nodes[nodeID]) {
@@ -75,9 +83,7 @@ export function parseGoalTreeSemantics(ast: Ast): TreeSemantics {
   return {nodes, edges, rankdir: "BT"};
 }
 
-function findNodeAnnotation(statement: StatementAst) {
-  if (statement.type !== "node")
-    return undefined;
+function findNodeAnnotation(statement: AstNode): string | undefined {
   const pattern = /^(UDE|FOL|DE)/i;
   if (typeof statement.params?.class === "string" && statement.params?.class?.match(pattern)) {
     return statement.params.class.match(pattern)![0].toUpperCase();
@@ -85,68 +91,76 @@ function findNodeAnnotation(statement: StatementAst) {
   return undefined;
 }
 
-export function parseProblemTreeSemantics(ast: Ast): TreeSemantics {
-  const nodes: Record<NodeID, Node> = Object.fromEntries(ast.statements
-    .filter((s): s is StatementAst & { type: "node" } => s.type === "node")
-    .map(statement => [statement.id, {
-      annotation: findNodeAnnotation(statement),
-      id: statement.id,
-      label: statement.text,
-    }]));
+function topologicalSort({nodes, edges}: Ast): AstNode[] {
+  const graph = new Map<NodeID, NodeID[]>();
+  nodes.forEach(node => {
+    graph.set(node.id, []);
+  });
+  edges.forEach(edge => {
+    edge.fromIds.forEach(fromId => {
+      graph.get(fromId)!.push(edge.toId);
+    });
+  });
 
-  const edges = ast.statements
-    .filter((s): s is StatementAst & { type: "edge" } => s.type === "edge")
-    .flatMap((statement): Edge[] => {
-      const effectID = statement.toId;
-      if (!nodes[effectID]) {
-        throw new Error(`Effect ${effectID} not declared`);
+  const nodeMap = new Map(nodes.map(node => [node.id, node]));
+
+  const visited = new Set<NodeID>();
+  const sorted: NodeID[] = [];
+  function dfs(id: NodeID): void {
+    if (visited.has(id)) return;
+    visited.add(id);
+    for (const toId of graph.get(id) ?? [])
+      dfs(toId);
+    sorted.push(id);
+  }
+  for (const node of nodes)
+    dfs(node.id);
+
+  return sorted.filter(id => nodeMap.has(id)).map(id => nodeMap.get(id)!);
+}
+
+export function parseProblemTreeSemantics(ast: Ast): TreeSemantics {
+  ast = sortAst(ast);
+  const nodes: Record<NodeID, Node> = Object.fromEntries(ast.nodes.map(node => [node.id, {
+    annotation: findNodeAnnotation(node),
+    id: node.id,
+    label: node.text,
+  }]));
+
+  const edges = ast.edges.flatMap((edge): Edge[] => {
+    const effectID = edge.toId;
+    if (!nodes[effectID]) {
+      throw new Error(`Effect ${effectID} not declared`);
+    }
+    if (edge.fromIds.length === 1) {
+      const causeID = edge.fromIds[0];
+      if (!nodes[causeID]) {
+        throw new Error(`Cause ${causeID} not declared`);
       }
-      if (statement.fromIds.length === 1) {
-        const causeID = statement.fromIds[0];
+      return [{from: causeID, to: effectID}];
+    }
+
+    // Multi-cause: create intermediate AND node
+    const intermediateID = edge.fromIds.join("_") + "_cause_" + effectID;
+    nodes[intermediateID] = {
+      id: intermediateID,
+      label: "AND",
+      intermediate: true,
+    };
+    return [
+      ...edge.fromIds.map((causeID) => {
         if (!nodes[causeID]) {
           throw new Error(`Cause ${causeID} not declared`);
         }
-        return [{from: causeID, to: effectID}];
-      }
-
-      // Multi-cause: create intermediate AND node
-      const intermediateID = statement.fromIds.join("_") + "_cause_" + effectID;
-      nodes[intermediateID] = {
-        id: intermediateID,
-        label: "AND",
-        intermediate: true,
-      };
-      return [
-        ...statement.fromIds.map((causeID) => {
-          if (!nodes[causeID]) {
-            throw new Error(`Cause ${causeID} not declared`);
-          }
-          return {from: causeID, to: intermediateID};
-        }),
-        {from: intermediateID, to: effectID},
-      ];
-    });
+        return {from: causeID, to: intermediateID};
+      }),
+      {from: intermediateID, to: effectID},
+    ];
+  });
 
   return {nodes, edges, rankdir: "BT"};
 }
 
-export function parseTextToAst(code: string): ParseResult {
-  const parsedAst: ParsedAst = parse(code);
-
-  // Find type from parsed statements
-  const typeStatement = parsedAst.statements.find((s) => s.type === "type") as | {type: "type", value: string} | undefined;
-  const parserType = typeStatement ? typeStatement.value : "problem";
-
-  if (!["problem", "conflict", "goal"].includes(parserType)) {
-    throw Error(`Invalid type '${parserType}'. Must be one of: problem, conflict, goal`);
-  }
-
-  // For empty input, require explicit type
-  if (!typeStatement && parsedAst.statements.length === 0) {
-    throw Error("Type declaration missing");
-  }
-
-  const parserEType = parserType as EDiagramType;
-  const statements = parsedAst.statements.filter((s): s is StatementAst => s.type !== "type");
-  return {ast: {statements}, type: parserEType};
+export function parseTextToAst(code: string): Ast {
+  return parse(code);
 }

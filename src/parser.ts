@@ -1,43 +1,47 @@
 // Parser for TOC-Lang
 import {EOF, SyntaxError, Token, tokenize, TokenType} from "./tokenizer.ts";
 
-export type RawStatementAst =
-  | StatementAst
-  | {
-      type: "type",
-      value: string,
-    };
-
-export type StatementAst =
-  | {
-      type: "edge",
-      id?: string,
-      text?: string,
-      fromIds: string[],
-      toId: string,
-      biDir?: boolean,
-      params?: ParamsAst,
-      biDirectional?: true,
-    }
-  | {
-      type: "node",
-      id: string,
-      text: string,
-      params: ParamsAst,
-    }
-  | {
-      type: "comment",
-      text: string,
-    };
-
-export interface Ast {
-  statements: StatementAst[],
-}
-
 export type ParamsAst = Record<string, string>;
 
-export interface ParsedAst {
-  statements: RawStatementAst[],
+export type StatementAst =
+| {
+  type: "edge",
+  id?: string,
+  text?: string,
+  fromIds: string[],
+  toId: string,
+  biDir?: boolean,
+  params?: ParamsAst,
+  biDirectional?: true,
+}
+| {
+  type: "node",
+  id: string,
+  text: string,
+  params: ParamsAst,
+}
+| {
+  type: "type",
+  value: string,
+};
+
+export type EDiagramType = "problem" | "conflict" | "goal";
+
+export type AstNode = {
+  id: string,
+  text: string,
+  params: ParamsAst,
+};
+export type AstEdge = {
+  fromIds: string[],
+  toId: string,
+  text?: string,
+  biDirectional?: true,
+};
+export interface Ast {
+  type: EDiagramType,
+  nodes: AstNode[],
+  edges: AstEdge[],
 }
 
 class Parser {
@@ -85,7 +89,7 @@ class Parser {
   }
 
   // type: ident
-  private parseTypeStatement(): RawStatementAst {
+  private parseTypeStatement(): StatementAst {
     this.consume("IDENT", "Expected 'type'");
     this.consume("COLON", "Expected ':' after 'type'");
     const typeValue = this.consume("IDENT", "Expected type value");
@@ -96,12 +100,8 @@ class Parser {
   }
 
   // # text
-  private parseCommentLine(): StatementAst {
-    const comment = this.value(this.consume("COMMENT", "Expected comment"));
-    return {
-      type: "comment",
-      text: comment.slice(1), // remove the #
-    };
+  private parseCommentLine(): void {
+    this.consume("COMMENT", "Expected comment");
   }
 
   // ident : label params?
@@ -236,7 +236,7 @@ class Parser {
     return ["ARROW_LEFT", "ARROW_RIGHT", "ARROW_BI", "AND"].includes(next);
   }
 
-  *parseStatement(): Generator<RawStatementAst> {
+  *parseStatement(): Generator<StatementAst> {
     while (this.match("EOL"));
 
     if (this.check("EOF")) return;
@@ -245,7 +245,7 @@ class Parser {
       yield this.parseTypeStatement();
       return;
     } else if (this.check("COMMENT")) {
-      yield this.parseCommentLine();
+      this.parseCommentLine();
       return;
     } else if (this.check("IDENT") && this.peekAhead()?.type === "COLON") {
       yield this.parseNodeStatement();
@@ -264,7 +264,7 @@ class Parser {
     }
   }
 
-  *parse(): Generator<RawStatementAst> {
+  *parse(): Generator<StatementAst> {
     while (!this.check("EOF")) {
       const stmt = this.parseStatement();
       if (stmt) {
@@ -274,8 +274,39 @@ class Parser {
   }
 }
 
-export function parse(input: string): ParsedAst {
+const zeroLocation = {col: 0, end: 0, line: 0, start: 0};
+
+export function parse(input: string): Ast {
   const parser = new Parser(input);
-  const statements: RawStatementAst[] = Array.from(parser.parse());
-  return {statements};
+  const statements: StatementAst[] = Array.from(parser.parse());
+
+  const typeStatements: (StatementAst & {type: "type"})[] = [];
+  const nodeStatements: (StatementAst & {type: "node"})[] = [];
+  const edgeStatements: (StatementAst & {type: "edge"})[] = [];
+  for (const s of statements) {
+    switch (s.type) {
+      case "type": typeStatements.push(s); break;
+      case "node": nodeStatements.push(s); break;
+      case "edge": edgeStatements.push(s); break;
+      default: {const _: never = s; void(_);}
+    }
+  }
+
+  const validTypes = ["problem", "conflict", "goal"];
+  if (typeStatements.length > 1)
+    throw new SyntaxError("Only one 'type' statement is allowed", zeroLocation);
+  else if (typeStatements.length === 1 && !validTypes.includes(typeStatements[0].value))
+    throw new SyntaxError(`Invalid type '${typeStatements[0].value}'. Must be one of: ${validTypes.join(", ")}`, zeroLocation);
+
+  const parserType = (typeStatements.length === 1 ? typeStatements[0].value : "problem") as EDiagramType;
+  return {
+    type: parserType,
+    nodes: nodeStatements.map(({id, text, params}) => ({id, text, params})),
+    edges: edgeStatements.map(({fromIds, toId, text, biDirectional}) => {
+      const res: AstEdge = {fromIds, toId};
+      if (text) res.text = text;
+      if (biDirectional) res.biDirectional = biDirectional;
+      return res;
+    }),
+  };
 }

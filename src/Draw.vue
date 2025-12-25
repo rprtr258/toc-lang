@@ -9,9 +9,8 @@ import {
   parseProblemTreeSemantics,
   type TreeSemantics,
   type Completions,
-  EDiagramType,
 } from "./interpreter.ts";
-import {Ast} from "./parser.ts";
+import {Ast, EDiagramType} from "./parser.ts";
 import {SyntaxError} from "./tokenizer.ts";
 
 const completions = ref<Completions>({idents: []});
@@ -24,8 +23,8 @@ const diagramType = ref<EDiagramType | null>(null);
 
 const onEditorChange = (value: string) => {
   try {
-    const {ast: parsedAst, type} = parseTextToAst(value);
-    switch (type) {
+    const parsedAst = parseTextToAst(value);
+    switch (parsedAst.type) {
       case "goal": {
         const sem = parseGoalTreeSemantics(parsedAst);
         semantics.value = sem;
@@ -43,7 +42,7 @@ const onEditorChange = (value: string) => {
         completions.value.idents = ["A", "B", "C", "D", "E"];
     }
     ast.value = parsedAst;
-    diagramType.value = type;
+    diagramType.value = parsedAst.type;
     diagnostics.value = [];
   } catch (e) {
     const err = e as SyntaxError;
