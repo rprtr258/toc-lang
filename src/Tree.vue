@@ -25,6 +25,7 @@ type LayoutedNode = {
   labelStyle: string,
   label: string,
   annotation: string,
+  intermediate: boolean,
 };
 
 function edgePath(points: xy[]): string {
@@ -80,6 +81,7 @@ function createNode(node: Node): LayoutedNode {
     labelStyle: `font: ${fontWeight} ${fontSize}px "trebuchet ms",verdana,arial,sans-serif; fill: black;`,
     label: labelLines.join("\n"),
     annotation: node.annotation ?? "",
+    intermediate: node.intermediate ?? false,
   };
 }
 
@@ -213,10 +215,21 @@ onMounted(() => {
             dominant-baseline="central"
           >
             <tspan
+              v-if="!node.intermediate"
+              :x="node.x + node.width / 2"
+              :y="node.y + 7"
+              :style="`font-size: 0.6em; fill: black; font-style: italic; font-weight: bold;`"
+              text-anchor="middle"
+              dominant-baseline="central"
+            >
+              {{ node.id }}
+            </tspan>
+            <title v-if="!node.intermediate">{{ node.id }}</title>
+            <tspan
               v-for="(line, index) in node.label.split('\n')"
               :key="index"
               :x="node.x + node.width / 2"
-              :dy="index === 0 ? 0 : '1.2em'"
+              :dy="node.intermediate ? 0 : index === 0 ? '1em' : '1.2em'"
             >
               {{ line }}
             </tspan>
