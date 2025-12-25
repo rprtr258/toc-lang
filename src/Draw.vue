@@ -8,12 +8,13 @@ import {
   parseGoalTreeSemantics,
   parseProblemTreeSemantics,
   type TreeSemantics,
-  type Completions,
+  Completion,
+  cloudDefaultLabels,
 } from "./interpreter.ts";
 import {Ast, EDiagramType} from "./parser.ts";
 import {SyntaxError} from "./tokenizer.ts";
 
-const completions = ref<Completions>({idents: []});
+const completions = ref<Completion[]>([]);
 
 const ast = ref<Ast | null>(null);
 const semantics = ref<TreeSemantics | null>(null);
@@ -28,18 +29,21 @@ const onEditorChange = (value: string) => {
       case "goal": {
         const sem = parseGoalTreeSemantics(parsedAst);
         semantics.value = sem;
-        completions.value.idents = Object.keys(sem.nodes);
+        completions.value = parsedAst.nodes;
         break;
       }
       case "problem": {
         const sem = parseProblemTreeSemantics(parsedAst);
         semantics.value = sem;
-        completions.value.idents = Object.keys(sem.nodes);
+        completions.value = parsedAst.nodes;
         break;
       }
       default:
-        semantics.value = null;
-        completions.value.idents = ["A", "B", "C", "D", "E"];
+        semantics.value = null; // TODO: validate semantics
+        completions.value = Object.entries(cloudDefaultLabels).map(([id, text]) => ({
+          id,
+          text: parsedAst.nodes.find(n => n.id === id)?.text ?? text,
+        }));
     }
     ast.value = parsedAst;
     diagramType.value = parsedAst.type;

@@ -1,6 +1,6 @@
 import {describe, expect, it} from "bun:test";
 import {parseTextToAst} from "../interpreter.ts";
-import {exampleEvaporatingCloudText} from "../examples.ts";
+import {exampleEvaporatingCloud} from "../examples.ts";
 import {Ast} from "../parser.ts";
 
 const testcases = [
@@ -205,7 +205,7 @@ describe("evaporating cloud tree interpreter", () => {
   }
 
   it("parses example", () => {
-    const text = exampleEvaporatingCloudText;
+    const text = exampleEvaporatingCloud;
     expect(parseTextToAst(text)).not.toBeNull();
   });
 });

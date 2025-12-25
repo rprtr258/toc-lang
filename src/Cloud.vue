@@ -5,6 +5,7 @@ import CloudNode from "./CloudNode.vue";
 import Injection from "./Injection.vue";
 import CloudEdge from "./CloudEdge.vue";
 import {Ast} from "./parser.ts";
+import {cloudDefaultLabels} from "./interpreter.ts";
 
 const props = defineProps<{
   ast: Ast,
@@ -36,7 +37,10 @@ type NodeLabels = {
   D: string,
   E: string,
 };
-const nodeLabels = computed<NodeLabels>(() => Object.fromEntries(ast.value.nodes.map(node => [node.id, node.text])) as NodeLabels);
+const nodeLabels = computed<NodeLabels>(() => ({
+  ...cloudDefaultLabels,
+  ...Object.fromEntries(ast.value.nodes.map(node => [node.id, node.text])),
+}) as NodeLabels);
 
 const injections = computed<Record<string, string>>(() => Object.fromEntries(ast.value.edges.map(edge => {
   const id1 = edge.fromIds[0];

@@ -7,19 +7,19 @@ import {linter, type Diagnostic} from "@codemirror/lint";
 import {EditorSelection} from "@codemirror/state";
 import FileControls from "./FileControls.vue";
 import {
-  exampleEvaporatingCloudText,
-  exampleGoalTreeText,
-  exampleProblemTreeText,
+  exampleEvaporatingCloud,
+  exampleGoalTree,
+  exampleProblemTree,
+  exampleRPA,
 } from "./examples.ts";
-import {Completions} from "./interpreter.ts";
-import {TOC_LANG, TOC_LANG_HIGHLIGHT} from "./highlight.ts";
+import {TOC_LANG, TOC_LANG_HIGHLIGHT} from "./lang.ts";
+import {Completion} from "./interpreter.ts";
 
-const myProps = withDefaults(defineProps<{
-  rows: number,
+const myProps = defineProps<{
   value: string,
   diagnostics: Diagnostic[],
-  completions: Completions,
-}>(), {rows: 20});
+  completions: Completion[],
+}>();
 const emit = defineEmits<{
   "update": [value: string],
 }>();
@@ -33,7 +33,7 @@ const extensions = computed(() => [
   EditorView.baseTheme({
     ".cm-gutters": {display: "none"},
   }),
-  TOC_LANG({idents: myProps.completions.idents}),
+  TOC_LANG(myProps.completions),
   TOC_LANG_HIGHLIGHT,
   linter(() => myProps.diagnostics),
 ]);
@@ -55,9 +55,10 @@ async function handleSave() {
 }
 
 const examplesByType = {
-  conflict: exampleEvaporatingCloudText,
-  goal: exampleGoalTreeText,
-  problem: exampleProblemTreeText,
+  conflict: exampleEvaporatingCloud,
+  goal: exampleGoalTree,
+  problem: exampleProblemTree,
+  problem_rpa: exampleRPA,
 };
 
 function handleSelectExample(example: string) {

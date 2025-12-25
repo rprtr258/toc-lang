@@ -9,6 +9,7 @@ const examples = [
   {value: "goal", label: "Goal Tree"},
   {value: "problem", label: "Problem Tree"},
   {value: "conflict", label: "Conflict Cloud"},
+  {value: "problem_rpa", label: "Problem Tree on RPA deployment"},
 ];
 
 function onChange(e: Event & {target: HTMLSelectElement}) {

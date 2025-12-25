@@ -8,8 +8,10 @@ import {
 import type {
   CompletionSource,
   CompletionContext,
+  CompletionResult,
 } from "@codemirror/autocomplete";
 import {tags as t} from "@lezer/highlight";
+import {Completion} from "./interpreter.ts";
 
 export function myLanguage(idents: string[]) {
   return StreamLanguage.define<undefined>({
@@ -71,19 +73,20 @@ export const TOC_LANG_HIGHLIGHT = syntaxHighlighting(
   ),
 );
 
-export function TOC_LANG(options: {idents: string[]}): LanguageSupport {
-  const autocomplete: CompletionSource = (context: CompletionContext) => {
+export function TOC_LANG(completions: Completion[]): LanguageSupport {
+  completions.toSorted((a: Completion, b: Completion) => a.id.localeCompare(b.id));
+  const autocomplete: CompletionSource = (context: CompletionContext): CompletionResult | null => {
     const word = context.matchBefore(/\w*/);
-    console.log(word, context, options.idents);
     if (word !== null && word.from === word.to && !context.explicit) {
       return null;
     }
     return {
       from: word?.from || context.pos,
-      options: options.idents.map(ident => ({label: ident, type: "Ident"})),
+      options: completions.map(({id, text}) => ({label: id, type: "variable", info: text})),
       validFor: /^(\w+)?$/,
     };
   };
-  const lang = myLanguage(options.idents.toSorted((a: string, b: string) => b.length - a.length));
-  return new LanguageSupport(lang, [lang.data.of(autocomplete)]);
+  const idents = completions.map(c => c.id);
+  const lang = myLanguage(idents);
+  return new LanguageSupport(lang, [lang.data.of({autocomplete})]);
 }

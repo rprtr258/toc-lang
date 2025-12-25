@@ -1,7 +1,7 @@
 import {describe, expect, it} from "bun:test";
 import * as approvals from "approvals";
 import {parseTextToAst, parseProblemTreeSemantics} from "../interpreter.ts";
-import {exampleProblemTreeText} from "../examples.ts";
+import {exampleProblemTree} from "../examples.ts";
 import {Ast} from "../parser.ts";
 
 const testCases = [
@@ -87,7 +87,7 @@ describe("problem tree interpreter", () => {
   });
 
   it("example parses", () => {
-    const text = exampleProblemTreeText;
+    const text = exampleProblemTree;
     const ast = parseTextToAst(text);
     expect(ast.type).toEqual("problem");
     const semantics = parseProblemTreeSemantics(ast);

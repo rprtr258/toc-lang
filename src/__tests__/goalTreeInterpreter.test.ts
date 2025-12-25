@@ -1,6 +1,6 @@
 import {describe, expect, it} from "bun:test";
 import {parseTextToAst, parseGoalTreeSemantics, TreeSemantics} from "../interpreter.ts";
-import {exampleGoalTreeText} from "../examples.ts";
+import {exampleGoalTree} from "../examples.ts";
 import {Ast} from "../parser.ts";
 
 const testcases = [
@@ -157,7 +157,7 @@ describe("goal tree interpreter", () => {
   }
 
   it("parses example", () => {
-    const text = exampleGoalTreeText;
+    const text = exampleGoalTree;
     const ast = parseTextToAst(text);
     expect(ast).not.toBeNull();
     const semTree = parseGoalTreeSemantics(ast);

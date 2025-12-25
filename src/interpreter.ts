@@ -21,8 +21,9 @@ export interface TreeSemantics {
   edges: Edge[],
 }
 
-export interface Completions {
-  idents: NodeID[],
+export type Completion = {
+  id: string,
+  text: string,
 }
 
 function sortAst(ast: Ast): Ast {
@@ -164,3 +165,11 @@ export function parseProblemTreeSemantics(ast: Ast): TreeSemantics {
 export function parseTextToAst(code: string): Ast {
   return parse(code);
 }
+
+export const cloudDefaultLabels = {
+  A: "Objective",
+  B: "Requirement 1",
+  C: "Prerequisite 1",
+  D: "Requirement 2",
+  E: "Prerequisite 2",
+};
