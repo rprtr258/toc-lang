@@ -6,14 +6,9 @@ import {basicSetup, EditorView} from "codemirror";
 import {linter, type Diagnostic} from "@codemirror/lint";
 import {EditorSelection} from "@codemirror/state";
 import FileControls from "./FileControls.vue";
-import {
-  exampleEvaporatingCloud,
-  exampleGoalTree,
-  exampleProblemTree,
-  exampleRPA,
-} from "./examples.ts";
 import {TOC_LANG, TOC_LANG_HIGHLIGHT} from "./lang.ts";
 import {Completion} from "./interpreter.ts";
+import {examples} from "./examples.ts";
 
 const myProps = defineProps<{
   value: string,
@@ -54,23 +49,16 @@ async function handleSave() {
   });
 }
 
-const examplesByType = {
-  conflict: exampleEvaporatingCloud,
-  goal: exampleGoalTree,
-  problem: exampleProblemTree,
-  problem_rpa: exampleRPA,
-};
+const examplesByType = Object.fromEntries(examples.map(({id, text}) => [id, text]));
 
 function handleSelectExample(example: string) {
-  if (example in examplesByType) {
-    const exampleText = examplesByType[example as keyof typeof examplesByType];
-    editorText.value = exampleText;
-    emit("update", exampleText);
-    view.value?.dispatch({
-      selection: EditorSelection.cursor(0),
-      scrollIntoView: true,
-    });
-  }
+  const exampleText = examplesByType[example];
+  editorText.value = exampleText;
+  emit("update", exampleText);
+  view.value?.dispatch({
+    selection: EditorSelection.cursor(0),
+    scrollIntoView: true,
+  });
 }
 onMounted(() => handleSelectExample("goal"));
 </script>

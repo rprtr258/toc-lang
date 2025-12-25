@@ -1,16 +1,11 @@
 <script setup lang="ts">
+import {examples} from "./examples.ts";
+
 const emit = defineEmits<{
   "load": [],
   "save": [],
   "selectExample": [value: string],
 }>();
-
-const examples = [
-  {value: "goal", label: "Goal Tree"},
-  {value: "problem", label: "Problem Tree"},
-  {value: "conflict", label: "Conflict Cloud"},
-  {value: "problem_rpa", label: "Problem Tree on RPA deployment"},
-];
 
 function onChange(e: Event & {target: HTMLSelectElement}) {
   emit('selectExample', e.target.value);
@@ -23,8 +18,8 @@ function onChange(e: Event & {target: HTMLSelectElement}) {
     <button class="save" @click="emit('save')">Save</button>
     <select @change="onChange">
       <option value="" disabled>Examples</option>
-      <option v-for="example in examples" :key="example.value" :value="example.value">
-        {{ example.label }}
+      <option v-for="example in examples" :key="example.id" :value="example.id">
+        {{ example.name }}
       </option>
     </select>
   </div>

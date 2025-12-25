@@ -62,7 +62,7 @@ const onEditorChange = (value: string) => {
 </script>
 
 <template>
-  <div style="display: grid; grid-template-columns: 50% 50%; height: 100%">
+  <div style="display: grid; grid-template-columns: 33% 67%; height: 100%">
     <Editor
       :rows="20"
       :value="text"

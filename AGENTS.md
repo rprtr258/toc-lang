@@ -7,7 +7,7 @@
 - Only edit files and lines directly related to the task at hand.
 - Do not run auto-formatting tools (like lint:fix or format) unless explicitly requested by the user.
 - After making changes, run only the specified verification commands (lint, test), but do not fix or modify any unrelated issues that arise.
-- Use Chrome MCP to debug changes using dev server running on `http://localhost:5173/toc-lang/`.
+- Use Chrome MCP to debug changes using dev server running on `http://localhost:5173/`.
 - Do not ever run your own dev server or stop existing one.
 
 ## Commands

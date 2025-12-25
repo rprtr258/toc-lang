@@ -1,4 +1,10 @@
-export const exampleGoalTree = `type: goal
+type Example = {
+  id: string,
+  name: string,
+  text: string,
+}
+
+const exampleGoalTree = `type: goal
 
 Goal: "Make money now and in the future"
 
@@ -30,7 +36,13 @@ retain <- marketSalary
 retain <- morale
 `;
 
-export const exampleEvaporatingCloud = `type: conflict
+const exampleGoal = {
+  id: "goal",
+  name: "Goal Tree",
+  text: exampleGoalTree,
+};
+
+const exampleEvaporatingCloud = `type: conflict
 
 A: "Maximize business performance"
 B: "Subordinate all decisions to the financial goal"
@@ -40,7 +52,13 @@ B <- D: "*inject* Psychological flow triggers"
 E: "Attend to people's needs (& let people work)"
 `;
 
-export const exampleProblemTree = `type: problem
+const exampleCloud = {
+  id: "conflict",
+  name: "Conflict Cloud",
+  text: exampleEvaporatingCloud,
+};
+
+const exampleProblemTree = `type: problem
 
 bad: "Bad user experience" {class: UDE}
 cluttered: "Cluttered interface" {class: UDE}
@@ -50,7 +68,13 @@ features: "Many features added"
 cluttered <- ux && features
 `;
 
-export const exampleRPA = `# https://www.youtube.com/watch?v=uggmMOoEfwA
+const exampleProblem = {
+  id: "problem",
+  name: "Problem Tree",
+  text: exampleProblemTree,
+};
+
+const exampleRPA = `# https://www.youtube.com/watch?v=uggmMOoEfwA
 type: problem
 
 more_jobs: "RPA creates more jobs than it eliminates"
@@ -103,3 +127,16 @@ redundant_not_replaced <- unwilling_redundant && redundant_workload
 less_jobs: "RPA destroys more jobs than it creates" {class: UDE}
 less_jobs <- emp_laidoff && redundant_not_replaced
 `;
+
+const exampleRpa = {
+  id: "problem_rpa",
+  name: "Problem Tree on RPA deployment",
+  text: exampleRPA,
+};
+
+export const examples: Example[] = [
+  exampleGoal,
+  exampleProblem,
+  exampleCloud,
+  exampleRpa,
+];
