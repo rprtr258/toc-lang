@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {computed, onMounted, useTemplateRef, watch} from "vue";
-import {createEdge, displacePoint, midPoint, bottomCenter, topCenter, rect} from "./math.ts";
+import {createEdge, plus, mid, bottomCenter, topCenter, rect} from "./math.ts";
 import CloudNode from "./CloudNode.vue";
 import Injection from "./Injection.vue";
 import CloudEdge from "./CloudEdge.vue";
@@ -61,19 +61,19 @@ const nodeA: rect = {x: x1, y: y2, w: nodeWidth, h: nodeHeight};
 const nodeB: rect = {x: x2, y: y1, w: nodeWidth, h: nodeHeight};
 const nodeC: rect = {x: x2, y: y3, w: nodeWidth, h: nodeHeight};
 const nodeD: rect = {x: x3, y: y1, w: nodeWidth, h: nodeHeight};
-const nodeDp: rect = {x: x3, y: y3, w: nodeWidth, h: nodeHeight};
+const nodeE: rect = {x: x3, y: y3, w: nodeWidth, h: nodeHeight};
 const edgeAB = createEdge(nodeA, nodeB);
 const edgeAC = createEdge(nodeA, nodeC);
 const edgeBD = createEdge(nodeB, nodeD);
-const edgeCDp = createEdge(nodeC, nodeDp);
+const edgeCE = createEdge(nodeC, nodeE);
 const conflictStart = bottomCenter(nodeD);
-const conflictEnd = topCenter(nodeDp);
-const conflictMid = midPoint(conflictStart, conflictEnd);
+const conflictEnd = topCenter(nodeE);
+const conflictMid = mid(conflictStart, conflictEnd);
 const conflictEdgePoints = [
-  displacePoint(conflictStart, {x: 0, y: 16}),
-  displacePoint(conflictMid, {x: -15, y: 5}),
-  displacePoint(conflictMid, {x: 15, y: -5}),
-  displacePoint(conflictEnd, {x: 0, y: -16}),
+  conflictStart,
+  plus(conflictMid, {x: -15, y: 5}),
+  plus(conflictMid, {x: 15, y: -5}),
+  conflictEnd,
 ];
 const edgeDDp = {
   start: conflictEdgePoints[0],
@@ -170,15 +170,15 @@ const conflictEdgePointsString = conflictEdgePoints.map((p) => `${p.x},${p.y}`).
         <CloudNode
           annotation="E"
           :text="nodeLabels.E"
-          :x="nodeDp.x"
-          :y="nodeDp.y"
+          :x="nodeE.x"
+          :y="nodeE.y"
           :width="nodeWidth"
           :height="nodeHeight"
         />
         <CloudEdge :edge="edgeAB" />
         <CloudEdge :edge="edgeAC" />
         <CloudEdge :edge="edgeBD" />
-        <CloudEdge :edge="edgeCDp" />
+        <CloudEdge :edge="edgeCE" />
         <Injection
           v-if="injections['A-B']"
           :text="injections['A-B']"
@@ -203,7 +203,7 @@ const conflictEdgePointsString = conflictEdgePoints.map((p) => `${p.x},${p.y}`).
         <Injection
           v-if="injections[`C-E`]"
           :text="injections[`C-E`]"
-          :edge="edgeCDp"
+          :edge="edgeCE"
           :dx="0"
           :dy="75"
         />

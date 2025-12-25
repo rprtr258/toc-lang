@@ -19,10 +19,18 @@ export function intermediatePoint(start: xy, end: xy, distance: number): xy {
   };
 }
 
-export function midPoint(start: xy, end: xy): xy {
+export function plus(a: xy, b: xy): xy {
   return {
-    x: (start.x + end.x) / 2,
-    y: (start.y + end.y) / 2,
+    x: a.x + b.x,
+    y: a.y + b.y,
+  };
+}
+
+export function mid(a: xy, b: xy): xy {
+  const sum = plus(a, b);
+  return {
+    x: sum.x / 2,
+    y: sum.y / 2,
   };
 }
 
@@ -57,12 +65,5 @@ export function topCenter(r: rect): xy {
   return {
     x: r.x + r.w / 2,
     y: r.y,
-  };
-}
-
-export function displacePoint(point: xy, delta: xy): xy {
-  return {
-    x: point.x + delta.x,
-    y: point.y + delta.y,
   };
 }

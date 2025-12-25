@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {computed} from "vue";
-import {Edge, midPoint} from "./math.ts";
+import {Edge, mid} from "./math.ts";
 import {wrapLines} from "./util.ts";
 
 const props = defineProps<{
@@ -12,7 +12,7 @@ const props = defineProps<{
 const {edge, dx, dy} = props;
 const text = computed(() => props.text);
 const lines = computed(() => wrapLines(text.value, 35));
-const edgeMidPoint = midPoint(edge.start, edge.end);
+const edgeMidPoint = mid(edge.start, edge.end);
 const lineHeight = 16;
 const textCenterX = edgeMidPoint.x + dx;
 const textX = textCenterX - 75;

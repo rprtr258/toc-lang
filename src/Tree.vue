@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import {onMounted, useTemplateRef, computed} from "vue";
 import dagre from "@dagrejs/dagre";
+import {getBoxToBoxArrow} from "curved-arrows";
 import {wrapLines} from "./util.ts";
 import {TreeSemantics, Node, NodeID} from "./interpreter.ts";
 import {xy} from "./math.ts";
@@ -28,44 +29,37 @@ type LayoutedNode = {
   intermediate: boolean,
 };
 
-function edgePath(points: xy[]): string {
-  const n = points.length;
-  if (n < 2) return "";
-
-  let d = `M ${points[0].x} ${points[0].y}`;
-
-  if (n === 2) {
-    const p0 = points[0];
-    const p1 = points[1];
-    const cx = (p0.x + p1.x) / 2;
-    const cy = (p0.y + p1.y) / 2;
-    return `${d} Q ${cx} ${cy} ${p1.x} ${p1.y}`;
-  }
-
-  for (let i = 1; i < n - 1; i++) {
-    const pPrev = points[i - 1];
-    const pCurr = points[i];
-    const pNext = points[i + 1];
-
-    const cx = pCurr.x + (pNext.x - pPrev.x) * 0.2;
-    const cy = pCurr.y + (pNext.y - pPrev.y) * 0.2;
-
-    d += ` Q ${cx} ${cy} ${pNext.x} ${pNext.y}`;
-  }
-
-  return d;
+function edgePath(edge: LayoutedEdge): string {
+  const from = layoutedNodes.value.find(n => n.id === edge.from)!;
+  const to = layoutedNodes.value.find(n => n.id === edge.to)!;
+  const [sx, sy, c1x, c1y, c2x, c2y, ex, ey, ae, as] = getBoxToBoxArrow(
+    from.x, from.y, from.width, from.height,
+    to.x, to.y, to.width, to.height,
+    {
+      allowedStartSides: ["top"],
+      allowedEndSides: semantics.value.nodes[edge.to]?.intermediate ? ["bottom", "left", "right"] : ["bottom"],
+      controlPointStretch: 20,
+    },
+  );
+  void([ae, as]);
+  return `M ${sx} ${sy} C ${c1x} ${c1y}, ${c2x} ${c2y}, ${ex} ${ey}`;
 }
+
+const white = "#ffffff";
+const red = "#ffb2b2";
+const green = "#95f795";
+// const blue = "#dff8ff";
+const yellow = "#fdfdbe";
 
 function createNode(node: Node): LayoutedNode {
   const fontSize = node.intermediate ? 7 : 13;
   const fontWeight = node.intermediate ? "bold" : "300";
   const shape = node.intermediate ? "ellipse" : "rect";
   const fillColor = ((statusPercentage) => {
-    if (node.intermediate) return "white";
-    if (statusPercentage === undefined) return "#dff8ff"; // Blue
-    if (statusPercentage >= 70) return "#95f795"; // Green
-    if (statusPercentage > 30) return "#fdfdbe"; // Yellow
-    return "#ffb2b2"; // Red
+    if (node.intermediate || statusPercentage === undefined) return white;
+    if (statusPercentage >= 70) return green;
+    if (statusPercentage > 30) return yellow;
+    return red;
   })(node.statusPercentage);
   const styleCommon = shape === "rect" ? "rx: 5px; ry: 5px;" : "";
   const style = `stroke: black; stroke-width: 1px; ${styleCommon} fill:${fillColor};`;
@@ -111,22 +105,21 @@ const layoutedNodes = computed<(LayoutedNode & xy)[]>(() => layedOutNodes.value.
   return {
     ...node,
     x: pos.x - node.width / 2,
-    y: pos.y - node.height / 2,
+    y: (pos.y - node.height / 2) * 1.2,
   };
 }));
 
-const layoutedEdges = computed<{
+type LayoutedEdge = {
   from: NodeID,
   to: NodeID,
   points: Array<xy>,
-  style: string,
-}[]>(() => g.value.edges().map(edgeInfo => {
+};
+const layoutedEdges = computed<LayoutedEdge[]>(() => g.value.edges().map(edgeInfo => {
   const edge = g.value.edge(edgeInfo);
   return {
     from: edgeInfo.v,
     to: edgeInfo.w,
     points: edge.points,
-    style: "stroke: black; fill:none; stroke-width: 1px;",
   };
 }));
 
@@ -186,8 +179,8 @@ onMounted(() => {
         <path
           v-for="edge in layoutedEdges"
           :key="`${edge.from}-${edge.to}`"
-          :d="edgePath(edge.points)"
-          :style="edge.style"
+          :d="edgePath(edge)"
+          style="stroke: black; fill:none; stroke-width: 1px;"
           marker-end="url(#arrowhead)"
         />
         <g v-for="node in layoutedNodes" :key="node.id">
