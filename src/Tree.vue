@@ -8,7 +8,7 @@ import {xy} from "./math.ts";
 
 const props = defineProps<{
   semantics: TreeSemantics,
-  setSvgElem: (svgElem: SVGElement | null, initialTransform?: string) => void,
+  setSvgElem: (svgElem: SVGElement, initialTransform?: [zoom: number, pan: xy]) => void,
 }>();
 const {setSvgElem} = props;
 const semantics = computed(() => props.semantics);
@@ -134,17 +134,23 @@ const allY = computed(() => [
 ]);
 
 const faa = 20;
-const viewBox = computed(() => {
+const viewRect = computed(() => {
   const minX = Math.min(...allX.value) - faa;
   const maxX = Math.max(...allX.value) + faa;
   const minY = Math.min(...allY.value) - faa;
   const maxY = Math.max(...allY.value) + faa;
+  return {minX, minY, maxX, maxY};
+});
+const viewBox = computed(() => {
+  const {minX, maxX, minY, maxY} = viewRect.value;
   return `${minX} ${minY} ${maxX - minX} ${maxY - minY}`;
 });
 
 onMounted(() => {
-  svgRef.value!.setAttribute("viewBox", viewBox.value);
-  setSvgElem(svgRef.value, "translate(0, 0)");
+  const svg = svgRef.value!;
+  svg.setAttribute("viewBox", viewBox.value);
+  const vb = viewRect.value;
+  setSvgElem(svg, [1, {x: vb.minX, y: vb.minY}]);
 });
 </script>
 

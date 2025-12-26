@@ -1,0 +1,238 @@
+{
+  "ast": {
+    "edges": [
+      {
+        "fromIds": [
+          "devFriendly"
+        ],
+        "toId": "Goal"
+      },
+      {
+        "fromIds": [
+          "openTool"
+        ],
+        "toId": "devFriendly"
+      },
+      {
+        "fromIds": [
+          "wellFormed"
+        ],
+        "toId": "devFriendly"
+      },
+      {
+        "fromIds": [
+          "versioning"
+        ],
+        "toId": "devFriendly"
+      },
+      {
+        "fromIds": [
+          "textRep"
+        ],
+        "toId": "versioning"
+      },
+      {
+        "fromIds": [
+          "gtGrammar"
+        ],
+        "toId": "textRep"
+      },
+      {
+        "fromIds": [
+          "crtGrammar"
+        ],
+        "toId": "textRep"
+      },
+      {
+        "fromIds": [
+          "ecGrammar"
+        ],
+        "toId": "textRep"
+      },
+      {
+        "fromIds": [
+          "prqGrammar"
+        ],
+        "toId": "textRep"
+      },
+      {
+        "fromIds": [
+          "frtGrammar"
+        ],
+        "toId": "textRep"
+      }
+    ],
+    "nodes": [
+      {
+        "id": "Goal",
+        "params": {},
+        "text": "Drive adoption of TOC in software"
+      },
+      {
+        "id": "devFriendly",
+        "params": {},
+        "text": "Thinking Processes are Dev Friendly"
+      },
+      {
+        "id": "openTool",
+        "params": {},
+        "text": "Open source tooling"
+      },
+      {
+        "id": "wellFormed",
+        "params": {},
+        "text": "It is easy to create well-formed diagrams"
+      },
+      {
+        "id": "versioning",
+        "params": {
+          "status": "50"
+        },
+        "text": "Diagrams can be version controlled with source code"
+      },
+      {
+        "id": "textRep",
+        "params": {
+          "status": "50"
+        },
+        "text": "Diagrams have a textual representation"
+      },
+      {
+        "id": "gtGrammar",
+        "params": {
+          "status": "100"
+        },
+        "text": "Goal Tree grammar"
+      },
+      {
+        "id": "ecGrammar",
+        "params": {
+          "status": "100"
+        },
+        "text": "Evaporating Cloud grammar"
+      },
+      {
+        "id": "crtGrammar",
+        "params": {
+          "status": "100"
+        },
+        "text": "Current Reality Tree grammar"
+      },
+      {
+        "id": "prqGrammar",
+        "params": {
+          "status": "1"
+        },
+        "text": "Prerequisite Tree grammar"
+      },
+      {
+        "id": "frtGrammar",
+        "params": {
+          "status": "1"
+        },
+        "text": "Future Reality Tree grammar"
+      }
+    ],
+    "type": "goal"
+  },
+  "semantics": {
+    "edges": [
+      {
+        "from": "devFriendly",
+        "to": "Goal"
+      },
+      {
+        "from": "openTool",
+        "to": "devFriendly"
+      },
+      {
+        "from": "wellFormed",
+        "to": "devFriendly"
+      },
+      {
+        "from": "versioning",
+        "to": "devFriendly"
+      },
+      {
+        "from": "textRep",
+        "to": "versioning"
+      },
+      {
+        "from": "gtGrammar",
+        "to": "textRep"
+      },
+      {
+        "from": "crtGrammar",
+        "to": "textRep"
+      },
+      {
+        "from": "ecGrammar",
+        "to": "textRep"
+      },
+      {
+        "from": "prqGrammar",
+        "to": "textRep"
+      },
+      {
+        "from": "frtGrammar",
+        "to": "textRep"
+      }
+    ],
+    "nodes": {
+      "Goal": {
+        "annotation": "G",
+        "id": "Goal",
+        "label": "Drive adoption of TOC in software"
+      },
+      "crtGrammar": {
+        "id": "crtGrammar",
+        "label": "Current Reality Tree grammar",
+        "statusPercentage": 100
+      },
+      "devFriendly": {
+        "annotation": "CSF",
+        "id": "devFriendly",
+        "label": "Thinking Processes are Dev Friendly"
+      },
+      "ecGrammar": {
+        "id": "ecGrammar",
+        "label": "Evaporating Cloud grammar",
+        "statusPercentage": 100
+      },
+      "frtGrammar": {
+        "id": "frtGrammar",
+        "label": "Future Reality Tree grammar",
+        "statusPercentage": 1
+      },
+      "gtGrammar": {
+        "id": "gtGrammar",
+        "label": "Goal Tree grammar",
+        "statusPercentage": 100
+      },
+      "openTool": {
+        "id": "openTool",
+        "label": "Open source tooling"
+      },
+      "prqGrammar": {
+        "id": "prqGrammar",
+        "label": "Prerequisite Tree grammar",
+        "statusPercentage": 1
+      },
+      "textRep": {
+        "id": "textRep",
+        "label": "Diagrams have a textual representation",
+        "statusPercentage": 50
+      },
+      "versioning": {
+        "id": "versioning",
+        "label": "Diagrams can be version controlled with source code",
+        "statusPercentage": 50
+      },
+      "wellFormed": {
+        "id": "wellFormed",
+        "label": "It is easy to create well-formed diagrams"
+      }
+    },
+    "rankdir": "BT"
+  }
+}

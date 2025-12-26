@@ -49,7 +49,10 @@ async function handleSave() {
   });
 }
 
-const examplesByType = Object.fromEntries(examples.map(({id, text}) => [id, text]));
+const examplesByType = (() => {
+  const allExamples = examples.flatMap(([_group, examples]) => examples);
+  return Object.fromEntries(allExamples.map(({id, text}) => [id, text]));
+})();
 
 function handleSelectExample(example: string) {
   const exampleText = examplesByType[example];
@@ -60,7 +63,7 @@ function handleSelectExample(example: string) {
     scrollIntoView: true,
   });
 }
-onMounted(() => handleSelectExample("goal"));
+onMounted(() => handleSelectExample(examples[0][1][0].id));
 </script>
 
 <template>

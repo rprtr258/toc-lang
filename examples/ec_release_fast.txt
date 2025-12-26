@@ -1,0 +1,8 @@
+type: conflict
+
+A: "Make customers happy"
+B: "Respond to needs"
+C: "Don't break existing functionality"
+D: "Release more often"
+E: "Release less often"
+C <- E: "Release often to ensure releases are non-breaking (CI/CD)"

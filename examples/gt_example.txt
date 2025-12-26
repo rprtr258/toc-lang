@@ -1,0 +1,30 @@
+type: goal
+
+Goal: "Make money now and in the future"
+
+revUp: "Generate more revenue" {class: CSF}
+costsDown: "Control costs" {class: CSF}
+
+Goal <- revUp
+Goal <- costsDown
+
+keepCust: "Protect relationship with existing customers"
+newCust: "Acquire new customers"
+
+reduceInfra: "Reduce infrastructure spending"
+retain: "Retain employees"
+marketSalary: "Keep up with market salaries"
+
+morale: "Maintain employee morale"
+features: "Develop new features"
+
+newCust <- features
+
+# This is probably the wrong place for 'retain'
+features <- retain
+
+revUp <- newCust
+revUp <- keepCust
+costsDown <- reduceInfra
+retain <- marketSalary
+retain <- morale

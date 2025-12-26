@@ -5,6 +5,7 @@ import Cloud from "./Cloud.vue";
 import Tree from "./Tree.vue";
 import {TreeSemantics} from "./interpreter.ts";
 import {Ast, EDiagramType} from "./parser.ts";
+import {xy} from "./math.ts";
 
 const props = defineProps<{
   ast: Ast,
@@ -21,8 +22,8 @@ type SvgPanZoomInstance = typeof svgPanZoom; // TODO: this shit does not export 
 let panZoomInstance: SvgPanZoomInstance | null = null;
 
 const updateSvgElem = (
-  elem: SVGSVGElement | null,
-  initialTransform?: string,
+  elem: SVGSVGElement,
+  initialTransform?: [zoom: number, pan: xy],
 ) => {
   svgElem.value = elem;
   if (panZoomInstance) {
@@ -33,16 +34,30 @@ const updateSvgElem = (
     panZoomInstance = svgPanZoom(elem, {
       zoomEnabled: true,
       panEnabled: true,
-      controlIconsEnabled: false,
+      mouseWheelZoomEnabled: true,
+      dblClickZoomEnabled: false,
+      controlIconsEnabled: true,
       fit: true,
       center: true,
       minZoom: 0.1,
       maxZoom: 10,
       zoomScaleSensitivity: 0.4,
+      onZoom(newScale) {
+        console.log("zoom", newScale);
+      },
+      onPan(newPan) {
+        console.log("pan", newPan);
+      },
     });
+    // TODO: fix this gavnischcsche from https://github.com/bumbu/svg-pan-zoom/issues/433
+    const controls = elem.querySelector('g[id="svg-pan-zoom-controls"]')!; // reposition the controls
+    const svgHeight = elem.getBoundingClientRect().height;
+    const svgWidth = elem.getBoundingClientRect().width;
+    controls.setAttribute("transform", `translate(${svgWidth - 100}, ${svgHeight - 100})`);
     if (initialTransform) {
-      // Parse initial transform, but svg-pan-zoom handles fit/center, so maybe skip or adjust
-      // For simplicity, let it fit and center
+      console.log(initialTransform[0], initialTransform[1]);
+      panZoomInstance.zoom(initialTransform[0]);
+      panZoomInstance.pan(initialTransform[1]);
     }
   }
 };

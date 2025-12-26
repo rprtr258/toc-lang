@@ -17,10 +17,11 @@ function onChange(e: Event & {target: HTMLSelectElement}) {
     <button class="load" @click="emit('load')">Load</button>
     <button class="save" @click="emit('save')">Save</button>
     <select @change="onChange">
-      <option value="" disabled>Examples</option>
-      <option v-for="example in examples" :key="example.id" :value="example.id">
-        {{ example.name }}
-      </option>
+      <optgroup v-for="[group, examples_] in examples" :key="group" :label="group">
+        <option v-for="example in examples_" :key="example.id" :value="example.id">
+          {{group}}/{{example.name}}
+        </option>
+      </optgroup>
     </select>
   </div>
 </template>
@@ -39,6 +40,10 @@ function onChange(e: Event & {target: HTMLSelectElement}) {
   :is(button).save {
     background-color: #4299e1;
     color: white;
+  }
+
+  select {
+    width: 100%;
   }
 }
 </style>

@@ -1,0 +1,8 @@
+type: conflict
+
+A: "Make customers happy"
+B: "Produce new features"
+C: "Make features high quality"
+D: "Work on new features"
+E: "Add more tests"
+D -- E: "Writing tests helps developing new features"

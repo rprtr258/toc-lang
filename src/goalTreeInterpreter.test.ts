@@ -1,7 +1,8 @@
 import {describe, expect, it} from "bun:test";
-import {parseTextToAst, parseGoalTreeSemantics, TreeSemantics} from "../interpreter.ts";
-import {exampleGoalTree} from "../examples.ts";
-import {Ast} from "../parser.ts";
+import {readFileSync} from "fs";
+import {parseTextToAst, parseGoalTreeSemantics} from "./interpreter.ts";
+import {examples} from "./examples.ts";
+import {Ast} from "./parser.ts";
 
 const testcases = [
   {
@@ -156,70 +157,12 @@ describe("goal tree interpreter", () => {
     });
   }
 
-  it("parses example", () => {
-    const text = exampleGoalTree;
-    const ast = parseTextToAst(text);
-    expect(ast).not.toBeNull();
-    const semTree = parseGoalTreeSemantics(ast);
-    const expectedSemTree: TreeSemantics = {
-      edges: [
-        {from: "revUp", to: "Goal"},
-        {from: "costsDown", to: "Goal"},
-        {from: "newCust", to: "revUp"},
-        {from: "keepCust", to: "revUp"},
-        {from: "reduceInfra", to: "costsDown"},
-        {from: "features", to: "newCust"},
-        {from: "retain", to: "features"},
-        {from: "marketSalary", to: "retain"},
-        {from: "morale", to: "retain"},
-      ],
-      nodes: {
-        Goal: {
-          id: "Goal",
-          label: "Make money now and in the future",
-          annotation: "G",
-        },
-        revUp: {
-          id: "revUp",
-          label: "Generate more revenue",
-          annotation: "CSF",
-        },
-        costsDown: {
-          id: "costsDown",
-          label: "Control costs",
-          annotation: "CSF",
-        },
-        keepCust: {
-          id: "keepCust",
-          label: "Protect relationship with existing customers",
-        },
-        newCust: {
-          id: "newCust",
-          label: "Acquire new customers",
-        },
-        reduceInfra: {
-          id: "reduceInfra",
-          label: "Reduce infrastructure spending",
-        },
-        retain: {
-          id: "retain",
-          label: "Retain employees",
-        },
-        marketSalary: {
-          id: "marketSalary",
-          label: "Keep up with market salaries",
-        },
-        morale: {
-          id: "morale",
-          label: "Maintain employee morale",
-        },
-        features: {
-          id: "features",
-          label: "Develop new features",
-        },
-      },
-      rankdir: "BT",
-    };
-    expect(semTree).toStrictEqual(expectedSemTree);
-  });
+  for (const {name, text} of examples.find(([group, _examples]) => group === "Goal Tree")![1]) {
+    it(`parses example: ${name}`, () => {
+      const ast = parseTextToAst(text);
+      expect(ast.type).toEqual("goal");
+      const semantics = parseGoalTreeSemantics(ast);
+      expect({ast, semantics}).toStrictEqual(JSON.parse(readFileSync(`${__dirname}/__tests__/example goal tree: ${name}.approved.txt`).toString()));
+    });
+  }
 });

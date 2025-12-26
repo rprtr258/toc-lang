@@ -1,0 +1,40 @@
+{
+  "edges": [
+    {
+      "biDirectional": true,
+      "fromIds": [
+        "D"
+      ],
+      "text": "Writing tests helps developing new features",
+      "toId": "E"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "A",
+      "params": {},
+      "text": "Make customers happy"
+    },
+    {
+      "id": "B",
+      "params": {},
+      "text": "Produce new features"
+    },
+    {
+      "id": "C",
+      "params": {},
+      "text": "Make features high quality"
+    },
+    {
+      "id": "D",
+      "params": {},
+      "text": "Work on new features"
+    },
+    {
+      "id": "E",
+      "params": {},
+      "text": "Add more tests"
+    }
+  ],
+  "type": "conflict"
+}

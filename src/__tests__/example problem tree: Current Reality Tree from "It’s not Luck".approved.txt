@@ -1,0 +1,1039 @@
+{
+  "ast": {
+    "edges": [
+      {
+        "fromIds": [
+          "pricePressure"
+        ],
+        "toId": "fierceComp"
+      },
+      {
+        "fromIds": [
+          "fierceComp"
+        ],
+        "toId": "lessUnified"
+      },
+      {
+        "fromIds": [
+          "salesPressure"
+        ],
+        "toId": "salesPeoplePressure"
+      },
+      {
+        "fromIds": [
+          "tradMethod",
+          "salesPressure"
+        ],
+        "toId": "pricePressure"
+      },
+      {
+        "fromIds": [
+          "companiesFallingShort",
+          "alreadyCut"
+        ],
+        "toId": "salesPressure"
+      },
+      {
+        "fromIds": [
+          "notImproving",
+          "fierceComp"
+        ],
+        "toId": "companiesFallingShort"
+      },
+      {
+        "fromIds": [
+          "salesPeoplePressure",
+          "needLaunchProducts"
+        ],
+        "toId": "salesOverloaded"
+      },
+      {
+        "fromIds": [
+          "needLaunchProducts"
+        ],
+        "toId": "newProductsConfuse"
+      },
+      {
+        "fromIds": [
+          "needLaunchProducts"
+        ],
+        "toId": "fierceComp"
+      },
+      {
+        "fromIds": [
+          "salesPressure",
+          "sellNewProducts",
+          "newMaterialsEnables"
+        ],
+        "toId": "pressureDevelopProducts"
+      },
+      {
+        "fromIds": [
+          "pressureDevelopProducts"
+        ],
+        "toId": "needLaunchProducts"
+      },
+      {
+        "fromIds": [
+          "engTooSlow",
+          "prodDistNotImproving",
+          "insuffientMarketingIdeas"
+        ],
+        "toId": "notImproving"
+      },
+      {
+        "fromIds": [
+          "marketingNotOriented"
+        ],
+        "toId": "insuffientMarketingIdeas"
+      },
+      {
+        "fromIds": [
+          "marketingNotOriented"
+        ],
+        "toId": "eatIntoSales"
+      },
+      {
+        "fromIds": [
+          "differentPerceptions",
+          "singlePriceTrimsCust",
+          "singlePriceLowers"
+        ],
+        "toId": "marketingNotOriented"
+      },
+      {
+        "fromIds": [
+          "singlePriceTrimsCust",
+          "singlePriceLowers",
+          "marketPerceptionIsKey"
+        ],
+        "toId": "marketPunish"
+      },
+      {
+        "fromIds": [
+          "perceptionMatchesBenefits"
+        ],
+        "toId": "marketDeterminesPrice"
+      },
+      {
+        "fromIds": [
+          "marketDeterminesPrice"
+        ],
+        "toId": "marketPerceptionIsKey"
+      },
+      {
+        "fromIds": [
+          "marketDeterminesPrice",
+          "managersBelieveGoodPrice"
+        ],
+        "toId": "lowMargin"
+      },
+      {
+        "fromIds": [
+          "managersBelieveGoodPrice"
+        ],
+        "toId": "managersBelieveSinglePrice"
+      },
+      {
+        "fromIds": [
+          "managersBelieveSinglePrice"
+        ],
+        "toId": "singlePriceTrimsCust"
+      },
+      {
+        "fromIds": [
+          "managersBelieveSinglePrice"
+        ],
+        "toId": "singlePriceLowers"
+      },
+      {
+        "fromIds": [
+          "managersBelieveGoodPrice"
+        ],
+        "toId": "managersBelieveBelowCostLosses"
+      },
+      {
+        "fromIds": [
+          "managersBelieveBelowCostLosses"
+        ],
+        "toId": "refuseLowMargins"
+      },
+      {
+        "fromIds": [
+          "differentSectionsNeeds",
+          "canSegment"
+        ],
+        "toId": "differentPerceptions"
+      },
+      {
+        "fromIds": [
+          "believeProductCostReal"
+        ],
+        "toId": "managersBelieveGoodPrice"
+      },
+      {
+        "fromIds": [
+          "managerMeasure",
+          "localOptima"
+        ],
+        "toId": "measureLocal"
+      },
+      {
+        "fromIds": [
+          "improvementIncreasesCost",
+          "measureLocal"
+        ],
+        "toId": "prodDistNotImproving"
+      },
+      {
+        "fromIds": [
+          "improvementIncreasesCost",
+          "measureLocal"
+        ],
+        "toId": "engTooSlow"
+      },
+      {
+        "fromIds": [
+          "localOptima"
+        ],
+        "toId": "managersPerceiveEffortAsValue"
+      },
+      {
+        "fromIds": [
+          "costAccountingProductCost",
+          "managersPerceiveEffortAsValue",
+          "measureLocal"
+        ],
+        "toId": "believeProductCostReal"
+      }
+    ],
+    "nodes": [
+      {
+        "id": "lessUnified",
+        "params": {
+          "class": "UDE"
+        },
+        "text": "Sellers display a less and less unified front"
+      },
+      {
+        "id": "fierceComp",
+        "params": {
+          "class": "UDE"
+        },
+        "text": "Competition is fiercer than ever"
+      },
+      {
+        "id": "pricePressure",
+        "params": {
+          "class": "UDE"
+        },
+        "text": "There is an increasing pressure to reduce prices"
+      },
+      {
+        "id": "tradMethod",
+        "params": {
+          "class": "FOL"
+        },
+        "text": "A desperate traditional to get sales is to reduce prices"
+      },
+      {
+        "id": "salesPressure",
+        "params": {
+          "class": "UDE"
+        },
+        "text": "There is an increasing pressure to take actions that will increase sales"
+      },
+      {
+        "id": "salesPeoplePressure",
+        "params": {
+          "class": "UDE"
+        },
+        "text": "There is pressure on salespeople to bring in more sales"
+      },
+      {
+        "id": "companiesFallingShort",
+        "params": {
+          "class": "UDE"
+        },
+        "text": "Companies are falling short of their stated financial targets"
+      },
+      {
+        "id": "alreadyCut",
+        "params": {
+          "class": "FOL"
+        },
+        "text": "Companies have already cut the costs they know how to cut"
+      },
+      {
+        "id": "notImproving",
+        "params": {
+          "class": "UDE"
+        },
+        "text": "Companies are not improving fast enough"
+      },
+      {
+        "id": "salesOverloaded",
+        "params": {
+          "class": "UDE"
+        },
+        "text": "Salespeople are overloaded"
+      },
+      {
+        "id": "newProductsConfuse",
+        "params": {
+          "class": "UDE"
+        },
+        "text": "In advanced material industries the constant introduction of new products confuses and spoils the market"
+      },
+      {
+        "id": "needLaunchProducts",
+        "params": {
+          "class": "UDE"
+        },
+        "text": "In advanced material industries there is need to launch new products at an unprecedented rate"
+      },
+      {
+        "id": "pressureDevelopProducts",
+        "params": {
+          "class": "UDE"
+        },
+        "text": "In advanced material industries there is unprecedented pressure to promptly develop new products"
+      },
+      {
+        "id": "sellNewProducts",
+        "params": {
+          "class": "FOL"
+        },
+        "text": "One of the most effective ways to increase sales is to develop new, improved products"
+      },
+      {
+        "id": "newMaterialsEnables",
+        "params": {
+          "class": "FOL"
+        },
+        "text": "There are industries where fast development of new material enables the development of new products - advanced material industries"
+      },
+      {
+        "id": "engTooSlow",
+        "params": {
+          "class": "UDE"
+        },
+        "text": "Engineering is unable to deliver new products fast and reliably enough"
+      },
+      {
+        "id": "prodDistNotImproving",
+        "params": {
+          "class": "UDE"
+        },
+        "text": "Production and distribution do not improve fast/significantly enough"
+      },
+      {
+        "id": "insuffientMarketingIdeas",
+        "params": {
+          "class": "UDE"
+        },
+        "text": "Companies do not come up with sufficient innovative ideas in marketing"
+      },
+      {
+        "id": "marketingNotOriented",
+        "params": {
+          "class": "UDE"
+        },
+        "text": "Marketing is not oriented to take advantage of the most promising and almost virgin direction - that of market segmentation"
+      },
+      {
+        "id": "eatIntoSales",
+        "params": {
+          "class": "UDE"
+        },
+        "text": "Most new outlets and most new/improved products eat into the sales of existing outlets/products"
+      },
+      {
+        "id": "differentPerceptions",
+        "params": {},
+        "text": "Different market sections might have different perceptions of value even for the same product"
+      },
+      {
+        "id": "singlePriceTrimsCust",
+        "params": {
+          "class": "UDE"
+        },
+        "text": "Imposing a single price trims away customers for whom the price is too steep relative to their perception of value"
+      },
+      {
+        "id": "singlePriceLowers",
+        "params": {
+          "class": "UDE"
+        },
+        "text": "Imposing a single price enables customer who have a high perception of value to pay a lower price"
+      },
+      {
+        "id": "marketPunish",
+        "params": {
+          "class": "UDE"
+        },
+        "text": "More than ever the market punishes suppliers who don't perform according to expectation"
+      },
+      {
+        "id": "marketPerceptionIsKey",
+        "params": {},
+        "text": "More than ever satisfying the market perception of value is key to success"
+      },
+      {
+        "id": "lowMargin",
+        "params": {
+          "class": "UDE"
+        },
+        "text": "In more and more cases the price the market is willing to pay doesn't leave behind enough margin"
+      },
+      {
+        "id": "perceptionMatchesBenefits",
+        "params": {
+          "class": "FOL"
+        },
+        "text": "Market perception of value is in accordance with with the benefits of having the product"
+      },
+      {
+        "id": "marketDeterminesPrice",
+        "params": {},
+        "text": "Prices and quantities sold are determined more and more by the markets' perception of value and less and less by the suppliers perception of value"
+      },
+      {
+        "id": "managersBelieveGoodPrice",
+        "params": {
+          "class": "UDE"
+        },
+        "text": "Most managers believe that the product price should be equal to product cost plus reasonable margin"
+      },
+      {
+        "id": "managersBelieveSinglePrice",
+        "params": {
+          "class": "UDE"
+        },
+        "text": "Most managers believe that there is a single, fair price for a product"
+      },
+      {
+        "id": "managersBelieveBelowCostLosses",
+        "params": {
+          "class": "UDE"
+        },
+        "text": "Most managers believe that selling below product cost leads (at least in the long run) to losses"
+      },
+      {
+        "id": "refuseLowMargins",
+        "params": {
+          "class": "UDE"
+        },
+        "text": "Most companies are reluctant to accept orders with low margins and even go so far as dropping low-margin products"
+      },
+      {
+        "id": "differentSectionsNeeds",
+        "params": {
+          "class": "FOL"
+        },
+        "text": "Different market sections might have different needs?"
+      },
+      {
+        "id": "canSegment",
+        "params": {},
+        "text": "Actions to guarantee effective segmentation can be taken"
+      },
+      {
+        "id": "believeProductCostReal",
+        "params": {
+          "class": "UDE"
+        },
+        "text": "Most managers believe that product cost is something real that that quantifies the efforts absorbed by the product"
+      },
+      {
+        "id": "managerMeasure",
+        "params": {
+          "class": "FOL"
+        },
+        "text": "For every mode of operation, managers develop suitable measurements"
+      },
+      {
+        "id": "localOptima",
+        "params": {
+          "class": "UDE"
+        },
+        "text": "Managers are trying to run their companies by striving to achieve local optima"
+      },
+      {
+        "id": "measureLocal",
+        "params": {
+          "class": "UDE"
+        },
+        "text": "There are important measurements that focus on local optima, e.g. cost accounting based measurements"
+      },
+      {
+        "id": "improvementIncreasesCost",
+        "params": {
+          "class": "FOL"
+        },
+        "text": "Many actions that are needed for improving lead-time, reliability, quality, response time and service do not save cost and/or increase cost in the short run"
+      },
+      {
+        "id": "managersPerceiveEffortAsValue",
+        "params": {
+          "class": "UDE"
+        },
+        "text": "Most managers' perception of value of a product is heavily influenced by the local efforts required to design, produce, sell and deliver the product"
+      },
+      {
+        "id": "costAccountingProductCost",
+        "params": {
+          "class": "FOL"
+        },
+        "text": "The essence of cost accounting is to calculate the product cost"
+      },
+      {
+        "id": "lackSalesSkills",
+        "params": {
+          "class": "UDE"
+        },
+        "text": "A large percentage of the existing sales force lacks sufficient sales skills"
+      }
+    ],
+    "type": "problem"
+  },
+  "semantics": {
+    "edges": [
+      {
+        "from": "fierceComp",
+        "to": "lessUnified"
+      },
+      {
+        "from": "salesPressure",
+        "to": "salesPeoplePressure"
+      },
+      {
+        "from": "needLaunchProducts",
+        "to": "newProductsConfuse"
+      },
+      {
+        "from": "pressureDevelopProducts",
+        "to": "needLaunchProducts"
+      },
+      {
+        "from": "pricePressure",
+        "to": "fierceComp"
+      },
+      {
+        "from": "needLaunchProducts",
+        "to": "fierceComp"
+      },
+      {
+        "from": "marketingNotOriented",
+        "to": "insuffientMarketingIdeas"
+      },
+      {
+        "from": "marketingNotOriented",
+        "to": "eatIntoSales"
+      },
+      {
+        "from": "managersBelieveSinglePrice",
+        "to": "singlePriceTrimsCust"
+      },
+      {
+        "from": "managersBelieveSinglePrice",
+        "to": "singlePriceLowers"
+      },
+      {
+        "from": "marketDeterminesPrice",
+        "to": "marketPerceptionIsKey"
+      },
+      {
+        "from": "perceptionMatchesBenefits",
+        "to": "marketDeterminesPrice"
+      },
+      {
+        "from": "managersBelieveGoodPrice",
+        "to": "managersBelieveSinglePrice"
+      },
+      {
+        "from": "managersBelieveBelowCostLosses",
+        "to": "refuseLowMargins"
+      },
+      {
+        "from": "managersBelieveGoodPrice",
+        "to": "managersBelieveBelowCostLosses"
+      },
+      {
+        "from": "believeProductCostReal",
+        "to": "managersBelieveGoodPrice"
+      },
+      {
+        "from": "localOptima",
+        "to": "managersPerceiveEffortAsValue"
+      },
+      {
+        "from": "salesPeoplePressure",
+        "to": "salesPeoplePressure_needLaunchProducts_cause_salesOverloaded"
+      },
+      {
+        "from": "needLaunchProducts",
+        "to": "salesPeoplePressure_needLaunchProducts_cause_salesOverloaded"
+      },
+      {
+        "from": "salesPeoplePressure_needLaunchProducts_cause_salesOverloaded",
+        "to": "salesOverloaded"
+      },
+      {
+        "from": "tradMethod",
+        "to": "tradMethod_salesPressure_cause_pricePressure"
+      },
+      {
+        "from": "salesPressure",
+        "to": "tradMethod_salesPressure_cause_pricePressure"
+      },
+      {
+        "from": "tradMethod_salesPressure_cause_pricePressure",
+        "to": "pricePressure"
+      },
+      {
+        "from": "companiesFallingShort",
+        "to": "companiesFallingShort_alreadyCut_cause_salesPressure"
+      },
+      {
+        "from": "alreadyCut",
+        "to": "companiesFallingShort_alreadyCut_cause_salesPressure"
+      },
+      {
+        "from": "companiesFallingShort_alreadyCut_cause_salesPressure",
+        "to": "salesPressure"
+      },
+      {
+        "from": "notImproving",
+        "to": "notImproving_fierceComp_cause_companiesFallingShort"
+      },
+      {
+        "from": "fierceComp",
+        "to": "notImproving_fierceComp_cause_companiesFallingShort"
+      },
+      {
+        "from": "notImproving_fierceComp_cause_companiesFallingShort",
+        "to": "companiesFallingShort"
+      },
+      {
+        "from": "improvementIncreasesCost",
+        "to": "improvementIncreasesCost_measureLocal_cause_engTooSlow"
+      },
+      {
+        "from": "measureLocal",
+        "to": "improvementIncreasesCost_measureLocal_cause_engTooSlow"
+      },
+      {
+        "from": "improvementIncreasesCost_measureLocal_cause_engTooSlow",
+        "to": "engTooSlow"
+      },
+      {
+        "from": "improvementIncreasesCost",
+        "to": "improvementIncreasesCost_measureLocal_cause_prodDistNotImproving"
+      },
+      {
+        "from": "measureLocal",
+        "to": "improvementIncreasesCost_measureLocal_cause_prodDistNotImproving"
+      },
+      {
+        "from": "improvementIncreasesCost_measureLocal_cause_prodDistNotImproving",
+        "to": "prodDistNotImproving"
+      },
+      {
+        "from": "differentSectionsNeeds",
+        "to": "differentSectionsNeeds_canSegment_cause_differentPerceptions"
+      },
+      {
+        "from": "canSegment",
+        "to": "differentSectionsNeeds_canSegment_cause_differentPerceptions"
+      },
+      {
+        "from": "differentSectionsNeeds_canSegment_cause_differentPerceptions",
+        "to": "differentPerceptions"
+      },
+      {
+        "from": "marketDeterminesPrice",
+        "to": "marketDeterminesPrice_managersBelieveGoodPrice_cause_lowMargin"
+      },
+      {
+        "from": "managersBelieveGoodPrice",
+        "to": "marketDeterminesPrice_managersBelieveGoodPrice_cause_lowMargin"
+      },
+      {
+        "from": "marketDeterminesPrice_managersBelieveGoodPrice_cause_lowMargin",
+        "to": "lowMargin"
+      },
+      {
+        "from": "managerMeasure",
+        "to": "managerMeasure_localOptima_cause_measureLocal"
+      },
+      {
+        "from": "localOptima",
+        "to": "managerMeasure_localOptima_cause_measureLocal"
+      },
+      {
+        "from": "managerMeasure_localOptima_cause_measureLocal",
+        "to": "measureLocal"
+      },
+      {
+        "from": "salesPressure",
+        "to": "salesPressure_sellNewProducts_newMaterialsEnables_cause_pressureDevelopProducts"
+      },
+      {
+        "from": "sellNewProducts",
+        "to": "salesPressure_sellNewProducts_newMaterialsEnables_cause_pressureDevelopProducts"
+      },
+      {
+        "from": "newMaterialsEnables",
+        "to": "salesPressure_sellNewProducts_newMaterialsEnables_cause_pressureDevelopProducts"
+      },
+      {
+        "from": "salesPressure_sellNewProducts_newMaterialsEnables_cause_pressureDevelopProducts",
+        "to": "pressureDevelopProducts"
+      },
+      {
+        "from": "engTooSlow",
+        "to": "engTooSlow_prodDistNotImproving_insuffientMarketingIdeas_cause_notImproving"
+      },
+      {
+        "from": "prodDistNotImproving",
+        "to": "engTooSlow_prodDistNotImproving_insuffientMarketingIdeas_cause_notImproving"
+      },
+      {
+        "from": "insuffientMarketingIdeas",
+        "to": "engTooSlow_prodDistNotImproving_insuffientMarketingIdeas_cause_notImproving"
+      },
+      {
+        "from": "engTooSlow_prodDistNotImproving_insuffientMarketingIdeas_cause_notImproving",
+        "to": "notImproving"
+      },
+      {
+        "from": "differentPerceptions",
+        "to": "differentPerceptions_singlePriceTrimsCust_singlePriceLowers_cause_marketingNotOriented"
+      },
+      {
+        "from": "singlePriceTrimsCust",
+        "to": "differentPerceptions_singlePriceTrimsCust_singlePriceLowers_cause_marketingNotOriented"
+      },
+      {
+        "from": "singlePriceLowers",
+        "to": "differentPerceptions_singlePriceTrimsCust_singlePriceLowers_cause_marketingNotOriented"
+      },
+      {
+        "from": "differentPerceptions_singlePriceTrimsCust_singlePriceLowers_cause_marketingNotOriented",
+        "to": "marketingNotOriented"
+      },
+      {
+        "from": "singlePriceTrimsCust",
+        "to": "singlePriceTrimsCust_singlePriceLowers_marketPerceptionIsKey_cause_marketPunish"
+      },
+      {
+        "from": "singlePriceLowers",
+        "to": "singlePriceTrimsCust_singlePriceLowers_marketPerceptionIsKey_cause_marketPunish"
+      },
+      {
+        "from": "marketPerceptionIsKey",
+        "to": "singlePriceTrimsCust_singlePriceLowers_marketPerceptionIsKey_cause_marketPunish"
+      },
+      {
+        "from": "singlePriceTrimsCust_singlePriceLowers_marketPerceptionIsKey_cause_marketPunish",
+        "to": "marketPunish"
+      },
+      {
+        "from": "costAccountingProductCost",
+        "to": "costAccountingProductCost_managersPerceiveEffortAsValue_measureLocal_cause_believeProductCostReal"
+      },
+      {
+        "from": "managersPerceiveEffortAsValue",
+        "to": "costAccountingProductCost_managersPerceiveEffortAsValue_measureLocal_cause_believeProductCostReal"
+      },
+      {
+        "from": "measureLocal",
+        "to": "costAccountingProductCost_managersPerceiveEffortAsValue_measureLocal_cause_believeProductCostReal"
+      },
+      {
+        "from": "costAccountingProductCost_managersPerceiveEffortAsValue_measureLocal_cause_believeProductCostReal",
+        "to": "believeProductCostReal"
+      }
+    ],
+    "nodes": {
+      "alreadyCut": {
+        "annotation": "FOL",
+        "id": "alreadyCut",
+        "label": "Companies have already cut the costs they know how to cut"
+      },
+      "believeProductCostReal": {
+        "annotation": "UDE",
+        "id": "believeProductCostReal",
+        "label": "Most managers believe that product cost is something real that that quantifies the efforts absorbed by the product"
+      },
+      "canSegment": {
+        "id": "canSegment",
+        "label": "Actions to guarantee effective segmentation can be taken"
+      },
+      "companiesFallingShort": {
+        "annotation": "UDE",
+        "id": "companiesFallingShort",
+        "label": "Companies are falling short of their stated financial targets"
+      },
+      "companiesFallingShort_alreadyCut_cause_salesPressure": {
+        "id": "companiesFallingShort_alreadyCut_cause_salesPressure",
+        "intermediate": true,
+        "label": "AND"
+      },
+      "costAccountingProductCost": {
+        "annotation": "FOL",
+        "id": "costAccountingProductCost",
+        "label": "The essence of cost accounting is to calculate the product cost"
+      },
+      "costAccountingProductCost_managersPerceiveEffortAsValue_measureLocal_cause_believeProductCostReal": {
+        "id": "costAccountingProductCost_managersPerceiveEffortAsValue_measureLocal_cause_believeProductCostReal",
+        "intermediate": true,
+        "label": "AND"
+      },
+      "differentPerceptions": {
+        "id": "differentPerceptions",
+        "label": "Different market sections might have different perceptions of value even for the same product"
+      },
+      "differentPerceptions_singlePriceTrimsCust_singlePriceLowers_cause_marketingNotOriented": {
+        "id": "differentPerceptions_singlePriceTrimsCust_singlePriceLowers_cause_marketingNotOriented",
+        "intermediate": true,
+        "label": "AND"
+      },
+      "differentSectionsNeeds": {
+        "annotation": "FOL",
+        "id": "differentSectionsNeeds",
+        "label": "Different market sections might have different needs?"
+      },
+      "differentSectionsNeeds_canSegment_cause_differentPerceptions": {
+        "id": "differentSectionsNeeds_canSegment_cause_differentPerceptions",
+        "intermediate": true,
+        "label": "AND"
+      },
+      "eatIntoSales": {
+        "annotation": "UDE",
+        "id": "eatIntoSales",
+        "label": "Most new outlets and most new/improved products eat into the sales of existing outlets/products"
+      },
+      "engTooSlow": {
+        "annotation": "UDE",
+        "id": "engTooSlow",
+        "label": "Engineering is unable to deliver new products fast and reliably enough"
+      },
+      "engTooSlow_prodDistNotImproving_insuffientMarketingIdeas_cause_notImproving": {
+        "id": "engTooSlow_prodDistNotImproving_insuffientMarketingIdeas_cause_notImproving",
+        "intermediate": true,
+        "label": "AND"
+      },
+      "fierceComp": {
+        "annotation": "UDE",
+        "id": "fierceComp",
+        "label": "Competition is fiercer than ever"
+      },
+      "improvementIncreasesCost": {
+        "annotation": "FOL",
+        "id": "improvementIncreasesCost",
+        "label": "Many actions that are needed for improving lead-time, reliability, quality, response time and service do not save cost and/or increase cost in the short run"
+      },
+      "improvementIncreasesCost_measureLocal_cause_engTooSlow": {
+        "id": "improvementIncreasesCost_measureLocal_cause_engTooSlow",
+        "intermediate": true,
+        "label": "AND"
+      },
+      "improvementIncreasesCost_measureLocal_cause_prodDistNotImproving": {
+        "id": "improvementIncreasesCost_measureLocal_cause_prodDistNotImproving",
+        "intermediate": true,
+        "label": "AND"
+      },
+      "insuffientMarketingIdeas": {
+        "annotation": "UDE",
+        "id": "insuffientMarketingIdeas",
+        "label": "Companies do not come up with sufficient innovative ideas in marketing"
+      },
+      "lackSalesSkills": {
+        "annotation": "UDE",
+        "id": "lackSalesSkills",
+        "label": "A large percentage of the existing sales force lacks sufficient sales skills"
+      },
+      "lessUnified": {
+        "annotation": "UDE",
+        "id": "lessUnified",
+        "label": "Sellers display a less and less unified front"
+      },
+      "localOptima": {
+        "annotation": "UDE",
+        "id": "localOptima",
+        "label": "Managers are trying to run their companies by striving to achieve local optima"
+      },
+      "lowMargin": {
+        "annotation": "UDE",
+        "id": "lowMargin",
+        "label": "In more and more cases the price the market is willing to pay doesn't leave behind enough margin"
+      },
+      "managerMeasure": {
+        "annotation": "FOL",
+        "id": "managerMeasure",
+        "label": "For every mode of operation, managers develop suitable measurements"
+      },
+      "managerMeasure_localOptima_cause_measureLocal": {
+        "id": "managerMeasure_localOptima_cause_measureLocal",
+        "intermediate": true,
+        "label": "AND"
+      },
+      "managersBelieveBelowCostLosses": {
+        "annotation": "UDE",
+        "id": "managersBelieveBelowCostLosses",
+        "label": "Most managers believe that selling below product cost leads (at least in the long run) to losses"
+      },
+      "managersBelieveGoodPrice": {
+        "annotation": "UDE",
+        "id": "managersBelieveGoodPrice",
+        "label": "Most managers believe that the product price should be equal to product cost plus reasonable margin"
+      },
+      "managersBelieveSinglePrice": {
+        "annotation": "UDE",
+        "id": "managersBelieveSinglePrice",
+        "label": "Most managers believe that there is a single, fair price for a product"
+      },
+      "managersPerceiveEffortAsValue": {
+        "annotation": "UDE",
+        "id": "managersPerceiveEffortAsValue",
+        "label": "Most managers' perception of value of a product is heavily influenced by the local efforts required to design, produce, sell and deliver the product"
+      },
+      "marketDeterminesPrice": {
+        "id": "marketDeterminesPrice",
+        "label": "Prices and quantities sold are determined more and more by the markets' perception of value and less and less by the suppliers perception of value"
+      },
+      "marketDeterminesPrice_managersBelieveGoodPrice_cause_lowMargin": {
+        "id": "marketDeterminesPrice_managersBelieveGoodPrice_cause_lowMargin",
+        "intermediate": true,
+        "label": "AND"
+      },
+      "marketPerceptionIsKey": {
+        "id": "marketPerceptionIsKey",
+        "label": "More than ever satisfying the market perception of value is key to success"
+      },
+      "marketPunish": {
+        "annotation": "UDE",
+        "id": "marketPunish",
+        "label": "More than ever the market punishes suppliers who don't perform according to expectation"
+      },
+      "marketingNotOriented": {
+        "annotation": "UDE",
+        "id": "marketingNotOriented",
+        "label": "Marketing is not oriented to take advantage of the most promising and almost virgin direction - that of market segmentation"
+      },
+      "measureLocal": {
+        "annotation": "UDE",
+        "id": "measureLocal",
+        "label": "There are important measurements that focus on local optima, e.g. cost accounting based measurements"
+      },
+      "needLaunchProducts": {
+        "annotation": "UDE",
+        "id": "needLaunchProducts",
+        "label": "In advanced material industries there is need to launch new products at an unprecedented rate"
+      },
+      "newMaterialsEnables": {
+        "annotation": "FOL",
+        "id": "newMaterialsEnables",
+        "label": "There are industries where fast development of new material enables the development of new products - advanced material industries"
+      },
+      "newProductsConfuse": {
+        "annotation": "UDE",
+        "id": "newProductsConfuse",
+        "label": "In advanced material industries the constant introduction of new products confuses and spoils the market"
+      },
+      "notImproving": {
+        "annotation": "UDE",
+        "id": "notImproving",
+        "label": "Companies are not improving fast enough"
+      },
+      "notImproving_fierceComp_cause_companiesFallingShort": {
+        "id": "notImproving_fierceComp_cause_companiesFallingShort",
+        "intermediate": true,
+        "label": "AND"
+      },
+      "perceptionMatchesBenefits": {
+        "annotation": "FOL",
+        "id": "perceptionMatchesBenefits",
+        "label": "Market perception of value is in accordance with with the benefits of having the product"
+      },
+      "pressureDevelopProducts": {
+        "annotation": "UDE",
+        "id": "pressureDevelopProducts",
+        "label": "In advanced material industries there is unprecedented pressure to promptly develop new products"
+      },
+      "pricePressure": {
+        "annotation": "UDE",
+        "id": "pricePressure",
+        "label": "There is an increasing pressure to reduce prices"
+      },
+      "prodDistNotImproving": {
+        "annotation": "UDE",
+        "id": "prodDistNotImproving",
+        "label": "Production and distribution do not improve fast/significantly enough"
+      },
+      "refuseLowMargins": {
+        "annotation": "UDE",
+        "id": "refuseLowMargins",
+        "label": "Most companies are reluctant to accept orders with low margins and even go so far as dropping low-margin products"
+      },
+      "salesOverloaded": {
+        "annotation": "UDE",
+        "id": "salesOverloaded",
+        "label": "Salespeople are overloaded"
+      },
+      "salesPeoplePressure": {
+        "annotation": "UDE",
+        "id": "salesPeoplePressure",
+        "label": "There is pressure on salespeople to bring in more sales"
+      },
+      "salesPeoplePressure_needLaunchProducts_cause_salesOverloaded": {
+        "id": "salesPeoplePressure_needLaunchProducts_cause_salesOverloaded",
+        "intermediate": true,
+        "label": "AND"
+      },
+      "salesPressure": {
+        "annotation": "UDE",
+        "id": "salesPressure",
+        "label": "There is an increasing pressure to take actions that will increase sales"
+      },
+      "salesPressure_sellNewProducts_newMaterialsEnables_cause_pressureDevelopProducts": {
+        "id": "salesPressure_sellNewProducts_newMaterialsEnables_cause_pressureDevelopProducts",
+        "intermediate": true,
+        "label": "AND"
+      },
+      "sellNewProducts": {
+        "annotation": "FOL",
+        "id": "sellNewProducts",
+        "label": "One of the most effective ways to increase sales is to develop new, improved products"
+      },
+      "singlePriceLowers": {
+        "annotation": "UDE",
+        "id": "singlePriceLowers",
+        "label": "Imposing a single price enables customer who have a high perception of value to pay a lower price"
+      },
+      "singlePriceTrimsCust": {
+        "annotation": "UDE",
+        "id": "singlePriceTrimsCust",
+        "label": "Imposing a single price trims away customers for whom the price is too steep relative to their perception of value"
+      },
+      "singlePriceTrimsCust_singlePriceLowers_marketPerceptionIsKey_cause_marketPunish": {
+        "id": "singlePriceTrimsCust_singlePriceLowers_marketPerceptionIsKey_cause_marketPunish",
+        "intermediate": true,
+        "label": "AND"
+      },
+      "tradMethod": {
+        "annotation": "FOL",
+        "id": "tradMethod",
+        "label": "A desperate traditional to get sales is to reduce prices"
+      },
+      "tradMethod_salesPressure_cause_pricePressure": {
+        "id": "tradMethod_salesPressure_cause_pricePressure",
+        "intermediate": true,
+        "label": "AND"
+      }
+    },
+    "rankdir": "BT"
+  }
+}

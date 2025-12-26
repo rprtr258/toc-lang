@@ -1,8 +1,8 @@
 import {describe, expect, it} from "bun:test";
-import * as approvals from "approvals";
-import {parseTextToAst, parseProblemTreeSemantics} from "../interpreter.ts";
-import {exampleProblemTree} from "../examples.ts";
-import {Ast} from "../parser.ts";
+import {readFileSync} from "fs";
+import {parseTextToAst, parseProblemTreeSemantics} from "./interpreter.ts";
+import {examples} from "./examples.ts";
+import {Ast} from "./parser.ts";
 
 const testCases = [
   {
@@ -60,7 +60,7 @@ describe("problem tree interpreter", () => {
     it(testCase.name, () => {
       const typeLine = `type: problem\n`;
       const ast = parseTextToAst(typeLine + testCase.text);
-      approvals.verifyAsJSON(__dirname, "parses ast for input " + testCase.name, ast, {});
+      expect(ast).toStrictEqual(JSON.parse(readFileSync(`${__dirname}/__tests__/parses ast for input ${testCase.name}.approved.txt`).toString()));
     });
   });
 
@@ -86,11 +86,12 @@ describe("problem tree interpreter", () => {
     expect(() => parseProblemTreeSemantics(ast)).toThrowError(/^Effect d not declared$/);
   });
 
-  it("example parses", () => {
-    const text = exampleProblemTree;
-    const ast = parseTextToAst(text);
-    expect(ast.type).toEqual("problem");
-    const semantics = parseProblemTreeSemantics(ast);
-    approvals.verifyAsJSON(__dirname, "example problem tree", {ast, semantics}, {});
-  });
+  for (const {name, text} of examples.find(([group, _examples]) => group === "Current Reality Tree")![1]) {
+    it(`parses example: ${name}`, () => {
+      const ast = parseTextToAst(text);
+      expect(ast.type).toEqual("problem");
+      const semantics = parseProblemTreeSemantics(ast);
+      expect(JSON.parse(JSON.stringify({ast, semantics}))).toStrictEqual(JSON.parse(readFileSync(`${__dirname}/__tests__/example problem tree: ${name}.approved.txt`).toString()));
+    });
+  }
 });

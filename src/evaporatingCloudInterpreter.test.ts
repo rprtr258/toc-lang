@@ -1,7 +1,8 @@
 import {describe, expect, it} from "bun:test";
-import {parseTextToAst} from "../interpreter.ts";
-import {exampleEvaporatingCloud} from "../examples.ts";
-import {Ast} from "../parser.ts";
+import {readFileSync} from "fs";
+import {parseTextToAst} from "./interpreter.ts";
+import {examples} from "./examples.ts";
+import {Ast} from "./parser.ts";
 
 const testcases = [
   {
@@ -204,8 +205,10 @@ describe("evaporating cloud tree interpreter", () => {
     });
   }
 
-  it("parses example", () => {
-    const text = exampleEvaporatingCloud;
-    expect(parseTextToAst(text)).not.toBeNull();
-  });
+  for (const {name, text} of examples.find(([group, _examples]) => group === "Evaporating Cloud")![1]) {
+    it(`parses example: ${name}`, () => {
+      const ast = parseTextToAst(text);
+      expect(ast).toStrictEqual(JSON.parse(readFileSync(`${__dirname}/__tests__/example evaporating cloud: ${name}.approved.txt`).toString()));
+    });
+  }
 });

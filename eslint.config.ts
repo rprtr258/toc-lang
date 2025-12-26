@@ -36,6 +36,9 @@ export default defineConfig([
       }],
       "vue/multi-word-component-names": "off",
       "import/extensions": ["error", "always"],
+      "@typescript-eslint/no-unused-vars": ["error", {
+        argsIgnorePattern: "^_",
+      }],
     },
   },
 ]);

@@ -1,0 +1,39 @@
+{
+  "edges": [
+    {
+      "fromIds": [
+        "E"
+      ],
+      "text": "Release often to ensure releases are non-breaking (CI/CD)",
+      "toId": "C"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "A",
+      "params": {},
+      "text": "Make customers happy"
+    },
+    {
+      "id": "B",
+      "params": {},
+      "text": "Respond to needs"
+    },
+    {
+      "id": "C",
+      "params": {},
+      "text": "Don't break existing functionality"
+    },
+    {
+      "id": "D",
+      "params": {},
+      "text": "Release more often"
+    },
+    {
+      "id": "E",
+      "params": {},
+      "text": "Release less often"
+    }
+  ],
+  "type": "conflict"
+}

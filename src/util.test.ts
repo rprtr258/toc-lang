@@ -1,5 +1,5 @@
 import {describe, expect, it} from "bun:test";
-import {wrapLines} from "../util.ts";
+import {wrapLines} from "./util.ts";
 
 const testcases = [
   {
@@ -8,10 +8,10 @@ const testcases = [
   },
 ];
 
-describe("util", () => {
-  it("wrap lines", () => {
-    for (const {text, expected} of testcases) {
+describe("util/wrapLines", () => {
+  for (const {text, expected} of testcases) {
+    it(`wraps ${text}`, () => {
       expect(wrapLines(text, 20)).toEqual(expected);
-    }
-  });
+    });
+  }
 });
