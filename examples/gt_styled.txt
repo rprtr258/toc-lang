@@ -1,0 +1,10 @@
+.type: goal
+
+Goal: "Achieve market leadership"
+Revenue: "Increase revenue by 50%" class=CSF border=green fill=green status=85 shape=diamond
+Quality: "Maintain 99.9% uptime" class=CSF shape=circle border=blue fill=blue status=92
+Speed: "Ship features faster" class=NC border=yellow fill=yellow status=65
+
+Goal <- Revenue: "primary" color=red
+Goal <- Quality: "secondary"
+Goal <- Speed: "supporting"
