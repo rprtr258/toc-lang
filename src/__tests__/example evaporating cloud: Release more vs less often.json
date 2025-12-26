@@ -4,6 +4,7 @@
       "fromIds": [
         "E"
       ],
+      "params": {},
       "text": "Release often to ensure releases are non-breaking (CI/CD)",
       "toId": "C"
     }

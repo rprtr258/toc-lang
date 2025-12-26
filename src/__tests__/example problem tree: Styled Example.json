@@ -1,0 +1,129 @@
+{
+  "ast": {
+    "edges": [
+      {
+        "fromIds": [
+          "cause1"
+        ],
+        "params": {
+          "color": "red"
+        },
+        "text": "caused by",
+        "toId": "critical"
+      },
+      {
+        "fromIds": [
+          "cause2"
+        ],
+        "params": {
+          "color": "red"
+        },
+        "text": "caused by",
+        "toId": "critical"
+      },
+      {
+        "fromIds": [
+          "cause1"
+        ],
+        "params": {
+          "color": "yellow"
+        },
+        "text": "related to",
+        "toId": "minor"
+      }
+    ],
+    "nodes": [
+      {
+        "id": "critical",
+        "params": {
+          "border": "red",
+          "class": "UDE",
+          "fill": "red",
+          "shape": "circle"
+        },
+        "text": "Critical issue"
+      },
+      {
+        "id": "minor",
+        "params": {
+          "border": "yellow",
+          "class": "UDE",
+          "fill": "yellow",
+          "shape": "box"
+        },
+        "text": "Minor issue"
+      },
+      {
+        "id": "cause1",
+        "params": {
+          "border": "blue",
+          "fill": "blue",
+          "shape": "diamond"
+        },
+        "text": "Root cause 1"
+      },
+      {
+        "id": "cause2",
+        "params": {
+          "border": "green",
+          "fill": "green",
+          "shape": "box"
+        },
+        "text": "Root cause 2"
+      }
+    ],
+    "type": "problem"
+  },
+  "semantics": {
+    "edges": [
+      {
+        "color": "red",
+        "from": "cause1",
+        "to": "critical"
+      },
+      {
+        "color": "red",
+        "from": "cause2",
+        "to": "critical"
+      },
+      {
+        "color": "yellow",
+        "from": "cause1",
+        "to": "minor"
+      }
+    ],
+    "nodes": {
+      "cause1": {
+        "border": "blue",
+        "fill": "blue",
+        "id": "cause1",
+        "label": "Root cause 1",
+        "shape": "diamond"
+      },
+      "cause2": {
+        "border": "green",
+        "fill": "green",
+        "id": "cause2",
+        "label": "Root cause 2",
+        "shape": "box"
+      },
+      "critical": {
+        "annotation": "UDE",
+        "border": "red",
+        "fill": "red",
+        "id": "critical",
+        "label": "Critical issue",
+        "shape": "circle"
+      },
+      "minor": {
+        "annotation": "UDE",
+        "border": "yellow",
+        "fill": "yellow",
+        "id": "minor",
+        "label": "Minor issue",
+        "shape": "box"
+      }
+    },
+    "rankdir": "BT"
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "edges": [
+    {
+      "fromIds": [
+        "D"
+      ],
+      "params": {
+        "color": "green"
+      },
+      "text": "*inject* Psychological flow triggers",
+      "toId": "B"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "A",
+      "params": {
+        "border": "green",
+        "fill": "green",
+        "shape": "circle"
+      },
+      "text": "Maximize business performance"
+    },
+    {
+      "id": "B",
+      "params": {
+        "class": "CSF"
+      },
+      "text": "Subordinate all decisions to financial goal"
+    },
+    {
+      "id": "C",
+      "params": {
+        "class": "CSF"
+      },
+      "text": "Ensure optimal performance"
+    },
+    {
+      "id": "D",
+      "params": {
+        "border": "red",
+        "fill": "red",
+        "shape": "box"
+      },
+      "text": "Subordinate people's needs"
+    },
+    {
+      "id": "E",
+      "params": {
+        "border": "blue",
+        "fill": "blue",
+        "shape": "circle"
+      },
+      "text": "Attend to people's needs"
+    }
+  ],
+  "type": "conflict"
+}

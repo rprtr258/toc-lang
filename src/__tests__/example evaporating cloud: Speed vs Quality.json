@@ -5,6 +5,7 @@
       "fromIds": [
         "D"
       ],
+      "params": {},
       "text": "Writing tests helps developing new features",
       "toId": "E"
     }

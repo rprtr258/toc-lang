@@ -1,4 +1,4 @@
-type: conflict
+.type: conflict
 
 A: "Maximize business performance"
 B: "Subordinate all decisions to the financial goal"
