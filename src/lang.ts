@@ -21,11 +21,19 @@ function isTrue(value: boolean | RegExpMatchArray | null): value is true {
 
 export function myLanguage(idents: string[]) {
   return StreamLanguage.define<undefined>({
-    startState() { return undefined; },
+    startState() {
+      return undefined;
+    },
     token(stream, state: undefined): keyof typeof t {
       void state;
+
+      // Comments
       if (isTrue(stream.match(/^#.*/))) return "lineComment";
+
+      // Punctuation
       if (isTrue(stream.match(":"))) return "punctuation";
+
+      // Arrows
       if (isTrue(stream.match(/^(->|<-|--)/))) return "arithmeticOperator";
       if (isTrue(stream.match("type"))) return "keyword";
       if (isTrue(stream.match(/^[{}]/))) return "brace";

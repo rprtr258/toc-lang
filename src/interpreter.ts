@@ -138,7 +138,7 @@ export function parseProblemTreeSemantics(ast: Ast): TreeSemantics {
       if (nodes[causeID] === undefined)
         throw new Error(`Cause ${causeID} not declared`);
 
-      const newEdge = {
+      const newEdge: Edge = {
         from: causeID,
         to: effectID,
       };
@@ -153,7 +153,7 @@ export function parseProblemTreeSemantics(ast: Ast): TreeSemantics {
       intermediate: true,
     };
     return [
-      ...edge.fromIds.map((causeID) => {
+      ...edge.fromIds.map(causeID => {
         if (nodes[causeID] === undefined)
           throw new Error(`Cause ${causeID} not declared`);
 

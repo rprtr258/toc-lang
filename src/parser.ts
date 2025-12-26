@@ -1,4 +1,3 @@
-// Parser for TOC-Lang
 import {EOF, SyntaxError, Token, tokenize, TokenType} from "./tokenizer.ts";
 
 export type ParamsAst = Record<string, string>;
@@ -24,11 +23,11 @@ export type StatementAst =
     value: string,
   };
 
-const validTypes = ["problem", "conflict", "goal"] as const; // TODO: move to interpreter
-export type DiagramType = (typeof validTypes)[number];
+export const VALID_TYPES = ["problem", "conflict", "goal"] as const; // TODO: move to interpreter
+export type DiagramType = (typeof VALID_TYPES)[number];
 
 function isDiagramType(type: string): type is DiagramType {
-  return (validTypes as readonly string[]).includes(type);
+  return (VALID_TYPES as readonly string[]).includes(type);
 }
 
 export type AstNode = {
@@ -259,7 +258,7 @@ export function parse(input: string): Ast {
   if (typeStatements.length > 1)
     throw new SyntaxError("Only one 'type' statement is allowed", zeroLocation);
   else if (typeStatements.length === 1 && !isDiagramType(typeStatements[0].value))
-    throw new SyntaxError(`Invalid type '${typeStatements[0].value}'. Must be one of: ${validTypes.join(", ")}`, zeroLocation);
+    throw new SyntaxError(`Invalid type '${typeStatements[0].value}'. Must be one of: ${VALID_TYPES.join(", ")}`, zeroLocation);
 
   const parserType = (typeStatements.length === 1 ? typeStatements[0].value : "problem") as DiagramType;
   return {

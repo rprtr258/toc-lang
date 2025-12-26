@@ -94,7 +94,7 @@ const edgeDE = {
   start: conflictEdgePoints[0],
   end: conflictEdgePoints[3],
 };
-const conflictEdgePointsString = conflictEdgePoints.map((p) => `${p.x},${p.y}`).join(" ");
+const conflictEdgePointsString = conflictEdgePoints.map(p => `${p.x},${p.y}`).join(" ");
 </script>
 
 <template>

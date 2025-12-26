@@ -76,7 +76,7 @@ onMounted(() => handleSelectExample(examples[0][1][0].id));
     <Codemirror
       v-model="editorText"
       :extensions="extensions"
-      style="min-height: 0; flex: 1;"
+      style="min-height: 0; flex-grow: 1;"
       @ready="view = $event.view"
     />
   </div>
