@@ -1,0 +1,129 @@
+{
+  "ast": {
+    "edges": [
+      {
+        "fromIds": [
+          "Revenue"
+        ],
+        "params": {
+          "color": "red"
+        },
+        "text": "primary",
+        "toId": "Goal"
+      },
+      {
+        "fromIds": [
+          "Quality"
+        ],
+        "params": {},
+        "text": "secondary",
+        "toId": "Goal"
+      },
+      {
+        "fromIds": [
+          "Speed"
+        ],
+        "params": {},
+        "text": "supporting",
+        "toId": "Goal"
+      }
+    ],
+    "nodes": [
+      {
+        "id": "Goal",
+        "params": {},
+        "text": "Achieve market leadership"
+      },
+      {
+        "id": "Revenue",
+        "params": {
+          "border": "green",
+          "class": "CSF",
+          "fill": "green",
+          "shape": "diamond",
+          "status": "85"
+        },
+        "text": "Increase revenue by 50%"
+      },
+      {
+        "id": "Quality",
+        "params": {
+          "border": "blue",
+          "class": "CSF",
+          "fill": "blue",
+          "shape": "circle",
+          "status": "92"
+        },
+        "text": "Maintain 99.9% uptime"
+      },
+      {
+        "id": "Speed",
+        "params": {
+          "border": "yellow",
+          "class": "NC",
+          "fill": "yellow",
+          "status": "65"
+        },
+        "text": "Ship features faster"
+      }
+    ],
+    "type": "goal"
+  },
+  "semantics": {
+    "edges": [
+      {
+        "color": "red",
+        "from": "Revenue",
+        "to": "Goal"
+      },
+      {
+        "color": "black",
+        "from": "Quality",
+        "to": "Goal"
+      },
+      {
+        "color": "black",
+        "from": "Speed",
+        "to": "Goal"
+      }
+    ],
+    "nodes": {
+      "Goal": {
+        "annotation": "G",
+        "border": "black",
+        "fill": "white",
+        "id": "Goal",
+        "label": "Achieve market leadership",
+        "shape": "box"
+      },
+      "Quality": {
+        "annotation": "CSF",
+        "border": "blue",
+        "fill": "blue",
+        "id": "Quality",
+        "label": "Maintain 99.9% uptime",
+        "shape": "circle",
+        "statusPercentage": 92
+      },
+      "Revenue": {
+        "annotation": "CSF",
+        "border": "green",
+        "fill": "green",
+        "id": "Revenue",
+        "label": "Increase revenue by 50%",
+        "shape": "diamond",
+        "statusPercentage": 85
+      },
+      "Speed": {
+        "annotation": "CSF",
+        "border": "yellow",
+        "fill": "yellow",
+        "id": "Speed",
+        "label": "Ship features faster",
+        "shape": "box",
+        "statusPercentage": 65
+      }
+    },
+    "rankdir": "BT"
+  }
+}

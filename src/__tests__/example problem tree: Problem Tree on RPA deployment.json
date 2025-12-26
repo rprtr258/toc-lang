@@ -6,6 +6,7 @@
           "rpa_time_value",
           "emp_time_value"
         ],
+        "params": {},
         "toId": "more_jobs"
       },
       {
@@ -13,6 +14,7 @@
           "emp_valuable",
           "emp_no_valuable"
         ],
+        "params": {},
         "toId": "rpa_no_time"
       },
       {
@@ -20,24 +22,28 @@
           "emp_do_val",
           "emp_valuable"
         ],
+        "params": {},
         "toId": "rpa_time_value"
       },
       {
         "fromIds": [
           "emp_valuable"
         ],
+        "params": {},
         "toId": "emp_time_value"
       },
       {
         "fromIds": [
           "emp_capacity"
         ],
+        "params": {},
         "toId": "emp_valuable"
       },
       {
         "fromIds": [
           "free_time"
         ],
+        "params": {},
         "toId": "emp_capacity"
       },
       {
@@ -46,6 +52,7 @@
           "rpa_low_value",
           "rpa_deploy"
         ],
+        "params": {},
         "toId": "free_time"
       },
       {
@@ -54,12 +61,14 @@
           "rpa_deploy",
           "emp_like_do"
         ],
+        "params": {},
         "toId": "emp_deprived"
       },
       {
         "fromIds": [
           "emp_deprived"
         ],
+        "params": {},
         "toId": "emp_hate_rpa"
       },
       {
@@ -67,6 +76,7 @@
           "emp_valuable",
           "emp_unskill"
         ],
+        "params": {},
         "toId": "emp_no_value"
       },
       {
@@ -74,6 +84,7 @@
           "emp_time_value",
           "emp_no_value"
         ],
+        "params": {},
         "toId": "emp_not_valuable"
       },
       {
@@ -81,6 +92,7 @@
           "emp_no_value",
           "unwilling_redundant"
         ],
+        "params": {},
         "toId": "emp_laidoff"
       },
       {
@@ -88,6 +100,7 @@
           "unwilling_redundant",
           "redundant_workload"
         ],
+        "params": {},
         "toId": "redundant_not_replaced"
       },
       {
@@ -95,6 +108,7 @@
           "emp_laidoff",
           "redundant_not_replaced"
         ],
+        "params": {},
         "toId": "less_jobs"
       }
     ],
@@ -224,294 +238,429 @@
   "semantics": {
     "edges": [
       {
+        "color": "black",
         "from": "emp_valuable",
         "to": "emp_time_value"
       },
       {
+        "color": "black",
         "from": "emp_capacity",
         "to": "emp_valuable"
       },
       {
+        "color": "black",
         "from": "free_time",
         "to": "emp_capacity"
       },
       {
+        "color": "black",
         "from": "emp_deprived",
         "to": "emp_hate_rpa"
       },
       {
+        "color": "black",
         "from": "rpa_time_value",
         "to": "rpa_time_value_emp_time_value_cause_more_jobs"
       },
       {
+        "color": "black",
         "from": "emp_time_value",
         "to": "rpa_time_value_emp_time_value_cause_more_jobs"
       },
       {
+        "color": "black",
         "from": "rpa_time_value_emp_time_value_cause_more_jobs",
         "to": "more_jobs"
       },
       {
+        "color": "black",
         "from": "emp_do_val",
         "to": "emp_do_val_emp_valuable_cause_rpa_time_value"
       },
       {
+        "color": "black",
         "from": "emp_valuable",
         "to": "emp_do_val_emp_valuable_cause_rpa_time_value"
       },
       {
+        "color": "black",
         "from": "emp_do_val_emp_valuable_cause_rpa_time_value",
         "to": "rpa_time_value"
       },
       {
+        "color": "black",
         "from": "emp_time_value",
         "to": "emp_time_value_emp_no_value_cause_emp_not_valuable"
       },
       {
+        "color": "black",
         "from": "emp_no_value",
         "to": "emp_time_value_emp_no_value_cause_emp_not_valuable"
       },
       {
+        "color": "black",
         "from": "emp_time_value_emp_no_value_cause_emp_not_valuable",
         "to": "emp_not_valuable"
       },
       {
+        "color": "black",
         "from": "emp_valuable",
         "to": "emp_valuable_emp_no_valuable_cause_rpa_no_time"
       },
       {
+        "color": "black",
         "from": "emp_no_valuable",
         "to": "emp_valuable_emp_no_valuable_cause_rpa_no_time"
       },
       {
+        "color": "black",
         "from": "emp_valuable_emp_no_valuable_cause_rpa_no_time",
         "to": "rpa_no_time"
       },
       {
+        "color": "black",
         "from": "emp_laidoff",
         "to": "emp_laidoff_redundant_not_replaced_cause_less_jobs"
       },
       {
+        "color": "black",
         "from": "redundant_not_replaced",
         "to": "emp_laidoff_redundant_not_replaced_cause_less_jobs"
       },
       {
+        "color": "black",
         "from": "emp_laidoff_redundant_not_replaced_cause_less_jobs",
         "to": "less_jobs"
       },
       {
+        "color": "black",
         "from": "emp_no_value",
         "to": "emp_no_value_unwilling_redundant_cause_emp_laidoff"
       },
       {
+        "color": "black",
         "from": "unwilling_redundant",
         "to": "emp_no_value_unwilling_redundant_cause_emp_laidoff"
       },
       {
+        "color": "black",
         "from": "emp_no_value_unwilling_redundant_cause_emp_laidoff",
         "to": "emp_laidoff"
       },
       {
+        "color": "black",
         "from": "emp_valuable",
         "to": "emp_valuable_emp_unskill_cause_emp_no_value"
       },
       {
+        "color": "black",
         "from": "emp_unskill",
         "to": "emp_valuable_emp_unskill_cause_emp_no_value"
       },
       {
+        "color": "black",
         "from": "emp_valuable_emp_unskill_cause_emp_no_value",
         "to": "emp_no_value"
       },
       {
+        "color": "black",
         "from": "unwilling_redundant",
         "to": "unwilling_redundant_redundant_workload_cause_redundant_not_replaced"
       },
       {
+        "color": "black",
         "from": "redundant_workload",
         "to": "unwilling_redundant_redundant_workload_cause_redundant_not_replaced"
       },
       {
+        "color": "black",
         "from": "unwilling_redundant_redundant_workload_cause_redundant_not_replaced",
         "to": "redundant_not_replaced"
       },
       {
+        "color": "black",
         "from": "low_value_time",
         "to": "low_value_time_rpa_low_value_rpa_deploy_cause_free_time"
       },
       {
+        "color": "black",
         "from": "rpa_low_value",
         "to": "low_value_time_rpa_low_value_rpa_deploy_cause_free_time"
       },
       {
+        "color": "black",
         "from": "rpa_deploy",
         "to": "low_value_time_rpa_low_value_rpa_deploy_cause_free_time"
       },
       {
+        "color": "black",
         "from": "low_value_time_rpa_low_value_rpa_deploy_cause_free_time",
         "to": "free_time"
       },
       {
+        "color": "black",
         "from": "rpa_low_value",
         "to": "rpa_low_value_rpa_deploy_emp_like_do_cause_emp_deprived"
       },
       {
+        "color": "black",
         "from": "rpa_deploy",
         "to": "rpa_low_value_rpa_deploy_emp_like_do_cause_emp_deprived"
       },
       {
+        "color": "black",
         "from": "emp_like_do",
         "to": "rpa_low_value_rpa_deploy_emp_like_do_cause_emp_deprived"
       },
       {
+        "color": "black",
         "from": "rpa_low_value_rpa_deploy_emp_like_do_cause_emp_deprived",
         "to": "emp_deprived"
       }
     ],
     "nodes": {
       "emp_capacity": {
+        "border": "black",
+        "fill": "white",
         "id": "emp_capacity",
-        "label": "We create capacity with these employees"
+        "label": "We create capacity with these employees",
+        "shape": "box"
       },
       "emp_deprived": {
+        "border": "black",
+        "fill": "white",
         "id": "emp_deprived",
-        "label": "Some employees are deprived from doing tasks they like by RPA"
+        "label": "Some employees are deprived from doing tasks they like by RPA",
+        "shape": "box"
       },
       "emp_do_val": {
+        "border": "black",
+        "fill": "white",
         "id": "emp_do_val",
-        "label": "Employees do more valuable work"
+        "label": "Employees do more valuable work",
+        "shape": "box"
       },
       "emp_do_val_emp_valuable_cause_rpa_time_value": {
+        "border": "black",
+        "fill": "white",
         "id": "emp_do_val_emp_valuable_cause_rpa_time_value",
         "intermediate": true,
-        "label": "AND"
+        "label": "AND",
+        "shape": "circle"
       },
       "emp_hate_rpa": {
+        "border": "black",
+        "fill": "white",
         "id": "emp_hate_rpa",
-        "label": "Some employees are not positive towards RPA"
+        "label": "Some employees are not positive towards RPA",
+        "shape": "box"
       },
       "emp_laidoff": {
+        "border": "black",
+        "fill": "white",
         "id": "emp_laidoff",
-        "label": "Some employees are made redundant (laid off)"
+        "label": "Some employees are made redundant (laid off)",
+        "shape": "box"
       },
       "emp_laidoff_redundant_not_replaced_cause_less_jobs": {
+        "border": "black",
+        "fill": "white",
         "id": "emp_laidoff_redundant_not_replaced_cause_less_jobs",
         "intermediate": true,
-        "label": "AND"
+        "label": "AND",
+        "shape": "circle"
       },
       "emp_like_do": {
+        "border": "black",
+        "fill": "white",
         "id": "emp_like_do",
-        "label": "Some employees like doing no or low value tasks"
+        "label": "Some employees like doing no or low value tasks",
+        "shape": "box"
       },
       "emp_no_valuable": {
+        "border": "black",
+        "fill": "white",
         "id": "emp_no_valuable",
-        "label": "Employees don't do more valuable work"
+        "label": "Employees don't do more valuable work",
+        "shape": "box"
       },
       "emp_no_value": {
+        "border": "black",
+        "fill": "white",
         "id": "emp_no_value",
-        "label": "Some employees are not able to take over more valuable work"
+        "label": "Some employees are not able to take over more valuable work",
+        "shape": "box"
       },
       "emp_no_value_unwilling_redundant_cause_emp_laidoff": {
+        "border": "black",
+        "fill": "white",
         "id": "emp_no_value_unwilling_redundant_cause_emp_laidoff",
         "intermediate": true,
-        "label": "AND"
+        "label": "AND",
+        "shape": "circle"
       },
       "emp_not_valuable": {
+        "border": "black",
+        "fill": "white",
         "id": "emp_not_valuable",
-        "label": "Some employees are not considered as valuable to the organization than others"
+        "label": "Some employees are not considered as valuable to the organization than others",
+        "shape": "box"
       },
       "emp_time_value": {
+        "border": "black",
+        "fill": "white",
         "id": "emp_time_value",
-        "label": "Employees doing more valuable work are more valuable to the organization"
+        "label": "Employees doing more valuable work are more valuable to the organization",
+        "shape": "box"
       },
       "emp_time_value_emp_no_value_cause_emp_not_valuable": {
+        "border": "black",
+        "fill": "white",
         "id": "emp_time_value_emp_no_value_cause_emp_not_valuable",
         "intermediate": true,
-        "label": "AND"
+        "label": "AND",
+        "shape": "circle"
       },
       "emp_unskill": {
+        "border": "black",
+        "fill": "white",
         "id": "emp_unskill",
-        "label": "Some employees are unskilled/unfit for more valuable work"
+        "label": "Some employees are unskilled/unfit for more valuable work",
+        "shape": "box"
       },
       "emp_valuable": {
+        "border": "black",
+        "fill": "white",
         "id": "emp_valuable",
-        "label": "Employees can do more valuable work"
+        "label": "Employees can do more valuable work",
+        "shape": "box"
       },
       "emp_valuable_emp_no_valuable_cause_rpa_no_time": {
+        "border": "black",
+        "fill": "white",
         "id": "emp_valuable_emp_no_valuable_cause_rpa_no_time",
         "intermediate": true,
-        "label": "AND"
+        "label": "AND",
+        "shape": "circle"
       },
       "emp_valuable_emp_unskill_cause_emp_no_value": {
+        "border": "black",
+        "fill": "white",
         "id": "emp_valuable_emp_unskill_cause_emp_no_value",
         "intermediate": true,
-        "label": "AND"
+        "label": "AND",
+        "shape": "circle"
       },
       "free_time": {
+        "border": "black",
+        "fill": "white",
         "id": "free_time",
-        "label": "We free up time (of these employees with RPA)"
+        "label": "We free up time (of these employees with RPA)",
+        "shape": "box"
       },
       "less_jobs": {
         "annotation": "UDE",
+        "border": "black",
+        "fill": "white",
         "id": "less_jobs",
-        "label": "RPA destroys more jobs than it creates"
+        "label": "RPA destroys more jobs than it creates",
+        "shape": "box"
       },
       "low_value_time": {
+        "border": "black",
+        "fill": "white",
         "id": "low_value_time",
-        "label": "Employees spend significant amount of their time doing no or low value tasks"
+        "label": "Employees spend significant amount of their time doing no or low value tasks",
+        "shape": "box"
       },
       "low_value_time_rpa_low_value_rpa_deploy_cause_free_time": {
+        "border": "black",
+        "fill": "white",
         "id": "low_value_time_rpa_low_value_rpa_deploy_cause_free_time",
         "intermediate": true,
-        "label": "AND"
+        "label": "AND",
+        "shape": "circle"
       },
       "more_jobs": {
+        "border": "black",
+        "fill": "white",
         "id": "more_jobs",
-        "label": "RPA creates more jobs than it eliminates"
+        "label": "RPA creates more jobs than it eliminates",
+        "shape": "box"
       },
       "redundant_not_replaced": {
+        "border": "black",
+        "fill": "white",
         "id": "redundant_not_replaced",
-        "label": "Redundant employees are not replaced thanks to RPA"
+        "label": "Redundant employees are not replaced thanks to RPA",
+        "shape": "box"
       },
       "redundant_workload": {
+        "border": "black",
+        "fill": "white",
         "id": "redundant_workload",
-        "label": "The current workload without redundant employees can be handled with RPA"
+        "label": "The current workload without redundant employees can be handled with RPA",
+        "shape": "box"
       },
       "rpa_deploy": {
+        "border": "black",
+        "fill": "white",
         "id": "rpa_deploy",
-        "label": "RPA is deployed"
+        "label": "RPA is deployed",
+        "shape": "box"
       },
       "rpa_low_value": {
+        "border": "black",
+        "fill": "white",
         "id": "rpa_low_value",
-        "label": "RPA takes over no/low value task (almost for free)"
+        "label": "RPA takes over no/low value task (almost for free)",
+        "shape": "box"
       },
       "rpa_low_value_rpa_deploy_emp_like_do_cause_emp_deprived": {
+        "border": "black",
+        "fill": "white",
         "id": "rpa_low_value_rpa_deploy_emp_like_do_cause_emp_deprived",
         "intermediate": true,
-        "label": "AND"
+        "label": "AND",
+        "shape": "circle"
       },
       "rpa_no_time": {
         "annotation": "UDE",
+        "border": "black",
+        "fill": "white",
         "id": "rpa_no_time",
-        "label": "RPA does not create greater value with the time that is available"
+        "label": "RPA does not create greater value with the time that is available",
+        "shape": "box"
       },
       "rpa_time_value": {
+        "border": "black",
+        "fill": "white",
         "id": "rpa_time_value",
-        "label": "RPA creates greater value with the time that is available"
+        "label": "RPA creates greater value with the time that is available",
+        "shape": "box"
       },
       "rpa_time_value_emp_time_value_cause_more_jobs": {
+        "border": "black",
+        "fill": "white",
         "id": "rpa_time_value_emp_time_value_cause_more_jobs",
         "intermediate": true,
-        "label": "AND"
+        "label": "AND",
+        "shape": "circle"
       },
       "unwilling_redundant": {
+        "border": "black",
+        "fill": "white",
         "id": "unwilling_redundant",
-        "label": "The organization makes unable and unwilling employees redundant"
+        "label": "The organization makes unable and unwilling employees redundant",
+        "shape": "box"
       },
       "unwilling_redundant_redundant_workload_cause_redundant_not_replaced": {
+        "border": "black",
+        "fill": "white",
         "id": "unwilling_redundant_redundant_workload_cause_redundant_not_replaced",
         "intermediate": true,
-        "label": "AND"
+        "label": "AND",
+        "shape": "circle"
       }
     },
     "rankdir": "BT"

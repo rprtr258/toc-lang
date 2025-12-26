@@ -1,9 +1,9 @@
-type: goal
+.type: goal
 
 Goal: "Make money now and in the future"
 
-revUp: "Generate more revenue" {class: CSF}
-costsDown: "Control costs" {class: CSF}
+revUp: "Generate more revenue" class=CSF
+costsDown: "Control costs" class=CSF
 
 Goal <- revUp
 Goal <- costsDown

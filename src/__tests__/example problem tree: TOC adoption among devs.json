@@ -5,6 +5,7 @@
         "fromIds": [
           "friction"
         ],
+        "params": {},
         "toId": "lowAdoption"
       },
       {
@@ -12,6 +13,7 @@
           "closedSource",
           "openSourcePreference"
         ],
+        "params": {},
         "toId": "friction"
       },
       {
@@ -19,6 +21,7 @@
           "noVersionControl",
           "versionControlPreference"
         ],
+        "params": {},
         "toId": "friction"
       }
     ],
@@ -65,71 +68,102 @@
   "semantics": {
     "edges": [
       {
+        "color": "black",
         "from": "friction",
         "to": "lowAdoption"
       },
       {
+        "color": "black",
         "from": "closedSource",
         "to": "closedSource_openSourcePreference_cause_friction"
       },
       {
+        "color": "black",
         "from": "openSourcePreference",
         "to": "closedSource_openSourcePreference_cause_friction"
       },
       {
+        "color": "black",
         "from": "closedSource_openSourcePreference_cause_friction",
         "to": "friction"
       },
       {
+        "color": "black",
         "from": "noVersionControl",
         "to": "noVersionControl_versionControlPreference_cause_friction"
       },
       {
+        "color": "black",
         "from": "versionControlPreference",
         "to": "noVersionControl_versionControlPreference_cause_friction"
       },
       {
+        "color": "black",
         "from": "noVersionControl_versionControlPreference_cause_friction",
         "to": "friction"
       }
     ],
     "nodes": {
       "closedSource": {
+        "border": "black",
+        "fill": "white",
         "id": "closedSource",
-        "label": "TOC-specific tools are closed source"
+        "label": "TOC-specific tools are closed source",
+        "shape": "box"
       },
       "closedSource_openSourcePreference_cause_friction": {
+        "border": "black",
+        "fill": "white",
         "id": "closedSource_openSourcePreference_cause_friction",
         "intermediate": true,
-        "label": "AND"
+        "label": "AND",
+        "shape": "circle"
       },
       "friction": {
+        "border": "black",
+        "fill": "white",
         "id": "friction",
-        "label": "Existing tools introduce friction for developers"
+        "label": "Existing tools introduce friction for developers",
+        "shape": "box"
       },
       "lowAdoption": {
         "annotation": "UDE",
+        "border": "black",
+        "fill": "white",
         "id": "lowAdoption",
-        "label": "There is low adoption of TOC methods in the software industry"
+        "label": "There is low adoption of TOC methods in the software industry",
+        "shape": "box"
       },
       "noVersionControl": {
+        "border": "black",
+        "fill": "white",
         "id": "noVersionControl",
-        "label": "Existing tools cannot be version controlled"
+        "label": "Existing tools cannot be version controlled",
+        "shape": "box"
       },
       "noVersionControl_versionControlPreference_cause_friction": {
+        "border": "black",
+        "fill": "white",
         "id": "noVersionControl_versionControlPreference_cause_friction",
         "intermediate": true,
-        "label": "AND"
+        "label": "AND",
+        "shape": "circle"
       },
       "openSourcePreference": {
         "annotation": "FOL",
+        "border": "black",
+        "fill": "white",
         "id": "openSourcePreference",
-        "label": "Devs are unlikely to buy proprietary diagraming tools as their first intro to TOC"
+        "label": "Devs are unlikely to buy proprietary diagraming tools as their first intro to TOC",
+        "shape": "box"
       },
       "versionControlPreference": {
         "annotation": "FOL",
+        "border": "black",
+        "fill": "white",
         "id": "versionControlPreference",
-        "label": "Devs expect the ability to maintain docs along-side source code"
+        "label": "Devs expect the ability to maintain docs along-side source code",
+        "shape": "box"
       }
     },
     "rankdir": "BT"

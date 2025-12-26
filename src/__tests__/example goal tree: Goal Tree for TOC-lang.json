@@ -5,60 +5,70 @@
         "fromIds": [
           "devFriendly"
         ],
+        "params": {},
         "toId": "Goal"
       },
       {
         "fromIds": [
           "openTool"
         ],
+        "params": {},
         "toId": "devFriendly"
       },
       {
         "fromIds": [
           "wellFormed"
         ],
+        "params": {},
         "toId": "devFriendly"
       },
       {
         "fromIds": [
           "versioning"
         ],
+        "params": {},
         "toId": "devFriendly"
       },
       {
         "fromIds": [
           "textRep"
         ],
+        "params": {},
         "toId": "versioning"
       },
       {
         "fromIds": [
           "gtGrammar"
         ],
+        "params": {},
         "toId": "textRep"
       },
       {
         "fromIds": [
           "crtGrammar"
         ],
+        "params": {},
         "toId": "textRep"
       },
       {
         "fromIds": [
           "ecGrammar"
         ],
+        "params": {},
         "toId": "textRep"
       },
       {
         "fromIds": [
           "prqGrammar"
         ],
+        "params": {},
         "toId": "textRep"
       },
       {
         "fromIds": [
           "frtGrammar"
         ],
+        "params": {},
         "toId": "textRep"
       }
     ],
@@ -138,42 +148,52 @@
   "semantics": {
     "edges": [
       {
+        "color": "black",
         "from": "devFriendly",
         "to": "Goal"
       },
       {
+        "color": "black",
         "from": "openTool",
         "to": "devFriendly"
       },
       {
+        "color": "black",
         "from": "wellFormed",
         "to": "devFriendly"
       },
       {
+        "color": "black",
         "from": "versioning",
         "to": "devFriendly"
       },
       {
+        "color": "black",
         "from": "textRep",
         "to": "versioning"
       },
       {
+        "color": "black",
         "from": "gtGrammar",
         "to": "textRep"
       },
       {
+        "color": "black",
         "from": "crtGrammar",
         "to": "textRep"
       },
       {
+        "color": "black",
         "from": "ecGrammar",
         "to": "textRep"
       },
       {
+        "color": "black",
         "from": "prqGrammar",
         "to": "textRep"
       },
       {
+        "color": "black",
         "from": "frtGrammar",
         "to": "textRep"
       }
@@ -181,56 +201,89 @@
     "nodes": {
       "Goal": {
         "annotation": "G",
+        "border": "black",
+        "fill": "white",
         "id": "Goal",
-        "label": "Drive adoption of TOC in software"
+        "label": "Drive adoption of TOC in software",
+        "shape": "box"
       },
       "crtGrammar": {
+        "border": "black",
+        "fill": "white",
         "id": "crtGrammar",
         "label": "Current Reality Tree grammar",
+        "shape": "box",
         "statusPercentage": 100
       },
       "devFriendly": {
         "annotation": "CSF",
+        "border": "black",
+        "fill": "white",
         "id": "devFriendly",
-        "label": "Thinking Processes are Dev Friendly"
+        "label": "Thinking Processes are Dev Friendly",
+        "shape": "box"
       },
       "ecGrammar": {
+        "border": "black",
+        "fill": "white",
         "id": "ecGrammar",
         "label": "Evaporating Cloud grammar",
+        "shape": "box",
         "statusPercentage": 100
       },
       "frtGrammar": {
+        "border": "black",
+        "fill": "white",
         "id": "frtGrammar",
         "label": "Future Reality Tree grammar",
+        "shape": "box",
         "statusPercentage": 1
       },
       "gtGrammar": {
+        "border": "black",
+        "fill": "white",
         "id": "gtGrammar",
         "label": "Goal Tree grammar",
+        "shape": "box",
         "statusPercentage": 100
       },
       "openTool": {
+        "border": "black",
+        "fill": "white",
         "id": "openTool",
-        "label": "Open source tooling"
+        "label": "Open source tooling",
+        "shape": "box"
       },
       "prqGrammar": {
+        "border": "black",
+        "fill": "white",
         "id": "prqGrammar",
         "label": "Prerequisite Tree grammar",
+        "shape": "box",
         "statusPercentage": 1
       },
       "textRep": {
+        "border": "black",
+        "fill": "white",
         "id": "textRep",
         "label": "Diagrams have a textual representation",
+        "shape": "box",
         "statusPercentage": 50
       },
       "versioning": {
+        "border": "black",
+        "fill": "white",
         "id": "versioning",
         "label": "Diagrams can be version controlled with source code",
+        "shape": "box",
         "statusPercentage": 50
       },
       "wellFormed": {
+        "border": "black",
+        "fill": "white",
         "id": "wellFormed",
-        "label": "It is easy to create well-formed diagrams"
+        "label": "It is easy to create well-formed diagrams",
+        "shape": "box"
       }
     },
     "rankdir": "BT"
