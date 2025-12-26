@@ -1,4 +1,4 @@
-type: conflict
+.type: conflict
 
 A: "Make customers happy"
 B: "Produce new features"

@@ -1,7 +1,7 @@
-type: problem
+.type: problem
 
-bad: "Bad user experience" {class: UDE}
-cluttered: "Cluttered interface" {class: UDE}
+bad: "Bad user experience" class=UDE
+cluttered: "Cluttered interface" class=UDE
 bad <- cluttered
 ux: "Low investment in UX design"
 features: "Many features added"

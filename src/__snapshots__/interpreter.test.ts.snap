@@ -97,6 +97,7 @@ exports[`evaporating cloud with injection on requirement 1`] = `
         "D"
       ],
       "toId": "A",
+      "params": {},
       "text": "inject Psychological flow triggers"
     }
   ]
@@ -113,6 +114,7 @@ exports[`evaporating cloud with injection on conflict 1`] = `
         "D"
       ],
       "toId": "E",
+      "params": {},
       "text": "Discover they don't conflict"
     }
   ]
@@ -129,6 +131,7 @@ exports[`evaporating cloud can inject with bidirectional edge 1`] = `
         "D"
       ],
       "toId": "E",
+      "params": {},
       "text": "Discover they don't conflict",
       "biDirectional": true
     }
@@ -194,6 +197,7 @@ exports[`evaporating cloud parses example: Example 1`] = `
         "D"
       ],
       "toId": "B",
+      "params": {},
       "text": "*inject* Psychological flow triggers"
     }
   ]
@@ -236,6 +240,7 @@ exports[`evaporating cloud parses example: Speed vs Quality 1`] = `
         "D"
       ],
       "toId": "E",
+      "params": {},
       "text": "Writing tests helps developing new features",
       "biDirectional": true
     }
@@ -279,7 +284,69 @@ exports[`evaporating cloud parses example: Release more vs less often 1`] = `
         "E"
       ],
       "toId": "C",
+      "params": {},
       "text": "Release often to ensure releases are non-breaking (CI/CD)"
+    }
+  ]
+}"
+`;
+
+exports[`evaporating cloud parses example: Styled Example 1`] = `
+"{
+  "type": "conflict",
+  "nodes": [
+    {
+      "id": "A",
+      "text": "Maximize business performance",
+      "params": {
+        "shape": "circle",
+        "fill": "green",
+        "border": "green"
+      }
+    },
+    {
+      "id": "B",
+      "text": "Subordinate all decisions to financial goal",
+      "params": {
+        "class": "CSF"
+      }
+    },
+    {
+      "id": "C",
+      "text": "Ensure optimal performance",
+      "params": {
+        "class": "CSF"
+      }
+    },
+    {
+      "id": "D",
+      "text": "Subordinate people's needs",
+      "params": {
+        "shape": "box",
+        "fill": "red",
+        "border": "red"
+      }
+    },
+    {
+      "id": "E",
+      "text": "Attend to people's needs",
+      "params": {
+        "shape": "circle",
+        "fill": "blue",
+        "border": "blue"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "fromIds": [
+        "D"
+      ],
+      "toId": "B",
+      "params": {
+        "color": "green"
+      },
+      "text": "*inject* Psychological flow triggers"
     }
   ]
 }"
@@ -343,19 +410,22 @@ exports[`goal tree with CSF and NCs 1`] = `
       "fromIds": [
         "defense"
       ],
-      "toId": "theyDont"
+      "toId": "theyDont",
+      "params": {}
     },
     {
       "fromIds": [
         "possession"
       ],
-      "toId": "weScore"
+      "toId": "weScore",
+      "params": {}
     },
     {
       "fromIds": [
         "shooting"
       ],
-      "toId": "weScore"
+      "toId": "weScore",
+      "params": {}
     }
   ]
 }"
@@ -471,55 +541,64 @@ exports[`goal tree parses example: Example 1`] = `
         "fromIds": [
           "revUp"
         ],
-        "toId": "Goal"
+        "toId": "Goal",
+        "params": {}
       },
       {
         "fromIds": [
           "costsDown"
         ],
-        "toId": "Goal"
+        "toId": "Goal",
+        "params": {}
       },
       {
         "fromIds": [
           "features"
         ],
-        "toId": "newCust"
+        "toId": "newCust",
+        "params": {}
       },
       {
         "fromIds": [
           "retain"
         ],
-        "toId": "features"
+        "toId": "features",
+        "params": {}
       },
       {
         "fromIds": [
           "newCust"
         ],
-        "toId": "revUp"
+        "toId": "revUp",
+        "params": {}
       },
       {
         "fromIds": [
           "keepCust"
         ],
-        "toId": "revUp"
+        "toId": "revUp",
+        "params": {}
       },
       {
         "fromIds": [
           "reduceInfra"
         ],
-        "toId": "costsDown"
+        "toId": "costsDown",
+        "params": {}
       },
       {
         "fromIds": [
           "marketSalary"
         ],
-        "toId": "retain"
+        "toId": "retain",
+        "params": {}
       },
       {
         "fromIds": [
           "morale"
         ],
-        "toId": "retain"
+        "toId": "retain",
+        "params": {}
       }
     ]
   },
@@ -528,83 +607,122 @@ exports[`goal tree parses example: Example 1`] = `
       "Goal": {
         "id": "Goal",
         "annotation": "G",
-        "label": "Make money now and in the future"
+        "label": "Make money now and in the future",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "revUp": {
         "id": "revUp",
         "label": "Generate more revenue",
-        "annotation": "CSF"
+        "annotation": "CSF",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "costsDown": {
         "id": "costsDown",
         "label": "Control costs",
-        "annotation": "CSF"
+        "annotation": "CSF",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "keepCust": {
         "id": "keepCust",
-        "label": "Protect relationship with existing customers"
+        "label": "Protect relationship with existing customers",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "newCust": {
         "id": "newCust",
-        "label": "Acquire new customers"
+        "label": "Acquire new customers",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "reduceInfra": {
         "id": "reduceInfra",
-        "label": "Reduce infrastructure spending"
+        "label": "Reduce infrastructure spending",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "features": {
         "id": "features",
-        "label": "Develop new features"
+        "label": "Develop new features",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "retain": {
         "id": "retain",
-        "label": "Retain employees"
+        "label": "Retain employees",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "marketSalary": {
         "id": "marketSalary",
-        "label": "Keep up with market salaries"
+        "label": "Keep up with market salaries",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "morale": {
         "id": "morale",
-        "label": "Maintain employee morale"
+        "label": "Maintain employee morale",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       }
     },
     "edges": [
       {
         "from": "revUp",
-        "to": "Goal"
+        "to": "Goal",
+        "color": "black"
       },
       {
         "from": "costsDown",
-        "to": "Goal"
+        "to": "Goal",
+        "color": "black"
       },
       {
         "from": "newCust",
-        "to": "revUp"
+        "to": "revUp",
+        "color": "black"
       },
       {
         "from": "keepCust",
-        "to": "revUp"
+        "to": "revUp",
+        "color": "black"
       },
       {
         "from": "reduceInfra",
-        "to": "costsDown"
+        "to": "costsDown",
+        "color": "black"
       },
       {
         "from": "features",
-        "to": "newCust"
+        "to": "newCust",
+        "color": "black"
       },
       {
         "from": "retain",
-        "to": "features"
+        "to": "features",
+        "color": "black"
       },
       {
         "from": "marketSalary",
-        "to": "retain"
+        "to": "retain",
+        "color": "black"
       },
       {
         "from": "morale",
-        "to": "retain"
+        "to": "retain",
+        "color": "black"
       }
     ],
     "rankdir": "BT"
@@ -692,61 +810,71 @@ exports[`goal tree parses example: Goal Tree for TOC-lang 1`] = `
         "fromIds": [
           "devFriendly"
         ],
-        "toId": "Goal"
+        "toId": "Goal",
+        "params": {}
       },
       {
         "fromIds": [
           "openTool"
         ],
-        "toId": "devFriendly"
+        "toId": "devFriendly",
+        "params": {}
       },
       {
         "fromIds": [
           "wellFormed"
         ],
-        "toId": "devFriendly"
+        "toId": "devFriendly",
+        "params": {}
       },
       {
         "fromIds": [
           "versioning"
         ],
-        "toId": "devFriendly"
+        "toId": "devFriendly",
+        "params": {}
       },
       {
         "fromIds": [
           "textRep"
         ],
-        "toId": "versioning"
+        "toId": "versioning",
+        "params": {}
       },
       {
         "fromIds": [
           "gtGrammar"
         ],
-        "toId": "textRep"
+        "toId": "textRep",
+        "params": {}
       },
       {
         "fromIds": [
           "crtGrammar"
         ],
-        "toId": "textRep"
+        "toId": "textRep",
+        "params": {}
       },
       {
         "fromIds": [
           "ecGrammar"
         ],
-        "toId": "textRep"
+        "toId": "textRep",
+        "params": {}
       },
       {
         "fromIds": [
           "prqGrammar"
         ],
-        "toId": "textRep"
+        "toId": "textRep",
+        "params": {}
       },
       {
         "fromIds": [
           "frtGrammar"
         ],
-        "toId": "textRep"
+        "toId": "textRep",
+        "params": {}
       }
     ]
   },
@@ -755,97 +883,272 @@ exports[`goal tree parses example: Goal Tree for TOC-lang 1`] = `
       "Goal": {
         "id": "Goal",
         "annotation": "G",
-        "label": "Drive adoption of TOC in software"
+        "label": "Drive adoption of TOC in software",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "devFriendly": {
         "id": "devFriendly",
         "label": "Thinking Processes are Dev Friendly",
+        "shape": "box",
+        "fill": "white",
+        "border": "black",
         "annotation": "CSF"
       },
       "openTool": {
         "id": "openTool",
-        "label": "Open source tooling"
+        "label": "Open source tooling",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "wellFormed": {
         "id": "wellFormed",
-        "label": "It is easy to create well-formed diagrams"
+        "label": "It is easy to create well-formed diagrams",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "versioning": {
         "id": "versioning",
         "label": "Diagrams can be version controlled with source code",
-        "statusPercentage": 50
+        "statusPercentage": 50,
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "textRep": {
         "id": "textRep",
         "label": "Diagrams have a textual representation",
-        "statusPercentage": 50
+        "statusPercentage": 50,
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "gtGrammar": {
         "id": "gtGrammar",
         "label": "Goal Tree grammar",
-        "statusPercentage": 100
+        "statusPercentage": 100,
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "ecGrammar": {
         "id": "ecGrammar",
         "label": "Evaporating Cloud grammar",
-        "statusPercentage": 100
+        "statusPercentage": 100,
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "crtGrammar": {
         "id": "crtGrammar",
         "label": "Current Reality Tree grammar",
-        "statusPercentage": 100
+        "statusPercentage": 100,
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "prqGrammar": {
         "id": "prqGrammar",
         "label": "Prerequisite Tree grammar",
-        "statusPercentage": 1
+        "statusPercentage": 1,
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "frtGrammar": {
         "id": "frtGrammar",
         "label": "Future Reality Tree grammar",
-        "statusPercentage": 1
+        "statusPercentage": 1,
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       }
     },
     "edges": [
       {
         "from": "devFriendly",
-        "to": "Goal"
+        "to": "Goal",
+        "color": "black"
       },
       {
         "from": "openTool",
-        "to": "devFriendly"
+        "to": "devFriendly",
+        "color": "black"
       },
       {
         "from": "wellFormed",
-        "to": "devFriendly"
+        "to": "devFriendly",
+        "color": "black"
       },
       {
         "from": "versioning",
-        "to": "devFriendly"
+        "to": "devFriendly",
+        "color": "black"
       },
       {
         "from": "textRep",
-        "to": "versioning"
+        "to": "versioning",
+        "color": "black"
       },
       {
         "from": "gtGrammar",
-        "to": "textRep"
+        "to": "textRep",
+        "color": "black"
       },
       {
         "from": "crtGrammar",
-        "to": "textRep"
+        "to": "textRep",
+        "color": "black"
       },
       {
         "from": "ecGrammar",
-        "to": "textRep"
+        "to": "textRep",
+        "color": "black"
       },
       {
         "from": "prqGrammar",
-        "to": "textRep"
+        "to": "textRep",
+        "color": "black"
       },
       {
         "from": "frtGrammar",
-        "to": "textRep"
+        "to": "textRep",
+        "color": "black"
+      }
+    ],
+    "rankdir": "BT"
+  }
+}"
+`;
+
+exports[`goal tree parses example: Styled Example 1`] = `
+"{
+  "ast": {
+    "type": "goal",
+    "nodes": [
+      {
+        "id": "Goal",
+        "text": "Achieve market leadership",
+        "params": {}
+      },
+      {
+        "id": "Revenue",
+        "text": "Increase revenue by 50%",
+        "params": {
+          "class": "CSF",
+          "border": "green",
+          "fill": "green",
+          "status": "85",
+          "shape": "diamond"
+        }
+      },
+      {
+        "id": "Quality",
+        "text": "Maintain 99.9% uptime",
+        "params": {
+          "class": "CSF",
+          "shape": "circle",
+          "border": "blue",
+          "fill": "blue",
+          "status": "92"
+        }
+      },
+      {
+        "id": "Speed",
+        "text": "Ship features faster",
+        "params": {
+          "class": "NC",
+          "border": "yellow",
+          "fill": "yellow",
+          "status": "65"
+        }
+      }
+    ],
+    "edges": [
+      {
+        "fromIds": [
+          "Revenue"
+        ],
+        "toId": "Goal",
+        "params": {
+          "color": "red"
+        },
+        "text": "primary"
+      },
+      {
+        "fromIds": [
+          "Quality"
+        ],
+        "toId": "Goal",
+        "params": {},
+        "text": "secondary"
+      },
+      {
+        "fromIds": [
+          "Speed"
+        ],
+        "toId": "Goal",
+        "params": {},
+        "text": "supporting"
+      }
+    ]
+  },
+  "semantics": {
+    "nodes": {
+      "Goal": {
+        "id": "Goal",
+        "annotation": "G",
+        "label": "Achieve market leadership",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
+      },
+      "Revenue": {
+        "id": "Revenue",
+        "label": "Increase revenue by 50%",
+        "annotation": "CSF",
+        "statusPercentage": 85,
+        "shape": "diamond",
+        "fill": "green",
+        "border": "green"
+      },
+      "Quality": {
+        "id": "Quality",
+        "label": "Maintain 99.9% uptime",
+        "annotation": "CSF",
+        "statusPercentage": 92,
+        "shape": "circle",
+        "fill": "blue",
+        "border": "blue"
+      },
+      "Speed": {
+        "id": "Speed",
+        "label": "Ship features faster",
+        "annotation": "CSF",
+        "statusPercentage": 65,
+        "shape": "box",
+        "fill": "yellow",
+        "border": "yellow"
+      }
+    },
+    "edges": [
+      {
+        "from": "Revenue",
+        "to": "Goal",
+        "color": "red"
+      },
+      {
+        "from": "Quality",
+        "to": "Goal",
+        "color": "black"
+      },
+      {
+        "from": "Speed",
+        "to": "Goal",
+        "color": "black"
       }
     ],
     "rankdir": "BT"
@@ -891,7 +1194,8 @@ exports[`problem tree with UDE and single cause 1`] = `
       "fromIds": [
         "c"
       ],
-      "toId": "b"
+      "toId": "b",
+      "params": {}
     }
   ]
 }"
@@ -925,7 +1229,8 @@ exports[`problem tree with UDE and multi-cause 1`] = `
         "c1",
         "c2"
       ],
-      "toId": "b"
+      "toId": "b",
+      "params": {}
     }
   ]
 }"
@@ -957,7 +1262,8 @@ exports[`problem tree with multi-cause right arrow 1`] = `
         "c1",
         "c2"
       ],
-      "toId": "b"
+      "toId": "b",
+      "params": {}
     }
   ]
 }"
@@ -991,7 +1297,8 @@ exports[`problem tree single cause right arrow 1`] = `
       "fromIds": [
         "c"
       ],
-      "toId": "b"
+      "toId": "b",
+      "params": {}
     }
   ]
 }"
@@ -1042,14 +1349,16 @@ exports[`problem tree parses AST and semantics for injection example 1`] = `
           "x",
           "cause_cause"
         ],
-        "toId": "y"
+        "toId": "y",
+        "params": {}
       },
       {
         "fromIds": [
           "x",
           "cause"
         ],
-        "toId": "cause_y"
+        "toId": "cause_y",
+        "params": {}
       }
     ]
   },
@@ -1057,59 +1366,86 @@ exports[`problem tree parses AST and semantics for injection example 1`] = `
     "nodes": {
       "y": {
         "id": "y",
-        "label": "Y"
+        "label": "Y",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "cause_y": {
         "id": "cause_y",
-        "label": "cause_y"
+        "label": "cause_y",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "x": {
         "id": "x",
-        "label": "X"
+        "label": "X",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "cause_cause": {
         "id": "cause_cause",
-        "label": "cause_cause"
+        "label": "cause_cause",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "cause": {
         "id": "cause",
-        "label": "cause"
+        "label": "cause",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "x|cause_cause|cause|y": {
         "id": "x|cause_cause|cause|y",
         "label": "AND",
-        "intermediate": true
+        "intermediate": true,
+        "shape": "circle",
+        "fill": "white",
+        "border": "black"
       },
       "x|cause|cause|cause_y": {
         "id": "x|cause|cause|cause_y",
         "label": "AND",
-        "intermediate": true
+        "intermediate": true,
+        "shape": "circle",
+        "fill": "white",
+        "border": "black"
       }
     },
     "edges": [
       {
         "from": "x",
-        "to": "x|cause_cause|cause|y"
+        "to": "x|cause_cause|cause|y",
+        "color": "black"
       },
       {
         "from": "cause_cause",
-        "to": "x|cause_cause|cause|y"
+        "to": "x|cause_cause|cause|y",
+        "color": "black"
       },
       {
         "from": "x|cause_cause|cause|y",
-        "to": "y"
+        "to": "y",
+        "color": "black"
       },
       {
         "from": "x",
-        "to": "x|cause|cause|cause_y"
+        "to": "x|cause|cause|cause_y",
+        "color": "black"
       },
       {
         "from": "cause",
-        "to": "x|cause|cause|cause_y"
+        "to": "x|cause|cause|cause_y",
+        "color": "black"
       },
       {
         "from": "x|cause|cause|cause_y",
-        "to": "cause_y"
+        "to": "cause_y",
+        "color": "black"
       }
     ],
     "rankdir": "BT"
@@ -1152,14 +1488,16 @@ exports[`problem tree parses example: Example 1`] = `
         "fromIds": [
           "cluttered"
         ],
-        "toId": "bad"
+        "toId": "bad",
+        "params": {}
       },
       {
         "fromIds": [
           "ux",
           "features"
         ],
-        "toId": "cluttered"
+        "toId": "cluttered",
+        "params": {}
       }
     ]
   },
@@ -1168,43 +1506,62 @@ exports[`problem tree parses example: Example 1`] = `
       "bad": {
         "id": "bad",
         "label": "Bad user experience",
-        "annotation": "UDE"
+        "annotation": "UDE",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "cluttered": {
         "id": "cluttered",
         "label": "Cluttered interface",
-        "annotation": "UDE"
+        "annotation": "UDE",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "ux": {
         "id": "ux",
-        "label": "Low investment in UX design"
+        "label": "Low investment in UX design",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "features": {
         "id": "features",
-        "label": "Many features added"
+        "label": "Many features added",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "ux|features|cause|cluttered": {
         "id": "ux|features|cause|cluttered",
         "label": "AND",
-        "intermediate": true
+        "intermediate": true,
+        "shape": "circle",
+        "fill": "white",
+        "border": "black"
       }
     },
     "edges": [
       {
         "from": "cluttered",
-        "to": "bad"
+        "to": "bad",
+        "color": "black"
       },
       {
         "from": "ux",
-        "to": "ux|features|cause|cluttered"
+        "to": "ux|features|cause|cluttered",
+        "color": "black"
       },
       {
         "from": "features",
-        "to": "ux|features|cause|cluttered"
+        "to": "ux|features|cause|cluttered",
+        "color": "black"
       },
       {
         "from": "ux|features|cause|cluttered",
-        "to": "cluttered"
+        "to": "cluttered",
+        "color": "black"
       }
     ],
     "rankdir": "BT"
@@ -1259,21 +1616,24 @@ exports[`problem tree parses example: TOC adoption among devs 1`] = `
         "fromIds": [
           "friction"
         ],
-        "toId": "lowAdoption"
+        "toId": "lowAdoption",
+        "params": {}
       },
       {
         "fromIds": [
           "closedSource",
           "openSourcePreference"
         ],
-        "toId": "friction"
+        "toId": "friction",
+        "params": {}
       },
       {
         "fromIds": [
           "noVersionControl",
           "versionControlPreference"
         ],
-        "toId": "friction"
+        "toId": "friction",
+        "params": {}
       }
     ]
   },
@@ -1282,69 +1642,100 @@ exports[`problem tree parses example: TOC adoption among devs 1`] = `
       "lowAdoption": {
         "id": "lowAdoption",
         "label": "There is low adoption of TOC methods in the software industry",
-        "annotation": "UDE"
+        "annotation": "UDE",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "friction": {
         "id": "friction",
-        "label": "Existing tools introduce friction for developers"
+        "label": "Existing tools introduce friction for developers",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "closedSource": {
         "id": "closedSource",
-        "label": "TOC-specific tools are closed source"
+        "label": "TOC-specific tools are closed source",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "noVersionControl": {
         "id": "noVersionControl",
-        "label": "Existing tools cannot be version controlled"
+        "label": "Existing tools cannot be version controlled",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "versionControlPreference": {
         "id": "versionControlPreference",
         "label": "Devs expect the ability to maintain docs along-side source code",
-        "annotation": "FOL"
+        "annotation": "FOL",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "openSourcePreference": {
         "id": "openSourcePreference",
         "label": "Devs are unlikely to buy proprietary diagraming tools as their first intro to TOC",
-        "annotation": "FOL"
+        "annotation": "FOL",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "closedSource|openSourcePreference|cause|friction": {
         "id": "closedSource|openSourcePreference|cause|friction",
         "label": "AND",
-        "intermediate": true
+        "intermediate": true,
+        "shape": "circle",
+        "fill": "white",
+        "border": "black"
       },
       "noVersionControl|versionControlPreference|cause|friction": {
         "id": "noVersionControl|versionControlPreference|cause|friction",
         "label": "AND",
-        "intermediate": true
+        "intermediate": true,
+        "shape": "circle",
+        "fill": "white",
+        "border": "black"
       }
     },
     "edges": [
       {
         "from": "friction",
-        "to": "lowAdoption"
+        "to": "lowAdoption",
+        "color": "black"
       },
       {
         "from": "closedSource",
-        "to": "closedSource|openSourcePreference|cause|friction"
+        "to": "closedSource|openSourcePreference|cause|friction",
+        "color": "black"
       },
       {
         "from": "openSourcePreference",
-        "to": "closedSource|openSourcePreference|cause|friction"
+        "to": "closedSource|openSourcePreference|cause|friction",
+        "color": "black"
       },
       {
         "from": "closedSource|openSourcePreference|cause|friction",
-        "to": "friction"
+        "to": "friction",
+        "color": "black"
       },
       {
         "from": "noVersionControl",
-        "to": "noVersionControl|versionControlPreference|cause|friction"
+        "to": "noVersionControl|versionControlPreference|cause|friction",
+        "color": "black"
       },
       {
         "from": "versionControlPreference",
-        "to": "noVersionControl|versionControlPreference|cause|friction"
+        "to": "noVersionControl|versionControlPreference|cause|friction",
+        "color": "black"
       },
       {
         "from": "noVersionControl|versionControlPreference|cause|friction",
-        "to": "friction"
+        "to": "friction",
+        "color": "black"
       }
     ],
     "rankdir": "BT"
@@ -1649,59 +2040,68 @@ exports[`problem tree parses example: Current Reality Tree from "It’s not Luck
         "fromIds": [
           "pricePressure"
         ],
-        "toId": "fierceComp"
+        "toId": "fierceComp",
+        "params": {}
       },
       {
         "fromIds": [
           "fierceComp"
         ],
-        "toId": "lessUnified"
+        "toId": "lessUnified",
+        "params": {}
       },
       {
         "fromIds": [
           "salesPressure"
         ],
-        "toId": "salesPeoplePressure"
+        "toId": "salesPeoplePressure",
+        "params": {}
       },
       {
         "fromIds": [
           "tradMethod",
           "salesPressure"
         ],
-        "toId": "pricePressure"
+        "toId": "pricePressure",
+        "params": {}
       },
       {
         "fromIds": [
           "companiesFallingShort",
           "alreadyCut"
         ],
-        "toId": "salesPressure"
+        "toId": "salesPressure",
+        "params": {}
       },
       {
         "fromIds": [
           "notImproving",
           "fierceComp"
         ],
-        "toId": "companiesFallingShort"
+        "toId": "companiesFallingShort",
+        "params": {}
       },
       {
         "fromIds": [
           "salesPeoplePressure",
           "needLaunchProducts"
         ],
-        "toId": "salesOverloaded"
+        "toId": "salesOverloaded",
+        "params": {}
       },
       {
         "fromIds": [
           "needLaunchProducts"
         ],
-        "toId": "newProductsConfuse"
+        "toId": "newProductsConfuse",
+        "params": {}
       },
       {
         "fromIds": [
           "needLaunchProducts"
         ],
-        "toId": "fierceComp"
+        "toId": "fierceComp",
+        "params": {}
       },
       {
         "fromIds": [
@@ -1709,13 +2109,15 @@ exports[`problem tree parses example: Current Reality Tree from "It’s not Luck
           "sellNewProducts",
           "newMaterialsEnables"
         ],
-        "toId": "pressureDevelopProducts"
+        "toId": "pressureDevelopProducts",
+        "params": {}
       },
       {
         "fromIds": [
           "pressureDevelopProducts"
         ],
-        "toId": "needLaunchProducts"
+        "toId": "needLaunchProducts",
+        "params": {}
       },
       {
         "fromIds": [
@@ -1723,19 +2125,22 @@ exports[`problem tree parses example: Current Reality Tree from "It’s not Luck
           "prodDistNotImproving",
           "insuffientMarketingIdeas"
         ],
-        "toId": "notImproving"
+        "toId": "notImproving",
+        "params": {}
       },
       {
         "fromIds": [
           "marketingNotOriented"
         ],
-        "toId": "insuffientMarketingIdeas"
+        "toId": "insuffientMarketingIdeas",
+        "params": {}
       },
       {
         "fromIds": [
           "marketingNotOriented"
         ],
-        "toId": "eatIntoSales"
+        "toId": "eatIntoSales",
+        "params": {}
       },
       {
         "fromIds": [
@@ -1743,7 +2148,8 @@ exports[`problem tree parses example: Current Reality Tree from "It’s not Luck
           "singlePriceTrimsCust",
           "singlePriceLowers"
         ],
-        "toId": "marketingNotOriented"
+        "toId": "marketingNotOriented",
+        "params": {}
       },
       {
         "fromIds": [
@@ -1751,96 +2157,111 @@ exports[`problem tree parses example: Current Reality Tree from "It’s not Luck
           "singlePriceLowers",
           "marketPerceptionIsKey"
         ],
-        "toId": "marketPunish"
+        "toId": "marketPunish",
+        "params": {}
       },
       {
         "fromIds": [
           "perceptionMatchesBenefits"
         ],
-        "toId": "marketDeterminesPrice"
+        "toId": "marketDeterminesPrice",
+        "params": {}
       },
       {
         "fromIds": [
           "marketDeterminesPrice"
         ],
-        "toId": "marketPerceptionIsKey"
+        "toId": "marketPerceptionIsKey",
+        "params": {}
       },
       {
         "fromIds": [
           "marketDeterminesPrice",
           "managersBelieveGoodPrice"
         ],
-        "toId": "lowMargin"
+        "toId": "lowMargin",
+        "params": {}
       },
       {
         "fromIds": [
           "managersBelieveGoodPrice"
         ],
-        "toId": "managersBelieveSinglePrice"
+        "toId": "managersBelieveSinglePrice",
+        "params": {}
       },
       {
         "fromIds": [
           "managersBelieveSinglePrice"
         ],
-        "toId": "singlePriceTrimsCust"
+        "toId": "singlePriceTrimsCust",
+        "params": {}
       },
       {
         "fromIds": [
           "managersBelieveSinglePrice"
         ],
-        "toId": "singlePriceLowers"
+        "toId": "singlePriceLowers",
+        "params": {}
       },
       {
         "fromIds": [
           "managersBelieveGoodPrice"
         ],
-        "toId": "managersBelieveBelowCostLosses"
+        "toId": "managersBelieveBelowCostLosses",
+        "params": {}
       },
       {
         "fromIds": [
           "managersBelieveBelowCostLosses"
         ],
-        "toId": "refuseLowMargins"
+        "toId": "refuseLowMargins",
+        "params": {}
       },
       {
         "fromIds": [
           "differentSectionsNeeds",
           "canSegment"
         ],
-        "toId": "differentPerceptions"
+        "toId": "differentPerceptions",
+        "params": {}
       },
       {
         "fromIds": [
           "believeProductCostReal"
         ],
-        "toId": "managersBelieveGoodPrice"
+        "toId": "managersBelieveGoodPrice",
+        "params": {}
       },
       {
         "fromIds": [
           "managerMeasure",
           "localOptima"
         ],
-        "toId": "measureLocal"
+        "toId": "measureLocal",
+        "params": {}
       },
       {
         "fromIds": [
           "improvementIncreasesCost",
           "measureLocal"
         ],
-        "toId": "prodDistNotImproving"
+        "toId": "prodDistNotImproving",
+        "params": {}
       },
       {
         "fromIds": [
           "improvementIncreasesCost",
           "measureLocal"
         ],
-        "toId": "engTooSlow"
+        "toId": "engTooSlow",
+        "params": {}
       },
       {
         "fromIds": [
           "localOptima"
         ],
-        "toId": "managersPerceiveEffortAsValue"
+        "toId": "managersPerceiveEffortAsValue",
+        "params": {}
       },
       {
         "fromIds": [
@@ -1848,7 +2269,8 @@ exports[`problem tree parses example: Current Reality Tree from "It’s not Luck
           "managersPerceiveEffortAsValue",
           "measureLocal"
         ],
-        "toId": "believeProductCostReal"
+        "toId": "believeProductCostReal",
+        "params": {}
       }
     ]
   },
@@ -1857,536 +2279,768 @@ exports[`problem tree parses example: Current Reality Tree from "It’s not Luck
       "lessUnified": {
         "id": "lessUnified",
         "label": "Sellers display a less and less unified front",
-        "annotation": "UDE"
+        "annotation": "UDE",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "salesOverloaded": {
         "id": "salesOverloaded",
         "label": "Salespeople are overloaded",
-        "annotation": "UDE"
+        "annotation": "UDE",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "salesPeoplePressure": {
         "id": "salesPeoplePressure",
         "label": "There is pressure on salespeople to bring in more sales",
-        "annotation": "UDE"
+        "annotation": "UDE",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "pricePressure": {
         "id": "pricePressure",
         "label": "There is an increasing pressure to reduce prices",
-        "annotation": "UDE"
+        "annotation": "UDE",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "newProductsConfuse": {
         "id": "newProductsConfuse",
         "label": "In advanced material industries the constant introduction of new products confuses and spoils the market",
-        "annotation": "UDE"
+        "annotation": "UDE",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "needLaunchProducts": {
         "id": "needLaunchProducts",
         "label": "In advanced material industries there is need to launch new products at an unprecedented rate",
-        "annotation": "UDE"
+        "annotation": "UDE",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "pressureDevelopProducts": {
         "id": "pressureDevelopProducts",
         "label": "In advanced material industries there is unprecedented pressure to promptly develop new products",
-        "annotation": "UDE"
+        "annotation": "UDE",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "salesPressure": {
         "id": "salesPressure",
         "label": "There is an increasing pressure to take actions that will increase sales",
-        "annotation": "UDE"
+        "annotation": "UDE",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "companiesFallingShort": {
         "id": "companiesFallingShort",
         "label": "Companies are falling short of their stated financial targets",
-        "annotation": "UDE"
+        "annotation": "UDE",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "fierceComp": {
         "id": "fierceComp",
         "label": "Competition is fiercer than ever",
-        "annotation": "UDE"
+        "annotation": "UDE",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "tradMethod": {
         "id": "tradMethod",
         "label": "A desperate traditional to get sales is to reduce prices",
-        "annotation": "FOL"
+        "annotation": "FOL",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "alreadyCut": {
         "id": "alreadyCut",
         "label": "Companies have already cut the costs they know how to cut",
-        "annotation": "FOL"
+        "annotation": "FOL",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "notImproving": {
         "id": "notImproving",
         "label": "Companies are not improving fast enough",
-        "annotation": "UDE"
+        "annotation": "UDE",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "sellNewProducts": {
         "id": "sellNewProducts",
         "label": "One of the most effective ways to increase sales is to develop new, improved products",
-        "annotation": "FOL"
+        "annotation": "FOL",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "newMaterialsEnables": {
         "id": "newMaterialsEnables",
         "label": "There are industries where fast development of new material enables the development of new products - advanced material industries",
-        "annotation": "FOL"
+        "annotation": "FOL",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "engTooSlow": {
         "id": "engTooSlow",
         "label": "Engineering is unable to deliver new products fast and reliably enough",
-        "annotation": "UDE"
+        "annotation": "UDE",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "prodDistNotImproving": {
         "id": "prodDistNotImproving",
         "label": "Production and distribution do not improve fast/significantly enough",
-        "annotation": "UDE"
+        "annotation": "UDE",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "insuffientMarketingIdeas": {
         "id": "insuffientMarketingIdeas",
         "label": "Companies do not come up with sufficient innovative ideas in marketing",
-        "annotation": "UDE"
+        "annotation": "UDE",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "eatIntoSales": {
         "id": "eatIntoSales",
         "label": "Most new outlets and most new/improved products eat into the sales of existing outlets/products",
-        "annotation": "UDE"
+        "annotation": "UDE",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "marketingNotOriented": {
         "id": "marketingNotOriented",
         "label": "Marketing is not oriented to take advantage of the most promising and almost virgin direction - that of market segmentation",
-        "annotation": "UDE"
+        "annotation": "UDE",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "differentPerceptions": {
         "id": "differentPerceptions",
-        "label": "Different market sections might have different perceptions of value even for the same product"
+        "label": "Different market sections might have different perceptions of value even for the same product",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "marketPunish": {
         "id": "marketPunish",
         "label": "More than ever the market punishes suppliers who don't perform according to expectation",
-        "annotation": "UDE"
+        "annotation": "UDE",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "singlePriceTrimsCust": {
         "id": "singlePriceTrimsCust",
         "label": "Imposing a single price trims away customers for whom the price is too steep relative to their perception of value",
-        "annotation": "UDE"
+        "annotation": "UDE",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "singlePriceLowers": {
         "id": "singlePriceLowers",
         "label": "Imposing a single price enables customer who have a high perception of value to pay a lower price",
-        "annotation": "UDE"
+        "annotation": "UDE",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "marketPerceptionIsKey": {
         "id": "marketPerceptionIsKey",
-        "label": "More than ever satisfying the market perception of value is key to success"
+        "label": "More than ever satisfying the market perception of value is key to success",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "lowMargin": {
         "id": "lowMargin",
         "label": "In more and more cases the price the market is willing to pay doesn't leave behind enough margin",
-        "annotation": "UDE"
+        "annotation": "UDE",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "marketDeterminesPrice": {
         "id": "marketDeterminesPrice",
-        "label": "Prices and quantities sold are determined more and more by the markets' perception of value and less and less by the suppliers perception of value"
+        "label": "Prices and quantities sold are determined more and more by the markets' perception of value and less and less by the suppliers perception of value",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "perceptionMatchesBenefits": {
         "id": "perceptionMatchesBenefits",
         "label": "Market perception of value is in accordance with with the benefits of having the product",
-        "annotation": "FOL"
+        "annotation": "FOL",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "managersBelieveSinglePrice": {
         "id": "managersBelieveSinglePrice",
         "label": "Most managers believe that there is a single, fair price for a product",
-        "annotation": "UDE"
+        "annotation": "UDE",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "refuseLowMargins": {
         "id": "refuseLowMargins",
         "label": "Most companies are reluctant to accept orders with low margins and even go so far as dropping low-margin products",
-        "annotation": "UDE"
+        "annotation": "UDE",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "managersBelieveBelowCostLosses": {
         "id": "managersBelieveBelowCostLosses",
         "label": "Most managers believe that selling below product cost leads (at least in the long run) to losses",
-        "annotation": "UDE"
+        "annotation": "UDE",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "managersBelieveGoodPrice": {
         "id": "managersBelieveGoodPrice",
         "label": "Most managers believe that the product price should be equal to product cost plus reasonable margin",
-        "annotation": "UDE"
+        "annotation": "UDE",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "differentSectionsNeeds": {
         "id": "differentSectionsNeeds",
         "label": "Different market sections might have different needs?",
-        "annotation": "FOL"
+        "annotation": "FOL",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "canSegment": {
         "id": "canSegment",
-        "label": "Actions to guarantee effective segmentation can be taken"
+        "label": "Actions to guarantee effective segmentation can be taken",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "believeProductCostReal": {
         "id": "believeProductCostReal",
         "label": "Most managers believe that product cost is something real that that quantifies the efforts absorbed by the product",
-        "annotation": "UDE"
+        "annotation": "UDE",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "measureLocal": {
         "id": "measureLocal",
         "label": "There are important measurements that focus on local optima, e.g. cost accounting based measurements",
-        "annotation": "UDE"
+        "annotation": "UDE",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "managerMeasure": {
         "id": "managerMeasure",
         "label": "For every mode of operation, managers develop suitable measurements",
-        "annotation": "FOL"
+        "annotation": "FOL",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "managersPerceiveEffortAsValue": {
         "id": "managersPerceiveEffortAsValue",
         "label": "Most managers' perception of value of a product is heavily influenced by the local efforts required to design, produce, sell and deliver the product",
-        "annotation": "UDE"
+        "annotation": "UDE",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "localOptima": {
         "id": "localOptima",
         "label": "Managers are trying to run their companies by striving to achieve local optima",
-        "annotation": "UDE"
+        "annotation": "UDE",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "improvementIncreasesCost": {
         "id": "improvementIncreasesCost",
         "label": "Many actions that are needed for improving lead-time, reliability, quality, response time and service do not save cost and/or increase cost in the short run",
-        "annotation": "FOL"
+        "annotation": "FOL",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "costAccountingProductCost": {
         "id": "costAccountingProductCost",
         "label": "The essence of cost accounting is to calculate the product cost",
-        "annotation": "FOL"
+        "annotation": "FOL",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "lackSalesSkills": {
         "id": "lackSalesSkills",
         "label": "A large percentage of the existing sales force lacks sufficient sales skills",
-        "annotation": "UDE"
+        "annotation": "UDE",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "salesPeoplePressure|needLaunchProducts|cause|salesOverloaded": {
         "id": "salesPeoplePressure|needLaunchProducts|cause|salesOverloaded",
         "label": "AND",
-        "intermediate": true
+        "intermediate": true,
+        "shape": "circle",
+        "fill": "white",
+        "border": "black"
       },
       "tradMethod|salesPressure|cause|pricePressure": {
         "id": "tradMethod|salesPressure|cause|pricePressure",
         "label": "AND",
-        "intermediate": true
+        "intermediate": true,
+        "shape": "circle",
+        "fill": "white",
+        "border": "black"
       },
       "companiesFallingShort|alreadyCut|cause|salesPressure": {
         "id": "companiesFallingShort|alreadyCut|cause|salesPressure",
         "label": "AND",
-        "intermediate": true
+        "intermediate": true,
+        "shape": "circle",
+        "fill": "white",
+        "border": "black"
       },
       "notImproving|fierceComp|cause|companiesFallingShort": {
         "id": "notImproving|fierceComp|cause|companiesFallingShort",
         "label": "AND",
-        "intermediate": true
+        "intermediate": true,
+        "shape": "circle",
+        "fill": "white",
+        "border": "black"
       },
       "improvementIncreasesCost|measureLocal|cause|engTooSlow": {
         "id": "improvementIncreasesCost|measureLocal|cause|engTooSlow",
         "label": "AND",
-        "intermediate": true
+        "intermediate": true,
+        "shape": "circle",
+        "fill": "white",
+        "border": "black"
       },
       "improvementIncreasesCost|measureLocal|cause|prodDistNotImproving": {
         "id": "improvementIncreasesCost|measureLocal|cause|prodDistNotImproving",
         "label": "AND",
-        "intermediate": true
+        "intermediate": true,
+        "shape": "circle",
+        "fill": "white",
+        "border": "black"
       },
       "differentSectionsNeeds|canSegment|cause|differentPerceptions": {
         "id": "differentSectionsNeeds|canSegment|cause|differentPerceptions",
         "label": "AND",
-        "intermediate": true
+        "intermediate": true,
+        "shape": "circle",
+        "fill": "white",
+        "border": "black"
       },
       "marketDeterminesPrice|managersBelieveGoodPrice|cause|lowMargin": {
         "id": "marketDeterminesPrice|managersBelieveGoodPrice|cause|lowMargin",
         "label": "AND",
-        "intermediate": true
+        "intermediate": true,
+        "shape": "circle",
+        "fill": "white",
+        "border": "black"
       },
       "managerMeasure|localOptima|cause|measureLocal": {
         "id": "managerMeasure|localOptima|cause|measureLocal",
         "label": "AND",
-        "intermediate": true
+        "intermediate": true,
+        "shape": "circle",
+        "fill": "white",
+        "border": "black"
       },
       "salesPressure|sellNewProducts|newMaterialsEnables|cause|pressureDevelopProducts": {
         "id": "salesPressure|sellNewProducts|newMaterialsEnables|cause|pressureDevelopProducts",
         "label": "AND",
-        "intermediate": true
+        "intermediate": true,
+        "shape": "circle",
+        "fill": "white",
+        "border": "black"
       },
       "engTooSlow|prodDistNotImproving|insuffientMarketingIdeas|cause|notImproving": {
         "id": "engTooSlow|prodDistNotImproving|insuffientMarketingIdeas|cause|notImproving",
         "label": "AND",
-        "intermediate": true
+        "intermediate": true,
+        "shape": "circle",
+        "fill": "white",
+        "border": "black"
       },
       "differentPerceptions|singlePriceTrimsCust|singlePriceLowers|cause|marketingNotOriented": {
         "id": "differentPerceptions|singlePriceTrimsCust|singlePriceLowers|cause|marketingNotOriented",
         "label": "AND",
-        "intermediate": true
+        "intermediate": true,
+        "shape": "circle",
+        "fill": "white",
+        "border": "black"
       },
       "singlePriceTrimsCust|singlePriceLowers|marketPerceptionIsKey|cause|marketPunish": {
         "id": "singlePriceTrimsCust|singlePriceLowers|marketPerceptionIsKey|cause|marketPunish",
         "label": "AND",
-        "intermediate": true
+        "intermediate": true,
+        "shape": "circle",
+        "fill": "white",
+        "border": "black"
       },
       "costAccountingProductCost|managersPerceiveEffortAsValue|measureLocal|cause|believeProductCostReal": {
         "id": "costAccountingProductCost|managersPerceiveEffortAsValue|measureLocal|cause|believeProductCostReal",
         "label": "AND",
-        "intermediate": true
+        "intermediate": true,
+        "shape": "circle",
+        "fill": "white",
+        "border": "black"
       }
     },
     "edges": [
       {
         "from": "fierceComp",
-        "to": "lessUnified"
+        "to": "lessUnified",
+        "color": "black"
       },
       {
         "from": "salesPressure",
-        "to": "salesPeoplePressure"
+        "to": "salesPeoplePressure",
+        "color": "black"
       },
       {
         "from": "needLaunchProducts",
-        "to": "newProductsConfuse"
+        "to": "newProductsConfuse",
+        "color": "black"
       },
       {
         "from": "pressureDevelopProducts",
-        "to": "needLaunchProducts"
+        "to": "needLaunchProducts",
+        "color": "black"
       },
       {
         "from": "pricePressure",
-        "to": "fierceComp"
+        "to": "fierceComp",
+        "color": "black"
       },
       {
         "from": "needLaunchProducts",
-        "to": "fierceComp"
+        "to": "fierceComp",
+        "color": "black"
       },
       {
         "from": "marketingNotOriented",
-        "to": "insuffientMarketingIdeas"
+        "to": "insuffientMarketingIdeas",
+        "color": "black"
       },
       {
         "from": "marketingNotOriented",
-        "to": "eatIntoSales"
+        "to": "eatIntoSales",
+        "color": "black"
       },
       {
         "from": "managersBelieveSinglePrice",
-        "to": "singlePriceTrimsCust"
+        "to": "singlePriceTrimsCust",
+        "color": "black"
       },
       {
         "from": "managersBelieveSinglePrice",
-        "to": "singlePriceLowers"
+        "to": "singlePriceLowers",
+        "color": "black"
       },
       {
         "from": "marketDeterminesPrice",
-        "to": "marketPerceptionIsKey"
+        "to": "marketPerceptionIsKey",
+        "color": "black"
       },
       {
         "from": "perceptionMatchesBenefits",
-        "to": "marketDeterminesPrice"
+        "to": "marketDeterminesPrice",
+        "color": "black"
       },
       {
         "from": "managersBelieveGoodPrice",
-        "to": "managersBelieveSinglePrice"
+        "to": "managersBelieveSinglePrice",
+        "color": "black"
       },
       {
         "from": "managersBelieveBelowCostLosses",
-        "to": "refuseLowMargins"
+        "to": "refuseLowMargins",
+        "color": "black"
       },
       {
         "from": "managersBelieveGoodPrice",
-        "to": "managersBelieveBelowCostLosses"
+        "to": "managersBelieveBelowCostLosses",
+        "color": "black"
       },
       {
         "from": "believeProductCostReal",
-        "to": "managersBelieveGoodPrice"
+        "to": "managersBelieveGoodPrice",
+        "color": "black"
       },
       {
         "from": "localOptima",
-        "to": "managersPerceiveEffortAsValue"
+        "to": "managersPerceiveEffortAsValue",
+        "color": "black"
       },
       {
         "from": "salesPeoplePressure",
-        "to": "salesPeoplePressure|needLaunchProducts|cause|salesOverloaded"
+        "to": "salesPeoplePressure|needLaunchProducts|cause|salesOverloaded",
+        "color": "black"
       },
       {
         "from": "needLaunchProducts",
-        "to": "salesPeoplePressure|needLaunchProducts|cause|salesOverloaded"
+        "to": "salesPeoplePressure|needLaunchProducts|cause|salesOverloaded",
+        "color": "black"
       },
       {
         "from": "salesPeoplePressure|needLaunchProducts|cause|salesOverloaded",
-        "to": "salesOverloaded"
+        "to": "salesOverloaded",
+        "color": "black"
       },
       {
         "from": "tradMethod",
-        "to": "tradMethod|salesPressure|cause|pricePressure"
+        "to": "tradMethod|salesPressure|cause|pricePressure",
+        "color": "black"
       },
       {
         "from": "salesPressure",
-        "to": "tradMethod|salesPressure|cause|pricePressure"
+        "to": "tradMethod|salesPressure|cause|pricePressure",
+        "color": "black"
       },
       {
         "from": "tradMethod|salesPressure|cause|pricePressure",
-        "to": "pricePressure"
+        "to": "pricePressure",
+        "color": "black"
       },
       {
         "from": "companiesFallingShort",
-        "to": "companiesFallingShort|alreadyCut|cause|salesPressure"
+        "to": "companiesFallingShort|alreadyCut|cause|salesPressure",
+        "color": "black"
       },
       {
         "from": "alreadyCut",
-        "to": "companiesFallingShort|alreadyCut|cause|salesPressure"
+        "to": "companiesFallingShort|alreadyCut|cause|salesPressure",
+        "color": "black"
       },
       {
         "from": "companiesFallingShort|alreadyCut|cause|salesPressure",
-        "to": "salesPressure"
+        "to": "salesPressure",
+        "color": "black"
       },
       {
         "from": "notImproving",
-        "to": "notImproving|fierceComp|cause|companiesFallingShort"
+        "to": "notImproving|fierceComp|cause|companiesFallingShort",
+        "color": "black"
       },
       {
         "from": "fierceComp",
-        "to": "notImproving|fierceComp|cause|companiesFallingShort"
+        "to": "notImproving|fierceComp|cause|companiesFallingShort",
+        "color": "black"
       },
       {
         "from": "notImproving|fierceComp|cause|companiesFallingShort",
-        "to": "companiesFallingShort"
+        "to": "companiesFallingShort",
+        "color": "black"
       },
       {
         "from": "improvementIncreasesCost",
-        "to": "improvementIncreasesCost|measureLocal|cause|engTooSlow"
+        "to": "improvementIncreasesCost|measureLocal|cause|engTooSlow",
+        "color": "black"
       },
       {
         "from": "measureLocal",
-        "to": "improvementIncreasesCost|measureLocal|cause|engTooSlow"
+        "to": "improvementIncreasesCost|measureLocal|cause|engTooSlow",
+        "color": "black"
       },
       {
         "from": "improvementIncreasesCost|measureLocal|cause|engTooSlow",
-        "to": "engTooSlow"
+        "to": "engTooSlow",
+        "color": "black"
       },
       {
         "from": "improvementIncreasesCost",
-        "to": "improvementIncreasesCost|measureLocal|cause|prodDistNotImproving"
+        "to": "improvementIncreasesCost|measureLocal|cause|prodDistNotImproving",
+        "color": "black"
       },
       {
         "from": "measureLocal",
-        "to": "improvementIncreasesCost|measureLocal|cause|prodDistNotImproving"
+        "to": "improvementIncreasesCost|measureLocal|cause|prodDistNotImproving",
+        "color": "black"
       },
       {
         "from": "improvementIncreasesCost|measureLocal|cause|prodDistNotImproving",
-        "to": "prodDistNotImproving"
+        "to": "prodDistNotImproving",
+        "color": "black"
       },
       {
         "from": "differentSectionsNeeds",
-        "to": "differentSectionsNeeds|canSegment|cause|differentPerceptions"
+        "to": "differentSectionsNeeds|canSegment|cause|differentPerceptions",
+        "color": "black"
       },
       {
         "from": "canSegment",
-        "to": "differentSectionsNeeds|canSegment|cause|differentPerceptions"
+        "to": "differentSectionsNeeds|canSegment|cause|differentPerceptions",
+        "color": "black"
       },
       {
         "from": "differentSectionsNeeds|canSegment|cause|differentPerceptions",
-        "to": "differentPerceptions"
+        "to": "differentPerceptions",
+        "color": "black"
       },
       {
         "from": "marketDeterminesPrice",
-        "to": "marketDeterminesPrice|managersBelieveGoodPrice|cause|lowMargin"
+        "to": "marketDeterminesPrice|managersBelieveGoodPrice|cause|lowMargin",
+        "color": "black"
       },
       {
         "from": "managersBelieveGoodPrice",
-        "to": "marketDeterminesPrice|managersBelieveGoodPrice|cause|lowMargin"
+        "to": "marketDeterminesPrice|managersBelieveGoodPrice|cause|lowMargin",
+        "color": "black"
       },
       {
         "from": "marketDeterminesPrice|managersBelieveGoodPrice|cause|lowMargin",
-        "to": "lowMargin"
+        "to": "lowMargin",
+        "color": "black"
       },
       {
         "from": "managerMeasure",
-        "to": "managerMeasure|localOptima|cause|measureLocal"
+        "to": "managerMeasure|localOptima|cause|measureLocal",
+        "color": "black"
       },
       {
         "from": "localOptima",
-        "to": "managerMeasure|localOptima|cause|measureLocal"
+        "to": "managerMeasure|localOptima|cause|measureLocal",
+        "color": "black"
       },
       {
         "from": "managerMeasure|localOptima|cause|measureLocal",
-        "to": "measureLocal"
+        "to": "measureLocal",
+        "color": "black"
       },
       {
         "from": "salesPressure",
-        "to": "salesPressure|sellNewProducts|newMaterialsEnables|cause|pressureDevelopProducts"
+        "to": "salesPressure|sellNewProducts|newMaterialsEnables|cause|pressureDevelopProducts",
+        "color": "black"
       },
       {
         "from": "sellNewProducts",
-        "to": "salesPressure|sellNewProducts|newMaterialsEnables|cause|pressureDevelopProducts"
+        "to": "salesPressure|sellNewProducts|newMaterialsEnables|cause|pressureDevelopProducts",
+        "color": "black"
       },
       {
         "from": "newMaterialsEnables",
-        "to": "salesPressure|sellNewProducts|newMaterialsEnables|cause|pressureDevelopProducts"
+        "to": "salesPressure|sellNewProducts|newMaterialsEnables|cause|pressureDevelopProducts",
+        "color": "black"
       },
       {
         "from": "salesPressure|sellNewProducts|newMaterialsEnables|cause|pressureDevelopProducts",
-        "to": "pressureDevelopProducts"
+        "to": "pressureDevelopProducts",
+        "color": "black"
       },
       {
         "from": "engTooSlow",
-        "to": "engTooSlow|prodDistNotImproving|insuffientMarketingIdeas|cause|notImproving"
+        "to": "engTooSlow|prodDistNotImproving|insuffientMarketingIdeas|cause|notImproving",
+        "color": "black"
       },
       {
         "from": "prodDistNotImproving",
-        "to": "engTooSlow|prodDistNotImproving|insuffientMarketingIdeas|cause|notImproving"
+        "to": "engTooSlow|prodDistNotImproving|insuffientMarketingIdeas|cause|notImproving",
+        "color": "black"
       },
       {
         "from": "insuffientMarketingIdeas",
-        "to": "engTooSlow|prodDistNotImproving|insuffientMarketingIdeas|cause|notImproving"
+        "to": "engTooSlow|prodDistNotImproving|insuffientMarketingIdeas|cause|notImproving",
+        "color": "black"
       },
       {
         "from": "engTooSlow|prodDistNotImproving|insuffientMarketingIdeas|cause|notImproving",
-        "to": "notImproving"
+        "to": "notImproving",
+        "color": "black"
       },
       {
         "from": "differentPerceptions",
-        "to": "differentPerceptions|singlePriceTrimsCust|singlePriceLowers|cause|marketingNotOriented"
+        "to": "differentPerceptions|singlePriceTrimsCust|singlePriceLowers|cause|marketingNotOriented",
+        "color": "black"
       },
       {
         "from": "singlePriceTrimsCust",
-        "to": "differentPerceptions|singlePriceTrimsCust|singlePriceLowers|cause|marketingNotOriented"
+        "to": "differentPerceptions|singlePriceTrimsCust|singlePriceLowers|cause|marketingNotOriented",
+        "color": "black"
       },
       {
         "from": "singlePriceLowers",
-        "to": "differentPerceptions|singlePriceTrimsCust|singlePriceLowers|cause|marketingNotOriented"
+        "to": "differentPerceptions|singlePriceTrimsCust|singlePriceLowers|cause|marketingNotOriented",
+        "color": "black"
       },
       {
         "from": "differentPerceptions|singlePriceTrimsCust|singlePriceLowers|cause|marketingNotOriented",
-        "to": "marketingNotOriented"
+        "to": "marketingNotOriented",
+        "color": "black"
       },
       {
         "from": "singlePriceTrimsCust",
-        "to": "singlePriceTrimsCust|singlePriceLowers|marketPerceptionIsKey|cause|marketPunish"
+        "to": "singlePriceTrimsCust|singlePriceLowers|marketPerceptionIsKey|cause|marketPunish",
+        "color": "black"
       },
       {
         "from": "singlePriceLowers",
-        "to": "singlePriceTrimsCust|singlePriceLowers|marketPerceptionIsKey|cause|marketPunish"
+        "to": "singlePriceTrimsCust|singlePriceLowers|marketPerceptionIsKey|cause|marketPunish",
+        "color": "black"
       },
       {
         "from": "marketPerceptionIsKey",
-        "to": "singlePriceTrimsCust|singlePriceLowers|marketPerceptionIsKey|cause|marketPunish"
+        "to": "singlePriceTrimsCust|singlePriceLowers|marketPerceptionIsKey|cause|marketPunish",
+        "color": "black"
       },
       {
         "from": "singlePriceTrimsCust|singlePriceLowers|marketPerceptionIsKey|cause|marketPunish",
-        "to": "marketPunish"
+        "to": "marketPunish",
+        "color": "black"
       },
       {
         "from": "costAccountingProductCost",
-        "to": "costAccountingProductCost|managersPerceiveEffortAsValue|measureLocal|cause|believeProductCostReal"
+        "to": "costAccountingProductCost|managersPerceiveEffortAsValue|measureLocal|cause|believeProductCostReal",
+        "color": "black"
       },
       {
         "from": "managersPerceiveEffortAsValue",
-        "to": "costAccountingProductCost|managersPerceiveEffortAsValue|measureLocal|cause|believeProductCostReal"
+        "to": "costAccountingProductCost|managersPerceiveEffortAsValue|measureLocal|cause|believeProductCostReal",
+        "color": "black"
       },
       {
         "from": "measureLocal",
-        "to": "costAccountingProductCost|managersPerceiveEffortAsValue|measureLocal|cause|believeProductCostReal"
+        "to": "costAccountingProductCost|managersPerceiveEffortAsValue|measureLocal|cause|believeProductCostReal",
+        "color": "black"
       },
       {
         "from": "costAccountingProductCost|managersPerceiveEffortAsValue|measureLocal|cause|believeProductCostReal",
-        "to": "believeProductCostReal"
+        "to": "believeProductCostReal",
+        "color": "black"
       }
     ],
     "rankdir": "BT"
@@ -2525,39 +3179,45 @@ exports[`problem tree parses example: Problem Tree on RPA deployment 1`] = `
           "rpa_time_value",
           "emp_time_value"
         ],
-        "toId": "more_jobs"
+        "toId": "more_jobs",
+        "params": {}
       },
       {
         "fromIds": [
           "emp_valuable",
           "emp_no_valuable"
         ],
-        "toId": "rpa_no_time"
+        "toId": "rpa_no_time",
+        "params": {}
       },
       {
         "fromIds": [
           "emp_do_val",
           "emp_valuable"
         ],
-        "toId": "rpa_time_value"
+        "toId": "rpa_time_value",
+        "params": {}
       },
       {
         "fromIds": [
           "emp_valuable"
         ],
-        "toId": "emp_time_value"
+        "toId": "emp_time_value",
+        "params": {}
       },
       {
         "fromIds": [
           "emp_capacity"
         ],
-        "toId": "emp_valuable"
+        "toId": "emp_valuable",
+        "params": {}
       },
       {
         "fromIds": [
           "free_time"
         ],
-        "toId": "emp_capacity"
+        "toId": "emp_capacity",
+        "params": {}
       },
       {
         "fromIds": [
@@ -2565,7 +3225,8 @@ exports[`problem tree parses example: Problem Tree on RPA deployment 1`] = `
           "rpa_low_value",
           "rpa_deploy"
         ],
-        "toId": "free_time"
+        "toId": "free_time",
+        "params": {}
       },
       {
         "fromIds": [
@@ -2573,48 +3234,55 @@ exports[`problem tree parses example: Problem Tree on RPA deployment 1`] = `
           "rpa_deploy",
           "emp_like_do"
         ],
-        "toId": "emp_deprived"
+        "toId": "emp_deprived",
+        "params": {}
       },
       {
         "fromIds": [
           "emp_deprived"
         ],
-        "toId": "emp_hate_rpa"
+        "toId": "emp_hate_rpa",
+        "params": {}
       },
       {
         "fromIds": [
           "emp_valuable",
           "emp_unskill"
         ],
-        "toId": "emp_no_value"
+        "toId": "emp_no_value",
+        "params": {}
       },
       {
         "fromIds": [
           "emp_time_value",
           "emp_no_value"
         ],
-        "toId": "emp_not_valuable"
+        "toId": "emp_not_valuable",
+        "params": {}
       },
       {
         "fromIds": [
           "emp_no_value",
           "unwilling_redundant"
         ],
-        "toId": "emp_laidoff"
+        "toId": "emp_laidoff",
+        "params": {}
       },
       {
         "fromIds": [
           "unwilling_redundant",
           "redundant_workload"
         ],
-        "toId": "redundant_not_replaced"
+        "toId": "redundant_not_replaced",
+        "params": {}
       },
       {
         "fromIds": [
           "emp_laidoff",
           "redundant_not_replaced"
         ],
-        "toId": "less_jobs"
+        "toId": "less_jobs",
+        "params": {}
       }
     ]
   },
@@ -2622,293 +3290,560 @@ exports[`problem tree parses example: Problem Tree on RPA deployment 1`] = `
     "nodes": {
       "more_jobs": {
         "id": "more_jobs",
-        "label": "RPA creates more jobs than it eliminates"
+        "label": "RPA creates more jobs than it eliminates",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "rpa_time_value": {
         "id": "rpa_time_value",
-        "label": "RPA creates greater value with the time that is available"
+        "label": "RPA creates greater value with the time that is available",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "emp_do_val": {
         "id": "emp_do_val",
-        "label": "Employees do more valuable work"
+        "label": "Employees do more valuable work",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "emp_not_valuable": {
         "id": "emp_not_valuable",
-        "label": "Some employees are not considered as valuable to the organization than others"
+        "label": "Some employees are not considered as valuable to the organization than others",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "emp_time_value": {
         "id": "emp_time_value",
-        "label": "Employees doing more valuable work are more valuable to the organization"
+        "label": "Employees doing more valuable work are more valuable to the organization",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "rpa_no_time": {
         "id": "rpa_no_time",
         "label": "RPA does not create greater value with the time that is available",
-        "annotation": "UDE"
+        "annotation": "UDE",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "emp_no_valuable": {
         "id": "emp_no_valuable",
-        "label": "Employees don't do more valuable work"
+        "label": "Employees don't do more valuable work",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "less_jobs": {
         "id": "less_jobs",
         "label": "RPA destroys more jobs than it creates",
-        "annotation": "UDE"
+        "annotation": "UDE",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "emp_laidoff": {
         "id": "emp_laidoff",
-        "label": "Some employees are made redundant (laid off)"
+        "label": "Some employees are made redundant (laid off)",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "emp_no_value": {
         "id": "emp_no_value",
-        "label": "Some employees are not able to take over more valuable work"
+        "label": "Some employees are not able to take over more valuable work",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "emp_valuable": {
         "id": "emp_valuable",
-        "label": "Employees can do more valuable work"
+        "label": "Employees can do more valuable work",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "emp_capacity": {
         "id": "emp_capacity",
-        "label": "We create capacity with these employees"
+        "label": "We create capacity with these employees",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "free_time": {
         "id": "free_time",
-        "label": "We free up time (of these employees with RPA)"
+        "label": "We free up time (of these employees with RPA)",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "low_value_time": {
         "id": "low_value_time",
-        "label": "Employees spend significant amount of their time doing no or low value tasks"
+        "label": "Employees spend significant amount of their time doing no or low value tasks",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "emp_hate_rpa": {
         "id": "emp_hate_rpa",
-        "label": "Some employees are not positive towards RPA"
+        "label": "Some employees are not positive towards RPA",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "emp_deprived": {
         "id": "emp_deprived",
-        "label": "Some employees are deprived from doing tasks they like by RPA"
+        "label": "Some employees are deprived from doing tasks they like by RPA",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "rpa_low_value": {
         "id": "rpa_low_value",
-        "label": "RPA takes over no/low value task (almost for free)"
+        "label": "RPA takes over no/low value task (almost for free)",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "rpa_deploy": {
         "id": "rpa_deploy",
-        "label": "RPA is deployed"
+        "label": "RPA is deployed",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "emp_like_do": {
         "id": "emp_like_do",
-        "label": "Some employees like doing no or low value tasks"
+        "label": "Some employees like doing no or low value tasks",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "emp_unskill": {
         "id": "emp_unskill",
-        "label": "Some employees are unskilled/unfit for more valuable work"
+        "label": "Some employees are unskilled/unfit for more valuable work",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "redundant_not_replaced": {
         "id": "redundant_not_replaced",
-        "label": "Redundant employees are not replaced thanks to RPA"
+        "label": "Redundant employees are not replaced thanks to RPA",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "unwilling_redundant": {
         "id": "unwilling_redundant",
-        "label": "The organization makes unable and unwilling employees redundant"
+        "label": "The organization makes unable and unwilling employees redundant",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "redundant_workload": {
         "id": "redundant_workload",
-        "label": "The current workload without redundant employees can be handled with RPA"
+        "label": "The current workload without redundant employees can be handled with RPA",
+        "shape": "box",
+        "fill": "white",
+        "border": "black"
       },
       "rpa_time_value|emp_time_value|cause|more_jobs": {
         "id": "rpa_time_value|emp_time_value|cause|more_jobs",
         "label": "AND",
-        "intermediate": true
+        "intermediate": true,
+        "shape": "circle",
+        "fill": "white",
+        "border": "black"
       },
       "emp_do_val|emp_valuable|cause|rpa_time_value": {
         "id": "emp_do_val|emp_valuable|cause|rpa_time_value",
         "label": "AND",
-        "intermediate": true
+        "intermediate": true,
+        "shape": "circle",
+        "fill": "white",
+        "border": "black"
       },
       "emp_time_value|emp_no_value|cause|emp_not_valuable": {
         "id": "emp_time_value|emp_no_value|cause|emp_not_valuable",
         "label": "AND",
-        "intermediate": true
+        "intermediate": true,
+        "shape": "circle",
+        "fill": "white",
+        "border": "black"
       },
       "emp_valuable|emp_no_valuable|cause|rpa_no_time": {
         "id": "emp_valuable|emp_no_valuable|cause|rpa_no_time",
         "label": "AND",
-        "intermediate": true
+        "intermediate": true,
+        "shape": "circle",
+        "fill": "white",
+        "border": "black"
       },
       "emp_laidoff|redundant_not_replaced|cause|less_jobs": {
         "id": "emp_laidoff|redundant_not_replaced|cause|less_jobs",
         "label": "AND",
-        "intermediate": true
+        "intermediate": true,
+        "shape": "circle",
+        "fill": "white",
+        "border": "black"
       },
       "emp_no_value|unwilling_redundant|cause|emp_laidoff": {
         "id": "emp_no_value|unwilling_redundant|cause|emp_laidoff",
         "label": "AND",
-        "intermediate": true
+        "intermediate": true,
+        "shape": "circle",
+        "fill": "white",
+        "border": "black"
       },
       "emp_valuable|emp_unskill|cause|emp_no_value": {
         "id": "emp_valuable|emp_unskill|cause|emp_no_value",
         "label": "AND",
-        "intermediate": true
+        "intermediate": true,
+        "shape": "circle",
+        "fill": "white",
+        "border": "black"
       },
       "unwilling_redundant|redundant_workload|cause|redundant_not_replaced": {
         "id": "unwilling_redundant|redundant_workload|cause|redundant_not_replaced",
         "label": "AND",
-        "intermediate": true
+        "intermediate": true,
+        "shape": "circle",
+        "fill": "white",
+        "border": "black"
       },
       "low_value_time|rpa_low_value|rpa_deploy|cause|free_time": {
         "id": "low_value_time|rpa_low_value|rpa_deploy|cause|free_time",
         "label": "AND",
-        "intermediate": true
+        "intermediate": true,
+        "shape": "circle",
+        "fill": "white",
+        "border": "black"
       },
       "rpa_low_value|rpa_deploy|emp_like_do|cause|emp_deprived": {
         "id": "rpa_low_value|rpa_deploy|emp_like_do|cause|emp_deprived",
         "label": "AND",
-        "intermediate": true
+        "intermediate": true,
+        "shape": "circle",
+        "fill": "white",
+        "border": "black"
       }
     },
     "edges": [
       {
         "from": "emp_valuable",
-        "to": "emp_time_value"
+        "to": "emp_time_value",
+        "color": "black"
       },
       {
         "from": "emp_capacity",
-        "to": "emp_valuable"
+        "to": "emp_valuable",
+        "color": "black"
       },
       {
         "from": "free_time",
-        "to": "emp_capacity"
+        "to": "emp_capacity",
+        "color": "black"
       },
       {
         "from": "emp_deprived",
-        "to": "emp_hate_rpa"
+        "to": "emp_hate_rpa",
+        "color": "black"
       },
       {
         "from": "rpa_time_value",
-        "to": "rpa_time_value|emp_time_value|cause|more_jobs"
+        "to": "rpa_time_value|emp_time_value|cause|more_jobs",
+        "color": "black"
       },
       {
         "from": "emp_time_value",
-        "to": "rpa_time_value|emp_time_value|cause|more_jobs"
+        "to": "rpa_time_value|emp_time_value|cause|more_jobs",
+        "color": "black"
       },
       {
         "from": "rpa_time_value|emp_time_value|cause|more_jobs",
-        "to": "more_jobs"
+        "to": "more_jobs",
+        "color": "black"
       },
       {
         "from": "emp_do_val",
-        "to": "emp_do_val|emp_valuable|cause|rpa_time_value"
+        "to": "emp_do_val|emp_valuable|cause|rpa_time_value",
+        "color": "black"
       },
       {
         "from": "emp_valuable",
-        "to": "emp_do_val|emp_valuable|cause|rpa_time_value"
+        "to": "emp_do_val|emp_valuable|cause|rpa_time_value",
+        "color": "black"
       },
       {
         "from": "emp_do_val|emp_valuable|cause|rpa_time_value",
-        "to": "rpa_time_value"
+        "to": "rpa_time_value",
+        "color": "black"
       },
       {
         "from": "emp_time_value",
-        "to": "emp_time_value|emp_no_value|cause|emp_not_valuable"
+        "to": "emp_time_value|emp_no_value|cause|emp_not_valuable",
+        "color": "black"
       },
       {
         "from": "emp_no_value",
-        "to": "emp_time_value|emp_no_value|cause|emp_not_valuable"
+        "to": "emp_time_value|emp_no_value|cause|emp_not_valuable",
+        "color": "black"
       },
       {
         "from": "emp_time_value|emp_no_value|cause|emp_not_valuable",
-        "to": "emp_not_valuable"
+        "to": "emp_not_valuable",
+        "color": "black"
       },
       {
         "from": "emp_valuable",
-        "to": "emp_valuable|emp_no_valuable|cause|rpa_no_time"
+        "to": "emp_valuable|emp_no_valuable|cause|rpa_no_time",
+        "color": "black"
       },
       {
         "from": "emp_no_valuable",
-        "to": "emp_valuable|emp_no_valuable|cause|rpa_no_time"
+        "to": "emp_valuable|emp_no_valuable|cause|rpa_no_time",
+        "color": "black"
       },
       {
         "from": "emp_valuable|emp_no_valuable|cause|rpa_no_time",
-        "to": "rpa_no_time"
+        "to": "rpa_no_time",
+        "color": "black"
       },
       {
         "from": "emp_laidoff",
-        "to": "emp_laidoff|redundant_not_replaced|cause|less_jobs"
+        "to": "emp_laidoff|redundant_not_replaced|cause|less_jobs",
+        "color": "black"
       },
       {
         "from": "redundant_not_replaced",
-        "to": "emp_laidoff|redundant_not_replaced|cause|less_jobs"
+        "to": "emp_laidoff|redundant_not_replaced|cause|less_jobs",
+        "color": "black"
       },
       {
         "from": "emp_laidoff|redundant_not_replaced|cause|less_jobs",
-        "to": "less_jobs"
+        "to": "less_jobs",
+        "color": "black"
       },
       {
         "from": "emp_no_value",
-        "to": "emp_no_value|unwilling_redundant|cause|emp_laidoff"
+        "to": "emp_no_value|unwilling_redundant|cause|emp_laidoff",
+        "color": "black"
       },
       {
         "from": "unwilling_redundant",
-        "to": "emp_no_value|unwilling_redundant|cause|emp_laidoff"
+        "to": "emp_no_value|unwilling_redundant|cause|emp_laidoff",
+        "color": "black"
       },
       {
         "from": "emp_no_value|unwilling_redundant|cause|emp_laidoff",
-        "to": "emp_laidoff"
+        "to": "emp_laidoff",
+        "color": "black"
       },
       {
         "from": "emp_valuable",
-        "to": "emp_valuable|emp_unskill|cause|emp_no_value"
+        "to": "emp_valuable|emp_unskill|cause|emp_no_value",
+        "color": "black"
       },
       {
         "from": "emp_unskill",
-        "to": "emp_valuable|emp_unskill|cause|emp_no_value"
+        "to": "emp_valuable|emp_unskill|cause|emp_no_value",
+        "color": "black"
       },
       {
         "from": "emp_valuable|emp_unskill|cause|emp_no_value",
-        "to": "emp_no_value"
+        "to": "emp_no_value",
+        "color": "black"
       },
       {
         "from": "unwilling_redundant",
-        "to": "unwilling_redundant|redundant_workload|cause|redundant_not_replaced"
+        "to": "unwilling_redundant|redundant_workload|cause|redundant_not_replaced",
+        "color": "black"
       },
       {
         "from": "redundant_workload",
-        "to": "unwilling_redundant|redundant_workload|cause|redundant_not_replaced"
+        "to": "unwilling_redundant|redundant_workload|cause|redundant_not_replaced",
+        "color": "black"
       },
       {
         "from": "unwilling_redundant|redundant_workload|cause|redundant_not_replaced",
-        "to": "redundant_not_replaced"
+        "to": "redundant_not_replaced",
+        "color": "black"
       },
       {
         "from": "low_value_time",
-        "to": "low_value_time|rpa_low_value|rpa_deploy|cause|free_time"
+        "to": "low_value_time|rpa_low_value|rpa_deploy|cause|free_time",
+        "color": "black"
       },
       {
         "from": "rpa_low_value",
-        "to": "low_value_time|rpa_low_value|rpa_deploy|cause|free_time"
+        "to": "low_value_time|rpa_low_value|rpa_deploy|cause|free_time",
+        "color": "black"
       },
       {
         "from": "rpa_deploy",
-        "to": "low_value_time|rpa_low_value|rpa_deploy|cause|free_time"
+        "to": "low_value_time|rpa_low_value|rpa_deploy|cause|free_time",
+        "color": "black"
       },
       {
         "from": "low_value_time|rpa_low_value|rpa_deploy|cause|free_time",
-        "to": "free_time"
+        "to": "free_time",
+        "color": "black"
       },
       {
         "from": "rpa_low_value",
-        "to": "rpa_low_value|rpa_deploy|emp_like_do|cause|emp_deprived"
+        "to": "rpa_low_value|rpa_deploy|emp_like_do|cause|emp_deprived",
+        "color": "black"
       },
       {
         "from": "rpa_deploy",
-        "to": "rpa_low_value|rpa_deploy|emp_like_do|cause|emp_deprived"
+        "to": "rpa_low_value|rpa_deploy|emp_like_do|cause|emp_deprived",
+        "color": "black"
       },
       {
         "from": "emp_like_do",
-        "to": "rpa_low_value|rpa_deploy|emp_like_do|cause|emp_deprived"
+        "to": "rpa_low_value|rpa_deploy|emp_like_do|cause|emp_deprived",
+        "color": "black"
       },
       {
         "from": "rpa_low_value|rpa_deploy|emp_like_do|cause|emp_deprived",
-        "to": "emp_deprived"
+        "to": "emp_deprived",
+        "color": "black"
+      }
+    ],
+    "rankdir": "BT"
+  }
+}"
+`;
+
+exports[`problem tree parses example: Styled Example 1`] = `
+"{
+  "ast": {
+    "type": "problem",
+    "nodes": [
+      {
+        "id": "critical",
+        "text": "Critical issue",
+        "params": {
+          "class": "UDE",
+          "shape": "circle",
+          "border": "red",
+          "fill": "red"
+        }
+      },
+      {
+        "id": "minor",
+        "text": "Minor issue",
+        "params": {
+          "class": "UDE",
+          "shape": "box",
+          "border": "yellow",
+          "fill": "yellow"
+        }
+      },
+      {
+        "id": "cause1",
+        "text": "Root cause 1",
+        "params": {
+          "shape": "diamond",
+          "border": "blue",
+          "fill": "blue"
+        }
+      },
+      {
+        "id": "cause2",
+        "text": "Root cause 2",
+        "params": {
+          "shape": "box",
+          "border": "green",
+          "fill": "green"
+        }
+      }
+    ],
+    "edges": [
+      {
+        "fromIds": [
+          "cause1"
+        ],
+        "toId": "critical",
+        "params": {
+          "color": "red"
+        },
+        "text": "caused by"
+      },
+      {
+        "fromIds": [
+          "cause2"
+        ],
+        "toId": "critical",
+        "params": {
+          "color": "red"
+        },
+        "text": "caused by"
+      },
+      {
+        "fromIds": [
+          "cause1"
+        ],
+        "toId": "minor",
+        "params": {
+          "color": "yellow"
+        },
+        "text": "related to"
+      }
+    ]
+  },
+  "semantics": {
+    "nodes": {
+      "critical": {
+        "id": "critical",
+        "label": "Critical issue",
+        "annotation": "UDE",
+        "shape": "circle",
+        "fill": "red",
+        "border": "red"
+      },
+      "minor": {
+        "id": "minor",
+        "label": "Minor issue",
+        "annotation": "UDE",
+        "shape": "box",
+        "fill": "yellow",
+        "border": "yellow"
+      },
+      "cause1": {
+        "id": "cause1",
+        "label": "Root cause 1",
+        "shape": "diamond",
+        "fill": "blue",
+        "border": "blue"
+      },
+      "cause2": {
+        "id": "cause2",
+        "label": "Root cause 2",
+        "shape": "box",
+        "fill": "green",
+        "border": "green"
+      }
+    },
+    "edges": [
+      {
+        "from": "cause1",
+        "to": "critical",
+        "color": "red"
+      },
+      {
+        "from": "cause2",
+        "to": "critical",
+        "color": "red"
+      },
+      {
+        "from": "cause1",
+        "to": "minor",
+        "color": "yellow"
       }
     ],
     "rankdir": "BT"

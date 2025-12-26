@@ -1,12 +1,12 @@
 export const problemTreeTestcases = [
   {
     name: "with only UDE",
-    text: `b: "badness" {class: UDE}`,
+    text: `b: "badness" class=UDE`,
   },
   {
     name: "with UDE and single cause",
     text: `
-    b: "badness" {class: UDE}
+    b: "badness" class=UDE
     c: "cause"
     b <- c
     `,
@@ -14,7 +14,7 @@ export const problemTreeTestcases = [
   {
     name: "with UDE and multi-cause",
     text: `
-    b: "badness" {class: UDE}
+    b: "badness" class=UDE
     c1: "cause 1"
     c2: "cause 2"
     b <- c1 && c2
@@ -31,9 +31,7 @@ export const problemTreeTestcases = [
   },
   {
     name: "single-line comments",
-    text: `
-    # This is a comment
-    `,
+    text: "# This is a comment",
   },
   {
     name: "single cause right arrow",
@@ -52,12 +50,12 @@ export const problemTreeTestcases = [
 export const evaporatingCloudTestcases = [
   {
     name: "only type line parses to empty",
-    text: "type: conflict",
+    text: ".type: conflict",
   },
   {
     name: "with only labels",
     text: `
-type: conflict
+.type: conflict
 A: "Maximize business performance"
 B: "Subordinate all decisions to the financial goal"
 C: "Ensure people are in a state of optimal performance"
@@ -68,7 +66,7 @@ E: "Attend to people's needs (& let people work)"
   {
     name: "with only labels, quoted",
     text: `
-type: conflict
+.type: conflict
 A: "Maximize business performance {"
 B: "Subordinate all decisions to the financial goal"
 C: "Ensure people are in a state of optimal performance"
@@ -79,7 +77,7 @@ E: "Attend to people's needs (& let people work)"
   {
     name: "with injection on requirement",
     text: `
-type: conflict
+.type: conflict
 A: "Maximize business performance"
 D: "Subordinate people's needs to the financial goal"
 A <- D: "inject Psychological flow triggers"
@@ -88,14 +86,14 @@ A <- D: "inject Psychological flow triggers"
   {
     name: "with injection on conflict",
     text: `
-type: conflict
+.type: conflict
 D -> E: "Discover they don't conflict"
 `,
   },
   {
     name: "can inject with bidirectional edge",
     text: `
-type: conflict
+.type: conflict
 D -- E: "Discover they don't conflict"
 `,
   },
@@ -103,13 +101,13 @@ D -- E: "Discover they don't conflict"
     name: "single-line comments",
     text: `
 # This is a comment
-type: conflict
+.type: conflict
 `,
   },
   {
     name: "unusual characters in annotation",
     text: `
-type: conflict
+.type: conflict
 A: "*watafa* pepe"
 `,
   },
@@ -119,19 +117,19 @@ export const goalTreeTestcases = [
   {
     name: "with only goal",
     text: `
-    type: goal
+    .type: goal
     Goal: "win"
     `,
   },
   {
     name: "with CSF and NCs",
     text: `
-    type: goal
+    .type: goal
 
     Goal: "win"
 
-    weScore: "We score points" { class: CSF }
-    theyDont: "Other team doesn't score" { class: CSF }
+    weScore: "We score points" class=CSF
+    theyDont: "Other team doesn't score" class=CSF
 
     possession: "We get the ball"
     shooting: "We shoot the ball accurately"
@@ -145,26 +143,24 @@ export const goalTreeTestcases = [
   {
     name: "node status",
     text: `
-    type: goal
-    mynode: "win" {
-      status: 50
-    }
+    .type: goal
+    mynode: "win" status=50
     `,
   },
   {
     name: "single-line comments",
     text: `
     # This is a comment
-    type: goal
+    .type: goal
     `,
   },
   {
     name: "with status",
     text: `
-    type: goal
+    .type: goal
 
     Goal: "win"
-    weScore: "We score points" {status: 70}
+    weScore: "We score points" status=70
     `,
   },
 ];

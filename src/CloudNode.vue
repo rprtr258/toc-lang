@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import {computed} from "vue";
 import {wrapLines} from "./util.ts";
+import {COLORS, parseColor} from "./interpreter.ts";
 
 const props = defineProps<{
   text: string,
@@ -9,11 +10,14 @@ const props = defineProps<{
   width: number,
   height: number,
   annotation: string,
+  params?: Record<string, string>, // TODO: assert no shape
 }>();
-const {x, y, width, height, annotation} = props;
+const {x, y, width, height, annotation, params = {}} = props;
 const lines = computed(() => wrapLines(props.text, 20));
 const lineHeight = 16;
 const textX = x + 12;
+const fillColor = computed(() => parseColor(params.fill, "white"));
+const borderColor = computed(() => parseColor(params.border, "black"));
 </script>
 
 <template>
@@ -24,6 +28,8 @@ const textX = x + 12;
     ry="10"
     :width="width"
     :height="height"
+    :fill="COLORS[fillColor]"
+    :stroke="borderColor"
   />
   <text :x="textX" :y="y + height / 2 - lines.length * lineHeight / 2 - 4">
     <tspan v-for="(line, i) in lines" :key="i" :x="textX" :dy="lineHeight">
@@ -42,9 +48,8 @@ const textX = x + 12;
 </template>
 
 <style scoped>
-svg rect {
-  fill: white;
-  stroke: black;
+svg text {
+  fill: black;
   stroke-width: 2;
 }
 </style>

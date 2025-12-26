@@ -2,17 +2,54 @@ import {Ast, AstNode, parse} from "./parser.ts";
 
 export type NodeID = string;
 
+export const COLORS = {
+  black: "#000000",
+  white: "#ffffff",
+  red: "#ffb2b2",
+  green: "#95f795",
+  blue: "#dff8ff",
+  yellow: "#fdfdbe",
+} as const;
+
+export type Color = keyof typeof COLORS;
+export function parseColor(color: string | undefined, defaultColor: Color): Color {
+  if (color === undefined)
+    return defaultColor;
+  if ((COLORS as unknown as Record<string, Color>)[color] !== undefined || color.match(/^#[0-9a-f]{6}$/i))
+    return color as Color;
+  throw new Error(`Invalid color: ${color}`);
+}
+
+export const VALID_SHAPES = ["box", "circle", "diamond"] as const;
+type Shape = typeof VALID_SHAPES[number];
+
+function isShape(shape: string): shape is Shape {
+  return (VALID_SHAPES as readonly string[]).includes(shape);
+}
+
+function parseShape(shape?: string): Shape {
+  if (shape === undefined)
+    return "box";
+  if (isShape(shape))
+    return shape;
+  throw new Error(`Invalid shape: ${shape}`);
+}
+
 export interface Node {
   id: NodeID,
   label: string,
   statusPercentage?: number,
   annotation?: string,
   intermediate?: true,
+  shape: Shape,
+  fill: Color,
+  border: Color,
 }
 
 export interface Edge {
   from: NodeID,
   to: NodeID,
+  color: Color,
 }
 
 export interface TreeSemantics {
@@ -43,15 +80,22 @@ function sortAst(ast: Ast): Ast {
 
 export function parseGoalTreeSemantics(ast: Ast): TreeSemantics {
   ast = sortAst(ast);
-  const goal = ast.nodes.find((s: AstNode) => s.id === "Goal");
 
-  const nodes = {
-    "Goal": {
-      id: "Goal",
-      annotation: "G",
-      label: goal?.text ?? "",
-      ...(s => s !== undefined ? {statusPercentage: parseFloat(s)} : {})(goal?.params.status),
-    },
+  const goal = ast.nodes.find((s: AstNode) => s.id === "Goal");
+  const goalNode: Node = {
+    id: "Goal",
+    annotation: "G",
+    label: goal?.text ?? "",
+    shape: parseShape(goal?.params.shape),
+    fill: parseColor(goal?.params.fill, "white"),
+    border: parseColor(goal?.params.border, "black"),
+  };
+  if (goal?.params.status !== undefined) {
+    goalNode.statusPercentage = parseFloat(goal.params.status);
+  }
+
+  const nodes: Record<string, Node> = {
+    Goal: goalNode,
     ...Object.fromEntries(ast.nodes
       .filter(s => s.id !== "Goal")
       .map(statement => [statement.id, {
@@ -59,17 +103,19 @@ export function parseGoalTreeSemantics(ast: Ast): TreeSemantics {
         label: statement.text,
         ...(c => c !== undefined ? {annotation: c} : {})(statement.params.class),
         ...(s => s !== undefined ? {statusPercentage: parseFloat(s)} : {})(statement.params.status),
+        shape: parseShape(statement.params.shape),
+        fill: parseColor(statement.params.fill, "white"),
+        border: parseColor(statement.params.border, "black"),
       }])),
-  } as Record<string, Node>;
+  };
 
   const edges = ast.edges.map((statement): Edge => {
     const nodeID = statement.toId;
     if (nodes[nodeID] === undefined)
       throw new Error(`Node ${nodeID} not found`);
-
-    if (statement.fromIds.length !== 1) {
+    if (statement.fromIds.length !== 1)
       throw new Error("Edges must have exactly one 'from' node in a Goal Tree");
-    }
+
     const reqID = statement.fromIds[0];
     if (nodes[reqID] === undefined)
       throw new Error(`Requirement ${reqID} not found`);
@@ -80,6 +126,7 @@ export function parseGoalTreeSemantics(ast: Ast): TreeSemantics {
     return {
       from: reqID,
       to: nodeID,
+      color: parseColor(statement.params.color, "black"),
     };
   });
 
@@ -116,7 +163,7 @@ function topologicalSort({nodes, edges}: Ast): AstNode[] {
   for (const node of nodes)
     dfs(node.id);
 
-  return sorted.filter(id => nodeMap.has(id)).map(id => nodeMap.get(id)!);
+  return sorted.filter(id => nodeMap.has(id)).map((id) => nodeMap.get(id)!);
 }
 
 export function parseProblemTreeSemantics(ast: Ast): TreeSemantics {
@@ -126,6 +173,9 @@ export function parseProblemTreeSemantics(ast: Ast): TreeSemantics {
     id: node.id,
     label: node.text,
     ...(a => a !== undefined ? {annotation: a} : {})(findNodeAnnotation(node)),
+    shape: parseShape(node.params.shape),
+    fill: parseColor(node.params.fill, "white"),
+    border: parseColor(node.params.border, "black"),
   }]));
 
   const edges = ast.edges.flatMap((edge): Edge[] => {
@@ -141,6 +191,7 @@ export function parseProblemTreeSemantics(ast: Ast): TreeSemantics {
       const newEdge: Edge = {
         from: causeID,
         to: effectID,
+        color: parseColor(edge.params.color, "black"),
       };
       return [newEdge];
     }
@@ -151,7 +202,11 @@ export function parseProblemTreeSemantics(ast: Ast): TreeSemantics {
       id: intermediateID,
       label: "AND",
       intermediate: true,
+      shape: "circle",
+      fill: "white",
+      border: "black",
     };
+
     return [
       ...edge.fromIds.map(causeID => {
         if (nodes[causeID] === undefined)
@@ -160,11 +215,13 @@ export function parseProblemTreeSemantics(ast: Ast): TreeSemantics {
         return {
           from: causeID,
           to: intermediateID,
+          color: parseColor(edge.params.color, "black"),
         };
       }),
       {
         from: intermediateID,
         to: effectID,
+        color: parseColor(edge.params.color, "black"),
       },
     ];
   });
