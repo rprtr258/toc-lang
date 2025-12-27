@@ -1,0 +1,24 @@
+{
+  "edges": [
+    {
+      "fromIds": [
+        "D"
+      ],
+      "text": "inject Psychological flow triggers",
+      "toId": "A"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "A",
+      "params": {},
+      "text": "Maximize business performance"
+    },
+    {
+      "id": "D",
+      "params": {},
+      "text": "Subordinate people's needs to the financial goal"
+    }
+  ],
+  "type": "conflict"
+}

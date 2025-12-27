@@ -1,0 +1,11 @@
+{
+  "edges": [],
+  "nodes": [
+    {
+      "id": "Goal",
+      "params": {},
+      "text": "win"
+    }
+  ],
+  "type": "goal"
+}

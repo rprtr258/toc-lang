@@ -3,66 +3,15 @@ import {readFileSync} from "fs";
 import {parseTextToAst, parseProblemTreeSemantics} from "./interpreter.ts";
 import {examples} from "./examples.ts";
 import {Ast} from "./parser.ts";
-
-const testCases = [
-  {
-    name: "with only UDE",
-    text: `b: "badness" {class: UDE}`,
-  },
-  {
-    name: "with UDE and single cause",
-    text: `
-    b: "badness" {class: UDE}
-    c: "cause"
-    b <- c
-    `,
-  },
-  {
-    name: "with UDE and multi-cause",
-    text: `
-    b: "badness" {class: UDE}
-    c1: "cause 1"
-    c2: "cause 2"
-    b <- c1 && c2
-    `,
-  },
-  {
-    name: "with multi-cause right arrow",
-    text: `
-    b: "badness"
-    c1: "cause 1"
-    c2: "cause 2"
-    c1 && c2 -> b
-    `,
-  },
-  {
-    name: "single-line comments",
-    text: `
-    # This is a comment
-    `,
-  },
-  {
-    name: "single cause right arrow",
-    text: `
-    b: "badness"
-    c: "cause"
-    c -> b
-    `,
-  },
-  {
-    name: "empty text",
-    text: "",
-  },
-];
+import {problemTreeTestcases as testcases} from "./testcases.ts";
 
 describe("problem tree interpreter", () => {
-  testCases.forEach((testCase) => {
-    it(testCase.name, () => {
-      const typeLine = `type: problem\n`;
-      const ast = parseTextToAst(typeLine + testCase.text);
-      expect(ast).toStrictEqual(JSON.parse(readFileSync(`${__dirname}/__tests__/parses ast for input ${testCase.name}.json`).toString()));
+  for (const {name, text} of testcases) {
+    it(name, () => {
+      const ast = parseTextToAst(text);
+      expect(ast).toStrictEqual(JSON.parse(readFileSync(`${__dirname}/__tests__/parses ast for input ${name}.json`).toString()));
     });
-  });
+  };
 
   it("fails for cause referencing unknown node", () => {
     const text = `
