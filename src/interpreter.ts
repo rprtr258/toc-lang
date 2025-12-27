@@ -7,7 +7,7 @@ export interface Node {
   label: string,
   statusPercentage?: number,
   annotation?: string,
-  intermediate?: boolean,
+  intermediate?: true,
 }
 
 export interface Edge {
@@ -24,7 +24,7 @@ export interface TreeSemantics {
 export type Completion = {
   id: string,
   text: string,
-}
+};
 
 function sortAst(ast: Ast): Ast {
   const orderedNodes = topologicalSort(ast);
@@ -49,37 +49,39 @@ export function parseGoalTreeSemantics(ast: Ast): TreeSemantics {
     "Goal": {
       id: "Goal",
       annotation: "G",
-      label: goal?.text || "",
-      ...(goal?.params.status ? {statusPercentage: parseFloat(goal.params.status)} : {}),
+      label: goal?.text ?? "",
+      ...(s => s !== undefined ? {statusPercentage: parseFloat(s)} : {})(goal?.params.status),
     },
     ...Object.fromEntries(ast.nodes
       .filter(s => s.id !== "Goal")
-      .map((statement) => [statement.id, {
+      .map(statement => [statement.id, {
         id: statement.id,
         label: statement.text,
-        ...(statement.params.class ? {annotation: statement.params.class} : {}),
-        ...(statement.params.status ? {statusPercentage: parseFloat(statement.params.status)} : {}),
+        ...(c => c !== undefined ? {annotation: c} : {})(statement.params.class),
+        ...(s => s !== undefined ? {statusPercentage: parseFloat(s)} : {})(statement.params.status),
       }])),
   } as Record<string, Node>;
 
-  const edges = ast.edges
-    .map((statement): Edge => {
-      const nodeID = statement.toId;
-      if (!nodes[nodeID]) {
-        throw new Error(`Node ${nodeID} not found`);
-      }
-      if (statement.fromIds.length !== 1) {
-        throw new Error("Edges must have exactly one 'from' node in a Goal Tree");
-      }
-      const reqID = statement.fromIds[0];
-      if (!nodes[reqID]) {
-        throw new Error(`Requirement ${reqID} not found`);
-      }
-      if (nodeID === "Goal") {
-        nodes[reqID].annotation = "CSF";
-      }
-      return {from: reqID, to: nodeID};
-    });
+  const edges = ast.edges.map((statement): Edge => {
+    const nodeID = statement.toId;
+    if (nodes[nodeID] === undefined)
+      throw new Error(`Node ${nodeID} not found`);
+
+    if (statement.fromIds.length !== 1) {
+      throw new Error("Edges must have exactly one 'from' node in a Goal Tree");
+    }
+    const reqID = statement.fromIds[0];
+    if (nodes[reqID] === undefined)
+      throw new Error(`Requirement ${reqID} not found`);
+
+    if (nodeID === "Goal") {
+      nodes[reqID].annotation = "CSF";
+    }
+    return {
+      from: reqID,
+      to: nodeID,
+    };
+  });
 
   return {nodes, edges, rankdir: "BT"};
 }
@@ -122,23 +124,28 @@ function topologicalSort({nodes, edges}: Ast): AstNode[] {
 
 export function parseProblemTreeSemantics(ast: Ast): TreeSemantics {
   ast = sortAst(ast);
+
   const nodes: Record<NodeID, Node> = Object.fromEntries(ast.nodes.map(node => [node.id, {
-    annotation: findNodeAnnotation(node),
     id: node.id,
     label: node.text,
+    ...(a => a !== undefined ? {annotation: a} : {})(findNodeAnnotation(node)),
   }]));
 
   const edges = ast.edges.flatMap((edge): Edge[] => {
     const effectID = edge.toId;
-    if (!nodes[effectID]) {
+    if (nodes[effectID] === undefined)
       throw new Error(`Effect ${effectID} not declared`);
-    }
+
     if (edge.fromIds.length === 1) {
       const causeID = edge.fromIds[0];
-      if (!nodes[causeID]) {
+      if (nodes[causeID] === undefined)
         throw new Error(`Cause ${causeID} not declared`);
-      }
-      return [{from: causeID, to: effectID}];
+
+      const newEdge = {
+        from: causeID,
+        to: effectID,
+      };
+      return [newEdge];
     }
 
     // Multi-cause: create intermediate AND node
@@ -150,12 +157,18 @@ export function parseProblemTreeSemantics(ast: Ast): TreeSemantics {
     };
     return [
       ...edge.fromIds.map((causeID) => {
-        if (!nodes[causeID]) {
+        if (nodes[causeID] === undefined)
           throw new Error(`Cause ${causeID} not declared`);
-        }
-        return {from: causeID, to: intermediateID};
+
+        return {
+          from: causeID,
+          to: intermediateID,
+        };
       }),
-      {from: intermediateID, to: effectID},
+      {
+        from: intermediateID,
+        to: effectID,
+      },
     ];
   });
 

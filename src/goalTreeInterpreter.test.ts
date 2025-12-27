@@ -162,7 +162,7 @@ describe("goal tree interpreter", () => {
       const ast = parseTextToAst(text);
       expect(ast.type).toEqual("goal");
       const semantics = parseGoalTreeSemantics(ast);
-      expect({ast, semantics}).toStrictEqual(JSON.parse(readFileSync(`${__dirname}/__tests__/example goal tree: ${name}.approved.txt`).toString()));
+      expect({ast, semantics}).toStrictEqual(JSON.parse(readFileSync(`${__dirname}/__tests__/example goal tree: ${name}.json`).toString()));
     });
   }
 });

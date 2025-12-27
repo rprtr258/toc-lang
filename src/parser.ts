@@ -266,10 +266,7 @@ class Parser {
 
   *parse(): Generator<StatementAst> {
     while (!this.check("EOF")) {
-      const stmt = this.parseStatement();
-      if (stmt) {
-        yield* stmt;
-      }
+      yield* this.parseStatement();
     }
   }
 }
@@ -304,7 +301,7 @@ export function parse(input: string): Ast {
     nodes: nodeStatements.map(({id, text, params}) => ({id, text, params})),
     edges: edgeStatements.map(({fromIds, toId, text, biDirectional}) => {
       const res: AstEdge = {fromIds, toId};
-      if (text) res.text = text;
+      if (text !== undefined) res.text = text;
       if (biDirectional) res.biDirectional = biDirectional;
       return res;
     }),

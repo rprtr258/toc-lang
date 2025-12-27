@@ -21,12 +21,10 @@ watch(() => props.ast, () => updateTransform());
 
 function updateTransform() {
   const g = cloudSvgInnerRef.value!;
-  if (g) {
-    const bbox = g.getBBox();
-    const viewBox = `0 0 ${bbox.width + 20} ${bbox.height + 20}`;
-    cloudSvgRef.value?.setAttribute("viewBox", viewBox);
-    g.setAttribute("transform", "translate(10, 10)");
-  }
+  const bbox = g.getBBox();
+  const viewBox = `0 0 ${bbox.width + 20} ${bbox.height + 20}`;
+  cloudSvgRef.value?.setAttribute("viewBox", viewBox);
+  g.setAttribute("transform", "translate(10, 10)");
   props.setSvgElem(cloudSvgRef.value!);
 }
 

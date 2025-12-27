@@ -8,10 +8,10 @@
     "dev": "vite",
     "build": "vue-tsc -p tsconfig.json && vite build",
     "preview": "vite preview",
-    "lint": "eslint 'src/**/*.{js,jsx,ts,tsx,vue,json}' --ignore-pattern src/generated/",
-    "lint:fix": "eslint --fix 'src/**/*.{js,ts,vue,json}' --ignore-pattern src/generated/",
+    "lint": "eslint '**/*.{ts,vue,json}'",
+    "lint:fix": "eslint --fix '**/*.{ts,vue,json}'",
     "format": "prettier --write 'src/**/*.{js,ts,vue,css,md,json}' --config ./.prettierrc.json",
-    "ci": "bun lint && bun test",
+    "ci": "bun lint && bun test && vue-tsc -p tsconfig.json",
     "gen": "lezer-generator src/assets/grammars/toc-lang.lezer -o src/generated/tocLangLezerParser.js"
   },
   "dependencies": {
@@ -20,7 +20,6 @@
     "@codemirror/lint": "6.x",
     "@dagrejs/dagre": "latest",
     "@lezer/lr": "^1.4.2",
-    "@types/bun": "^1.3.5",
     "browser-fs-access": "^0.35.0",
     "curved-arrows": "^0.3.0",
     "jiti": "^2.6.1",
@@ -29,6 +28,7 @@
     "vue-codemirror": "latest"
   },
   "devDependencies": {
+    "@types/bun": "^1.3.5",
     "@eslint/js": "^9.39.2",
     "@lezer/generator": "^1.7.2",
     "@stylistic/eslint-plugin": "^5.6.1",

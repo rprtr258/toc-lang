@@ -208,7 +208,7 @@ describe("evaporating cloud tree interpreter", () => {
   for (const {name, text} of examples.find(([group, _examples]) => group === "Evaporating Cloud")![1]) {
     it(`parses example: ${name}`, () => {
       const ast = parseTextToAst(text);
-      expect(ast).toStrictEqual(JSON.parse(readFileSync(`${__dirname}/__tests__/example evaporating cloud: ${name}.approved.txt`).toString()));
+      expect(ast).toStrictEqual(JSON.parse(readFileSync(`${__dirname}/__tests__/example evaporating cloud: ${name}.json`).toString()));
     });
   }
 });

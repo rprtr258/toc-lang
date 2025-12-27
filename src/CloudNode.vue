@@ -21,7 +21,14 @@ const textX = x + textMargin;
 </script>
 
 <template>
-  <rect :x="x" :y="y" rx="10" ry="10" :width="width" :height="height" />
+  <rect
+    :x="x"
+    :y="y"
+    rx="10"
+    ry="10"
+    :width="width"
+    :height="height"
+  />
   <text :x="textX" :y="textY">
     <tspan v-for="(line, i) in lines" :key="i" :x="textX" :dy="lineHeight">
       {{ line }}
