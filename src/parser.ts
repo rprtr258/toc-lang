@@ -4,28 +4,32 @@ import {EOF, SyntaxError, Token, tokenize, TokenType} from "./tokenizer.ts";
 export type ParamsAst = Record<string, string>;
 
 export type StatementAst =
-| {
-  type: "edge",
-  id?: string,
-  text?: string,
-  fromIds: string[],
-  toId: string,
-  biDir?: boolean,
-  params?: ParamsAst,
-  biDirectional?: true,
-}
-| {
-  type: "node",
-  id: string,
-  text: string,
-  params: ParamsAst,
-}
-| {
-  type: "type",
-  value: string,
-};
+  | {
+    type: "edge",
+    id?: string,
+    text?: string,
+    fromIds: string[],
+    toId: string,
+    params?: ParamsAst,
+    biDirectional?: true,
+  }
+  | {
+    type: "node",
+    id: string,
+    text: string,
+    params: ParamsAst,
+  }
+  | {
+    type: "type",
+    value: string,
+  };
 
-export type EDiagramType = "problem" | "conflict" | "goal";
+const validTypes = ["problem", "conflict", "goal"] as const; // TODO: move to interpreter
+export type DiagramType = (typeof validTypes)[number];
+
+function isDiagramType(type: string): type is DiagramType {
+  return (validTypes as readonly string[]).includes(type);
+}
 
 export type AstNode = {
   id: string,
@@ -39,7 +43,7 @@ export type AstEdge = {
   biDirectional?: true,
 };
 export interface Ast {
-  type: EDiagramType,
+  type: DiagramType,
   nodes: AstNode[],
   edges: AstEdge[],
 }
@@ -99,11 +103,6 @@ class Parser {
     };
   }
 
-  // # text
-  private parseCommentLine(): void {
-    this.consume("COMMENT", "Expected comment");
-  }
-
   // ident : label params?
   private parseNodeStatement(): StatementAst {
     const id = this.value(this.consume("IDENT", "Expected identifier for node"));
@@ -119,9 +118,9 @@ class Parser {
   }
 
   private parseLabel(): string {
-    if (!this.check("STRING")) {
+    if (!this.check("STRING"))
       throw new SyntaxError("Expected label", this.peek());
-    }
+
     return this.value(this.advance());
   }
 
@@ -184,17 +183,11 @@ class Parser {
     return ids;
   }
 
-  *parseStatement(): Generator<StatementAst> {
-    while (this.match("EOL"));
-
-    if (this.check("EOF")) return;
-
+  parseStatement(): StatementAst {
     if (this.check("IDENT") && this.value(this.peek()) === "type") {
-      yield this.parseTypeStatement();
-    } else if (this.check("COMMENT")) {
-      this.parseCommentLine();
+      return this.parseTypeStatement();
     } else if (this.check("IDENT") && this.peekAhead()?.type === "COLON") {
-      yield this.parseNodeStatement();
+      return this.parseNodeStatement();
     } else if (this.check("IDENT")) {
       const [leftIds, rightIds, arrowTok, label] = this.parseEdgeStatement();
       switch (arrowTok.type) {
@@ -202,50 +195,46 @@ class Parser {
         case "ARROW_LEFT":
           if (leftIds.length !== 1)
             throw new SyntaxError("Only one 'to' identifier is allowed", arrowTok);
-          yield {
+          return {
             type: "edge",
             toId: leftIds[0],
             fromIds: rightIds,
             text: label,
           };
-          break;
         // fromIds && ... -> toId : label?
         case "ARROW_RIGHT":
           if (rightIds.length !== 1)
             throw new SyntaxError("Only one 'to' identifier is allowed", arrowTok);
-          yield {
+          return {
             type: "edge",
             toId: rightIds[0],
             fromIds: leftIds,
             text: label,
           };
-          break;
         // fromId -- toId : label?
         case "ARROW_BI":
           if (leftIds.length !== 1)
             throw new SyntaxError("Only one 'from' identifier is allowed", arrowTok);
           if (rightIds.length !== 1)
             throw new SyntaxError("Only one 'to' identifier is allowed", arrowTok);
-          yield {
+          return {
             type: "edge",
             toId: rightIds[0],
             fromIds: [leftIds[0]],
             text: label,
             biDirectional: true,
           };
-          break;
-      }
-    } else if (!this.check("EOF")) {
-      // Skip unknown tokens to next EOL
-      while (!this.check("EOL") && !this.check("EOF")) {
-        this.advance();
       }
     }
+    throw new SyntaxError("Unexpected token", this.peek());
   }
 
   *parse(): Generator<StatementAst> {
-    while (!this.check("EOF")) {
-      yield* this.parseStatement();
+    while (true) {
+      while (this.match("EOL") || this.match("COMMENT"));
+      if (this.check("EOF"))
+        return;
+      yield this.parseStatement();
     }
   }
 }
@@ -254,27 +243,25 @@ const zeroLocation = {col: 0, end: 0, line: 0, start: 0};
 
 export function parse(input: string): Ast {
   const parser = new Parser(input);
-  const statements: StatementAst[] = Array.from(parser.parse());
 
   const typeStatements: (StatementAst & {type: "type"})[] = [];
   const nodeStatements: (StatementAst & {type: "node"})[] = [];
   const edgeStatements: (StatementAst & {type: "edge"})[] = [];
-  for (const s of statements) {
+  for (const s of parser.parse()) {
     switch (s.type) {
       case "type": typeStatements.push(s); break;
       case "node": nodeStatements.push(s); break;
       case "edge": edgeStatements.push(s); break;
-      default: {const _: never = s; void(_);}
+      default: void s;
     }
   }
 
-  const validTypes = ["problem", "conflict", "goal"];
   if (typeStatements.length > 1)
     throw new SyntaxError("Only one 'type' statement is allowed", zeroLocation);
-  else if (typeStatements.length === 1 && !validTypes.includes(typeStatements[0].value))
+  else if (typeStatements.length === 1 && !isDiagramType(typeStatements[0].value))
     throw new SyntaxError(`Invalid type '${typeStatements[0].value}'. Must be one of: ${validTypes.join(", ")}`, zeroLocation);
 
-  const parserType = (typeStatements.length === 1 ? typeStatements[0].value : "problem") as EDiagramType;
+  const parserType = (typeStatements.length === 1 ? typeStatements[0].value : "problem") as DiagramType;
   return {
     type: parserType,
     nodes: nodeStatements.map(({id, text, params}) => ({id, text, params})),

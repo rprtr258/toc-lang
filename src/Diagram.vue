@@ -4,13 +4,13 @@ import svgPanZoom from "svg-pan-zoom";
 import Cloud from "./Cloud.vue";
 import Tree from "./Tree.vue";
 import {TreeSemantics} from "./interpreter.ts";
-import {Ast, EDiagramType} from "./parser.ts";
+import {Ast, DiagramType} from "./parser.ts";
 import {xy} from "./math.ts";
 
 const props = defineProps<{
   ast: Ast,
   semantics: TreeSemantics | null,
-  diagramType: EDiagramType | null,
+  diagramType: DiagramType | null,
 }>();
 const {diagramType} = props;
 const ast = computed(() => props.ast);
