@@ -4,18 +4,21 @@
       "fromIds": [
         "defense"
       ],
+      "params": {},
       "toId": "theyDont"
     },
     {
       "fromIds": [
         "possession"
       ],
+      "params": {},
       "toId": "weScore"
     },
     {
       "fromIds": [
         "shooting"
       ],
+      "params": {},
       "toId": "weScore"
     }
   ],

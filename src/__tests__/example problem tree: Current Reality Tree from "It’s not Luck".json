@@ -5,18 +5,21 @@
         "fromIds": [
           "pricePressure"
         ],
+        "params": {},
         "toId": "fierceComp"
       },
       {
         "fromIds": [
           "fierceComp"
         ],
+        "params": {},
         "toId": "lessUnified"
       },
       {
         "fromIds": [
           "salesPressure"
         ],
+        "params": {},
         "toId": "salesPeoplePressure"
       },
       {
@@ -24,6 +27,7 @@
           "tradMethod",
           "salesPressure"
         ],
+        "params": {},
         "toId": "pricePressure"
       },
       {
@@ -31,6 +35,7 @@
           "companiesFallingShort",
           "alreadyCut"
         ],
+        "params": {},
         "toId": "salesPressure"
       },
       {
@@ -38,6 +43,7 @@
           "notImproving",
           "fierceComp"
         ],
+        "params": {},
         "toId": "companiesFallingShort"
       },
       {
@@ -45,18 +51,21 @@
           "salesPeoplePressure",
           "needLaunchProducts"
         ],
+        "params": {},
         "toId": "salesOverloaded"
       },
       {
         "fromIds": [
           "needLaunchProducts"
         ],
+        "params": {},
         "toId": "newProductsConfuse"
       },
       {
         "fromIds": [
           "needLaunchProducts"
         ],
+        "params": {},
         "toId": "fierceComp"
       },
       {
@@ -65,12 +74,14 @@
           "sellNewProducts",
           "newMaterialsEnables"
         ],
+        "params": {},
         "toId": "pressureDevelopProducts"
       },
       {
         "fromIds": [
           "pressureDevelopProducts"
         ],
+        "params": {},
         "toId": "needLaunchProducts"
       },
       {
@@ -79,18 +90,21 @@
           "prodDistNotImproving",
           "insuffientMarketingIdeas"
         ],
+        "params": {},
         "toId": "notImproving"
       },
       {
         "fromIds": [
           "marketingNotOriented"
         ],
+        "params": {},
         "toId": "insuffientMarketingIdeas"
       },
       {
         "fromIds": [
           "marketingNotOriented"
         ],
+        "params": {},
         "toId": "eatIntoSales"
       },
       {
@@ -99,6 +113,7 @@
           "singlePriceTrimsCust",
           "singlePriceLowers"
         ],
+        "params": {},
         "toId": "marketingNotOriented"
       },
       {
@@ -107,18 +122,21 @@
           "singlePriceLowers",
           "marketPerceptionIsKey"
         ],
+        "params": {},
         "toId": "marketPunish"
       },
       {
         "fromIds": [
           "perceptionMatchesBenefits"
         ],
+        "params": {},
         "toId": "marketDeterminesPrice"
       },
       {
         "fromIds": [
           "marketDeterminesPrice"
         ],
+        "params": {},
         "toId": "marketPerceptionIsKey"
       },
       {
@@ -126,36 +144,42 @@
           "marketDeterminesPrice",
           "managersBelieveGoodPrice"
         ],
+        "params": {},
         "toId": "lowMargin"
       },
       {
         "fromIds": [
           "managersBelieveGoodPrice"
         ],
+        "params": {},
         "toId": "managersBelieveSinglePrice"
       },
       {
         "fromIds": [
           "managersBelieveSinglePrice"
         ],
+        "params": {},
         "toId": "singlePriceTrimsCust"
       },
       {
         "fromIds": [
           "managersBelieveSinglePrice"
         ],
+        "params": {},
         "toId": "singlePriceLowers"
       },
       {
         "fromIds": [
           "managersBelieveGoodPrice"
         ],
+        "params": {},
         "toId": "managersBelieveBelowCostLosses"
       },
       {
         "fromIds": [
           "managersBelieveBelowCostLosses"
         ],
+        "params": {},
         "toId": "refuseLowMargins"
       },
       {
@@ -163,12 +187,14 @@
           "differentSectionsNeeds",
           "canSegment"
         ],
+        "params": {},
         "toId": "differentPerceptions"
       },
       {
         "fromIds": [
           "believeProductCostReal"
         ],
+        "params": {},
         "toId": "managersBelieveGoodPrice"
       },
       {
@@ -176,6 +202,7 @@
           "managerMeasure",
           "localOptima"
         ],
+        "params": {},
         "toId": "measureLocal"
       },
       {
@@ -183,6 +210,7 @@
           "improvementIncreasesCost",
           "measureLocal"
         ],
+        "params": {},
         "toId": "prodDistNotImproving"
       },
       {
@@ -190,12 +218,14 @@
           "improvementIncreasesCost",
           "measureLocal"
         ],
+        "params": {},
         "toId": "engTooSlow"
       },
       {
         "fromIds": [
           "localOptima"
         ],
+        "params": {},
         "toId": "managersPerceiveEffortAsValue"
       },
       {
@@ -204,6 +234,7 @@
           "managersPerceiveEffortAsValue",
           "measureLocal"
         ],
+        "params": {},
         "toId": "believeProductCostReal"
       }
     ],
@@ -500,258 +531,322 @@
   "semantics": {
     "edges": [
       {
+        "color": "black",
         "from": "fierceComp",
         "to": "lessUnified"
       },
       {
+        "color": "black",
         "from": "salesPressure",
         "to": "salesPeoplePressure"
       },
       {
+        "color": "black",
         "from": "needLaunchProducts",
         "to": "newProductsConfuse"
       },
       {
+        "color": "black",
         "from": "pressureDevelopProducts",
         "to": "needLaunchProducts"
       },
       {
+        "color": "black",
         "from": "pricePressure",
         "to": "fierceComp"
       },
       {
+        "color": "black",
         "from": "needLaunchProducts",
         "to": "fierceComp"
       },
       {
+        "color": "black",
         "from": "marketingNotOriented",
         "to": "insuffientMarketingIdeas"
       },
       {
+        "color": "black",
         "from": "marketingNotOriented",
         "to": "eatIntoSales"
       },
       {
+        "color": "black",
         "from": "managersBelieveSinglePrice",
         "to": "singlePriceTrimsCust"
       },
       {
+        "color": "black",
         "from": "managersBelieveSinglePrice",
         "to": "singlePriceLowers"
       },
       {
+        "color": "black",
         "from": "marketDeterminesPrice",
         "to": "marketPerceptionIsKey"
       },
       {
+        "color": "black",
         "from": "perceptionMatchesBenefits",
         "to": "marketDeterminesPrice"
       },
       {
+        "color": "black",
         "from": "managersBelieveGoodPrice",
         "to": "managersBelieveSinglePrice"
       },
       {
+        "color": "black",
         "from": "managersBelieveBelowCostLosses",
         "to": "refuseLowMargins"
       },
       {
+        "color": "black",
         "from": "managersBelieveGoodPrice",
         "to": "managersBelieveBelowCostLosses"
       },
       {
+        "color": "black",
         "from": "believeProductCostReal",
         "to": "managersBelieveGoodPrice"
       },
       {
+        "color": "black",
         "from": "localOptima",
         "to": "managersPerceiveEffortAsValue"
       },
       {
+        "color": "black",
         "from": "salesPeoplePressure",
         "to": "salesPeoplePressure_needLaunchProducts_cause_salesOverloaded"
       },
       {
+        "color": "black",
         "from": "needLaunchProducts",
         "to": "salesPeoplePressure_needLaunchProducts_cause_salesOverloaded"
       },
       {
+        "color": "black",
         "from": "salesPeoplePressure_needLaunchProducts_cause_salesOverloaded",
         "to": "salesOverloaded"
       },
       {
+        "color": "black",
         "from": "tradMethod",
         "to": "tradMethod_salesPressure_cause_pricePressure"
       },
       {
+        "color": "black",
         "from": "salesPressure",
         "to": "tradMethod_salesPressure_cause_pricePressure"
       },
       {
+        "color": "black",
         "from": "tradMethod_salesPressure_cause_pricePressure",
         "to": "pricePressure"
       },
       {
+        "color": "black",
         "from": "companiesFallingShort",
         "to": "companiesFallingShort_alreadyCut_cause_salesPressure"
       },
       {
+        "color": "black",
         "from": "alreadyCut",
         "to": "companiesFallingShort_alreadyCut_cause_salesPressure"
       },
       {
+        "color": "black",
         "from": "companiesFallingShort_alreadyCut_cause_salesPressure",
         "to": "salesPressure"
       },
       {
+        "color": "black",
         "from": "notImproving",
         "to": "notImproving_fierceComp_cause_companiesFallingShort"
       },
       {
+        "color": "black",
         "from": "fierceComp",
         "to": "notImproving_fierceComp_cause_companiesFallingShort"
       },
       {
+        "color": "black",
         "from": "notImproving_fierceComp_cause_companiesFallingShort",
         "to": "companiesFallingShort"
       },
       {
+        "color": "black",
         "from": "improvementIncreasesCost",
         "to": "improvementIncreasesCost_measureLocal_cause_engTooSlow"
       },
       {
+        "color": "black",
         "from": "measureLocal",
         "to": "improvementIncreasesCost_measureLocal_cause_engTooSlow"
       },
       {
+        "color": "black",
         "from": "improvementIncreasesCost_measureLocal_cause_engTooSlow",
         "to": "engTooSlow"
       },
       {
+        "color": "black",
         "from": "improvementIncreasesCost",
         "to": "improvementIncreasesCost_measureLocal_cause_prodDistNotImproving"
       },
       {
+        "color": "black",
         "from": "measureLocal",
         "to": "improvementIncreasesCost_measureLocal_cause_prodDistNotImproving"
       },
       {
+        "color": "black",
         "from": "improvementIncreasesCost_measureLocal_cause_prodDistNotImproving",
         "to": "prodDistNotImproving"
       },
       {
+        "color": "black",
         "from": "differentSectionsNeeds",
         "to": "differentSectionsNeeds_canSegment_cause_differentPerceptions"
       },
       {
+        "color": "black",
         "from": "canSegment",
         "to": "differentSectionsNeeds_canSegment_cause_differentPerceptions"
       },
       {
+        "color": "black",
         "from": "differentSectionsNeeds_canSegment_cause_differentPerceptions",
         "to": "differentPerceptions"
       },
       {
+        "color": "black",
         "from": "marketDeterminesPrice",
         "to": "marketDeterminesPrice_managersBelieveGoodPrice_cause_lowMargin"
       },
       {
+        "color": "black",
         "from": "managersBelieveGoodPrice",
         "to": "marketDeterminesPrice_managersBelieveGoodPrice_cause_lowMargin"
       },
       {
+        "color": "black",
         "from": "marketDeterminesPrice_managersBelieveGoodPrice_cause_lowMargin",
         "to": "lowMargin"
       },
       {
+        "color": "black",
         "from": "managerMeasure",
         "to": "managerMeasure_localOptima_cause_measureLocal"
       },
       {
+        "color": "black",
         "from": "localOptima",
         "to": "managerMeasure_localOptima_cause_measureLocal"
       },
       {
+        "color": "black",
         "from": "managerMeasure_localOptima_cause_measureLocal",
         "to": "measureLocal"
       },
       {
+        "color": "black",
         "from": "salesPressure",
         "to": "salesPressure_sellNewProducts_newMaterialsEnables_cause_pressureDevelopProducts"
       },
       {
+        "color": "black",
         "from": "sellNewProducts",
         "to": "salesPressure_sellNewProducts_newMaterialsEnables_cause_pressureDevelopProducts"
       },
       {
+        "color": "black",
         "from": "newMaterialsEnables",
         "to": "salesPressure_sellNewProducts_newMaterialsEnables_cause_pressureDevelopProducts"
       },
       {
+        "color": "black",
         "from": "salesPressure_sellNewProducts_newMaterialsEnables_cause_pressureDevelopProducts",
         "to": "pressureDevelopProducts"
       },
       {
+        "color": "black",
         "from": "engTooSlow",
         "to": "engTooSlow_prodDistNotImproving_insuffientMarketingIdeas_cause_notImproving"
       },
       {
+        "color": "black",
         "from": "prodDistNotImproving",
         "to": "engTooSlow_prodDistNotImproving_insuffientMarketingIdeas_cause_notImproving"
       },
       {
+        "color": "black",
         "from": "insuffientMarketingIdeas",
         "to": "engTooSlow_prodDistNotImproving_insuffientMarketingIdeas_cause_notImproving"
       },
       {
+        "color": "black",
         "from": "engTooSlow_prodDistNotImproving_insuffientMarketingIdeas_cause_notImproving",
         "to": "notImproving"
       },
       {
+        "color": "black",
         "from": "differentPerceptions",
         "to": "differentPerceptions_singlePriceTrimsCust_singlePriceLowers_cause_marketingNotOriented"
       },
       {
+        "color": "black",
         "from": "singlePriceTrimsCust",
         "to": "differentPerceptions_singlePriceTrimsCust_singlePriceLowers_cause_marketingNotOriented"
       },
       {
+        "color": "black",
         "from": "singlePriceLowers",
         "to": "differentPerceptions_singlePriceTrimsCust_singlePriceLowers_cause_marketingNotOriented"
       },
       {
+        "color": "black",
         "from": "differentPerceptions_singlePriceTrimsCust_singlePriceLowers_cause_marketingNotOriented",
         "to": "marketingNotOriented"
       },
       {
+        "color": "black",
         "from": "singlePriceTrimsCust",
         "to": "singlePriceTrimsCust_singlePriceLowers_marketPerceptionIsKey_cause_marketPunish"
       },
       {
+        "color": "black",
         "from": "singlePriceLowers",
         "to": "singlePriceTrimsCust_singlePriceLowers_marketPerceptionIsKey_cause_marketPunish"
       },
       {
+        "color": "black",
         "from": "marketPerceptionIsKey",
         "to": "singlePriceTrimsCust_singlePriceLowers_marketPerceptionIsKey_cause_marketPunish"
       },
       {
+        "color": "black",
         "from": "singlePriceTrimsCust_singlePriceLowers_marketPerceptionIsKey_cause_marketPunish",
         "to": "marketPunish"
       },
       {
+        "color": "black",
         "from": "costAccountingProductCost",
         "to": "costAccountingProductCost_managersPerceiveEffortAsValue_measureLocal_cause_believeProductCostReal"
       },
       {
+        "color": "black",
         "from": "managersPerceiveEffortAsValue",
         "to": "costAccountingProductCost_managersPerceiveEffortAsValue_measureLocal_cause_believeProductCostReal"
       },
       {
+        "color": "black",
         "from": "measureLocal",
         "to": "costAccountingProductCost_managersPerceiveEffortAsValue_measureLocal_cause_believeProductCostReal"
       },
       {
+        "color": "black",
         "from": "costAccountingProductCost_managersPerceiveEffortAsValue_measureLocal_cause_believeProductCostReal",
         "to": "believeProductCostReal"
       }
@@ -759,279 +854,447 @@
     "nodes": {
       "alreadyCut": {
         "annotation": "FOL",
+        "border": "black",
+        "fill": "white",
         "id": "alreadyCut",
-        "label": "Companies have already cut the costs they know how to cut"
+        "label": "Companies have already cut the costs they know how to cut",
+        "shape": "box"
       },
       "believeProductCostReal": {
         "annotation": "UDE",
+        "border": "black",
+        "fill": "white",
         "id": "believeProductCostReal",
-        "label": "Most managers believe that product cost is something real that that quantifies the efforts absorbed by the product"
+        "label": "Most managers believe that product cost is something real that that quantifies the efforts absorbed by the product",
+        "shape": "box"
       },
       "canSegment": {
+        "border": "black",
+        "fill": "white",
         "id": "canSegment",
-        "label": "Actions to guarantee effective segmentation can be taken"
+        "label": "Actions to guarantee effective segmentation can be taken",
+        "shape": "box"
       },
       "companiesFallingShort": {
         "annotation": "UDE",
+        "border": "black",
+        "fill": "white",
         "id": "companiesFallingShort",
-        "label": "Companies are falling short of their stated financial targets"
+        "label": "Companies are falling short of their stated financial targets",
+        "shape": "box"
       },
       "companiesFallingShort_alreadyCut_cause_salesPressure": {
+        "border": "black",
+        "fill": "white",
         "id": "companiesFallingShort_alreadyCut_cause_salesPressure",
         "intermediate": true,
-        "label": "AND"
+        "label": "AND",
+        "shape": "circle"
       },
       "costAccountingProductCost": {
         "annotation": "FOL",
+        "border": "black",
+        "fill": "white",
         "id": "costAccountingProductCost",
-        "label": "The essence of cost accounting is to calculate the product cost"
+        "label": "The essence of cost accounting is to calculate the product cost",
+        "shape": "box"
       },
       "costAccountingProductCost_managersPerceiveEffortAsValue_measureLocal_cause_believeProductCostReal": {
+        "border": "black",
+        "fill": "white",
         "id": "costAccountingProductCost_managersPerceiveEffortAsValue_measureLocal_cause_believeProductCostReal",
         "intermediate": true,
-        "label": "AND"
+        "label": "AND",
+        "shape": "circle"
       },
       "differentPerceptions": {
+        "border": "black",
+        "fill": "white",
         "id": "differentPerceptions",
-        "label": "Different market sections might have different perceptions of value even for the same product"
+        "label": "Different market sections might have different perceptions of value even for the same product",
+        "shape": "box"
       },
       "differentPerceptions_singlePriceTrimsCust_singlePriceLowers_cause_marketingNotOriented": {
+        "border": "black",
+        "fill": "white",
         "id": "differentPerceptions_singlePriceTrimsCust_singlePriceLowers_cause_marketingNotOriented",
         "intermediate": true,
-        "label": "AND"
+        "label": "AND",
+        "shape": "circle"
       },
       "differentSectionsNeeds": {
         "annotation": "FOL",
+        "border": "black",
+        "fill": "white",
         "id": "differentSectionsNeeds",
-        "label": "Different market sections might have different needs?"
+        "label": "Different market sections might have different needs?",
+        "shape": "box"
       },
       "differentSectionsNeeds_canSegment_cause_differentPerceptions": {
+        "border": "black",
+        "fill": "white",
         "id": "differentSectionsNeeds_canSegment_cause_differentPerceptions",
         "intermediate": true,
-        "label": "AND"
+        "label": "AND",
+        "shape": "circle"
       },
       "eatIntoSales": {
         "annotation": "UDE",
+        "border": "black",
+        "fill": "white",
         "id": "eatIntoSales",
-        "label": "Most new outlets and most new/improved products eat into the sales of existing outlets/products"
+        "label": "Most new outlets and most new/improved products eat into the sales of existing outlets/products",
+        "shape": "box"
       },
       "engTooSlow": {
         "annotation": "UDE",
+        "border": "black",
+        "fill": "white",
         "id": "engTooSlow",
-        "label": "Engineering is unable to deliver new products fast and reliably enough"
+        "label": "Engineering is unable to deliver new products fast and reliably enough",
+        "shape": "box"
       },
       "engTooSlow_prodDistNotImproving_insuffientMarketingIdeas_cause_notImproving": {
+        "border": "black",
+        "fill": "white",
         "id": "engTooSlow_prodDistNotImproving_insuffientMarketingIdeas_cause_notImproving",
         "intermediate": true,
-        "label": "AND"
+        "label": "AND",
+        "shape": "circle"
       },
       "fierceComp": {
         "annotation": "UDE",
+        "border": "black",
+        "fill": "white",
         "id": "fierceComp",
-        "label": "Competition is fiercer than ever"
+        "label": "Competition is fiercer than ever",
+        "shape": "box"
       },
       "improvementIncreasesCost": {
         "annotation": "FOL",
+        "border": "black",
+        "fill": "white",
         "id": "improvementIncreasesCost",
-        "label": "Many actions that are needed for improving lead-time, reliability, quality, response time and service do not save cost and/or increase cost in the short run"
+        "label": "Many actions that are needed for improving lead-time, reliability, quality, response time and service do not save cost and/or increase cost in the short run",
+        "shape": "box"
       },
       "improvementIncreasesCost_measureLocal_cause_engTooSlow": {
+        "border": "black",
+        "fill": "white",
         "id": "improvementIncreasesCost_measureLocal_cause_engTooSlow",
         "intermediate": true,
-        "label": "AND"
+        "label": "AND",
+        "shape": "circle"
       },
       "improvementIncreasesCost_measureLocal_cause_prodDistNotImproving": {
+        "border": "black",
+        "fill": "white",
         "id": "improvementIncreasesCost_measureLocal_cause_prodDistNotImproving",
         "intermediate": true,
-        "label": "AND"
+        "label": "AND",
+        "shape": "circle"
       },
       "insuffientMarketingIdeas": {
         "annotation": "UDE",
+        "border": "black",
+        "fill": "white",
         "id": "insuffientMarketingIdeas",
-        "label": "Companies do not come up with sufficient innovative ideas in marketing"
+        "label": "Companies do not come up with sufficient innovative ideas in marketing",
+        "shape": "box"
       },
       "lackSalesSkills": {
         "annotation": "UDE",
+        "border": "black",
+        "fill": "white",
         "id": "lackSalesSkills",
-        "label": "A large percentage of the existing sales force lacks sufficient sales skills"
+        "label": "A large percentage of the existing sales force lacks sufficient sales skills",
+        "shape": "box"
       },
       "lessUnified": {
         "annotation": "UDE",
+        "border": "black",
+        "fill": "white",
         "id": "lessUnified",
-        "label": "Sellers display a less and less unified front"
+        "label": "Sellers display a less and less unified front",
+        "shape": "box"
       },
       "localOptima": {
         "annotation": "UDE",
+        "border": "black",
+        "fill": "white",
         "id": "localOptima",
-        "label": "Managers are trying to run their companies by striving to achieve local optima"
+        "label": "Managers are trying to run their companies by striving to achieve local optima",
+        "shape": "box"
       },
       "lowMargin": {
         "annotation": "UDE",
+        "border": "black",
+        "fill": "white",
         "id": "lowMargin",
-        "label": "In more and more cases the price the market is willing to pay doesn't leave behind enough margin"
+        "label": "In more and more cases the price the market is willing to pay doesn't leave behind enough margin",
+        "shape": "box"
       },
       "managerMeasure": {
         "annotation": "FOL",
+        "border": "black",
+        "fill": "white",
         "id": "managerMeasure",
-        "label": "For every mode of operation, managers develop suitable measurements"
+        "label": "For every mode of operation, managers develop suitable measurements",
+        "shape": "box"
       },
       "managerMeasure_localOptima_cause_measureLocal": {
+        "border": "black",
+        "fill": "white",
         "id": "managerMeasure_localOptima_cause_measureLocal",
         "intermediate": true,
-        "label": "AND"
+        "label": "AND",
+        "shape": "circle"
       },
       "managersBelieveBelowCostLosses": {
         "annotation": "UDE",
+        "border": "black",
+        "fill": "white",
         "id": "managersBelieveBelowCostLosses",
-        "label": "Most managers believe that selling below product cost leads (at least in the long run) to losses"
+        "label": "Most managers believe that selling below product cost leads (at least in the long run) to losses",
+        "shape": "box"
       },
       "managersBelieveGoodPrice": {
         "annotation": "UDE",
+        "border": "black",
+        "fill": "white",
         "id": "managersBelieveGoodPrice",
-        "label": "Most managers believe that the product price should be equal to product cost plus reasonable margin"
+        "label": "Most managers believe that the product price should be equal to product cost plus reasonable margin",
+        "shape": "box"
       },
       "managersBelieveSinglePrice": {
         "annotation": "UDE",
+        "border": "black",
+        "fill": "white",
         "id": "managersBelieveSinglePrice",
-        "label": "Most managers believe that there is a single, fair price for a product"
+        "label": "Most managers believe that there is a single, fair price for a product",
+        "shape": "box"
       },
       "managersPerceiveEffortAsValue": {
         "annotation": "UDE",
+        "border": "black",
+        "fill": "white",
         "id": "managersPerceiveEffortAsValue",
-        "label": "Most managers' perception of value of a product is heavily influenced by the local efforts required to design, produce, sell and deliver the product"
+        "label": "Most managers' perception of value of a product is heavily influenced by the local efforts required to design, produce, sell and deliver the product",
+        "shape": "box"
       },
       "marketDeterminesPrice": {
+        "border": "black",
+        "fill": "white",
         "id": "marketDeterminesPrice",
-        "label": "Prices and quantities sold are determined more and more by the markets' perception of value and less and less by the suppliers perception of value"
+        "label": "Prices and quantities sold are determined more and more by the markets' perception of value and less and less by the suppliers perception of value",
+        "shape": "box"
       },
       "marketDeterminesPrice_managersBelieveGoodPrice_cause_lowMargin": {
+        "border": "black",
+        "fill": "white",
         "id": "marketDeterminesPrice_managersBelieveGoodPrice_cause_lowMargin",
         "intermediate": true,
-        "label": "AND"
+        "label": "AND",
+        "shape": "circle"
       },
       "marketPerceptionIsKey": {
+        "border": "black",
+        "fill": "white",
         "id": "marketPerceptionIsKey",
-        "label": "More than ever satisfying the market perception of value is key to success"
+        "label": "More than ever satisfying the market perception of value is key to success",
+        "shape": "box"
       },
       "marketPunish": {
         "annotation": "UDE",
+        "border": "black",
+        "fill": "white",
         "id": "marketPunish",
-        "label": "More than ever the market punishes suppliers who don't perform according to expectation"
+        "label": "More than ever the market punishes suppliers who don't perform according to expectation",
+        "shape": "box"
       },
       "marketingNotOriented": {
         "annotation": "UDE",
+        "border": "black",
+        "fill": "white",
         "id": "marketingNotOriented",
-        "label": "Marketing is not oriented to take advantage of the most promising and almost virgin direction - that of market segmentation"
+        "label": "Marketing is not oriented to take advantage of the most promising and almost virgin direction - that of market segmentation",
+        "shape": "box"
       },
       "measureLocal": {
         "annotation": "UDE",
+        "border": "black",
+        "fill": "white",
         "id": "measureLocal",
-        "label": "There are important measurements that focus on local optima, e.g. cost accounting based measurements"
+        "label": "There are important measurements that focus on local optima, e.g. cost accounting based measurements",
+        "shape": "box"
       },
       "needLaunchProducts": {
         "annotation": "UDE",
+        "border": "black",
+        "fill": "white",
         "id": "needLaunchProducts",
-        "label": "In advanced material industries there is need to launch new products at an unprecedented rate"
+        "label": "In advanced material industries there is need to launch new products at an unprecedented rate",
+        "shape": "box"
       },
       "newMaterialsEnables": {
         "annotation": "FOL",
+        "border": "black",
+        "fill": "white",
         "id": "newMaterialsEnables",
-        "label": "There are industries where fast development of new material enables the development of new products - advanced material industries"
+        "label": "There are industries where fast development of new material enables the development of new products - advanced material industries",
+        "shape": "box"
       },
       "newProductsConfuse": {
         "annotation": "UDE",
+        "border": "black",
+        "fill": "white",
         "id": "newProductsConfuse",
-        "label": "In advanced material industries the constant introduction of new products confuses and spoils the market"
+        "label": "In advanced material industries the constant introduction of new products confuses and spoils the market",
+        "shape": "box"
       },
       "notImproving": {
         "annotation": "UDE",
+        "border": "black",
+        "fill": "white",
         "id": "notImproving",
-        "label": "Companies are not improving fast enough"
+        "label": "Companies are not improving fast enough",
+        "shape": "box"
       },
       "notImproving_fierceComp_cause_companiesFallingShort": {
+        "border": "black",
+        "fill": "white",
         "id": "notImproving_fierceComp_cause_companiesFallingShort",
         "intermediate": true,
-        "label": "AND"
+        "label": "AND",
+        "shape": "circle"
       },
       "perceptionMatchesBenefits": {
         "annotation": "FOL",
+        "border": "black",
+        "fill": "white",
         "id": "perceptionMatchesBenefits",
-        "label": "Market perception of value is in accordance with with the benefits of having the product"
+        "label": "Market perception of value is in accordance with with the benefits of having the product",
+        "shape": "box"
       },
       "pressureDevelopProducts": {
         "annotation": "UDE",
+        "border": "black",
+        "fill": "white",
         "id": "pressureDevelopProducts",
-        "label": "In advanced material industries there is unprecedented pressure to promptly develop new products"
+        "label": "In advanced material industries there is unprecedented pressure to promptly develop new products",
+        "shape": "box"
       },
       "pricePressure": {
         "annotation": "UDE",
+        "border": "black",
+        "fill": "white",
         "id": "pricePressure",
-        "label": "There is an increasing pressure to reduce prices"
+        "label": "There is an increasing pressure to reduce prices",
+        "shape": "box"
       },
       "prodDistNotImproving": {
         "annotation": "UDE",
+        "border": "black",
+        "fill": "white",
         "id": "prodDistNotImproving",
-        "label": "Production and distribution do not improve fast/significantly enough"
+        "label": "Production and distribution do not improve fast/significantly enough",
+        "shape": "box"
       },
       "refuseLowMargins": {
         "annotation": "UDE",
+        "border": "black",
+        "fill": "white",
         "id": "refuseLowMargins",
-        "label": "Most companies are reluctant to accept orders with low margins and even go so far as dropping low-margin products"
+        "label": "Most companies are reluctant to accept orders with low margins and even go so far as dropping low-margin products",
+        "shape": "box"
       },
       "salesOverloaded": {
         "annotation": "UDE",
+        "border": "black",
+        "fill": "white",
         "id": "salesOverloaded",
-        "label": "Salespeople are overloaded"
+        "label": "Salespeople are overloaded",
+        "shape": "box"
       },
       "salesPeoplePressure": {
         "annotation": "UDE",
+        "border": "black",
+        "fill": "white",
         "id": "salesPeoplePressure",
-        "label": "There is pressure on salespeople to bring in more sales"
+        "label": "There is pressure on salespeople to bring in more sales",
+        "shape": "box"
       },
       "salesPeoplePressure_needLaunchProducts_cause_salesOverloaded": {
+        "border": "black",
+        "fill": "white",
         "id": "salesPeoplePressure_needLaunchProducts_cause_salesOverloaded",
         "intermediate": true,
-        "label": "AND"
+        "label": "AND",
+        "shape": "circle"
       },
       "salesPressure": {
         "annotation": "UDE",
+        "border": "black",
+        "fill": "white",
         "id": "salesPressure",
-        "label": "There is an increasing pressure to take actions that will increase sales"
+        "label": "There is an increasing pressure to take actions that will increase sales",
+        "shape": "box"
       },
       "salesPressure_sellNewProducts_newMaterialsEnables_cause_pressureDevelopProducts": {
+        "border": "black",
+        "fill": "white",
         "id": "salesPressure_sellNewProducts_newMaterialsEnables_cause_pressureDevelopProducts",
         "intermediate": true,
-        "label": "AND"
+        "label": "AND",
+        "shape": "circle"
       },
       "sellNewProducts": {
         "annotation": "FOL",
+        "border": "black",
+        "fill": "white",
         "id": "sellNewProducts",
-        "label": "One of the most effective ways to increase sales is to develop new, improved products"
+        "label": "One of the most effective ways to increase sales is to develop new, improved products",
+        "shape": "box"
       },
       "singlePriceLowers": {
         "annotation": "UDE",
+        "border": "black",
+        "fill": "white",
         "id": "singlePriceLowers",
-        "label": "Imposing a single price enables customer who have a high perception of value to pay a lower price"
+        "label": "Imposing a single price enables customer who have a high perception of value to pay a lower price",
+        "shape": "box"
       },
       "singlePriceTrimsCust": {
         "annotation": "UDE",
+        "border": "black",
+        "fill": "white",
         "id": "singlePriceTrimsCust",
-        "label": "Imposing a single price trims away customers for whom the price is too steep relative to their perception of value"
+        "label": "Imposing a single price trims away customers for whom the price is too steep relative to their perception of value",
+        "shape": "box"
       },
       "singlePriceTrimsCust_singlePriceLowers_marketPerceptionIsKey_cause_marketPunish": {
+        "border": "black",
+        "fill": "white",
         "id": "singlePriceTrimsCust_singlePriceLowers_marketPerceptionIsKey_cause_marketPunish",
         "intermediate": true,
-        "label": "AND"
+        "label": "AND",
+        "shape": "circle"
       },
       "tradMethod": {
         "annotation": "FOL",
+        "border": "black",
+        "fill": "white",
         "id": "tradMethod",
-        "label": "A desperate traditional to get sales is to reduce prices"
+        "label": "A desperate traditional to get sales is to reduce prices",
+        "shape": "box"
       },
       "tradMethod_salesPressure_cause_pricePressure": {
+        "border": "black",
+        "fill": "white",
         "id": "tradMethod_salesPressure_cause_pricePressure",
         "intermediate": true,
-        "label": "AND"
+        "label": "AND",
+        "shape": "circle"
       }
     },
     "rankdir": "BT"

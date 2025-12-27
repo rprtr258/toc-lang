@@ -1,0 +1,12 @@
+.type: problem
+
+# Nodes with custom shapes and colors
+critical: "Critical issue" class=UDE shape=circle border=red fill=red
+minor: "Minor issue" class=UDE shape=box border=yellow fill=yellow
+cause1: "Root cause 1" shape=diamond border=blue fill=blue
+cause2: "Root cause 2" shape=box border=green fill=green
+
+# Edges with custom colors
+critical <- cause1: "caused by" color=red
+critical <- cause2: "caused by" color=red
+minor <- cause1: "related to" color=yellow

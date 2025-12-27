@@ -1,6 +1,7 @@
 # Agent Guidelines for toc-lang
 
 ## General Guidelines
+- Use `bd-mcp` for task tracking
 - Do not update code which does not relate to the change.
 - Do not modify any code, spacing, indentation, line breaks, or formatting outside the specific changes requested.
 - Only edit files and lines directly related to the task at hand.

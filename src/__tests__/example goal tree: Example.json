@@ -5,54 +5,63 @@
         "fromIds": [
           "revUp"
         ],
+        "params": {},
         "toId": "Goal"
       },
       {
         "fromIds": [
           "costsDown"
         ],
+        "params": {},
         "toId": "Goal"
       },
       {
         "fromIds": [
           "features"
         ],
+        "params": {},
         "toId": "newCust"
       },
       {
         "fromIds": [
           "retain"
         ],
+        "params": {},
         "toId": "features"
       },
       {
         "fromIds": [
           "newCust"
         ],
+        "params": {},
         "toId": "revUp"
       },
       {
         "fromIds": [
           "keepCust"
         ],
+        "params": {},
         "toId": "revUp"
       },
       {
         "fromIds": [
           "reduceInfra"
         ],
+        "params": {},
         "toId": "costsDown"
       },
       {
         "fromIds": [
           "marketSalary"
         ],
+        "params": {},
         "toId": "retain"
       },
       {
         "fromIds": [
           "morale"
         ],
+        "params": {},
         "toId": "retain"
       }
     ],
@@ -117,38 +126,47 @@
   "semantics": {
     "edges": [
       {
+        "color": "black",
         "from": "revUp",
         "to": "Goal"
       },
       {
+        "color": "black",
         "from": "costsDown",
         "to": "Goal"
       },
       {
+        "color": "black",
         "from": "newCust",
         "to": "revUp"
       },
       {
+        "color": "black",
         "from": "keepCust",
         "to": "revUp"
       },
       {
+        "color": "black",
         "from": "reduceInfra",
         "to": "costsDown"
       },
       {
+        "color": "black",
         "from": "features",
         "to": "newCust"
       },
       {
+        "color": "black",
         "from": "retain",
         "to": "features"
       },
       {
+        "color": "black",
         "from": "marketSalary",
         "to": "retain"
       },
       {
+        "color": "black",
         "from": "morale",
         "to": "retain"
       }
@@ -156,46 +174,76 @@
     "nodes": {
       "Goal": {
         "annotation": "G",
+        "border": "black",
+        "fill": "white",
         "id": "Goal",
-        "label": "Make money now and in the future"
+        "label": "Make money now and in the future",
+        "shape": "box"
       },
       "costsDown": {
         "annotation": "CSF",
+        "border": "black",
+        "fill": "white",
         "id": "costsDown",
-        "label": "Control costs"
+        "label": "Control costs",
+        "shape": "box"
       },
       "features": {
+        "border": "black",
+        "fill": "white",
         "id": "features",
-        "label": "Develop new features"
+        "label": "Develop new features",
+        "shape": "box"
       },
       "keepCust": {
+        "border": "black",
+        "fill": "white",
         "id": "keepCust",
-        "label": "Protect relationship with existing customers"
+        "label": "Protect relationship with existing customers",
+        "shape": "box"
       },
       "marketSalary": {
+        "border": "black",
+        "fill": "white",
         "id": "marketSalary",
-        "label": "Keep up with market salaries"
+        "label": "Keep up with market salaries",
+        "shape": "box"
       },
       "morale": {
+        "border": "black",
+        "fill": "white",
         "id": "morale",
-        "label": "Maintain employee morale"
+        "label": "Maintain employee morale",
+        "shape": "box"
       },
       "newCust": {
+        "border": "black",
+        "fill": "white",
         "id": "newCust",
-        "label": "Acquire new customers"
+        "label": "Acquire new customers",
+        "shape": "box"
       },
       "reduceInfra": {
+        "border": "black",
+        "fill": "white",
         "id": "reduceInfra",
-        "label": "Reduce infrastructure spending"
+        "label": "Reduce infrastructure spending",
+        "shape": "box"
       },
       "retain": {
+        "border": "black",
+        "fill": "white",
         "id": "retain",
-        "label": "Retain employees"
+        "label": "Retain employees",
+        "shape": "box"
       },
       "revUp": {
         "annotation": "CSF",
+        "border": "black",
+        "fill": "white",
         "id": "revUp",
-        "label": "Generate more revenue"
+        "label": "Generate more revenue",
+        "shape": "box"
       }
     },
     "rankdir": "BT"
