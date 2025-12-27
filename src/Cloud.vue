@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import {computed, onMounted, useTemplateRef, watch} from "vue";
-import {createEdge, plus, mid, bottomCenter, topCenter, rect} from "./math.ts";
+import {plus, mid, bottomCenter, topCenter, rect, xy, intermediatePoint, Edge} from "./math.ts";
 import CloudNode from "./CloudNode.vue";
 import Injection from "./Injection.vue";
-import CloudEdge from "./CloudEdge.vue";
 import {Ast} from "./parser.ts";
 import {cloudDefaultLabels} from "./interpreter.ts";
 
@@ -13,19 +12,22 @@ const props = defineProps<{
 }>();
 const ast = computed(() => props.ast);
 
-const cloudSvgRef = useTemplateRef<SVGSVGElement>("cloudSvg");
+const svgRef = useTemplateRef<SVGSVGElement>("svgRef");
 const cloudSvgInnerRef = useTemplateRef<SVGGElement>("cloudSvgInner");
 
 onMounted(() => updateTransform());
 watch(() => props.ast, () => updateTransform());
 
 function updateTransform() {
-  const g = cloudSvgInnerRef.value!;
-  const bbox = g.getBBox();
-  const viewBox = `0 0 ${bbox.width + 20} ${bbox.height + 20}`;
-  cloudSvgRef.value?.setAttribute("viewBox", viewBox);
-  g.setAttribute("transform", "translate(10, 10)");
-  props.setSvgElem(cloudSvgRef.value!);
+  const g = cloudSvgInnerRef.value;
+  if (g) {
+    const bbox = g.getBBox();
+    const viewBox = `0 0 ${bbox.width + 20} ${bbox.height + 20}`;
+    svgRef.value?.setAttribute("viewBox", viewBox);
+    g.setAttribute("transform", "translate(10, 10)");
+  }
+  if (svgRef.value)
+    props.setSvgElem(svgRef.value);
 }
 
 type NodeLabels = {
@@ -46,6 +48,21 @@ const injections = computed<Record<string, string>>(() => Object.fromEntries(ast
   const edgeName = id1 < id2 ? `${id1}-${id2}` : `${id2}-${id1}`;
   return [edgeName, edge.text!];
 })));
+
+function createEdge(
+  startNode: rect,
+  endNode: rect,
+): Edge & {adjStart: xy} {
+  const start: xy = {
+    x: startNode.x + startNode.w,
+    y: startNode.y + startNode.h / 2,
+  };
+  const end: xy = {
+    x: endNode.x,
+    y: endNode.y + endNode.h / 2,
+  };
+  return {start, adjStart: intermediatePoint(start, end, 16), end};
+}
 
 const x1 = 25;
 const x2 = 250;
@@ -73,7 +90,7 @@ const conflictEdgePoints = [
   plus(conflictMid, {x: 15, y: -5}),
   conflictEnd,
 ];
-const edgeDDp = {
+const edgeDE = {
   start: conflictEdgePoints[0],
   end: conflictEdgePoints[3],
 };
@@ -83,7 +100,7 @@ const conflictEdgePointsString = conflictEdgePoints.map((p) => `${p.x},${p.y}`).
 <template>
   <div style="width: 100%; height: 100%">
     <svg
-      ref="cloudSvg"
+      ref="svgRef"
       width="100%"
       height="100%"
       version="1.1"
@@ -134,83 +151,45 @@ const conflictEdgePointsString = conflictEdgePoints.map((p) => `${p.x},${p.y}`).
           </marker>
         </defs>
         <CloudNode
-          annotation="A"
-          :text="nodeLabels.A"
-          :x="nodeA.x"
-          :y="nodeA.y"
+          v-for="[annotation, text, node] in [
+            ['A', nodeLabels.A, nodeA],
+            ['B', nodeLabels.B, nodeB],
+            ['C', nodeLabels.C, nodeC],
+            ['D', nodeLabels.D, nodeD],
+            ['E', nodeLabels.E, nodeE],
+          ] as const"
+          :key="annotation"
+          :annotation="annotation"
+          :text="text"
+          :x="node.x"
+          :y="node.y"
           :width="nodeWidth"
           :height="nodeHeight"
         />
-        <CloudNode
-          annotation="B"
-          :text="nodeLabels.B"
-          :x="nodeB.x"
-          :y="nodeB.y"
-          :width="nodeWidth"
-          :height="nodeHeight"
-        />
-        <CloudNode
-          annotation="C"
-          :text="nodeLabels.C"
-          :x="nodeC.x"
-          :y="nodeC.y"
-          :width="nodeWidth"
-          :height="nodeHeight"
-        />
-        <CloudNode
-          annotation="D"
-          :text="nodeLabels.D"
-          :x="nodeD.x"
-          :y="nodeD.y"
-          :width="nodeWidth"
-          :height="nodeHeight"
-        />
-        <CloudNode
-          annotation="E"
-          :text="nodeLabels.E"
-          :x="nodeE.x"
-          :y="nodeE.y"
-          :width="nodeWidth"
-          :height="nodeHeight"
-        />
-        <CloudEdge :edge="edgeAB" />
-        <CloudEdge :edge="edgeAC" />
-        <CloudEdge :edge="edgeBD" />
-        <CloudEdge :edge="edgeCE" />
-        <Injection
-          v-if="injections['A-B']"
-          :text="injections['A-B']"
-          :edge="edgeAB"
-          :dx="-100"
-          :dy="-125"
+        <line
+          v-for="(edge, i) in [edgeAB, edgeAC, edgeBD, edgeCE]"
+          :key="i"
+          :x1="edge.adjStart.x"
+          :y1="edge.adjStart.y"
+          :x2="edge.end.x"
+          :y2="edge.end.y"
+          stroke="#000"
+          stroke-width="3"
+          marker-start="url(#startarrow)"
         />
         <Injection
-          v-if="injections['A-C']"
-          :text="injections['A-C']"
-          :edge="edgeAC"
-          :dx="-100"
-          :dy="125"
-        />
-        <Injection
-          v-if="injections['B-D']"
-          :text="injections['B-D']"
-          :edge="edgeBD"
-          :dx="0"
-          :dy="-75"
-        />
-        <Injection
-          v-if="injections[`C-E`]"
-          :text="injections[`C-E`]"
-          :edge="edgeCE"
-          :dx="0"
-          :dy="75"
-        />
-        <Injection
-          v-if="injections[`D-E`]"
-          :text="injections[`D-E`]"
-          :edge="edgeDDp"
-          :dx="120"
-          :dy="20"
+          v-for="([inj, edge, [dx, dy]], i) in ([
+            [injections['A-B'], edgeAB, [-100, -125]],
+            [injections['A-C'], edgeAC, [-100, 125]],
+            [injections['B-D'], edgeBD, [0, -75]],
+            [injections[`C-E`], edgeCE, [0, 75]],
+            [injections[`D-E`], edgeDE, [120, 20]],
+          ] as const).filter(([inj, _edge]) => inj !== undefined)"
+          :key="i"
+          :text="inj"
+          :edge="edge"
+          :dx="dx"
+          :dy="dy"
         />
         <polyline
           :points="conflictEdgePointsString"

@@ -11,13 +11,9 @@ const props = defineProps<{
   annotation: string,
 }>();
 const {x, y, width, height, annotation} = props;
-const text = computed(() => props.text);
-const lines = computed(() => wrapLines(text.value, 20));
+const lines = computed(() => wrapLines(props.text, 20));
 const lineHeight = 16;
-const textMargin = 12;
-const textHeight = computed(() => lines.value.length * lineHeight);
-const textY = computed(() => y + height / 2 - textHeight.value / 2 - 4);
-const textX = x + textMargin;
+const textX = x + 12;
 </script>
 
 <template>
@@ -29,7 +25,7 @@ const textX = x + textMargin;
     :width="width"
     :height="height"
   />
-  <text :x="textX" :y="textY">
+  <text :x="textX" :y="y + height / 2 - lines.length * lineHeight / 2 - 4">
     <tspan v-for="(line, i) in lines" :key="i" :x="textX" :dy="lineHeight">
       {{ line }}
     </tspan>
