@@ -13,18 +13,24 @@ import type {
 import {tags as t} from "@lezer/highlight";
 import {Completion} from "./interpreter.ts";
 
+function isTrue(value: boolean | RegExpMatchArray | null): value is true {
+  if (value === null) return false;
+  if (typeof value === "boolean") return value;
+  return value.length > 0;
+}
+
 export function myLanguage(idents: string[]) {
   return StreamLanguage.define<undefined>({
     startState() { return undefined; },
     token(stream, state: undefined): keyof typeof t {
-      void(state);
-      if (stream.match(/^#.*/) === true) return "lineComment";
-      if (stream.match(":") === true) return "punctuation";
-      if (stream.match(/^(->|<-|--)/) === true) return "arithmeticOperator";
-      if (stream.match("type") === true) return "keyword";
-      if (stream.match(/^[{}]/) === true) return "brace";
-      if (idents.find(ident => stream.match(ident) === true) !== undefined) return "variableName";
-      if (stream.match('"', false) === true && stream.match(/^"[^"]*"/) === true) return "string";
+      void state;
+      if (isTrue(stream.match(/^#.*/))) return "lineComment";
+      if (isTrue(stream.match(":"))) return "punctuation";
+      if (isTrue(stream.match(/^(->|<-|--)/))) return "arithmeticOperator";
+      if (isTrue(stream.match("type"))) return "keyword";
+      if (isTrue(stream.match(/^[{}]/))) return "brace";
+      if (idents.find(ident => isTrue(stream.match(ident))) !== undefined) return "variableName";
+      if (isTrue(stream.match('"', false)) && isTrue(stream.match(/^"[^"]*"/))) return "string";
 
       stream.eat(/./);
       return "name";
