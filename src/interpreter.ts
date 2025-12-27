@@ -96,14 +96,11 @@ function findNodeAnnotation(statement: AstNode): string | undefined {
 
 function topologicalSort({nodes, edges}: Ast): AstNode[] {
   const graph = new Map<NodeID, NodeID[]>();
-  nodes.forEach(node => {
+  for (const node of nodes)
     graph.set(node.id, []);
-  });
-  edges.forEach(edge => {
-    edge.fromIds.forEach(fromId => {
+  for (const edge of edges)
+    for (const fromId of edge.fromIds)
       graph.get(fromId)!.push(edge.toId);
-    });
-  });
 
   const nodeMap = new Map(nodes.map(node => [node.id, node]));
 

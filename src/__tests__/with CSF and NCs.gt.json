@@ -1,0 +1,59 @@
+{
+  "edges": [
+    {
+      "fromIds": [
+        "defense"
+      ],
+      "toId": "theyDont"
+    },
+    {
+      "fromIds": [
+        "possession"
+      ],
+      "toId": "weScore"
+    },
+    {
+      "fromIds": [
+        "shooting"
+      ],
+      "toId": "weScore"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "Goal",
+      "params": {},
+      "text": "win"
+    },
+    {
+      "id": "weScore",
+      "params": {
+        "class": "CSF"
+      },
+      "text": "We score points"
+    },
+    {
+      "id": "theyDont",
+      "params": {
+        "class": "CSF"
+      },
+      "text": "Other team doesn't score"
+    },
+    {
+      "id": "possession",
+      "params": {},
+      "text": "We get the ball"
+    },
+    {
+      "id": "shooting",
+      "params": {},
+      "text": "We shoot the ball accurately"
+    },
+    {
+      "id": "defense",
+      "params": {},
+      "text": "We have good defense"
+    }
+  ],
+  "type": "goal"
+}

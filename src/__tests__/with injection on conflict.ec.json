@@ -1,0 +1,13 @@
+{
+  "edges": [
+    {
+      "fromIds": [
+        "D"
+      ],
+      "text": "Discover they don't conflict",
+      "toId": "E"
+    }
+  ],
+  "nodes": [],
+  "type": "conflict"
+}

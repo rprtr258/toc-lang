@@ -14,6 +14,7 @@ import {
   parseGoalTreeSemantics,
 } from "./src/interpreter.ts";
 import {examples} from "./src/examples.ts";
+import {problemTreeTestcases, evaporatingCloudTestcases, goalTreeTestcases} from "./src/testcases.ts";
 
 type Json = string | number | boolean | null | Json[] | {[k: string]: Json};
 
@@ -33,48 +34,30 @@ function json(obj: unknown): string {
   return JSON.stringify(canonicalize(obj), undefined, 2);
 }
 
-// Test cases for basic parser tests
-const parserTestCases = [
-  {
-    name: "with only UDE",
-    text: `type: problem\nb: "badness" {class: UDE}`,
-  },
-  {
-    name: "with UDE and single cause",
-    text: `type: problem\nb: "badness" {class: UDE}\nc: "cause"\nb <- c`,
-  },
-  {
-    name: "with UDE and multi-cause",
-    text: `type: problem\nb: "badness" {class: UDE}\nc1: "cause 1"\nc2: "cause 2"\nb <- c1 && c2`,
-  },
-  {
-    name: "with multi-cause right arrow",
-    text: `type: problem\nb: "badness"\nc1: "cause 1"\nc2: "cause 2"\nc1 && c2 -> b`,
-  },
-  {
-    name: "single-line comments",
-    text: `type: problem\n# This is a comment`,
-  },
-  {
-    name: "single cause right arrow",
-    text: `type: problem\nb: "badness"\nc: "cause"\nc -> b`,
-  },
-  {
-    name: "empty text",
-    text: `type: problem\n`,
-  },
-];
-
 type RunEvent =
   | {type: "start_group", name: string}
   | {type: "test", name: string, filename: string, data: unknown}
   | {type: "end_group"};
 
 function* run(): Generator<RunEvent> {
-  yield {type: "start_group", name: "parser test"};
-  for (const testCase of parserTestCases) {
+  yield {type: "start_group", name: "problem tree testcases"};
+  for (const testCase of problemTreeTestcases) {
     const ast = parseTextToAst(testCase.text);
     yield {type: "test", name: testCase.name, filename: `parses ast for input ${testCase.name}`, data: ast};
+  };
+  yield {type: "end_group"};
+
+  yield {type: "start_group", name: "evaporating cloud testcases"};
+  for (const testCase of evaporatingCloudTestcases) {
+    const ast = parseTextToAst(testCase.text);
+    yield {type: "test", name: testCase.name, filename: `${testCase.name}.ec`, data: ast};
+  };
+  yield {type: "end_group"};
+
+  yield {type: "start_group", name: "goal tree testcases"};
+  for (const testCase of goalTreeTestcases) {
+    const ast = parseTextToAst(testCase.text);
+    yield {type: "test", name: testCase.name, filename: `${testCase.name}.gt`, data: ast};
   };
   yield {type: "end_group"};
 
