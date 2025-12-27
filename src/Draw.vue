@@ -11,7 +11,7 @@ import {
   Completion,
   cloudDefaultLabels,
 } from "./interpreter.ts";
-import {Ast, EDiagramType} from "./parser.ts";
+import {Ast, DiagramType} from "./parser.ts";
 import {SyntaxError} from "./tokenizer.ts";
 
 const completions = ref<Completion[]>([]);
@@ -20,7 +20,7 @@ const ast = ref<Ast | null>(null);
 const semantics = ref<TreeSemantics | null>(null);
 const diagnostics = ref<Diagnostic[]>([]);
 const text = ref<string>("");
-const diagramType = ref<EDiagramType | null>(null);
+const diagramType = ref<DiagramType | null>(null);
 
 const onEditorChange = (value: string) => {
   try {
