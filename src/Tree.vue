@@ -8,7 +8,7 @@ import {xy} from "./math.ts";
 
 const props = defineProps<{
   semantics: TreeSemantics,
-  setSvgElem: (svgElem: SVGElement, initialTransform?: [zoom: number, pan: xy]) => void,
+  setSvgElem: (svgElem: SVGSVGElement, initialTransform?: [zoom: number, pan: xy]) => void,
 }>();
 const {setSvgElem} = props;
 const semantics = computed(() => props.semantics);

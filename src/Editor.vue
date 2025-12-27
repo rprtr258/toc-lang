@@ -19,7 +19,7 @@ const emit = defineEmits<{
   "update": [value: string],
 }>();
 
-const editorText = ref(myProps.value || "");
+const editorText = ref(myProps.value);
 
 const view = ref<EditorView | null>(null);
 

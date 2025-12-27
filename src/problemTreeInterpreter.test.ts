@@ -60,7 +60,7 @@ describe("problem tree interpreter", () => {
     it(testCase.name, () => {
       const typeLine = `type: problem\n`;
       const ast = parseTextToAst(typeLine + testCase.text);
-      expect(ast).toStrictEqual(JSON.parse(readFileSync(`${__dirname}/__tests__/parses ast for input ${testCase.name}.approved.txt`).toString()));
+      expect(ast).toStrictEqual(JSON.parse(readFileSync(`${__dirname}/__tests__/parses ast for input ${testCase.name}.json`).toString()));
     });
   });
 
@@ -91,7 +91,7 @@ describe("problem tree interpreter", () => {
       const ast = parseTextToAst(text);
       expect(ast.type).toEqual("problem");
       const semantics = parseProblemTreeSemantics(ast);
-      expect(JSON.parse(JSON.stringify({ast, semantics}))).toStrictEqual(JSON.parse(readFileSync(`${__dirname}/__tests__/example problem tree: ${name}.approved.txt`).toString()));
+      expect(JSON.parse(JSON.stringify({ast, semantics}))).toStrictEqual(JSON.parse(readFileSync(`${__dirname}/__tests__/example problem tree: ${name}.json`).toString()));
     });
   }
 });

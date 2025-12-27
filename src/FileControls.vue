@@ -7,8 +7,8 @@ const emit = defineEmits<{
   "selectExample": [value: string],
 }>();
 
-function onChange(e: Event & {target: HTMLSelectElement}) {
-  emit('selectExample', e.target.value);
+function onChange(e: Event) {
+  emit('selectExample', (e.target as HTMLSelectElement).value);
 }
 </script>
 

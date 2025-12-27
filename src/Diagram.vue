@@ -30,35 +30,26 @@ const updateSvgElem = (
     panZoomInstance.destroy();
     panZoomInstance = null;
   }
-  if (elem) {
-    panZoomInstance = svgPanZoom(elem, {
-      zoomEnabled: true,
-      panEnabled: true,
-      mouseWheelZoomEnabled: true,
-      dblClickZoomEnabled: false,
-      controlIconsEnabled: true,
-      fit: true,
-      center: true,
-      minZoom: 0.1,
-      maxZoom: 10,
-      zoomScaleSensitivity: 0.4,
-      onZoom(newScale) {
-        console.log("zoom", newScale);
-      },
-      onPan(newPan) {
-        console.log("pan", newPan);
-      },
-    });
-    // TODO: fix this gavnischcsche from https://github.com/bumbu/svg-pan-zoom/issues/433
-    const controls = elem.querySelector('g[id="svg-pan-zoom-controls"]')!; // reposition the controls
-    const svgHeight = elem.getBoundingClientRect().height;
-    const svgWidth = elem.getBoundingClientRect().width;
-    controls.setAttribute("transform", `translate(${svgWidth - 100}, ${svgHeight - 100})`);
-    if (initialTransform) {
-      console.log(initialTransform[0], initialTransform[1]);
-      panZoomInstance.zoom(initialTransform[0]);
-      panZoomInstance.pan(initialTransform[1]);
-    }
+  panZoomInstance = svgPanZoom(elem, {
+    zoomEnabled: true,
+    panEnabled: true,
+    mouseWheelZoomEnabled: true,
+    dblClickZoomEnabled: false,
+    controlIconsEnabled: true,
+    fit: true,
+    center: true,
+    minZoom: 0.1,
+    maxZoom: 10,
+    zoomScaleSensitivity: 0.4,
+  });
+  // TODO: fix this gavnischcsche from https://github.com/bumbu/svg-pan-zoom/issues/433
+  const controls = elem.querySelector('g[id="svg-pan-zoom-controls"]')!; // reposition the controls
+  const svgHeight = elem.getBoundingClientRect().height;
+  const svgWidth = elem.getBoundingClientRect().width;
+  controls.setAttribute("transform", `translate(${svgWidth - 100}, ${svgHeight - 100})`);
+  if (initialTransform) {
+    panZoomInstance.zoom(initialTransform[0]);
+    panZoomInstance.pan(initialTransform[1]);
   }
 };
 </script>
