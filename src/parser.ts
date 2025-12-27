@@ -151,75 +151,28 @@ class Parser {
     }
   }
 
-  private parseEdgeStatement(): StatementAst {
-    if (this.check("IDENT") && this.peekAhead()?.type === "ARROW_LEFT") {
-      return this.parseLeftEdge();
-    } else if (this.check("IDENT") && this.peekAhead()?.type === "ARROW_RIGHT") {
-      return this.parseRightEdge();
-    } else if (this.check("IDENT") && this.peekAhead()?.type === "ARROW_BI") {
-      return this.parseBiDirEdge();
-    } else if (this.check("IDENT") && this.peekAhead()?.type === "AND") {
-      return this.parseRightEdge();
-    } else {
-      throw new SyntaxError("Unexpected edge syntax", this.peek());
-    }
-  }
-
   private peekAhead(): Token {
     const idx = this.current + 1;
     return idx < this.tokens.length ? this.tokens[idx] : EOF;
   }
 
-  private parseLeftEdge(): StatementAst {
-    // toId <- fromIds && ... : label?
-    const toId = this.value(this.consume("IDENT", "Expected target identifier"));
-    this.consume("ARROW_LEFT", "Expected '<-'");
-    const fromIds = this.parseIdentList();
-    let label: string | undefined;
-    if (this.match("COLON")) {
-      label = this.parseLabel();
+  private parseEdgeStatement(): [
+    left: string[],
+    right: string[],
+    tok: Token & {type: "ARROW_LEFT" | "ARROW_RIGHT" | "ARROW_BI"},
+    label: string | undefined,
+  ] {
+    const sosal = this.peek();
+    const leftIds = this.parseIdentList();
+    const tok = this.advance();
+    const rightIds = this.parseIdentList();
+    const label: string | undefined = this.match("COLON") ? this.parseLabel() : undefined;
+    switch (tok.type) {
+      case "ARROW_LEFT": case "ARROW_RIGHT": case "ARROW_BI": break;
+      default:
+        throw new SyntaxError("Unexpected edge syntax", sosal);
     }
-    return {
-      type: "edge",
-      toId,
-      fromIds,
-      text: label,
-    };
-  }
-
-  private parseRightEdge(): StatementAst {
-    // fromIds && ... -> toId : label?
-    const fromIds = this.parseIdentList();
-    this.consume("ARROW_RIGHT", "Expected '->'");
-    const toId = this.value(this.consume("IDENT", "Expected target identifier"));
-    let label: string | undefined;
-    if (this.match("COLON")) {
-      label = this.parseLabel();
-    }
-    return {
-      type: "edge",
-      toId,
-      fromIds,
-      text: label,
-    };
-  }
-
-  private parseBiDirEdge(): StatementAst {
-    // fromId -- toId : label?
-    const fromId = this.value(this.consume("IDENT", "Expected source identifier"));
-    this.consume("ARROW_BI", "Expected '--'");
-    const toId = this.value(this.consume("IDENT", "Expected target identifier"));
-    let label: string | undefined;
-    if (this.match("COLON")) {
-      label = this.parseLabel();
-    }
-    return {
-      type: "edge",
-      toId,
-      fromIds: [fromId],
-      text: label,
-      biDirectional: true,
-    };
+    return [leftIds, rightIds, tok as Token & {type: "ARROW_LEFT" | "ARROW_RIGHT" | "ARROW_BI"}, label];
   }
 
   private parseIdentList(): string[] {
@@ -231,11 +184,6 @@ class Parser {
     return ids;
   }
 
-  private isEdgeStart(): boolean {
-    const next = this.peekAhead().type;
-    return ["ARROW_LEFT", "ARROW_RIGHT", "ARROW_BI", "AND"].includes(next);
-  }
-
   *parseStatement(): Generator<StatementAst> {
     while (this.match("EOL"));
 
@@ -243,24 +191,55 @@ class Parser {
 
     if (this.check("IDENT") && this.value(this.peek()) === "type") {
       yield this.parseTypeStatement();
-      return;
     } else if (this.check("COMMENT")) {
       this.parseCommentLine();
-      return;
     } else if (this.check("IDENT") && this.peekAhead()?.type === "COLON") {
       yield this.parseNodeStatement();
-      return;
-    } else if (this.check("IDENT") && this.isEdgeStart()) {
-      yield this.parseEdgeStatement();
-      return;
-    } else if (this.check("EOF")) {
-      return;
-    } else {
+    } else if (this.check("IDENT")) {
+      const [leftIds, rightIds, arrowTok, label] = this.parseEdgeStatement();
+      switch (arrowTok.type) {
+        // toId <- fromIds && ... : label?
+        case "ARROW_LEFT":
+          if (leftIds.length !== 1)
+            throw new SyntaxError("Only one 'to' identifier is allowed", arrowTok);
+          yield {
+            type: "edge",
+            toId: leftIds[0],
+            fromIds: rightIds,
+            text: label,
+          };
+          break;
+        // fromIds && ... -> toId : label?
+        case "ARROW_RIGHT":
+          if (rightIds.length !== 1)
+            throw new SyntaxError("Only one 'to' identifier is allowed", arrowTok);
+          yield {
+            type: "edge",
+            toId: rightIds[0],
+            fromIds: leftIds,
+            text: label,
+          };
+          break;
+        // fromId -- toId : label?
+        case "ARROW_BI":
+          if (leftIds.length !== 1)
+            throw new SyntaxError("Only one 'from' identifier is allowed", arrowTok);
+          if (rightIds.length !== 1)
+            throw new SyntaxError("Only one 'to' identifier is allowed", arrowTok);
+          yield {
+            type: "edge",
+            toId: rightIds[0],
+            fromIds: [leftIds[0]],
+            text: label,
+            biDirectional: true,
+          };
+          break;
+      }
+    } else if (!this.check("EOF")) {
       // Skip unknown tokens to next EOL
       while (!this.check("EOL") && !this.check("EOF")) {
         this.advance();
       }
-      return;
     }
   }
 
