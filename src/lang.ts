@@ -47,7 +47,9 @@ export const TOC_LANG_HIGHLIGHT = syntaxHighlighting(HighlightStyle.define([
 ], {themeType: "light"}));
 
 export function TOC_LANG(completions: Completion[]): LanguageSupport {
-  completions.sort((a: Completion, b: Completion) => a.id.localeCompare(b.id));
+  // to highlight "lol_kek" before "lol"
+  completions.sort((a: Completion, b: Completion) => -a.id.localeCompare(b.id));
+
   const autocomplete: CompletionSource = (context: CompletionContext): CompletionResult | null => {
     const word = context.matchBefore(/\w*/);
     if (word !== null && word.from === word.to && !context.explicit) {
