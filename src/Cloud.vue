@@ -178,15 +178,15 @@ const conflictEdgePointsString = conflictEdgePoints.map((p) => `${p.x},${p.y}`).
           marker-start="url(#startarrow)"
         />
         <Injection
-          v-for="([inj, edge, [dx, dy]], i) in ([
-            [injections['A-B'], edgeAB, [-100, -125]],
-            [injections['A-C'], edgeAC, [-100, 125]],
-            [injections['B-D'], edgeBD, [0, -75]],
-            [injections[`C-E`], edgeCE, [0, 75]],
-            [injections[`D-E`], edgeDE, [120, 20]],
-          ] as const).filter(([inj, _edge]) => inj !== undefined)"
-          :key="i"
-          :text="inj"
+          v-for="[inj, edge, [dx, dy]] in ([
+            ['A-B', edgeAB, [-100, -125]],
+            ['A-C', edgeAC, [-100, 125]],
+            ['B-D', edgeBD, [0, -75]],
+            [`C-E`, edgeCE, [0, 75]],
+            [`D-E`, edgeDE, [120, 20]],
+          ] as const).filter(([inj, _edge]) => injections[inj] !== undefined)"
+          :key="inj"
+          :text="injections[inj]"
           :edge="edge"
           :dx="dx"
           :dy="dy"
