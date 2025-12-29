@@ -3,9 +3,13 @@ import Draw from "./Draw.vue";
 </script>
 
 <template>
-  <div class="App">
+  <div id="app">
     <Draw />
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+#app {
+  height: 100%;
+}
+</style>

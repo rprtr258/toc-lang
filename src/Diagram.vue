@@ -25,6 +25,7 @@ const updateSvgElem = (
   elem: SVGSVGElement,
   initialTransform?: [zoom: number, pan: xy],
 ) => {
+  elem.style.display = "block";
   svgElem.value = elem;
   if (panZoomInstance) {
     panZoomInstance.destroy();

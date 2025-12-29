@@ -62,7 +62,7 @@ const onEditorChange = (value: string) => {
 </script>
 
 <template>
-  <div style="display: grid; grid-template-columns: 33% 67%; height: 100%">
+  <div class="two-panes">
     <Editor
       :rows="20"
       :value="text"
@@ -81,4 +81,13 @@ const onEditorChange = (value: string) => {
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.two-panes {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  height: 100%;
+}
+.two-panes > :nth-child(1) {
+  min-height: 0;
+}
+</style>

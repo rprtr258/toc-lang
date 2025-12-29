@@ -67,7 +67,7 @@ onMounted(() => handleSelectExample(examples[0][1][0].id));
 </script>
 
 <template>
-  <div>
+  <div id="editor">
     <FileControls
       :onLoad="handleLoad"
       :onSave="handleSave"
@@ -76,10 +76,16 @@ onMounted(() => handleSelectExample(examples[0][1][0].id));
     <Codemirror
       v-model="editorText"
       :extensions="extensions"
-      style="height: calc(100vh - 50px)"
+      style="min-height: 0; flex: 1;"
       @ready="view = $event.view"
     />
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+#editor {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+</style>
