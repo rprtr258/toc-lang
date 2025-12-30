@@ -12,7 +12,7 @@ Generate Theory of Constraints diagrams from text-based notation.
 
 ```bash
 # Clone the project
-git clone git@github.com:raymyers/toc-lang.git
+git clone git@github.com:rprtr258/toc-lang.git
 cd toc-lang
 # Install dependencies
 bun i

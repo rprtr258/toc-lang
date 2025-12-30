@@ -39,6 +39,7 @@ function edgePath(edge: LayoutedEdge): string {
       allowedStartSides: ["top"],
       allowedEndSides: semantics.value.nodes[edge.to]?.intermediate ? ["bottom", "left", "right"] : ["bottom"],
       controlPointStretch: 20,
+      padEnd: 5,
     },
   );
   void([ae, as]);
@@ -174,7 +175,7 @@ onMounted(() => {
           id="arrowhead"
           markerWidth="10"
           markerHeight="7"
-          refX="9"
+          refX="0"
           refY="3.5"
           orient="auto"
         >

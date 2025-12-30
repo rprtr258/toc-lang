@@ -2,7 +2,7 @@ name: Check pull request
 
 on:
   push:
-    braches: ["*"]
+    branches: ["*"]
 
 jobs:
   typecheck:
