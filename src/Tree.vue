@@ -140,11 +140,11 @@ const layoutedEdges = computed<LayoutedEdge[]>(() => g.value.edges().map(edgeInf
       id="arrowhead"
       markerWidth="10"
       markerHeight="7"
-      refX="0"
+      refX="9"
       refY="3.5"
       orient="auto"
     >
-      <polygon points="0 0, 10 3.5, 0 7" fill="context-stroke" />
+      <polygon points="0 0, 10 3.5, 0 7" fill="black" />
     </marker>
   </defs>
   <g transform="translate(13, 13)">
@@ -218,6 +218,13 @@ const layoutedEdges = computed<LayoutedEdge[]>(() => g.value.edges().map(edgeInf
           fill="white"
           stroke="black"
           stroke-width="1"
+        />
+        <path
+          v-for="edge in layoutedEdges"
+          :key="`${edge.from}-${edge.to}`"
+          :d="edgePath(edge)"
+          style="stroke: black; fill:none; stroke-width: 1px;"
+          marker-end="url(#arrowhead)"
         />
         <text
           :x="node.x"
