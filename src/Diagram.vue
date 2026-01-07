@@ -1,11 +1,10 @@
 <script setup lang="ts">
-import {computed, ref} from "vue";
+import {computed, onMounted, useTemplateRef} from "vue";
 import svgPanZoom from "svg-pan-zoom";
 import Cloud from "./Cloud.vue";
 import Tree from "./Tree.vue";
 import {TreeSemantics} from "./interpreter.ts";
 import {Ast, DiagramType} from "./parser.ts";
-import {xy} from "./math.ts";
 
 const props = defineProps<{
   ast: Ast,
@@ -16,21 +15,18 @@ const {diagramType} = props;
 const ast = computed(() => props.ast);
 const semantics = computed(() => props.semantics);
 
-const svgElem = ref<SVGSVGElement | null>(null);
+const svgElem = useTemplateRef<SVGSVGElement | null>("svgRef");
 
 type SvgPanZoomInstance = typeof svgPanZoom; // TODO: this shit does not export fucking types
 let panZoomInstance: SvgPanZoomInstance | null = null;
 
-const updateSvgElem = (
-  elem: SVGSVGElement,
-  initialTransform?: [zoom: number, pan: xy],
-) => {
-  elem.style.display = "block";
-  svgElem.value = elem;
+onMounted(() => {
   if (panZoomInstance) {
     panZoomInstance.destroy();
     panZoomInstance = null;
   }
+  const elem = svgElem.value!;
+  elem.style.display = "block";
   panZoomInstance = svgPanZoom(elem, {
     zoomEnabled: true,
     panEnabled: true,
@@ -48,33 +44,36 @@ const updateSvgElem = (
   const svgHeight = elem.getBoundingClientRect().height;
   const svgWidth = elem.getBoundingClientRect().width;
   controls.setAttribute("transform", `translate(${svgWidth - 100}, ${svgHeight - 100})`);
-  if (initialTransform) {
-    panZoomInstance.zoom(initialTransform[0]);
-    panZoomInstance.pan(initialTransform[1]);
-  }
-};
+});
 </script>
 
 <template>
-  <div>
-    <Cloud
-      v-if="diagramType === 'conflict'"
-      :ast="ast"
-      :setSvgElem="updateSvgElem"
-    />
-    <!-- Check for goal because it's possible for us to get the wrong diagram type -->
-    <template v-else-if="!semantics">No AST</template>
-    <Tree
-      v-else-if="diagramType === 'goal'"
-      key="goal"
-      :semantics="semantics"
-      :setSvgElem="updateSvgElem"
-    />
-    <Tree
-      v-else-if="diagramType === 'problem'"
-      key="problem"
-      :semantics="semantics"
-      :setSvgElem="updateSvgElem"
-    />
+  <div style="width: 100%; height: 100%;">
+    <svg
+      ref="svgRef"
+      width="100%"
+      height="100%"
+      version="1.1"
+      preserveAspectRatio="xMinYMin"
+      viewBox="0 0 650 400"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <Cloud
+        v-if="diagramType === 'conflict'"
+        :ast="ast"
+      />
+      <!-- Check for goal because it's possible for us to get the wrong diagram type -->
+      <template v-else-if="!semantics">No AST</template>
+      <Tree
+        v-else-if="diagramType === 'goal'"
+        key="goal"
+        :semantics="semantics"
+      />
+      <Tree
+        v-else-if="diagramType === 'problem'"
+        key="problem"
+        :semantics="semantics"
+      />
+    </svg>
   </div>
 </template>

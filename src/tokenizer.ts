@@ -6,8 +6,7 @@ export type TokenType =
   | "ARROW_RIGHT"
   | "ARROW_BI"
   | "AND"
-  | "LBRACE"
-  | "RBRACE"
+  | "EQUALS"
   | "COMMENT"
   | "EOL"
   | "EOF";
@@ -88,7 +87,7 @@ class Tokenizer {
 
       if (char === "\n" || char === "\r") {
         this.advance();
-        if (char === "\r" && this.peek() === "\n" || char === "\n" && this.peek() === "\r") {
+        if ((char === "\r" && this.peek() === "\n") || (char === "\n" && this.peek() === "\r")) {
           this.advance();
         }
         yield {
@@ -115,7 +114,11 @@ class Tokenizer {
 
       if (char === '"') {
         this.advance(); // skip opening quote
-        while (this.position < this.input.length && this.peek() !== '"' && this.peek() != "") {
+        while (
+          this.position < this.input.length &&
+          this.peek() !== '"' &&
+          this.peek() != ""
+        ) {
           this.advance();
         }
         if (this.peek() === '"') {
@@ -195,10 +198,10 @@ class Tokenizer {
         continue;
       }
 
-      if (char === "{") {
+      if (char === "=") {
         this.advance();
         yield {
-          type: "LBRACE",
+          type: "EQUALS",
           start,
           end: this.position,
           line: startLine,
@@ -207,19 +210,7 @@ class Tokenizer {
         continue;
       }
 
-      if (char === "}") {
-        this.advance();
-        yield {
-          type: "RBRACE",
-          start,
-          end: this.position,
-          line: startLine,
-          col: startCol,
-        };
-        continue;
-      }
-
-      const re = /[a-zA-Z0-9_'*&()]/;
+      const re = /[a-zA-Z0-9_'*&().]/;
       if (!re.test(char)) { // Unknown character
         throw new SyntaxError(`Unknown character: ${char}`, {
           start: this.position,

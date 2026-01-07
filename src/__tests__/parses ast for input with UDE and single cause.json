@@ -4,6 +4,7 @@
       "fromIds": [
         "c"
       ],
+      "params": {},
       "toId": "b"
     }
   ],

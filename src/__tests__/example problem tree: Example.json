@@ -5,6 +5,7 @@
         "fromIds": [
           "cluttered"
         ],
+        "params": {},
         "toId": "bad"
       },
       {
@@ -12,6 +13,7 @@
           "ux",
           "features"
         ],
+        "params": {},
         "toId": "cluttered"
       }
     ],
@@ -46,18 +48,22 @@
   "semantics": {
     "edges": [
       {
+        "color": "black",
         "from": "cluttered",
         "to": "bad"
       },
       {
+        "color": "black",
         "from": "ux",
         "to": "ux_features_cause_cluttered"
       },
       {
+        "color": "black",
         "from": "features",
         "to": "ux_features_cause_cluttered"
       },
       {
+        "color": "black",
         "from": "ux_features_cause_cluttered",
         "to": "cluttered"
       }
@@ -65,26 +71,41 @@
     "nodes": {
       "bad": {
         "annotation": "UDE",
+        "border": "black",
+        "fill": "white",
         "id": "bad",
-        "label": "Bad user experience"
+        "label": "Bad user experience",
+        "shape": "box"
       },
       "cluttered": {
         "annotation": "UDE",
+        "border": "black",
+        "fill": "white",
         "id": "cluttered",
-        "label": "Cluttered interface"
+        "label": "Cluttered interface",
+        "shape": "box"
       },
       "features": {
+        "border": "black",
+        "fill": "white",
         "id": "features",
-        "label": "Many features added"
+        "label": "Many features added",
+        "shape": "box"
       },
       "ux": {
+        "border": "black",
+        "fill": "white",
         "id": "ux",
-        "label": "Low investment in UX design"
+        "label": "Low investment in UX design",
+        "shape": "box"
       },
       "ux_features_cause_cluttered": {
+        "border": "black",
+        "fill": "white",
         "id": "ux_features_cause_cluttered",
         "intermediate": true,
-        "label": "AND"
+        "label": "AND",
+        "shape": "circle"
       }
     },
     "rankdir": "BT"
