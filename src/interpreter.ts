@@ -146,7 +146,7 @@ export function parseProblemTreeSemantics(ast: Ast): TreeSemantics {
     }
 
     // Multi-cause: create intermediate AND node
-    const intermediateID = edge.fromIds.join("_") + "_cause_" + effectID;
+    const intermediateID = edge.fromIds.join("|") + "|cause|" + effectID;
     nodes[intermediateID] = {
       id: intermediateID,
       label: "AND",

@@ -1,5 +1,4 @@
 import {describe, expect, it} from "bun:test";
-
 import {Ast} from "./parser.ts";
 import {parseTextToAst, parseGoalTreeSemantics, parseProblemTreeSemantics} from "./interpreter.ts";
 import {examples} from "./examples.ts";
@@ -45,7 +44,7 @@ describe("problem tree", () => {
       const ast = parseTextToAst(text);
       expect(JSON.stringify(ast, null, 2)).toMatchSnapshot();
     });
-  };
+  }
 
   it("fails for cause referencing unknown node", () => {
     const text = `
@@ -67,6 +66,23 @@ describe("problem tree", () => {
     const ast = parseTextToAst(text);
     expect(ast).toEqual(expected);
     expect(() => parseProblemTreeSemantics(ast)).toThrowError(/^Effect d not declared$/);
+  });
+
+  it("parses AST and semantics for injection example", () => {
+    const text = `type: problem
+
+x: "X"
+y: "Y"
+cause_cause: "cause_cause"
+y <- x && cause_cause
+
+cause_y: "cause_y"
+cause: "cause"
+cause_y <- x && cause`;
+    const ast = parseTextToAst(text);
+    expect(ast.type).toEqual("problem");
+    const semantics = parseProblemTreeSemantics(ast);
+    expect(JSON.stringify({ast, semantics}, null, 2)).toMatchSnapshot();
   });
 
   for (const {name, text} of examples.find(([group, _examples]) => group === "Current Reality Tree")![1]) {
