@@ -9,7 +9,7 @@ export type StatementAst =
     text?: string,
     fromIds: string[],
     toId: string,
-    params?: ParamsAst,
+    params: ParamsAst,
     biDirectional?: true,
   }
   | {
@@ -19,7 +19,8 @@ export type StatementAst =
     params: ParamsAst,
   }
   | {
-    type: "type",
+    type: "directive",
+    key: string,
     value: string,
   };
 
@@ -40,6 +41,7 @@ export type AstEdge = {
   toId: string,
   text?: string,
   biDirectional?: true,
+  params: ParamsAst,
 };
 export interface Ast {
   type: DiagramType,
@@ -87,32 +89,36 @@ class Parser {
   }
 
   private value(tok: Token): string {
-    if (tok.type === "STRING") return this.input.slice(tok.start + 1, tok.end - 1);
+    if (tok.type === "STRING")
+      return this.input.slice(tok.start + 1, tok.end - 1);
     return this.input.slice(tok.start, tok.end);
   }
 
-  // type: ident
-  private parseTypeStatement(): StatementAst {
-    this.consume("IDENT", "Expected 'type'");
-    this.consume("COLON", "Expected ':' after 'type'");
-    const typeValue = this.consume("IDENT", "Expected type value");
+  // Directive: .type: problem
+  private parseDirective(): StatementAst {
+    const id = this.value(
+      this.consume("IDENT", "Expected directive identifier"),
+    );
+    this.consume("COLON", "Expected ':' after directive");
+    const value = this.value(this.consume("IDENT", "Expected directive value"));
     return {
-      type: "type",
-      value: this.value(typeValue),
+      type: "directive",
+      key: id.slice(1), // Remove leading dot
+      value,
     };
   }
 
-  // ident : label params?
+  // id: "label" key=value key=value
   private parseNodeStatement(): StatementAst {
     const id = this.value(this.consume("IDENT", "Expected identifier for node"));
     this.consume("COLON", "Expected ':' after node identifier");
     const label = this.parseLabel();
-    const params = this.parseParamBlock();
+    const params = this.parseProperties();
     return {
       type: "node",
       id,
       text: label,
-      params: params || {},
+      params,
     };
   }
 
@@ -123,35 +129,23 @@ class Parser {
     return this.value(this.advance());
   }
 
-  private parseParamBlock(): ParamsAst | null {
-    if (!this.match("LBRACE")) return null;
-    while (this.match("EOL"));
-    const params: ParamsAst = {};
-    while (!this.check("RBRACE") && !this.check("EOF")) {
-      while (this.match("EOL"));
-      if (this.check("RBRACE")) break;
-      const key = this.value(this.consume("IDENT", "Expected parameter key"));
-      this.consume("COLON", "Expected ':' in parameter");
-      params[key] = this.parseExpression();
-      while (this.match("EOL"));
-    }
-    this.consume("RBRACE", "Expected '}' after parameters");
-    return params;
-  }
-
-  private parseExpression(): string {
-    if (this.check("STRING")) {
-      return this.value(this.advance());
-    } else if (this.check("IDENT")) {
-      return this.value(this.advance());
-    } else {
-      return this.value(this.consume("IDENT", "Expected expression"));
-    }
-  }
-
   private peekAhead(): Token {
     const idx = this.current + 1;
     return idx < this.tokens.length ? this.tokens[idx] : EOF;
+  }
+
+  // key=value properties
+  private parseProperties(): ParamsAst {
+    const params: ParamsAst = {};
+    while (this.check("IDENT") && this.peekAhead()?.type === "EQUALS") {
+      const key = this.value(this.consume("IDENT", "Expected property key"));
+      this.consume("EQUALS", "Expected '=' after property key");
+      const value = this.value(
+        this.consume("IDENT", "Expected property value"),
+      );
+      params[key] = value;
+    }
+    return params;
   }
 
   private parseEdgeStatement(): [
@@ -159,18 +153,20 @@ class Parser {
     right: string[],
     tok: Token & {type: "ARROW_LEFT" | "ARROW_RIGHT" | "ARROW_BI"},
     label: string | undefined,
+    params: ParamsAst,
   ] {
     const sosal = this.peek();
     const leftIds = this.parseIdentList();
     const tok = this.advance();
     const rightIds = this.parseIdentList();
     const label: string | undefined = this.match("COLON") ? this.parseLabel() : undefined;
+    const params = this.parseProperties();
     switch (tok.type) {
       case "ARROW_LEFT": case "ARROW_RIGHT": case "ARROW_BI": break;
       default:
         throw new SyntaxError("Unexpected edge syntax", sosal);
     }
-    return [leftIds, rightIds, tok as Token & {type: "ARROW_LEFT" | "ARROW_RIGHT" | "ARROW_BI"}, label];
+    return [leftIds, rightIds, tok as Token & {type: "ARROW_LEFT" | "ARROW_RIGHT" | "ARROW_BI"}, label, params];
   }
 
   private parseIdentList(): string[] {
@@ -183,14 +179,15 @@ class Parser {
   }
 
   parseStatement(): StatementAst {
-    if (this.check("IDENT") && this.value(this.peek()) === "type") {
-      return this.parseTypeStatement();
+    // Check for directive (starts with .)
+    if (this.check("IDENT") && this.value(this.peek()).startsWith(".")) {
+      return this.parseDirective();
     } else if (this.check("IDENT") && this.peekAhead()?.type === "COLON") {
       return this.parseNodeStatement();
     } else if (this.check("IDENT")) {
-      const [leftIds, rightIds, arrowTok, label] = this.parseEdgeStatement();
+      const [leftIds, rightIds, arrowTok, text, params] = this.parseEdgeStatement();
       switch (arrowTok.type) {
-        // toId <- fromIds && ... : label?
+        // toId <- fromIds && ... : label? properties?
         case "ARROW_LEFT":
           if (leftIds.length !== 1)
             throw new SyntaxError("Only one 'to' identifier is allowed", arrowTok);
@@ -198,9 +195,10 @@ class Parser {
             type: "edge",
             toId: leftIds[0],
             fromIds: rightIds,
-            text: label,
+            text,
+            params,
           };
-        // fromIds && ... -> toId : label?
+        // fromIds && ... -> toId : label? properties?
         case "ARROW_RIGHT":
           if (rightIds.length !== 1)
             throw new SyntaxError("Only one 'to' identifier is allowed", arrowTok);
@@ -208,9 +206,10 @@ class Parser {
             type: "edge",
             toId: rightIds[0],
             fromIds: leftIds,
-            text: label,
+            text,
+            params,
           };
-        // fromId -- toId : label?
+        // fromId -- toId : label? properties?
         case "ARROW_BI":
           if (leftIds.length !== 1)
             throw new SyntaxError("Only one 'from' identifier is allowed", arrowTok);
@@ -220,7 +219,8 @@ class Parser {
             type: "edge",
             toId: rightIds[0],
             fromIds: [leftIds[0]],
-            text: label,
+            text,
+            params,
             biDirectional: true,
           };
       }
@@ -243,29 +243,33 @@ const zeroLocation = {col: 0, end: 0, line: 0, start: 0};
 export function parse(input: string): Ast {
   const parser = new Parser(input);
 
-  const typeStatements: (StatementAst & {type: "type"})[] = [];
+  const directives: (StatementAst & {type: "directive"})[] = [];
   const nodeStatements: (StatementAst & {type: "node"})[] = [];
   const edgeStatements: (StatementAst & {type: "edge"})[] = [];
   for (const s of parser.parse()) {
     switch (s.type) {
-      case "type": typeStatements.push(s); break;
+      case "directive": directives.push(s); break;
       case "node": nodeStatements.push(s); break;
       case "edge": edgeStatements.push(s); break;
       default: void s;
     }
   }
 
-  if (typeStatements.length > 1)
-    throw new SyntaxError("Only one 'type' statement is allowed", zeroLocation);
-  else if (typeStatements.length === 1 && !isDiagramType(typeStatements[0].value))
-    throw new SyntaxError(`Invalid type '${typeStatements[0].value}'. Must be one of: ${VALID_TYPES.join(", ")}`, zeroLocation);
+  // Determine type from directive or type statement
+  let diagramType: DiagramType = "problem";
+  for (const directive of directives) { // TODO: assert keys, map to map
+    if (directive.key !== "type")
+      throw new SyntaxError(`Unknown directive '${directive.key}'`, zeroLocation);
+    if (!isDiagramType(directive.value))
+      throw new SyntaxError(`Invalid type '${directive.value}'. Must be one of: ${VALID_TYPES.join(", ")}`, zeroLocation);
+    diagramType = directive.value;
+  }
 
-  const parserType = (typeStatements.length === 1 ? typeStatements[0].value : "problem") as DiagramType;
   return {
-    type: parserType,
+    type: diagramType,
     nodes: nodeStatements.map(({id, text, params}) => ({id, text, params})),
-    edges: edgeStatements.map(({fromIds, toId, text, biDirectional}) => {
-      const res: AstEdge = {fromIds, toId};
+    edges: edgeStatements.map(({fromIds, toId, text, biDirectional, params}) => {
+      const res: AstEdge = {fromIds, toId, params};
       if (text !== undefined) res.text = text;
       if (biDirectional) res.biDirectional = biDirectional;
       return res;

@@ -1,0 +1,9 @@
+.type: conflict
+
+A: "Maximize business performance" shape=circle fill=green border=green
+B: "Subordinate all decisions to financial goal" class=CSF
+C: "Ensure optimal performance" class=CSF
+D: "Subordinate people's needs" shape=box fill=red border=red
+E: "Attend to people's needs" shape=circle fill=blue border=blue
+
+B <- D: "*inject* Psychological flow triggers" color=green

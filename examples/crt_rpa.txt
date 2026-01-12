@@ -1,5 +1,5 @@
 # https://www.youtube.com/watch?v=uggmMOoEfwA
-type: problem
+.type: problem
 
 more_jobs: "RPA creates more jobs than it eliminates"
 rpa_time_value: "RPA creates greater value with the time that is available"
@@ -7,7 +7,7 @@ emp_do_val: "Employees do more valuable work"
 emp_time_value: "Employees doing more valuable work are more valuable to the organization"
 more_jobs <- rpa_time_value && emp_time_value
 
-rpa_no_time: "RPA does not create greater value with the time that is available" {class: UDE}
+rpa_no_time: "RPA does not create greater value with the time that is available" class=UDE
 emp_no_valuable: "Employees don't do more valuable work"
 rpa_no_time <- emp_valuable && emp_no_valuable
 
@@ -48,5 +48,5 @@ redundant_not_replaced: "Redundant employees are not replaced thanks to RPA"
 redundant_workload: "The current workload without redundant employees can be handled with RPA"
 redundant_not_replaced <- unwilling_redundant && redundant_workload
 
-less_jobs: "RPA destroys more jobs than it creates" {class: UDE}
+less_jobs: "RPA destroys more jobs than it creates" class=UDE
 less_jobs <- emp_laidoff && redundant_not_replaced
