@@ -1,0 +1,2805 @@
+// Bun Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`evaporating cloud only type line parses to empty 1`] = `
+"{
+  "type": "conflict",
+  "nodes": [],
+  "edges": []
+}"
+`;
+
+exports[`evaporating cloud with only labels 1`] = `
+"{
+  "type": "conflict",
+  "nodes": [
+    {
+      "id": "A",
+      "text": "Maximize business performance",
+      "params": {}
+    },
+    {
+      "id": "B",
+      "text": "Subordinate all decisions to the financial goal",
+      "params": {}
+    },
+    {
+      "id": "C",
+      "text": "Ensure people are in a state of optimal performance",
+      "params": {}
+    },
+    {
+      "id": "D",
+      "text": "Subordinate people's needs to the financial goal",
+      "params": {}
+    },
+    {
+      "id": "E",
+      "text": "Attend to people's needs (& let people work)",
+      "params": {}
+    }
+  ],
+  "edges": []
+}"
+`;
+
+exports[`evaporating cloud with only labels, quoted 1`] = `
+"{
+  "type": "conflict",
+  "nodes": [
+    {
+      "id": "A",
+      "text": "Maximize business performance {",
+      "params": {}
+    },
+    {
+      "id": "B",
+      "text": "Subordinate all decisions to the financial goal",
+      "params": {}
+    },
+    {
+      "id": "C",
+      "text": "Ensure people are in a state of optimal performance",
+      "params": {}
+    },
+    {
+      "id": "D",
+      "text": "Subordinate people's needs to the financial goal",
+      "params": {}
+    },
+    {
+      "id": "E",
+      "text": "Attend to people's needs (& let people work)",
+      "params": {}
+    }
+  ],
+  "edges": []
+}"
+`;
+
+exports[`evaporating cloud with injection on requirement 1`] = `
+"{
+  "type": "conflict",
+  "nodes": [
+    {
+      "id": "A",
+      "text": "Maximize business performance",
+      "params": {}
+    },
+    {
+      "id": "D",
+      "text": "Subordinate people's needs to the financial goal",
+      "params": {}
+    }
+  ],
+  "edges": [
+    {
+      "fromIds": [
+        "D"
+      ],
+      "toId": "A",
+      "text": "inject Psychological flow triggers"
+    }
+  ]
+}"
+`;
+
+exports[`evaporating cloud with injection on conflict 1`] = `
+"{
+  "type": "conflict",
+  "nodes": [],
+  "edges": [
+    {
+      "fromIds": [
+        "D"
+      ],
+      "toId": "E",
+      "text": "Discover they don't conflict"
+    }
+  ]
+}"
+`;
+
+exports[`evaporating cloud can inject with bidirectional edge 1`] = `
+"{
+  "type": "conflict",
+  "nodes": [],
+  "edges": [
+    {
+      "fromIds": [
+        "D"
+      ],
+      "toId": "E",
+      "text": "Discover they don't conflict",
+      "biDirectional": true
+    }
+  ]
+}"
+`;
+
+exports[`evaporating cloud single-line comments 1`] = `
+"{
+  "type": "conflict",
+  "nodes": [],
+  "edges": []
+}"
+`;
+
+exports[`evaporating cloud unusual characters in annotation 1`] = `
+"{
+  "type": "conflict",
+  "nodes": [
+    {
+      "id": "A",
+      "text": "*watafa* pepe",
+      "params": {}
+    }
+  ],
+  "edges": []
+}"
+`;
+
+exports[`evaporating cloud parses example: Example 1`] = `
+"{
+  "type": "conflict",
+  "nodes": [
+    {
+      "id": "A",
+      "text": "Maximize business performance",
+      "params": {}
+    },
+    {
+      "id": "B",
+      "text": "Subordinate all decisions to the financial goal",
+      "params": {}
+    },
+    {
+      "id": "C",
+      "text": "Ensure people are in a state of optimal performance",
+      "params": {}
+    },
+    {
+      "id": "D",
+      "text": "Subordinate people's needs to the financial goal",
+      "params": {}
+    },
+    {
+      "id": "E",
+      "text": "Attend to people's needs (& let people work)",
+      "params": {}
+    }
+  ],
+  "edges": [
+    {
+      "fromIds": [
+        "D"
+      ],
+      "toId": "B",
+      "text": "*inject* Psychological flow triggers"
+    }
+  ]
+}"
+`;
+
+exports[`evaporating cloud parses example: Speed vs Quality 1`] = `
+"{
+  "type": "conflict",
+  "nodes": [
+    {
+      "id": "A",
+      "text": "Make customers happy",
+      "params": {}
+    },
+    {
+      "id": "B",
+      "text": "Produce new features",
+      "params": {}
+    },
+    {
+      "id": "C",
+      "text": "Make features high quality",
+      "params": {}
+    },
+    {
+      "id": "D",
+      "text": "Work on new features",
+      "params": {}
+    },
+    {
+      "id": "E",
+      "text": "Add more tests",
+      "params": {}
+    }
+  ],
+  "edges": [
+    {
+      "fromIds": [
+        "D"
+      ],
+      "toId": "E",
+      "text": "Writing tests helps developing new features",
+      "biDirectional": true
+    }
+  ]
+}"
+`;
+
+exports[`evaporating cloud parses example: Release more vs less often 1`] = `
+"{
+  "type": "conflict",
+  "nodes": [
+    {
+      "id": "A",
+      "text": "Make customers happy",
+      "params": {}
+    },
+    {
+      "id": "B",
+      "text": "Respond to needs",
+      "params": {}
+    },
+    {
+      "id": "C",
+      "text": "Don't break existing functionality",
+      "params": {}
+    },
+    {
+      "id": "D",
+      "text": "Release more often",
+      "params": {}
+    },
+    {
+      "id": "E",
+      "text": "Release less often",
+      "params": {}
+    }
+  ],
+  "edges": [
+    {
+      "fromIds": [
+        "E"
+      ],
+      "toId": "C",
+      "text": "Release often to ensure releases are non-breaking (CI/CD)"
+    }
+  ]
+}"
+`;
+
+exports[`goal tree with only goal 1`] = `
+"{
+  "type": "goal",
+  "nodes": [
+    {
+      "id": "Goal",
+      "text": "win",
+      "params": {}
+    }
+  ],
+  "edges": []
+}"
+`;
+
+exports[`goal tree with CSF and NCs 1`] = `
+"{
+  "type": "goal",
+  "nodes": [
+    {
+      "id": "Goal",
+      "text": "win",
+      "params": {}
+    },
+    {
+      "id": "weScore",
+      "text": "We score points",
+      "params": {
+        "class": "CSF"
+      }
+    },
+    {
+      "id": "theyDont",
+      "text": "Other team doesn't score",
+      "params": {
+        "class": "CSF"
+      }
+    },
+    {
+      "id": "possession",
+      "text": "We get the ball",
+      "params": {}
+    },
+    {
+      "id": "shooting",
+      "text": "We shoot the ball accurately",
+      "params": {}
+    },
+    {
+      "id": "defense",
+      "text": "We have good defense",
+      "params": {}
+    }
+  ],
+  "edges": [
+    {
+      "fromIds": [
+        "defense"
+      ],
+      "toId": "theyDont"
+    },
+    {
+      "fromIds": [
+        "possession"
+      ],
+      "toId": "weScore"
+    },
+    {
+      "fromIds": [
+        "shooting"
+      ],
+      "toId": "weScore"
+    }
+  ]
+}"
+`;
+
+exports[`goal tree node status 1`] = `
+"{
+  "type": "goal",
+  "nodes": [
+    {
+      "id": "mynode",
+      "text": "win",
+      "params": {
+        "status": "50"
+      }
+    }
+  ],
+  "edges": []
+}"
+`;
+
+exports[`goal tree single-line comments 1`] = `
+"{
+  "type": "goal",
+  "nodes": [],
+  "edges": []
+}"
+`;
+
+exports[`goal tree with status 1`] = `
+"{
+  "type": "goal",
+  "nodes": [
+    {
+      "id": "Goal",
+      "text": "win",
+      "params": {}
+    },
+    {
+      "id": "weScore",
+      "text": "We score points",
+      "params": {
+        "status": "70"
+      }
+    }
+  ],
+  "edges": []
+}"
+`;
+
+exports[`goal tree parses example: Example 1`] = `
+"{
+  "ast": {
+    "type": "goal",
+    "nodes": [
+      {
+        "id": "Goal",
+        "text": "Make money now and in the future",
+        "params": {}
+      },
+      {
+        "id": "revUp",
+        "text": "Generate more revenue",
+        "params": {
+          "class": "CSF"
+        }
+      },
+      {
+        "id": "costsDown",
+        "text": "Control costs",
+        "params": {
+          "class": "CSF"
+        }
+      },
+      {
+        "id": "keepCust",
+        "text": "Protect relationship with existing customers",
+        "params": {}
+      },
+      {
+        "id": "newCust",
+        "text": "Acquire new customers",
+        "params": {}
+      },
+      {
+        "id": "reduceInfra",
+        "text": "Reduce infrastructure spending",
+        "params": {}
+      },
+      {
+        "id": "retain",
+        "text": "Retain employees",
+        "params": {}
+      },
+      {
+        "id": "marketSalary",
+        "text": "Keep up with market salaries",
+        "params": {}
+      },
+      {
+        "id": "morale",
+        "text": "Maintain employee morale",
+        "params": {}
+      },
+      {
+        "id": "features",
+        "text": "Develop new features",
+        "params": {}
+      }
+    ],
+    "edges": [
+      {
+        "fromIds": [
+          "revUp"
+        ],
+        "toId": "Goal"
+      },
+      {
+        "fromIds": [
+          "costsDown"
+        ],
+        "toId": "Goal"
+      },
+      {
+        "fromIds": [
+          "features"
+        ],
+        "toId": "newCust"
+      },
+      {
+        "fromIds": [
+          "retain"
+        ],
+        "toId": "features"
+      },
+      {
+        "fromIds": [
+          "newCust"
+        ],
+        "toId": "revUp"
+      },
+      {
+        "fromIds": [
+          "keepCust"
+        ],
+        "toId": "revUp"
+      },
+      {
+        "fromIds": [
+          "reduceInfra"
+        ],
+        "toId": "costsDown"
+      },
+      {
+        "fromIds": [
+          "marketSalary"
+        ],
+        "toId": "retain"
+      },
+      {
+        "fromIds": [
+          "morale"
+        ],
+        "toId": "retain"
+      }
+    ]
+  },
+  "semantics": {
+    "nodes": {
+      "Goal": {
+        "id": "Goal",
+        "annotation": "G",
+        "label": "Make money now and in the future"
+      },
+      "revUp": {
+        "id": "revUp",
+        "label": "Generate more revenue",
+        "annotation": "CSF"
+      },
+      "costsDown": {
+        "id": "costsDown",
+        "label": "Control costs",
+        "annotation": "CSF"
+      },
+      "keepCust": {
+        "id": "keepCust",
+        "label": "Protect relationship with existing customers"
+      },
+      "newCust": {
+        "id": "newCust",
+        "label": "Acquire new customers"
+      },
+      "reduceInfra": {
+        "id": "reduceInfra",
+        "label": "Reduce infrastructure spending"
+      },
+      "features": {
+        "id": "features",
+        "label": "Develop new features"
+      },
+      "retain": {
+        "id": "retain",
+        "label": "Retain employees"
+      },
+      "marketSalary": {
+        "id": "marketSalary",
+        "label": "Keep up with market salaries"
+      },
+      "morale": {
+        "id": "morale",
+        "label": "Maintain employee morale"
+      }
+    },
+    "edges": [
+      {
+        "from": "revUp",
+        "to": "Goal"
+      },
+      {
+        "from": "costsDown",
+        "to": "Goal"
+      },
+      {
+        "from": "newCust",
+        "to": "revUp"
+      },
+      {
+        "from": "keepCust",
+        "to": "revUp"
+      },
+      {
+        "from": "reduceInfra",
+        "to": "costsDown"
+      },
+      {
+        "from": "features",
+        "to": "newCust"
+      },
+      {
+        "from": "retain",
+        "to": "features"
+      },
+      {
+        "from": "marketSalary",
+        "to": "retain"
+      },
+      {
+        "from": "morale",
+        "to": "retain"
+      }
+    ],
+    "rankdir": "BT"
+  }
+}"
+`;
+
+exports[`goal tree parses example: Goal Tree for TOC-lang 1`] = `
+"{
+  "ast": {
+    "type": "goal",
+    "nodes": [
+      {
+        "id": "Goal",
+        "text": "Drive adoption of TOC in software",
+        "params": {}
+      },
+      {
+        "id": "devFriendly",
+        "text": "Thinking Processes are Dev Friendly",
+        "params": {}
+      },
+      {
+        "id": "openTool",
+        "text": "Open source tooling",
+        "params": {}
+      },
+      {
+        "id": "wellFormed",
+        "text": "It is easy to create well-formed diagrams",
+        "params": {}
+      },
+      {
+        "id": "versioning",
+        "text": "Diagrams can be version controlled with source code",
+        "params": {
+          "status": "50"
+        }
+      },
+      {
+        "id": "textRep",
+        "text": "Diagrams have a textual representation",
+        "params": {
+          "status": "50"
+        }
+      },
+      {
+        "id": "gtGrammar",
+        "text": "Goal Tree grammar",
+        "params": {
+          "status": "100"
+        }
+      },
+      {
+        "id": "ecGrammar",
+        "text": "Evaporating Cloud grammar",
+        "params": {
+          "status": "100"
+        }
+      },
+      {
+        "id": "crtGrammar",
+        "text": "Current Reality Tree grammar",
+        "params": {
+          "status": "100"
+        }
+      },
+      {
+        "id": "prqGrammar",
+        "text": "Prerequisite Tree grammar",
+        "params": {
+          "status": "1"
+        }
+      },
+      {
+        "id": "frtGrammar",
+        "text": "Future Reality Tree grammar",
+        "params": {
+          "status": "1"
+        }
+      }
+    ],
+    "edges": [
+      {
+        "fromIds": [
+          "devFriendly"
+        ],
+        "toId": "Goal"
+      },
+      {
+        "fromIds": [
+          "openTool"
+        ],
+        "toId": "devFriendly"
+      },
+      {
+        "fromIds": [
+          "wellFormed"
+        ],
+        "toId": "devFriendly"
+      },
+      {
+        "fromIds": [
+          "versioning"
+        ],
+        "toId": "devFriendly"
+      },
+      {
+        "fromIds": [
+          "textRep"
+        ],
+        "toId": "versioning"
+      },
+      {
+        "fromIds": [
+          "gtGrammar"
+        ],
+        "toId": "textRep"
+      },
+      {
+        "fromIds": [
+          "crtGrammar"
+        ],
+        "toId": "textRep"
+      },
+      {
+        "fromIds": [
+          "ecGrammar"
+        ],
+        "toId": "textRep"
+      },
+      {
+        "fromIds": [
+          "prqGrammar"
+        ],
+        "toId": "textRep"
+      },
+      {
+        "fromIds": [
+          "frtGrammar"
+        ],
+        "toId": "textRep"
+      }
+    ]
+  },
+  "semantics": {
+    "nodes": {
+      "Goal": {
+        "id": "Goal",
+        "annotation": "G",
+        "label": "Drive adoption of TOC in software"
+      },
+      "devFriendly": {
+        "id": "devFriendly",
+        "label": "Thinking Processes are Dev Friendly",
+        "annotation": "CSF"
+      },
+      "openTool": {
+        "id": "openTool",
+        "label": "Open source tooling"
+      },
+      "wellFormed": {
+        "id": "wellFormed",
+        "label": "It is easy to create well-formed diagrams"
+      },
+      "versioning": {
+        "id": "versioning",
+        "label": "Diagrams can be version controlled with source code",
+        "statusPercentage": 50
+      },
+      "textRep": {
+        "id": "textRep",
+        "label": "Diagrams have a textual representation",
+        "statusPercentage": 50
+      },
+      "gtGrammar": {
+        "id": "gtGrammar",
+        "label": "Goal Tree grammar",
+        "statusPercentage": 100
+      },
+      "ecGrammar": {
+        "id": "ecGrammar",
+        "label": "Evaporating Cloud grammar",
+        "statusPercentage": 100
+      },
+      "crtGrammar": {
+        "id": "crtGrammar",
+        "label": "Current Reality Tree grammar",
+        "statusPercentage": 100
+      },
+      "prqGrammar": {
+        "id": "prqGrammar",
+        "label": "Prerequisite Tree grammar",
+        "statusPercentage": 1
+      },
+      "frtGrammar": {
+        "id": "frtGrammar",
+        "label": "Future Reality Tree grammar",
+        "statusPercentage": 1
+      }
+    },
+    "edges": [
+      {
+        "from": "devFriendly",
+        "to": "Goal"
+      },
+      {
+        "from": "openTool",
+        "to": "devFriendly"
+      },
+      {
+        "from": "wellFormed",
+        "to": "devFriendly"
+      },
+      {
+        "from": "versioning",
+        "to": "devFriendly"
+      },
+      {
+        "from": "textRep",
+        "to": "versioning"
+      },
+      {
+        "from": "gtGrammar",
+        "to": "textRep"
+      },
+      {
+        "from": "crtGrammar",
+        "to": "textRep"
+      },
+      {
+        "from": "ecGrammar",
+        "to": "textRep"
+      },
+      {
+        "from": "prqGrammar",
+        "to": "textRep"
+      },
+      {
+        "from": "frtGrammar",
+        "to": "textRep"
+      }
+    ],
+    "rankdir": "BT"
+  }
+}"
+`;
+
+exports[`problem tree with only UDE 1`] = `
+"{
+  "type": "problem",
+  "nodes": [
+    {
+      "id": "b",
+      "text": "badness",
+      "params": {
+        "class": "UDE"
+      }
+    }
+  ],
+  "edges": []
+}"
+`;
+
+exports[`problem tree with UDE and single cause 1`] = `
+"{
+  "type": "problem",
+  "nodes": [
+    {
+      "id": "b",
+      "text": "badness",
+      "params": {
+        "class": "UDE"
+      }
+    },
+    {
+      "id": "c",
+      "text": "cause",
+      "params": {}
+    }
+  ],
+  "edges": [
+    {
+      "fromIds": [
+        "c"
+      ],
+      "toId": "b"
+    }
+  ]
+}"
+`;
+
+exports[`problem tree with UDE and multi-cause 1`] = `
+"{
+  "type": "problem",
+  "nodes": [
+    {
+      "id": "b",
+      "text": "badness",
+      "params": {
+        "class": "UDE"
+      }
+    },
+    {
+      "id": "c1",
+      "text": "cause 1",
+      "params": {}
+    },
+    {
+      "id": "c2",
+      "text": "cause 2",
+      "params": {}
+    }
+  ],
+  "edges": [
+    {
+      "fromIds": [
+        "c1",
+        "c2"
+      ],
+      "toId": "b"
+    }
+  ]
+}"
+`;
+
+exports[`problem tree with multi-cause right arrow 1`] = `
+"{
+  "type": "problem",
+  "nodes": [
+    {
+      "id": "b",
+      "text": "badness",
+      "params": {}
+    },
+    {
+      "id": "c1",
+      "text": "cause 1",
+      "params": {}
+    },
+    {
+      "id": "c2",
+      "text": "cause 2",
+      "params": {}
+    }
+  ],
+  "edges": [
+    {
+      "fromIds": [
+        "c1",
+        "c2"
+      ],
+      "toId": "b"
+    }
+  ]
+}"
+`;
+
+exports[`problem tree single-line comments 1`] = `
+"{
+  "type": "problem",
+  "nodes": [],
+  "edges": []
+}"
+`;
+
+exports[`problem tree single cause right arrow 1`] = `
+"{
+  "type": "problem",
+  "nodes": [
+    {
+      "id": "b",
+      "text": "badness",
+      "params": {}
+    },
+    {
+      "id": "c",
+      "text": "cause",
+      "params": {}
+    }
+  ],
+  "edges": [
+    {
+      "fromIds": [
+        "c"
+      ],
+      "toId": "b"
+    }
+  ]
+}"
+`;
+
+exports[`problem tree empty text 1`] = `
+"{
+  "type": "problem",
+  "nodes": [],
+  "edges": []
+}"
+`;
+
+exports[`problem tree parses example: Example 1`] = `
+"{
+  "ast": {
+    "type": "problem",
+    "nodes": [
+      {
+        "id": "bad",
+        "text": "Bad user experience",
+        "params": {
+          "class": "UDE"
+        }
+      },
+      {
+        "id": "cluttered",
+        "text": "Cluttered interface",
+        "params": {
+          "class": "UDE"
+        }
+      },
+      {
+        "id": "ux",
+        "text": "Low investment in UX design",
+        "params": {}
+      },
+      {
+        "id": "features",
+        "text": "Many features added",
+        "params": {}
+      }
+    ],
+    "edges": [
+      {
+        "fromIds": [
+          "cluttered"
+        ],
+        "toId": "bad"
+      },
+      {
+        "fromIds": [
+          "ux",
+          "features"
+        ],
+        "toId": "cluttered"
+      }
+    ]
+  },
+  "semantics": {
+    "nodes": {
+      "bad": {
+        "id": "bad",
+        "label": "Bad user experience",
+        "annotation": "UDE"
+      },
+      "cluttered": {
+        "id": "cluttered",
+        "label": "Cluttered interface",
+        "annotation": "UDE"
+      },
+      "ux": {
+        "id": "ux",
+        "label": "Low investment in UX design"
+      },
+      "features": {
+        "id": "features",
+        "label": "Many features added"
+      },
+      "ux_features_cause_cluttered": {
+        "id": "ux_features_cause_cluttered",
+        "label": "AND",
+        "intermediate": true
+      }
+    },
+    "edges": [
+      {
+        "from": "cluttered",
+        "to": "bad"
+      },
+      {
+        "from": "ux",
+        "to": "ux_features_cause_cluttered"
+      },
+      {
+        "from": "features",
+        "to": "ux_features_cause_cluttered"
+      },
+      {
+        "from": "ux_features_cause_cluttered",
+        "to": "cluttered"
+      }
+    ],
+    "rankdir": "BT"
+  }
+}"
+`;
+
+exports[`problem tree parses example: TOC adoption among devs 1`] = `
+"{
+  "ast": {
+    "type": "problem",
+    "nodes": [
+      {
+        "id": "lowAdoption",
+        "text": "There is low adoption of TOC methods in the software industry",
+        "params": {
+          "class": "UDE"
+        }
+      },
+      {
+        "id": "friction",
+        "text": "Existing tools introduce friction for developers",
+        "params": {}
+      },
+      {
+        "id": "closedSource",
+        "text": "TOC-specific tools are closed source",
+        "params": {}
+      },
+      {
+        "id": "noVersionControl",
+        "text": "Existing tools cannot be version controlled",
+        "params": {}
+      },
+      {
+        "id": "versionControlPreference",
+        "text": "Devs expect the ability to maintain docs along-side source code",
+        "params": {
+          "class": "FOL"
+        }
+      },
+      {
+        "id": "openSourcePreference",
+        "text": "Devs are unlikely to buy proprietary diagraming tools as their first intro to TOC",
+        "params": {
+          "class": "FOL"
+        }
+      }
+    ],
+    "edges": [
+      {
+        "fromIds": [
+          "friction"
+        ],
+        "toId": "lowAdoption"
+      },
+      {
+        "fromIds": [
+          "closedSource",
+          "openSourcePreference"
+        ],
+        "toId": "friction"
+      },
+      {
+        "fromIds": [
+          "noVersionControl",
+          "versionControlPreference"
+        ],
+        "toId": "friction"
+      }
+    ]
+  },
+  "semantics": {
+    "nodes": {
+      "lowAdoption": {
+        "id": "lowAdoption",
+        "label": "There is low adoption of TOC methods in the software industry",
+        "annotation": "UDE"
+      },
+      "friction": {
+        "id": "friction",
+        "label": "Existing tools introduce friction for developers"
+      },
+      "closedSource": {
+        "id": "closedSource",
+        "label": "TOC-specific tools are closed source"
+      },
+      "noVersionControl": {
+        "id": "noVersionControl",
+        "label": "Existing tools cannot be version controlled"
+      },
+      "versionControlPreference": {
+        "id": "versionControlPreference",
+        "label": "Devs expect the ability to maintain docs along-side source code",
+        "annotation": "FOL"
+      },
+      "openSourcePreference": {
+        "id": "openSourcePreference",
+        "label": "Devs are unlikely to buy proprietary diagraming tools as their first intro to TOC",
+        "annotation": "FOL"
+      },
+      "closedSource_openSourcePreference_cause_friction": {
+        "id": "closedSource_openSourcePreference_cause_friction",
+        "label": "AND",
+        "intermediate": true
+      },
+      "noVersionControl_versionControlPreference_cause_friction": {
+        "id": "noVersionControl_versionControlPreference_cause_friction",
+        "label": "AND",
+        "intermediate": true
+      }
+    },
+    "edges": [
+      {
+        "from": "friction",
+        "to": "lowAdoption"
+      },
+      {
+        "from": "closedSource",
+        "to": "closedSource_openSourcePreference_cause_friction"
+      },
+      {
+        "from": "openSourcePreference",
+        "to": "closedSource_openSourcePreference_cause_friction"
+      },
+      {
+        "from": "closedSource_openSourcePreference_cause_friction",
+        "to": "friction"
+      },
+      {
+        "from": "noVersionControl",
+        "to": "noVersionControl_versionControlPreference_cause_friction"
+      },
+      {
+        "from": "versionControlPreference",
+        "to": "noVersionControl_versionControlPreference_cause_friction"
+      },
+      {
+        "from": "noVersionControl_versionControlPreference_cause_friction",
+        "to": "friction"
+      }
+    ],
+    "rankdir": "BT"
+  }
+}"
+`;
+
+exports[`problem tree parses example: Current Reality Tree from "It’s not Luck" 1`] = `
+"{
+  "ast": {
+    "type": "problem",
+    "nodes": [
+      {
+        "id": "lessUnified",
+        "text": "Sellers display a less and less unified front",
+        "params": {
+          "class": "UDE"
+        }
+      },
+      {
+        "id": "fierceComp",
+        "text": "Competition is fiercer than ever",
+        "params": {
+          "class": "UDE"
+        }
+      },
+      {
+        "id": "pricePressure",
+        "text": "There is an increasing pressure to reduce prices",
+        "params": {
+          "class": "UDE"
+        }
+      },
+      {
+        "id": "tradMethod",
+        "text": "A desperate traditional to get sales is to reduce prices",
+        "params": {
+          "class": "FOL"
+        }
+      },
+      {
+        "id": "salesPressure",
+        "text": "There is an increasing pressure to take actions that will increase sales",
+        "params": {
+          "class": "UDE"
+        }
+      },
+      {
+        "id": "salesPeoplePressure",
+        "text": "There is pressure on salespeople to bring in more sales",
+        "params": {
+          "class": "UDE"
+        }
+      },
+      {
+        "id": "companiesFallingShort",
+        "text": "Companies are falling short of their stated financial targets",
+        "params": {
+          "class": "UDE"
+        }
+      },
+      {
+        "id": "alreadyCut",
+        "text": "Companies have already cut the costs they know how to cut",
+        "params": {
+          "class": "FOL"
+        }
+      },
+      {
+        "id": "notImproving",
+        "text": "Companies are not improving fast enough",
+        "params": {
+          "class": "UDE"
+        }
+      },
+      {
+        "id": "salesOverloaded",
+        "text": "Salespeople are overloaded",
+        "params": {
+          "class": "UDE"
+        }
+      },
+      {
+        "id": "newProductsConfuse",
+        "text": "In advanced material industries the constant introduction of new products confuses and spoils the market",
+        "params": {
+          "class": "UDE"
+        }
+      },
+      {
+        "id": "needLaunchProducts",
+        "text": "In advanced material industries there is need to launch new products at an unprecedented rate",
+        "params": {
+          "class": "UDE"
+        }
+      },
+      {
+        "id": "pressureDevelopProducts",
+        "text": "In advanced material industries there is unprecedented pressure to promptly develop new products",
+        "params": {
+          "class": "UDE"
+        }
+      },
+      {
+        "id": "sellNewProducts",
+        "text": "One of the most effective ways to increase sales is to develop new, improved products",
+        "params": {
+          "class": "FOL"
+        }
+      },
+      {
+        "id": "newMaterialsEnables",
+        "text": "There are industries where fast development of new material enables the development of new products - advanced material industries",
+        "params": {
+          "class": "FOL"
+        }
+      },
+      {
+        "id": "engTooSlow",
+        "text": "Engineering is unable to deliver new products fast and reliably enough",
+        "params": {
+          "class": "UDE"
+        }
+      },
+      {
+        "id": "prodDistNotImproving",
+        "text": "Production and distribution do not improve fast/significantly enough",
+        "params": {
+          "class": "UDE"
+        }
+      },
+      {
+        "id": "insuffientMarketingIdeas",
+        "text": "Companies do not come up with sufficient innovative ideas in marketing",
+        "params": {
+          "class": "UDE"
+        }
+      },
+      {
+        "id": "marketingNotOriented",
+        "text": "Marketing is not oriented to take advantage of the most promising and almost virgin direction - that of market segmentation",
+        "params": {
+          "class": "UDE"
+        }
+      },
+      {
+        "id": "eatIntoSales",
+        "text": "Most new outlets and most new/improved products eat into the sales of existing outlets/products",
+        "params": {
+          "class": "UDE"
+        }
+      },
+      {
+        "id": "differentPerceptions",
+        "text": "Different market sections might have different perceptions of value even for the same product",
+        "params": {}
+      },
+      {
+        "id": "singlePriceTrimsCust",
+        "text": "Imposing a single price trims away customers for whom the price is too steep relative to their perception of value",
+        "params": {
+          "class": "UDE"
+        }
+      },
+      {
+        "id": "singlePriceLowers",
+        "text": "Imposing a single price enables customer who have a high perception of value to pay a lower price",
+        "params": {
+          "class": "UDE"
+        }
+      },
+      {
+        "id": "marketPunish",
+        "text": "More than ever the market punishes suppliers who don't perform according to expectation",
+        "params": {
+          "class": "UDE"
+        }
+      },
+      {
+        "id": "marketPerceptionIsKey",
+        "text": "More than ever satisfying the market perception of value is key to success",
+        "params": {}
+      },
+      {
+        "id": "lowMargin",
+        "text": "In more and more cases the price the market is willing to pay doesn't leave behind enough margin",
+        "params": {
+          "class": "UDE"
+        }
+      },
+      {
+        "id": "perceptionMatchesBenefits",
+        "text": "Market perception of value is in accordance with with the benefits of having the product",
+        "params": {
+          "class": "FOL"
+        }
+      },
+      {
+        "id": "marketDeterminesPrice",
+        "text": "Prices and quantities sold are determined more and more by the markets' perception of value and less and less by the suppliers perception of value",
+        "params": {}
+      },
+      {
+        "id": "managersBelieveGoodPrice",
+        "text": "Most managers believe that the product price should be equal to product cost plus reasonable margin",
+        "params": {
+          "class": "UDE"
+        }
+      },
+      {
+        "id": "managersBelieveSinglePrice",
+        "text": "Most managers believe that there is a single, fair price for a product",
+        "params": {
+          "class": "UDE"
+        }
+      },
+      {
+        "id": "managersBelieveBelowCostLosses",
+        "text": "Most managers believe that selling below product cost leads (at least in the long run) to losses",
+        "params": {
+          "class": "UDE"
+        }
+      },
+      {
+        "id": "refuseLowMargins",
+        "text": "Most companies are reluctant to accept orders with low margins and even go so far as dropping low-margin products",
+        "params": {
+          "class": "UDE"
+        }
+      },
+      {
+        "id": "differentSectionsNeeds",
+        "text": "Different market sections might have different needs?",
+        "params": {
+          "class": "FOL"
+        }
+      },
+      {
+        "id": "canSegment",
+        "text": "Actions to guarantee effective segmentation can be taken",
+        "params": {}
+      },
+      {
+        "id": "believeProductCostReal",
+        "text": "Most managers believe that product cost is something real that that quantifies the efforts absorbed by the product",
+        "params": {
+          "class": "UDE"
+        }
+      },
+      {
+        "id": "managerMeasure",
+        "text": "For every mode of operation, managers develop suitable measurements",
+        "params": {
+          "class": "FOL"
+        }
+      },
+      {
+        "id": "localOptima",
+        "text": "Managers are trying to run their companies by striving to achieve local optima",
+        "params": {
+          "class": "UDE"
+        }
+      },
+      {
+        "id": "measureLocal",
+        "text": "There are important measurements that focus on local optima, e.g. cost accounting based measurements",
+        "params": {
+          "class": "UDE"
+        }
+      },
+      {
+        "id": "improvementIncreasesCost",
+        "text": "Many actions that are needed for improving lead-time, reliability, quality, response time and service do not save cost and/or increase cost in the short run",
+        "params": {
+          "class": "FOL"
+        }
+      },
+      {
+        "id": "managersPerceiveEffortAsValue",
+        "text": "Most managers' perception of value of a product is heavily influenced by the local efforts required to design, produce, sell and deliver the product",
+        "params": {
+          "class": "UDE"
+        }
+      },
+      {
+        "id": "costAccountingProductCost",
+        "text": "The essence of cost accounting is to calculate the product cost",
+        "params": {
+          "class": "FOL"
+        }
+      },
+      {
+        "id": "lackSalesSkills",
+        "text": "A large percentage of the existing sales force lacks sufficient sales skills",
+        "params": {
+          "class": "UDE"
+        }
+      }
+    ],
+    "edges": [
+      {
+        "fromIds": [
+          "pricePressure"
+        ],
+        "toId": "fierceComp"
+      },
+      {
+        "fromIds": [
+          "fierceComp"
+        ],
+        "toId": "lessUnified"
+      },
+      {
+        "fromIds": [
+          "salesPressure"
+        ],
+        "toId": "salesPeoplePressure"
+      },
+      {
+        "fromIds": [
+          "tradMethod",
+          "salesPressure"
+        ],
+        "toId": "pricePressure"
+      },
+      {
+        "fromIds": [
+          "companiesFallingShort",
+          "alreadyCut"
+        ],
+        "toId": "salesPressure"
+      },
+      {
+        "fromIds": [
+          "notImproving",
+          "fierceComp"
+        ],
+        "toId": "companiesFallingShort"
+      },
+      {
+        "fromIds": [
+          "salesPeoplePressure",
+          "needLaunchProducts"
+        ],
+        "toId": "salesOverloaded"
+      },
+      {
+        "fromIds": [
+          "needLaunchProducts"
+        ],
+        "toId": "newProductsConfuse"
+      },
+      {
+        "fromIds": [
+          "needLaunchProducts"
+        ],
+        "toId": "fierceComp"
+      },
+      {
+        "fromIds": [
+          "salesPressure",
+          "sellNewProducts",
+          "newMaterialsEnables"
+        ],
+        "toId": "pressureDevelopProducts"
+      },
+      {
+        "fromIds": [
+          "pressureDevelopProducts"
+        ],
+        "toId": "needLaunchProducts"
+      },
+      {
+        "fromIds": [
+          "engTooSlow",
+          "prodDistNotImproving",
+          "insuffientMarketingIdeas"
+        ],
+        "toId": "notImproving"
+      },
+      {
+        "fromIds": [
+          "marketingNotOriented"
+        ],
+        "toId": "insuffientMarketingIdeas"
+      },
+      {
+        "fromIds": [
+          "marketingNotOriented"
+        ],
+        "toId": "eatIntoSales"
+      },
+      {
+        "fromIds": [
+          "differentPerceptions",
+          "singlePriceTrimsCust",
+          "singlePriceLowers"
+        ],
+        "toId": "marketingNotOriented"
+      },
+      {
+        "fromIds": [
+          "singlePriceTrimsCust",
+          "singlePriceLowers",
+          "marketPerceptionIsKey"
+        ],
+        "toId": "marketPunish"
+      },
+      {
+        "fromIds": [
+          "perceptionMatchesBenefits"
+        ],
+        "toId": "marketDeterminesPrice"
+      },
+      {
+        "fromIds": [
+          "marketDeterminesPrice"
+        ],
+        "toId": "marketPerceptionIsKey"
+      },
+      {
+        "fromIds": [
+          "marketDeterminesPrice",
+          "managersBelieveGoodPrice"
+        ],
+        "toId": "lowMargin"
+      },
+      {
+        "fromIds": [
+          "managersBelieveGoodPrice"
+        ],
+        "toId": "managersBelieveSinglePrice"
+      },
+      {
+        "fromIds": [
+          "managersBelieveSinglePrice"
+        ],
+        "toId": "singlePriceTrimsCust"
+      },
+      {
+        "fromIds": [
+          "managersBelieveSinglePrice"
+        ],
+        "toId": "singlePriceLowers"
+      },
+      {
+        "fromIds": [
+          "managersBelieveGoodPrice"
+        ],
+        "toId": "managersBelieveBelowCostLosses"
+      },
+      {
+        "fromIds": [
+          "managersBelieveBelowCostLosses"
+        ],
+        "toId": "refuseLowMargins"
+      },
+      {
+        "fromIds": [
+          "differentSectionsNeeds",
+          "canSegment"
+        ],
+        "toId": "differentPerceptions"
+      },
+      {
+        "fromIds": [
+          "believeProductCostReal"
+        ],
+        "toId": "managersBelieveGoodPrice"
+      },
+      {
+        "fromIds": [
+          "managerMeasure",
+          "localOptima"
+        ],
+        "toId": "measureLocal"
+      },
+      {
+        "fromIds": [
+          "improvementIncreasesCost",
+          "measureLocal"
+        ],
+        "toId": "prodDistNotImproving"
+      },
+      {
+        "fromIds": [
+          "improvementIncreasesCost",
+          "measureLocal"
+        ],
+        "toId": "engTooSlow"
+      },
+      {
+        "fromIds": [
+          "localOptima"
+        ],
+        "toId": "managersPerceiveEffortAsValue"
+      },
+      {
+        "fromIds": [
+          "costAccountingProductCost",
+          "managersPerceiveEffortAsValue",
+          "measureLocal"
+        ],
+        "toId": "believeProductCostReal"
+      }
+    ]
+  },
+  "semantics": {
+    "nodes": {
+      "lessUnified": {
+        "id": "lessUnified",
+        "label": "Sellers display a less and less unified front",
+        "annotation": "UDE"
+      },
+      "salesOverloaded": {
+        "id": "salesOverloaded",
+        "label": "Salespeople are overloaded",
+        "annotation": "UDE"
+      },
+      "salesPeoplePressure": {
+        "id": "salesPeoplePressure",
+        "label": "There is pressure on salespeople to bring in more sales",
+        "annotation": "UDE"
+      },
+      "pricePressure": {
+        "id": "pricePressure",
+        "label": "There is an increasing pressure to reduce prices",
+        "annotation": "UDE"
+      },
+      "newProductsConfuse": {
+        "id": "newProductsConfuse",
+        "label": "In advanced material industries the constant introduction of new products confuses and spoils the market",
+        "annotation": "UDE"
+      },
+      "needLaunchProducts": {
+        "id": "needLaunchProducts",
+        "label": "In advanced material industries there is need to launch new products at an unprecedented rate",
+        "annotation": "UDE"
+      },
+      "pressureDevelopProducts": {
+        "id": "pressureDevelopProducts",
+        "label": "In advanced material industries there is unprecedented pressure to promptly develop new products",
+        "annotation": "UDE"
+      },
+      "salesPressure": {
+        "id": "salesPressure",
+        "label": "There is an increasing pressure to take actions that will increase sales",
+        "annotation": "UDE"
+      },
+      "companiesFallingShort": {
+        "id": "companiesFallingShort",
+        "label": "Companies are falling short of their stated financial targets",
+        "annotation": "UDE"
+      },
+      "fierceComp": {
+        "id": "fierceComp",
+        "label": "Competition is fiercer than ever",
+        "annotation": "UDE"
+      },
+      "tradMethod": {
+        "id": "tradMethod",
+        "label": "A desperate traditional to get sales is to reduce prices",
+        "annotation": "FOL"
+      },
+      "alreadyCut": {
+        "id": "alreadyCut",
+        "label": "Companies have already cut the costs they know how to cut",
+        "annotation": "FOL"
+      },
+      "notImproving": {
+        "id": "notImproving",
+        "label": "Companies are not improving fast enough",
+        "annotation": "UDE"
+      },
+      "sellNewProducts": {
+        "id": "sellNewProducts",
+        "label": "One of the most effective ways to increase sales is to develop new, improved products",
+        "annotation": "FOL"
+      },
+      "newMaterialsEnables": {
+        "id": "newMaterialsEnables",
+        "label": "There are industries where fast development of new material enables the development of new products - advanced material industries",
+        "annotation": "FOL"
+      },
+      "engTooSlow": {
+        "id": "engTooSlow",
+        "label": "Engineering is unable to deliver new products fast and reliably enough",
+        "annotation": "UDE"
+      },
+      "prodDistNotImproving": {
+        "id": "prodDistNotImproving",
+        "label": "Production and distribution do not improve fast/significantly enough",
+        "annotation": "UDE"
+      },
+      "insuffientMarketingIdeas": {
+        "id": "insuffientMarketingIdeas",
+        "label": "Companies do not come up with sufficient innovative ideas in marketing",
+        "annotation": "UDE"
+      },
+      "eatIntoSales": {
+        "id": "eatIntoSales",
+        "label": "Most new outlets and most new/improved products eat into the sales of existing outlets/products",
+        "annotation": "UDE"
+      },
+      "marketingNotOriented": {
+        "id": "marketingNotOriented",
+        "label": "Marketing is not oriented to take advantage of the most promising and almost virgin direction - that of market segmentation",
+        "annotation": "UDE"
+      },
+      "differentPerceptions": {
+        "id": "differentPerceptions",
+        "label": "Different market sections might have different perceptions of value even for the same product"
+      },
+      "marketPunish": {
+        "id": "marketPunish",
+        "label": "More than ever the market punishes suppliers who don't perform according to expectation",
+        "annotation": "UDE"
+      },
+      "singlePriceTrimsCust": {
+        "id": "singlePriceTrimsCust",
+        "label": "Imposing a single price trims away customers for whom the price is too steep relative to their perception of value",
+        "annotation": "UDE"
+      },
+      "singlePriceLowers": {
+        "id": "singlePriceLowers",
+        "label": "Imposing a single price enables customer who have a high perception of value to pay a lower price",
+        "annotation": "UDE"
+      },
+      "marketPerceptionIsKey": {
+        "id": "marketPerceptionIsKey",
+        "label": "More than ever satisfying the market perception of value is key to success"
+      },
+      "lowMargin": {
+        "id": "lowMargin",
+        "label": "In more and more cases the price the market is willing to pay doesn't leave behind enough margin",
+        "annotation": "UDE"
+      },
+      "marketDeterminesPrice": {
+        "id": "marketDeterminesPrice",
+        "label": "Prices and quantities sold are determined more and more by the markets' perception of value and less and less by the suppliers perception of value"
+      },
+      "perceptionMatchesBenefits": {
+        "id": "perceptionMatchesBenefits",
+        "label": "Market perception of value is in accordance with with the benefits of having the product",
+        "annotation": "FOL"
+      },
+      "managersBelieveSinglePrice": {
+        "id": "managersBelieveSinglePrice",
+        "label": "Most managers believe that there is a single, fair price for a product",
+        "annotation": "UDE"
+      },
+      "refuseLowMargins": {
+        "id": "refuseLowMargins",
+        "label": "Most companies are reluctant to accept orders with low margins and even go so far as dropping low-margin products",
+        "annotation": "UDE"
+      },
+      "managersBelieveBelowCostLosses": {
+        "id": "managersBelieveBelowCostLosses",
+        "label": "Most managers believe that selling below product cost leads (at least in the long run) to losses",
+        "annotation": "UDE"
+      },
+      "managersBelieveGoodPrice": {
+        "id": "managersBelieveGoodPrice",
+        "label": "Most managers believe that the product price should be equal to product cost plus reasonable margin",
+        "annotation": "UDE"
+      },
+      "differentSectionsNeeds": {
+        "id": "differentSectionsNeeds",
+        "label": "Different market sections might have different needs?",
+        "annotation": "FOL"
+      },
+      "canSegment": {
+        "id": "canSegment",
+        "label": "Actions to guarantee effective segmentation can be taken"
+      },
+      "believeProductCostReal": {
+        "id": "believeProductCostReal",
+        "label": "Most managers believe that product cost is something real that that quantifies the efforts absorbed by the product",
+        "annotation": "UDE"
+      },
+      "measureLocal": {
+        "id": "measureLocal",
+        "label": "There are important measurements that focus on local optima, e.g. cost accounting based measurements",
+        "annotation": "UDE"
+      },
+      "managerMeasure": {
+        "id": "managerMeasure",
+        "label": "For every mode of operation, managers develop suitable measurements",
+        "annotation": "FOL"
+      },
+      "managersPerceiveEffortAsValue": {
+        "id": "managersPerceiveEffortAsValue",
+        "label": "Most managers' perception of value of a product is heavily influenced by the local efforts required to design, produce, sell and deliver the product",
+        "annotation": "UDE"
+      },
+      "localOptima": {
+        "id": "localOptima",
+        "label": "Managers are trying to run their companies by striving to achieve local optima",
+        "annotation": "UDE"
+      },
+      "improvementIncreasesCost": {
+        "id": "improvementIncreasesCost",
+        "label": "Many actions that are needed for improving lead-time, reliability, quality, response time and service do not save cost and/or increase cost in the short run",
+        "annotation": "FOL"
+      },
+      "costAccountingProductCost": {
+        "id": "costAccountingProductCost",
+        "label": "The essence of cost accounting is to calculate the product cost",
+        "annotation": "FOL"
+      },
+      "lackSalesSkills": {
+        "id": "lackSalesSkills",
+        "label": "A large percentage of the existing sales force lacks sufficient sales skills",
+        "annotation": "UDE"
+      },
+      "salesPeoplePressure_needLaunchProducts_cause_salesOverloaded": {
+        "id": "salesPeoplePressure_needLaunchProducts_cause_salesOverloaded",
+        "label": "AND",
+        "intermediate": true
+      },
+      "tradMethod_salesPressure_cause_pricePressure": {
+        "id": "tradMethod_salesPressure_cause_pricePressure",
+        "label": "AND",
+        "intermediate": true
+      },
+      "companiesFallingShort_alreadyCut_cause_salesPressure": {
+        "id": "companiesFallingShort_alreadyCut_cause_salesPressure",
+        "label": "AND",
+        "intermediate": true
+      },
+      "notImproving_fierceComp_cause_companiesFallingShort": {
+        "id": "notImproving_fierceComp_cause_companiesFallingShort",
+        "label": "AND",
+        "intermediate": true
+      },
+      "improvementIncreasesCost_measureLocal_cause_engTooSlow": {
+        "id": "improvementIncreasesCost_measureLocal_cause_engTooSlow",
+        "label": "AND",
+        "intermediate": true
+      },
+      "improvementIncreasesCost_measureLocal_cause_prodDistNotImproving": {
+        "id": "improvementIncreasesCost_measureLocal_cause_prodDistNotImproving",
+        "label": "AND",
+        "intermediate": true
+      },
+      "differentSectionsNeeds_canSegment_cause_differentPerceptions": {
+        "id": "differentSectionsNeeds_canSegment_cause_differentPerceptions",
+        "label": "AND",
+        "intermediate": true
+      },
+      "marketDeterminesPrice_managersBelieveGoodPrice_cause_lowMargin": {
+        "id": "marketDeterminesPrice_managersBelieveGoodPrice_cause_lowMargin",
+        "label": "AND",
+        "intermediate": true
+      },
+      "managerMeasure_localOptima_cause_measureLocal": {
+        "id": "managerMeasure_localOptima_cause_measureLocal",
+        "label": "AND",
+        "intermediate": true
+      },
+      "salesPressure_sellNewProducts_newMaterialsEnables_cause_pressureDevelopProducts": {
+        "id": "salesPressure_sellNewProducts_newMaterialsEnables_cause_pressureDevelopProducts",
+        "label": "AND",
+        "intermediate": true
+      },
+      "engTooSlow_prodDistNotImproving_insuffientMarketingIdeas_cause_notImproving": {
+        "id": "engTooSlow_prodDistNotImproving_insuffientMarketingIdeas_cause_notImproving",
+        "label": "AND",
+        "intermediate": true
+      },
+      "differentPerceptions_singlePriceTrimsCust_singlePriceLowers_cause_marketingNotOriented": {
+        "id": "differentPerceptions_singlePriceTrimsCust_singlePriceLowers_cause_marketingNotOriented",
+        "label": "AND",
+        "intermediate": true
+      },
+      "singlePriceTrimsCust_singlePriceLowers_marketPerceptionIsKey_cause_marketPunish": {
+        "id": "singlePriceTrimsCust_singlePriceLowers_marketPerceptionIsKey_cause_marketPunish",
+        "label": "AND",
+        "intermediate": true
+      },
+      "costAccountingProductCost_managersPerceiveEffortAsValue_measureLocal_cause_believeProductCostReal": {
+        "id": "costAccountingProductCost_managersPerceiveEffortAsValue_measureLocal_cause_believeProductCostReal",
+        "label": "AND",
+        "intermediate": true
+      }
+    },
+    "edges": [
+      {
+        "from": "fierceComp",
+        "to": "lessUnified"
+      },
+      {
+        "from": "salesPressure",
+        "to": "salesPeoplePressure"
+      },
+      {
+        "from": "needLaunchProducts",
+        "to": "newProductsConfuse"
+      },
+      {
+        "from": "pressureDevelopProducts",
+        "to": "needLaunchProducts"
+      },
+      {
+        "from": "pricePressure",
+        "to": "fierceComp"
+      },
+      {
+        "from": "needLaunchProducts",
+        "to": "fierceComp"
+      },
+      {
+        "from": "marketingNotOriented",
+        "to": "insuffientMarketingIdeas"
+      },
+      {
+        "from": "marketingNotOriented",
+        "to": "eatIntoSales"
+      },
+      {
+        "from": "managersBelieveSinglePrice",
+        "to": "singlePriceTrimsCust"
+      },
+      {
+        "from": "managersBelieveSinglePrice",
+        "to": "singlePriceLowers"
+      },
+      {
+        "from": "marketDeterminesPrice",
+        "to": "marketPerceptionIsKey"
+      },
+      {
+        "from": "perceptionMatchesBenefits",
+        "to": "marketDeterminesPrice"
+      },
+      {
+        "from": "managersBelieveGoodPrice",
+        "to": "managersBelieveSinglePrice"
+      },
+      {
+        "from": "managersBelieveBelowCostLosses",
+        "to": "refuseLowMargins"
+      },
+      {
+        "from": "managersBelieveGoodPrice",
+        "to": "managersBelieveBelowCostLosses"
+      },
+      {
+        "from": "believeProductCostReal",
+        "to": "managersBelieveGoodPrice"
+      },
+      {
+        "from": "localOptima",
+        "to": "managersPerceiveEffortAsValue"
+      },
+      {
+        "from": "salesPeoplePressure",
+        "to": "salesPeoplePressure_needLaunchProducts_cause_salesOverloaded"
+      },
+      {
+        "from": "needLaunchProducts",
+        "to": "salesPeoplePressure_needLaunchProducts_cause_salesOverloaded"
+      },
+      {
+        "from": "salesPeoplePressure_needLaunchProducts_cause_salesOverloaded",
+        "to": "salesOverloaded"
+      },
+      {
+        "from": "tradMethod",
+        "to": "tradMethod_salesPressure_cause_pricePressure"
+      },
+      {
+        "from": "salesPressure",
+        "to": "tradMethod_salesPressure_cause_pricePressure"
+      },
+      {
+        "from": "tradMethod_salesPressure_cause_pricePressure",
+        "to": "pricePressure"
+      },
+      {
+        "from": "companiesFallingShort",
+        "to": "companiesFallingShort_alreadyCut_cause_salesPressure"
+      },
+      {
+        "from": "alreadyCut",
+        "to": "companiesFallingShort_alreadyCut_cause_salesPressure"
+      },
+      {
+        "from": "companiesFallingShort_alreadyCut_cause_salesPressure",
+        "to": "salesPressure"
+      },
+      {
+        "from": "notImproving",
+        "to": "notImproving_fierceComp_cause_companiesFallingShort"
+      },
+      {
+        "from": "fierceComp",
+        "to": "notImproving_fierceComp_cause_companiesFallingShort"
+      },
+      {
+        "from": "notImproving_fierceComp_cause_companiesFallingShort",
+        "to": "companiesFallingShort"
+      },
+      {
+        "from": "improvementIncreasesCost",
+        "to": "improvementIncreasesCost_measureLocal_cause_engTooSlow"
+      },
+      {
+        "from": "measureLocal",
+        "to": "improvementIncreasesCost_measureLocal_cause_engTooSlow"
+      },
+      {
+        "from": "improvementIncreasesCost_measureLocal_cause_engTooSlow",
+        "to": "engTooSlow"
+      },
+      {
+        "from": "improvementIncreasesCost",
+        "to": "improvementIncreasesCost_measureLocal_cause_prodDistNotImproving"
+      },
+      {
+        "from": "measureLocal",
+        "to": "improvementIncreasesCost_measureLocal_cause_prodDistNotImproving"
+      },
+      {
+        "from": "improvementIncreasesCost_measureLocal_cause_prodDistNotImproving",
+        "to": "prodDistNotImproving"
+      },
+      {
+        "from": "differentSectionsNeeds",
+        "to": "differentSectionsNeeds_canSegment_cause_differentPerceptions"
+      },
+      {
+        "from": "canSegment",
+        "to": "differentSectionsNeeds_canSegment_cause_differentPerceptions"
+      },
+      {
+        "from": "differentSectionsNeeds_canSegment_cause_differentPerceptions",
+        "to": "differentPerceptions"
+      },
+      {
+        "from": "marketDeterminesPrice",
+        "to": "marketDeterminesPrice_managersBelieveGoodPrice_cause_lowMargin"
+      },
+      {
+        "from": "managersBelieveGoodPrice",
+        "to": "marketDeterminesPrice_managersBelieveGoodPrice_cause_lowMargin"
+      },
+      {
+        "from": "marketDeterminesPrice_managersBelieveGoodPrice_cause_lowMargin",
+        "to": "lowMargin"
+      },
+      {
+        "from": "managerMeasure",
+        "to": "managerMeasure_localOptima_cause_measureLocal"
+      },
+      {
+        "from": "localOptima",
+        "to": "managerMeasure_localOptima_cause_measureLocal"
+      },
+      {
+        "from": "managerMeasure_localOptima_cause_measureLocal",
+        "to": "measureLocal"
+      },
+      {
+        "from": "salesPressure",
+        "to": "salesPressure_sellNewProducts_newMaterialsEnables_cause_pressureDevelopProducts"
+      },
+      {
+        "from": "sellNewProducts",
+        "to": "salesPressure_sellNewProducts_newMaterialsEnables_cause_pressureDevelopProducts"
+      },
+      {
+        "from": "newMaterialsEnables",
+        "to": "salesPressure_sellNewProducts_newMaterialsEnables_cause_pressureDevelopProducts"
+      },
+      {
+        "from": "salesPressure_sellNewProducts_newMaterialsEnables_cause_pressureDevelopProducts",
+        "to": "pressureDevelopProducts"
+      },
+      {
+        "from": "engTooSlow",
+        "to": "engTooSlow_prodDistNotImproving_insuffientMarketingIdeas_cause_notImproving"
+      },
+      {
+        "from": "prodDistNotImproving",
+        "to": "engTooSlow_prodDistNotImproving_insuffientMarketingIdeas_cause_notImproving"
+      },
+      {
+        "from": "insuffientMarketingIdeas",
+        "to": "engTooSlow_prodDistNotImproving_insuffientMarketingIdeas_cause_notImproving"
+      },
+      {
+        "from": "engTooSlow_prodDistNotImproving_insuffientMarketingIdeas_cause_notImproving",
+        "to": "notImproving"
+      },
+      {
+        "from": "differentPerceptions",
+        "to": "differentPerceptions_singlePriceTrimsCust_singlePriceLowers_cause_marketingNotOriented"
+      },
+      {
+        "from": "singlePriceTrimsCust",
+        "to": "differentPerceptions_singlePriceTrimsCust_singlePriceLowers_cause_marketingNotOriented"
+      },
+      {
+        "from": "singlePriceLowers",
+        "to": "differentPerceptions_singlePriceTrimsCust_singlePriceLowers_cause_marketingNotOriented"
+      },
+      {
+        "from": "differentPerceptions_singlePriceTrimsCust_singlePriceLowers_cause_marketingNotOriented",
+        "to": "marketingNotOriented"
+      },
+      {
+        "from": "singlePriceTrimsCust",
+        "to": "singlePriceTrimsCust_singlePriceLowers_marketPerceptionIsKey_cause_marketPunish"
+      },
+      {
+        "from": "singlePriceLowers",
+        "to": "singlePriceTrimsCust_singlePriceLowers_marketPerceptionIsKey_cause_marketPunish"
+      },
+      {
+        "from": "marketPerceptionIsKey",
+        "to": "singlePriceTrimsCust_singlePriceLowers_marketPerceptionIsKey_cause_marketPunish"
+      },
+      {
+        "from": "singlePriceTrimsCust_singlePriceLowers_marketPerceptionIsKey_cause_marketPunish",
+        "to": "marketPunish"
+      },
+      {
+        "from": "costAccountingProductCost",
+        "to": "costAccountingProductCost_managersPerceiveEffortAsValue_measureLocal_cause_believeProductCostReal"
+      },
+      {
+        "from": "managersPerceiveEffortAsValue",
+        "to": "costAccountingProductCost_managersPerceiveEffortAsValue_measureLocal_cause_believeProductCostReal"
+      },
+      {
+        "from": "measureLocal",
+        "to": "costAccountingProductCost_managersPerceiveEffortAsValue_measureLocal_cause_believeProductCostReal"
+      },
+      {
+        "from": "costAccountingProductCost_managersPerceiveEffortAsValue_measureLocal_cause_believeProductCostReal",
+        "to": "believeProductCostReal"
+      }
+    ],
+    "rankdir": "BT"
+  }
+}"
+`;
+
+exports[`problem tree parses example: Problem Tree on RPA deployment 1`] = `
+"{
+  "ast": {
+    "type": "problem",
+    "nodes": [
+      {
+        "id": "more_jobs",
+        "text": "RPA creates more jobs than it eliminates",
+        "params": {}
+      },
+      {
+        "id": "rpa_time_value",
+        "text": "RPA creates greater value with the time that is available",
+        "params": {}
+      },
+      {
+        "id": "emp_do_val",
+        "text": "Employees do more valuable work",
+        "params": {}
+      },
+      {
+        "id": "emp_time_value",
+        "text": "Employees doing more valuable work are more valuable to the organization",
+        "params": {}
+      },
+      {
+        "id": "rpa_no_time",
+        "text": "RPA does not create greater value with the time that is available",
+        "params": {
+          "class": "UDE"
+        }
+      },
+      {
+        "id": "emp_no_valuable",
+        "text": "Employees don't do more valuable work",
+        "params": {}
+      },
+      {
+        "id": "emp_valuable",
+        "text": "Employees can do more valuable work",
+        "params": {}
+      },
+      {
+        "id": "emp_capacity",
+        "text": "We create capacity with these employees",
+        "params": {}
+      },
+      {
+        "id": "free_time",
+        "text": "We free up time (of these employees with RPA)",
+        "params": {}
+      },
+      {
+        "id": "low_value_time",
+        "text": "Employees spend significant amount of their time doing no or low value tasks",
+        "params": {}
+      },
+      {
+        "id": "rpa_low_value",
+        "text": "RPA takes over no/low value task (almost for free)",
+        "params": {}
+      },
+      {
+        "id": "rpa_deploy",
+        "text": "RPA is deployed",
+        "params": {}
+      },
+      {
+        "id": "emp_deprived",
+        "text": "Some employees are deprived from doing tasks they like by RPA",
+        "params": {}
+      },
+      {
+        "id": "emp_like_do",
+        "text": "Some employees like doing no or low value tasks",
+        "params": {}
+      },
+      {
+        "id": "emp_hate_rpa",
+        "text": "Some employees are not positive towards RPA",
+        "params": {}
+      },
+      {
+        "id": "emp_unskill",
+        "text": "Some employees are unskilled/unfit for more valuable work",
+        "params": {}
+      },
+      {
+        "id": "emp_no_value",
+        "text": "Some employees are not able to take over more valuable work",
+        "params": {}
+      },
+      {
+        "id": "emp_not_valuable",
+        "text": "Some employees are not considered as valuable to the organization than others",
+        "params": {}
+      },
+      {
+        "id": "emp_laidoff",
+        "text": "Some employees are made redundant (laid off)",
+        "params": {}
+      },
+      {
+        "id": "unwilling_redundant",
+        "text": "The organization makes unable and unwilling employees redundant",
+        "params": {}
+      },
+      {
+        "id": "redundant_not_replaced",
+        "text": "Redundant employees are not replaced thanks to RPA",
+        "params": {}
+      },
+      {
+        "id": "redundant_workload",
+        "text": "The current workload without redundant employees can be handled with RPA",
+        "params": {}
+      },
+      {
+        "id": "less_jobs",
+        "text": "RPA destroys more jobs than it creates",
+        "params": {
+          "class": "UDE"
+        }
+      }
+    ],
+    "edges": [
+      {
+        "fromIds": [
+          "rpa_time_value",
+          "emp_time_value"
+        ],
+        "toId": "more_jobs"
+      },
+      {
+        "fromIds": [
+          "emp_valuable",
+          "emp_no_valuable"
+        ],
+        "toId": "rpa_no_time"
+      },
+      {
+        "fromIds": [
+          "emp_do_val",
+          "emp_valuable"
+        ],
+        "toId": "rpa_time_value"
+      },
+      {
+        "fromIds": [
+          "emp_valuable"
+        ],
+        "toId": "emp_time_value"
+      },
+      {
+        "fromIds": [
+          "emp_capacity"
+        ],
+        "toId": "emp_valuable"
+      },
+      {
+        "fromIds": [
+          "free_time"
+        ],
+        "toId": "emp_capacity"
+      },
+      {
+        "fromIds": [
+          "low_value_time",
+          "rpa_low_value",
+          "rpa_deploy"
+        ],
+        "toId": "free_time"
+      },
+      {
+        "fromIds": [
+          "rpa_low_value",
+          "rpa_deploy",
+          "emp_like_do"
+        ],
+        "toId": "emp_deprived"
+      },
+      {
+        "fromIds": [
+          "emp_deprived"
+        ],
+        "toId": "emp_hate_rpa"
+      },
+      {
+        "fromIds": [
+          "emp_valuable",
+          "emp_unskill"
+        ],
+        "toId": "emp_no_value"
+      },
+      {
+        "fromIds": [
+          "emp_time_value",
+          "emp_no_value"
+        ],
+        "toId": "emp_not_valuable"
+      },
+      {
+        "fromIds": [
+          "emp_no_value",
+          "unwilling_redundant"
+        ],
+        "toId": "emp_laidoff"
+      },
+      {
+        "fromIds": [
+          "unwilling_redundant",
+          "redundant_workload"
+        ],
+        "toId": "redundant_not_replaced"
+      },
+      {
+        "fromIds": [
+          "emp_laidoff",
+          "redundant_not_replaced"
+        ],
+        "toId": "less_jobs"
+      }
+    ]
+  },
+  "semantics": {
+    "nodes": {
+      "more_jobs": {
+        "id": "more_jobs",
+        "label": "RPA creates more jobs than it eliminates"
+      },
+      "rpa_time_value": {
+        "id": "rpa_time_value",
+        "label": "RPA creates greater value with the time that is available"
+      },
+      "emp_do_val": {
+        "id": "emp_do_val",
+        "label": "Employees do more valuable work"
+      },
+      "emp_not_valuable": {
+        "id": "emp_not_valuable",
+        "label": "Some employees are not considered as valuable to the organization than others"
+      },
+      "emp_time_value": {
+        "id": "emp_time_value",
+        "label": "Employees doing more valuable work are more valuable to the organization"
+      },
+      "rpa_no_time": {
+        "id": "rpa_no_time",
+        "label": "RPA does not create greater value with the time that is available",
+        "annotation": "UDE"
+      },
+      "emp_no_valuable": {
+        "id": "emp_no_valuable",
+        "label": "Employees don't do more valuable work"
+      },
+      "less_jobs": {
+        "id": "less_jobs",
+        "label": "RPA destroys more jobs than it creates",
+        "annotation": "UDE"
+      },
+      "emp_laidoff": {
+        "id": "emp_laidoff",
+        "label": "Some employees are made redundant (laid off)"
+      },
+      "emp_no_value": {
+        "id": "emp_no_value",
+        "label": "Some employees are not able to take over more valuable work"
+      },
+      "emp_valuable": {
+        "id": "emp_valuable",
+        "label": "Employees can do more valuable work"
+      },
+      "emp_capacity": {
+        "id": "emp_capacity",
+        "label": "We create capacity with these employees"
+      },
+      "free_time": {
+        "id": "free_time",
+        "label": "We free up time (of these employees with RPA)"
+      },
+      "low_value_time": {
+        "id": "low_value_time",
+        "label": "Employees spend significant amount of their time doing no or low value tasks"
+      },
+      "emp_hate_rpa": {
+        "id": "emp_hate_rpa",
+        "label": "Some employees are not positive towards RPA"
+      },
+      "emp_deprived": {
+        "id": "emp_deprived",
+        "label": "Some employees are deprived from doing tasks they like by RPA"
+      },
+      "rpa_low_value": {
+        "id": "rpa_low_value",
+        "label": "RPA takes over no/low value task (almost for free)"
+      },
+      "rpa_deploy": {
+        "id": "rpa_deploy",
+        "label": "RPA is deployed"
+      },
+      "emp_like_do": {
+        "id": "emp_like_do",
+        "label": "Some employees like doing no or low value tasks"
+      },
+      "emp_unskill": {
+        "id": "emp_unskill",
+        "label": "Some employees are unskilled/unfit for more valuable work"
+      },
+      "redundant_not_replaced": {
+        "id": "redundant_not_replaced",
+        "label": "Redundant employees are not replaced thanks to RPA"
+      },
+      "unwilling_redundant": {
+        "id": "unwilling_redundant",
+        "label": "The organization makes unable and unwilling employees redundant"
+      },
+      "redundant_workload": {
+        "id": "redundant_workload",
+        "label": "The current workload without redundant employees can be handled with RPA"
+      },
+      "rpa_time_value_emp_time_value_cause_more_jobs": {
+        "id": "rpa_time_value_emp_time_value_cause_more_jobs",
+        "label": "AND",
+        "intermediate": true
+      },
+      "emp_do_val_emp_valuable_cause_rpa_time_value": {
+        "id": "emp_do_val_emp_valuable_cause_rpa_time_value",
+        "label": "AND",
+        "intermediate": true
+      },
+      "emp_time_value_emp_no_value_cause_emp_not_valuable": {
+        "id": "emp_time_value_emp_no_value_cause_emp_not_valuable",
+        "label": "AND",
+        "intermediate": true
+      },
+      "emp_valuable_emp_no_valuable_cause_rpa_no_time": {
+        "id": "emp_valuable_emp_no_valuable_cause_rpa_no_time",
+        "label": "AND",
+        "intermediate": true
+      },
+      "emp_laidoff_redundant_not_replaced_cause_less_jobs": {
+        "id": "emp_laidoff_redundant_not_replaced_cause_less_jobs",
+        "label": "AND",
+        "intermediate": true
+      },
+      "emp_no_value_unwilling_redundant_cause_emp_laidoff": {
+        "id": "emp_no_value_unwilling_redundant_cause_emp_laidoff",
+        "label": "AND",
+        "intermediate": true
+      },
+      "emp_valuable_emp_unskill_cause_emp_no_value": {
+        "id": "emp_valuable_emp_unskill_cause_emp_no_value",
+        "label": "AND",
+        "intermediate": true
+      },
+      "unwilling_redundant_redundant_workload_cause_redundant_not_replaced": {
+        "id": "unwilling_redundant_redundant_workload_cause_redundant_not_replaced",
+        "label": "AND",
+        "intermediate": true
+      },
+      "low_value_time_rpa_low_value_rpa_deploy_cause_free_time": {
+        "id": "low_value_time_rpa_low_value_rpa_deploy_cause_free_time",
+        "label": "AND",
+        "intermediate": true
+      },
+      "rpa_low_value_rpa_deploy_emp_like_do_cause_emp_deprived": {
+        "id": "rpa_low_value_rpa_deploy_emp_like_do_cause_emp_deprived",
+        "label": "AND",
+        "intermediate": true
+      }
+    },
+    "edges": [
+      {
+        "from": "emp_valuable",
+        "to": "emp_time_value"
+      },
+      {
+        "from": "emp_capacity",
+        "to": "emp_valuable"
+      },
+      {
+        "from": "free_time",
+        "to": "emp_capacity"
+      },
+      {
+        "from": "emp_deprived",
+        "to": "emp_hate_rpa"
+      },
+      {
+        "from": "rpa_time_value",
+        "to": "rpa_time_value_emp_time_value_cause_more_jobs"
+      },
+      {
+        "from": "emp_time_value",
+        "to": "rpa_time_value_emp_time_value_cause_more_jobs"
+      },
+      {
+        "from": "rpa_time_value_emp_time_value_cause_more_jobs",
+        "to": "more_jobs"
+      },
+      {
+        "from": "emp_do_val",
+        "to": "emp_do_val_emp_valuable_cause_rpa_time_value"
+      },
+      {
+        "from": "emp_valuable",
+        "to": "emp_do_val_emp_valuable_cause_rpa_time_value"
+      },
+      {
+        "from": "emp_do_val_emp_valuable_cause_rpa_time_value",
+        "to": "rpa_time_value"
+      },
+      {
+        "from": "emp_time_value",
+        "to": "emp_time_value_emp_no_value_cause_emp_not_valuable"
+      },
+      {
+        "from": "emp_no_value",
+        "to": "emp_time_value_emp_no_value_cause_emp_not_valuable"
+      },
+      {
+        "from": "emp_time_value_emp_no_value_cause_emp_not_valuable",
+        "to": "emp_not_valuable"
+      },
+      {
+        "from": "emp_valuable",
+        "to": "emp_valuable_emp_no_valuable_cause_rpa_no_time"
+      },
+      {
+        "from": "emp_no_valuable",
+        "to": "emp_valuable_emp_no_valuable_cause_rpa_no_time"
+      },
+      {
+        "from": "emp_valuable_emp_no_valuable_cause_rpa_no_time",
+        "to": "rpa_no_time"
+      },
+      {
+        "from": "emp_laidoff",
+        "to": "emp_laidoff_redundant_not_replaced_cause_less_jobs"
+      },
+      {
+        "from": "redundant_not_replaced",
+        "to": "emp_laidoff_redundant_not_replaced_cause_less_jobs"
+      },
+      {
+        "from": "emp_laidoff_redundant_not_replaced_cause_less_jobs",
+        "to": "less_jobs"
+      },
+      {
+        "from": "emp_no_value",
+        "to": "emp_no_value_unwilling_redundant_cause_emp_laidoff"
+      },
+      {
+        "from": "unwilling_redundant",
+        "to": "emp_no_value_unwilling_redundant_cause_emp_laidoff"
+      },
+      {
+        "from": "emp_no_value_unwilling_redundant_cause_emp_laidoff",
+        "to": "emp_laidoff"
+      },
+      {
+        "from": "emp_valuable",
+        "to": "emp_valuable_emp_unskill_cause_emp_no_value"
+      },
+      {
+        "from": "emp_unskill",
+        "to": "emp_valuable_emp_unskill_cause_emp_no_value"
+      },
+      {
+        "from": "emp_valuable_emp_unskill_cause_emp_no_value",
+        "to": "emp_no_value"
+      },
+      {
+        "from": "unwilling_redundant",
+        "to": "unwilling_redundant_redundant_workload_cause_redundant_not_replaced"
+      },
+      {
+        "from": "redundant_workload",
+        "to": "unwilling_redundant_redundant_workload_cause_redundant_not_replaced"
+      },
+      {
+        "from": "unwilling_redundant_redundant_workload_cause_redundant_not_replaced",
+        "to": "redundant_not_replaced"
+      },
+      {
+        "from": "low_value_time",
+        "to": "low_value_time_rpa_low_value_rpa_deploy_cause_free_time"
+      },
+      {
+        "from": "rpa_low_value",
+        "to": "low_value_time_rpa_low_value_rpa_deploy_cause_free_time"
+      },
+      {
+        "from": "rpa_deploy",
+        "to": "low_value_time_rpa_low_value_rpa_deploy_cause_free_time"
+      },
+      {
+        "from": "low_value_time_rpa_low_value_rpa_deploy_cause_free_time",
+        "to": "free_time"
+      },
+      {
+        "from": "rpa_low_value",
+        "to": "rpa_low_value_rpa_deploy_emp_like_do_cause_emp_deprived"
+      },
+      {
+        "from": "rpa_deploy",
+        "to": "rpa_low_value_rpa_deploy_emp_like_do_cause_emp_deprived"
+      },
+      {
+        "from": "emp_like_do",
+        "to": "rpa_low_value_rpa_deploy_emp_like_do_cause_emp_deprived"
+      },
+      {
+        "from": "rpa_low_value_rpa_deploy_emp_like_do_cause_emp_deprived",
+        "to": "emp_deprived"
+      }
+    ],
+    "rankdir": "BT"
+  }
+}"
+`;

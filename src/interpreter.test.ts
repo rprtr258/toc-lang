@@ -1,7 +1,7 @@
 import {describe, expect, it} from "bun:test";
-import {readFileSync} from "fs";
+
 import {Ast} from "./parser.ts";
-import {parseTextToAst, parseGoalTreeSemantics, parseProblemTreeSemantics, TreeSemantics} from "./interpreter.ts";
+import {parseTextToAst, parseGoalTreeSemantics, parseProblemTreeSemantics} from "./interpreter.ts";
 import {examples} from "./examples.ts";
 import {evaporatingCloudTestcases, goalTreeTestcases, problemTreeTestcases} from "./testcases.ts";
 
@@ -9,14 +9,14 @@ describe("evaporating cloud", () => {
   for (const {name, text} of evaporatingCloudTestcases) {
     it(name, () => {
       const ast = parseTextToAst(text);
-      expect(ast).toStrictEqual(JSON.parse(readFileSync(`${__dirname}/__tests__/${name}.ec.json`).toString()) as Ast);
+      expect(JSON.stringify(ast, null, 2)).toMatchSnapshot();
     });
   }
 
   for (const {name, text} of examples.find(([group, _examples]) => group === "Evaporating Cloud")![1]) {
     it(`parses example: ${name}`, () => {
       const ast = parseTextToAst(text);
-      expect(ast).toStrictEqual(JSON.parse(readFileSync(`${__dirname}/__tests__/example evaporating cloud: ${name}.json`).toString()) as Ast);
+      expect(JSON.stringify(ast, null, 2)).toMatchSnapshot();
     });
   }
 });
@@ -25,7 +25,7 @@ describe("goal tree", () => {
   for (const {name, text} of goalTreeTestcases) {
     it(name, () => {
       const ast = parseTextToAst(text);
-      expect(ast).toStrictEqual(JSON.parse(readFileSync(`${__dirname}/__tests__/${name}.gt.json`).toString()) as Ast);
+      expect(JSON.stringify(ast, null, 2)).toMatchSnapshot();
     });
   }
 
@@ -34,7 +34,7 @@ describe("goal tree", () => {
       const ast = parseTextToAst(text);
       expect(ast.type).toEqual("goal");
       const semantics = parseGoalTreeSemantics(ast);
-      expect({ast, semantics}).toStrictEqual(JSON.parse(readFileSync(`${__dirname}/__tests__/example goal tree: ${name}.json`).toString()) as {ast: Ast, semantics: TreeSemantics});
+      expect(JSON.stringify({ast, semantics}, null, 2)).toMatchSnapshot();
     });
   }
 });
@@ -43,7 +43,7 @@ describe("problem tree", () => {
   for (const {name, text} of problemTreeTestcases) {
     it(name, () => {
       const ast = parseTextToAst(text);
-      expect(ast).toStrictEqual(JSON.parse(readFileSync(`${__dirname}/__tests__/parses ast for input ${name}.json`).toString()) as Ast);
+      expect(JSON.stringify(ast, null, 2)).toMatchSnapshot();
     });
   };
 
@@ -74,7 +74,7 @@ describe("problem tree", () => {
       const ast = parseTextToAst(text);
       expect(ast.type).toEqual("problem");
       const semantics = parseProblemTreeSemantics(ast);
-      expect(JSON.parse(JSON.stringify({ast, semantics}))).toStrictEqual(JSON.parse(readFileSync(`${__dirname}/__tests__/example problem tree: ${name}.json`).toString()));
+      expect(JSON.stringify({ast, semantics}, null, 2)).toMatchSnapshot();
     });
   }
 });
