@@ -6,8 +6,7 @@ export type TokenType =
   | "ARROW_RIGHT"
   | "ARROW_BI"
   | "AND"
-  | "LBRACE"
-  | "RBRACE"
+  | "EQUALS"
   | "COMMENT"
   | "EOL"
   | "EOF";
@@ -56,7 +55,7 @@ class Tokenizer {
   private advance(): string {
     const char = this.input[this.position];
     this.position++;
-    if (char === "\n") {
+    if (char === "\n" || char === "\r") {
       this.line++;
       this.col = 1;
     } else {
@@ -88,8 +87,15 @@ class Tokenizer {
 
       if (char === "\n" || char === "\r") {
         this.advance();
-        if (char === "\r" && this.peek() === "\n" || char === "\n" && this.peek() === "\r") {
-          this.advance();
+        // Handle CRLF or LFCR as a single newline
+        if (char === "\r" && this.peek() === "\n") {
+          // Consume the \n but don't treat it as a newline
+          this.position++;
+          // Don't update line/col since we already did for \r
+        } else if (char === "\n" && this.peek() === "\r") {
+          // Consume the \r but don't treat it as a newline
+          this.position++;
+          // Don't update line/col since we already did for \n
         }
         yield {
           type: "EOL",
@@ -115,7 +121,11 @@ class Tokenizer {
 
       if (char === '"') {
         this.advance(); // skip opening quote
-        while (this.position < this.input.length && this.peek() !== '"' && this.peek() != "") {
+        while (
+          this.position < this.input.length &&
+          this.peek() !== '"' &&
+          this.peek() != ""
+        ) {
           this.advance();
         }
         if (this.peek() === '"') {
@@ -195,10 +205,10 @@ class Tokenizer {
         continue;
       }
 
-      if (char === "{") {
+      if (char === "=") {
         this.advance();
         yield {
-          type: "LBRACE",
+          type: "EQUALS",
           start,
           end: this.position,
           line: startLine,
@@ -207,19 +217,7 @@ class Tokenizer {
         continue;
       }
 
-      if (char === "}") {
-        this.advance();
-        yield {
-          type: "RBRACE",
-          start,
-          end: this.position,
-          line: startLine,
-          col: startCol,
-        };
-        continue;
-      }
-
-      const re = /[a-zA-Z0-9_'*&()]/;
+      const re = /[a-zA-Z0-9_'*&().]/;
       if (!re.test(char)) { // Unknown character
         throw new SyntaxError(`Unknown character: ${char}`, {
           start: this.position,
