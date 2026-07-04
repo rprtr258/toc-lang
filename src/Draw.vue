@@ -22,6 +22,27 @@ const diagnostics = ref<Diagnostic[]>([]);
 const text = ref<string>("");
 const diagramType = ref<DiagramType | null>(null);
 
+const containerRef = ref<HTMLElement | null>(null);
+const splitPos = ref(33);
+const dragging = ref(false);
+
+function onSplitMouseDown(e: MouseEvent) {
+  e.preventDefault();
+  dragging.value = true;
+  function onMove(ev: MouseEvent) {
+    const rect = containerRef.value!.getBoundingClientRect();
+    const pct = ((ev.clientX - rect.left) / rect.width) * 100;
+    splitPos.value = pct;
+  }
+  function onUp() {
+    dragging.value = false;
+    window.removeEventListener("mousemove", onMove);
+    window.removeEventListener("mouseup", onUp);
+  }
+  window.addEventListener("mousemove", onMove);
+  window.addEventListener("mouseup", onUp);
+}
+
 const onEditorChange = (value: string) => {
   try {
     const parsedAst = parseTextToAst(value);
@@ -62,32 +83,53 @@ const onEditorChange = (value: string) => {
 </script>
 
 <template>
-  <div class="two-panes">
-    <Editor
-      :rows="20"
-      :value="text"
-      @update="v => {text = v; onEditorChange(v);}"
-      :diagnostics="diagnostics"
-      :completions="completions"
-    />
-    <Diagram
-      v-if="ast"
-      :key="diagramType || 'none'"
-      :ast="ast"
-      :semantics="semantics"
-      :diagramType="diagramType"
-    />
-    <div v-else>No AST</div>
+  <div ref="containerRef" class="two-panes" :class="{dragging}">
+    <div class="pane" :style="{width: splitPos + '%'}">
+      <Editor
+        :rows="20"
+        :value="text"
+        @update="v => {text = v; onEditorChange(v);}"
+        :diagnostics="diagnostics"
+        :completions="completions"
+      />
+    </div>
+    <div
+      class="splitter"
+      @mousedown="onSplitMouseDown"
+    ></div>
+    <div class="pane" :style="{width: (100 - splitPos) + '%'}">
+      <Diagram
+        v-if="ast"
+        :key="diagramType || 'none'"
+        :ast="ast"
+        :semantics="semantics"
+        :diagramType="diagramType"
+      />
+      <div v-else>No AST</div>
+    </div>
   </div>
 </template>
 
 <style scoped>
 .two-panes {
-  display: grid;
-  grid-template-columns: 33% auto;
+  display: flex;
   height: 100%;
+  overflow: hidden;
 }
-.two-panes > :nth-child(1) {
+.pane {
   min-height: 0;
+  flex-shrink: 0;
+  overflow: auto;
+}
+.splitter {
+  flex-shrink: 0;
+  width: 6px;
+  cursor: col-resize;
+  background: #ccc;
+  transition: background 0.15s;
+}
+.splitter:hover,
+.two-panes.dragging .splitter {
+  background: #888;
 }
 </style>
